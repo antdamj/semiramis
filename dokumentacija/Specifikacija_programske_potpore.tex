@@ -2,20 +2,18 @@
 		
 	\section{Funkcionalni zahtjevi}
 			
-			\textbf{\textit{dio 1. revizije}}\\
 			
-			\textit{Navesti \textbf{dionike} koji imaju \textbf{interes u ovom sustavu} ili  \textbf{su nositelji odgovornosti}. To su prije svega korisnici, ali i administratori sustava, naručitelji, razvojni tim.}\\
-				
-			\textit{Navesti \textbf{aktore} koji izravno \textbf{koriste} ili \textbf{komuniciraju sa sustavom}. Oni mogu imati inicijatorsku ulogu, tj. započinju određene procese u sustavu ili samo sudioničku ulogu, tj. obavljaju određeni posao. Za svakog aktora navesti funkcionalne zahtjeve koji se na njega odnose.}\\
 			
+
 			
 			\noindent \textbf{Dionici:}
 			
 			\begin{packed_enum}
 				
-				\item Dionik 1
-				\item Dionik 2				
-				\item ...
+				\item Poduzeće
+				\item Ovlašteni distributeri ili 'leasing' kuće				
+				\item Administrator baze podataka
+				\item Razvojni tim
 				
 			\end{packed_enum}
 			
@@ -23,28 +21,73 @@
 			
 			
 			\begin{packed_enum}
-				\item  \underbar{Aktor 1 (inicijator) može:}
+				\item  \underbar{Gost - neprijavljeni korisnik (inicijator) ima sljedeće mogućnosti:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
-					\begin{packed_enum}
-						
-						\item  podfunkcionalnost 1 
-						\item  podfunkcionalnost 2
+					\item pregled raspoloživih vozila poduzeća
+					\item pregled mjesta razmjene vozila
+					\item pristup osnovnim kontaktima poduzeća
+					\item izrada vlastitog korisničkog računa
+					\item odabir vlasnika uz prikaz općih informacija o vlasniku
+					\item prikaz recenzija i ocjena prodavača
+					\item pregled vozila po kategoriji i vrsti
+					\item pregled dostupnosti vozila
+					
+				\end{packed_enum}
 				
-					\end{packed_enum}
-					\item  funkcionalnost 3
+					\item  \underbar{Korisnik - najmoprimac (inicijator) ima sljedeće mogućnosti:}
+				
+				\begin{packed_enum}
+					
+					\item promjena osobnih podataka uz naknadnu autorizaciju administratora
+					\item pregled raspoloživih vozila poduzeća
+					\item pregled mjesta razmjene vozila
+					\item pristup osnovnim kontaktima poduzeća
+					\item pregled kategorija po kategoriji i po vrsti
+					\item odabir jednog od predloženih mjesta i vremena preuzimanja i isporuke vozila za unajmljivanja
+					\item korištenje posebne usluge odabira vlastitog mjesta i vremena preuzimanja i isporuke za unajmljivanja
+					\item uređivanje najmova
+					\item brisanje vlastitog korisničkog računa
+					\item pregled prethodnih najmova
+					\item pisanje recenzija i dodjeljivanje ocjena
+					
+				\end{packed_enum}
+				
+					\item  \underbar{Administrator (inicijator) ima sljedeće mogućnosti:}
+				
+				\begin{packed_enum}
+					
+					\item pregled trenutno aktivnih prijavljenih korisnika
+					\item pristup kontaktima pohranjenim u bazi podataka
+					\item upis podataka o poduzećima
+					\item autorizacija zatraženih promjena podataka računa
+					\item brisanje korisničkih računa
+					\item brisanje neprimjerenih recenzija
+					\item određivanje vlasnika sustava
+					
+				\end{packed_enum}
+				
+					\item  \underbar{Vlasnik (inicijator) ima sljedeće mogućnosti:}
+				
+				\begin{packed_enum}
+					
+					\item pristup statistici poduzeća
+					\item pregled svih vozila u voznom parku
+					\item dodavanje novih vozila
+					\item pristup i promjena podataka vozila
+					\item dodavanje mjesta razmjene vozila
+					\item brisanje mjesta razmjene vozila
+					\item kategorizacija vozila
 					
 				\end{packed_enum}
 			
-				\item  \underbar{Aktor 2 (sudionik) može:}
+				\item  \underbar{Baza podataka (sudionik) može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
+					\item pohrana podataka o vlasnicima i pripadnim vozilima
+					\item pohrana podataka o korisnicima 
 					
 				\end{packed_enum}
 			\end{packed_enum}
@@ -109,11 +152,31 @@
 				\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
 				\eject
 	
-		\section{Ostali zahtjevi}
+		\section{Nefunkcionalni zahtjevi}
 		
-			\textbf{\textit{dio 1. revizije}}\\
+		    	\textbf{\textit{Zahtjevi kvalitete:}}\\
 		 
-			 \textit{Nefunkcionalni zahtjevi i zahtjevi domene primjene dopunjuju funkcionalne zahtjeve. Oni opisuju \textbf{kako se sustav treba ponašati} i koja \textbf{ograničenja} treba poštivati (performanse, korisničko iskustvo, pouzdanost, standardi kvalitete, sigurnost...). Primjeri takvih zahtjeva u Vašem projektu mogu biti: podržani jezici korisničkog sučelja, vrijeme odziva, najveći mogući podržani broj korisnika, podržane web/mobilne platforme, razina zaštite (protokoli komunikacije, kriptiranje...)... Svaki takav zahtjev potrebno je navesti u jednoj ili dvije rečenice.}
+		\begin{packed_item}
+	
+						\item Sustav bi trebao jamčiti točnost i pouzdanost informacija.
+						\item  Unos neispravnih oblika podataka ili upload krivih datoteka ne smije narušiti sustav.
+						\item Odgovor na svaki upit ili zahtjev za nekom radnjom nebi trebao trajati duže od 1 sekunde.
+						\item  Dizajn sustava mora omogućiti intuitivnu uporabu sustava.
+						\item Sustav se mora moći nadograditi prema zahtjevima naručitelja
+						
+					\end{packed_item}
+				
+			 
+	    	\textbf{\textit{Ograničenja:}}\\
+		 
+			\begin{packed_item}
+	
+						\item Programska podrška je izvedena kao Springboot web aplikacija pisana u Javi.
+						\item  Pohrana podataka je izvedena preko Postgre SQL baze podataka.
+						\item Programska podrška mora bit sposobna na CRUD operacije svih priloženih podataka.
+						\item  Jedan korisnik ne može biti ulogiran na dva različita računala(istovremeno imati dvije aktivne sjednice)
+						
+					\end{packed_item}
 			 
 			 
 			 
