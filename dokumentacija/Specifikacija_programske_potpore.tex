@@ -101,7 +101,7 @@
 				\textbf{\textit{Dio 1. revizije}}\\
 					
 
-					\noindent \underbar{\textbf{UC1 - Registracija korisnika}}
+					\noindent \underbar{\textbf{UC 1 - Registracija korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Gost
@@ -127,7 +127,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC2 - Prijava korisnika}}
+					\noindent \underbar{\textbf{UC 2 - Prijava korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Gost
@@ -152,7 +152,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC3 - Pregled osobnih podataka}}
+					\noindent \underbar{\textbf{UC 3 - Pregled osobnih podataka}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -168,7 +168,7 @@
 						\item  \textbf{Opis mogućih odstupanja: }-
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC4 - Promjena osobnih podataka}}
+					\noindent \underbar{\textbf{UC 4 - Promjena osobnih podataka}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -193,7 +193,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC5 - Pregled prijašnjih rezervacija}}
+					\noindent \underbar{\textbf{UC 5 - Pregled prijašnjih rezervacija}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -210,7 +210,7 @@
 						\item  \textbf{Opis mogućih odstupanja: }-
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC6 - Brisanje korisničkog računa}}
+					\noindent \underbar{\textbf{UC 6 - Brisanje korisničkog računa}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -228,7 +228,43 @@
 						\item  \textbf{Opis mogućih odstupanja: }-
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC7 - Rezervacija vozila}}
+					\noindent \underbar{\textbf{UC 7 - Pretraga vozila}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Gost, korisnik
+						\item  \textbf{Cilj: }Pretražiti slobodna vozila po određenom kriteriju
+						\item  \textbf{Sudionici: }Baza podataka
+						\item  \textbf{Preduvjet: }-
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							\item Korisnik bira datum i mjesto preuzimanja te vraćanja vozila. Za to su mu na raspolaganju kalendar i popis mogućih lokacija te karta
+							\item Korisnik bira kategoriju vozila koje želi unajmiti
+							\item Ispisuje se popis svih vozila koje odgovaraju korisnikovim kriterijima
+							\item Klikom na za to predviđeno dugme traži se rezervacija vozila
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja: }
+						
+						\item[] \begin{packed_item}
+	                        
+	                        \item[1.a] Korisnik je odabrao vrijeme izvan besplatnog perioda (9.00 - 15.00)
+							\item[] \begin{packed_enum}
+								\item Za to korisnik plaća dodatnu naknadu
+							\end{packed_enum}
+							\item[1.b] Korisnik je izabrao mjesto drukčije od onog ponuđenog u popisu predefiniranih lokacija.
+							\item[] \begin{packed_enum}
+								\item Za to korisnik plaća dodatnu naknadu
+							\end{packed_enum}
+							\item[4.a] Gost nije prijavljen u sustav i traži rezervaciju
+							\item[] \begin{packed_enum}
+								\item Aplikacija ga preusmjerava na zaslon za prijavu i nakon prijave mu omogućuje rezervaciju
+							\end{packed_enum}
+						\end{packed_item}
+						
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC 8 - Rezervacija vozila}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -238,28 +274,15 @@
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik bira datum i mjesto preuzimanja te vraćanja vozila. Za to su mu na raspolaganju kalendar i popis mogućih lokacija te karta
-							\item Korisnik bira kategoriju vozila koje želi unajmiti
-							\item Ispisuje se popis svih vozila koje odgovaraju korisnikovim kriterijima
+							\item Korisnik pretražuje vozilo po prethodnom scenariju
 							\item Klikom na željeno vozilo otvara se zaslon za plaćanje, na kojem korisnik plaća za rezervaciju zajedno s predujmom
+							\item Rezervacija je napravljena i vidljiva je na korisničkim stranicama
 						\end{packed_enum}
 						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-	
-							\item[1.a] Korisnik je odabrao vrijeme izvan besplatnog perioda (9.00 - 15.00)
-							\item[] \begin{packed_enum}
-								\item Za to korisnik plaća dodatnu naknadu
-							\end{packed_enum}
-							\item[1.b] Korisnik je izabrao mjesto drukčije od onog ponuđenog u popisu predefiniranih lokacija.
-							\item[] \begin{packed_enum}
-								\item Za to korisnik plaća dodatnu naknadu
-							\end{packed_enum}
-						\end{packed_item}
+						\item  \textbf{Opis mogućih odstupanja: }-
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC 8 - Promjena rezervacije}}
+					\noindent \underbar{\textbf{UC 9 - Promjena rezervacije}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -285,7 +308,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC 9 - Otkazivanje rezervacije}}
+					\noindent \underbar{\textbf{UC 10 - Otkazivanje rezervacije}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -311,7 +334,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC 10 - Recenziranje usluge}}
+					\noindent \underbar{\textbf{UC 11 - Recenziranje usluge}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -327,7 +350,7 @@
 						\item  \textbf{Opis mogućih odstupanja: }-
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC 11 - Prikaz karte s navedenim poslovnicama}}
+					\noindent \underbar{\textbf{UC 12 - Prikaz karte s navedenim poslovnicama}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Gost, korisnik, vlasnik sustava
@@ -344,7 +367,7 @@
 						\item  \textbf{Opis mogućih odstupanja: }-
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC 12 - Dodavanje vozila}}
+					\noindent \underbar{\textbf{UC 13 - Dodavanje vozila}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vlasnik sustava
@@ -370,7 +393,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC 12 - Uklanjanje vozila}}
+					\noindent \underbar{\textbf{UC 14 - Uklanjanje vozila}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vlasnik sustava
@@ -388,7 +411,7 @@
 						\item  \textbf{Opis mogućih odstupanja: }-
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC 14 - Uređivanje podataka o vozilu}}
+					\noindent \underbar{\textbf{UC 15 - Uređivanje podataka o vozilu}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vlasnik sustava
@@ -414,7 +437,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC15 - Prikaz profitabilnosti i prijašnjih narudžbi}}
+					\noindent \underbar{\textbf{UC 16 - Prikaz profitabilnosti i prijašnjih narudžbi}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vlasnik sustava
@@ -440,7 +463,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC16 - Prikaz slobodnih vozila}}
+					\noindent \underbar{\textbf{UC 17 - Prikaz slobodnih vozila}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vlasnik sustava
@@ -464,7 +487,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC17 - Prikaz aktivnih rezervacija}}
+					\noindent \underbar{\textbf{UC 18 - Prikaz aktivnih rezervacija}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vlasnik sustava
@@ -489,7 +512,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC 18 - Zatvaranje rezervacije}}
+					\noindent \underbar{\textbf{UC 19 - Zatvaranje rezervacije}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vlasnik vozila
@@ -510,7 +533,7 @@
 					\end{packed_item}
 					
 					
-					\noindent \underbar{\textbf{UC19 - Pregled korisnika}}
+					\noindent \underbar{\textbf{UC 20 - Pregled korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -527,7 +550,7 @@
 						\item  \textbf{Opis mogućih odstupanja: }-
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC20 - Brisanje korisnika}}
+					\noindent \underbar{\textbf{UC 21 - Brisanje korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -553,7 +576,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC21 - Promjena razine korisnika}}
+					\noindent \underbar{\textbf{UC 22 - Promjena razine korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -579,7 +602,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC 22 - Dodavanje poslovnice}}
+					\noindent \underbar{\textbf{UC 23 - Dodavanje poslovnice}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -607,7 +630,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC 23 - Uklanjanje poslovnice}}
+					\noindent \underbar{\textbf{UC 24 - Uklanjanje poslovnice}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -625,7 +648,7 @@
 						\item  \textbf{Opis mogućih odstupanja: }-
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC 24 - Uređivanje poslovnice}}
+					\noindent \underbar{\textbf{UC 25 - Uređivanje poslovnice}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
