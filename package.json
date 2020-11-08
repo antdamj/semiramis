@@ -1,7 +1,7 @@
 {
-    "name": "wim-lab-3",
+    "name": "halikarnas",
     "version": "1.0.0",
-    "description": "WiM: Laboratory exercise 3",
+    "description": "Projekt",
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +11,7 @@
     "keywords": [
         "express"
     ],
-    "author": "WiM",
+    "author": "Halikarnas",
     "license": "MIT",
     "dependencies": {
         "connect-pg-simple": "^6.1.0",
