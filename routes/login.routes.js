@@ -33,11 +33,7 @@ router.post('/', async (req, res, next) => {
     //check credentials
     if(user.email=="null@admin" && user.isPersisted() && user.password=="admin"){
         req.session.user=user;
-        res.render('admin',{
-            title: 'Admin page',
-            user:req.session.user,
-            linkActive:'admin'
-        });
+        res.redirect('admin');
     }
     else if (user.isPersisted() &&
         user.checkPassword(req.body.password)) {

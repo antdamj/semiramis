@@ -12,6 +12,7 @@ const homeRouter = require('./routes/home.routes');
 const loginRoute = require('./routes/login.routes');
 const logoutRoute = require('./routes/logout.routes');
 const signupRoute = require('./routes/signup.routes');
+const adminRoute = require('./routes/admin.routes');
 const userRoute = require('./routes/user.routes');
 const userData = require('./models/UserData');
 
@@ -52,6 +53,7 @@ app.use('/login', loginRoute)
 app.use('/logout', logoutRoute)
 app.use('/signup', signupRoute)
 app.use('/user', userRoute)
+app.use('/admin',adminRoute);
 
 
 app.users = new userData('./data/users.json');
