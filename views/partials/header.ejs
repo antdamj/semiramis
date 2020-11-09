@@ -2,7 +2,7 @@
     <nav class="navigation container">
         <div class="menu">
             <a href="/" class="link menu-item <%if (linkActive === 'home') {%>  link-active  <%}%>">Naslovnica</a>
-            <% if(user!==undefined && user.role=='admin'){ %>
+            <% if(user!==undefined && user.uloga=='admin'){ %>
                 <a href="/admin" class="link menu-item <%if (linkActive === 'admin') {%>  link-active  <%}%>">Admin</a>
                 <a href="/" class="link">
                     <img class="scaled-image scaled-image-fixed" src="../images/logo.svg" alt="Company logo">

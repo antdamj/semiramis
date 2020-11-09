@@ -7,7 +7,6 @@ const router = express.Router();
 // - napraviti redirect na osnovnu stranicu
 router.get('/', (req, res, next) => {
 
-    req.session.cart = undefined;
     req.session.user = undefined;
     req.session.destroy((err) => {
         if (err) console.log(err)

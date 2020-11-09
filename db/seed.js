@@ -14,7 +14,7 @@ const pool = new Pool({
 
 const sql_create_korisnik = `CREATE TABLE korisnik
 (
-    korisnickoIme   text PRIMARY KEY,
+    korisnickoIme   text PRIMARY KEY UNIQUE,
 	ime			    text NOT NULL,
 	prezime		    text NOT NULL,
     email		    text NOT NULL,
@@ -25,10 +25,10 @@ const sql_create_korisnik = `CREATE TABLE korisnik
 
 const sql_insert_korisnik = `INSERT INTO korisnik 
 (korisnickoIme, ime, prezime, email, lozinka, brojMobitela, uloga) VALUES 
-    ('admin', 'Josip', 'Hrvatić', 'josip.hrvatic@fer.hr', 'jobi', '0996753456', 'admin'),
-    ('toni', 'Antonio', 'Damjanović', 'antonio.damjanovic@fer.hr', 'toni', '0916729911', 'vlasnik'),
-    ('kreso', 'Krešimir', 'Blaić', 'kresimir.blaic@fer.hr', 'kreso', '0956723334', 'korisnik'),
-    ('megi', 'Magda', 'Smolić - Ročak', 'magda.smolic-rocak@fer.hr', 'megi', '0919241827', 'korisnik')`;
+    ('admin', 'Josip', 'Hrvatić', 'josip.hrvatic@fer.hr', 'admin123', '0996753456', 'admin'),
+    ('toni', 'Antonio', 'Damjanović', 'antonio.damjanovic@fer.hr', 'toni1234', '0916729911', 'vlasnik'),
+    ('kreso', 'Krešimir', 'Blaić', 'kresimir.blaic@fer.hr', 'kreso123', '0956723334', 'korisnik'),
+    ('megi', 'Magda', 'Smolić - Ročak', 'magda.smolic-rocak@fer.hr', 'megi1234', '0919241827', 'korisnik')`;
 
 const sql_create_korisnik_korisnickoIme_index = `CREATE INDEX idx_korisnickoIme ON korisnik(korisnickoIme)`;
 

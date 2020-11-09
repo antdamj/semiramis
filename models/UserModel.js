@@ -3,9 +3,11 @@ const db = require('../db')
 //razred User enkapsulira korisnika
 module.exports = class User {
 
+
+
     //konstruktor korisnika
-    constructor(username, first_name, last_name, email, password, phoneNumber, role = "korisnik") {
-        this.korisnickoime = username
+    constructor(user_name, first_name, last_name, email, password, phoneNumber, role = "korisnik") {
+        this.korisnickoime = user_name
         this.ime = first_name
         this.prezime = last_name
         this.email = email
@@ -15,9 +17,9 @@ module.exports = class User {
     }
 
     //dohvat korisnika na osnovu korisničkog imena (email kod signup procedure)
-    static async fetchByUsername(username) {
+    static async fetchByUsername(user_name) {
 
-        let results = await dbGetUserByName(username)
+        let results = await dbGetUserByName(user_name)
         console.log(results);
         let newUser = new User()
 
@@ -65,11 +67,11 @@ dbGetUserByName = async (user_name) => {
 //umetanje zapisa o korisniku u bazu podataka
 dbNewUser = async (user) => {
     const sql = "INSERT INTO korisnik (korisnickoIme, ime, prezime, email, lozinka, brojMobitela, uloga) VALUES ('" +
-        user.user_name + "', '" + user.first_name + "', '" + user.last_name + "', '" +
-        user.email + "', '" + user.password + "', '" + user.phoneNumber + "', '" + user.role + "') RETURNING korisnickoIme";
+        user.korisnickoime + "', '" + user.ime + "', '" + user.prezime + "', '" +
+        user.email + "', '" + user.lozinka + "', '" + user.brojmobitela + "', '" + user.uloga + "') RETURNING korisnickoIme";
     try {
         const result = await db.query(sql, []);
-        return result.rows[0].id;
+        return result.rows[0].korisnickoime;
     } catch (err) {
         console.log(err);
         throw err
