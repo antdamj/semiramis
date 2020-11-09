@@ -26,25 +26,22 @@ router.post('/', async (req, res, next) => {
         return;
     }
 
-    let user = await User.fetchByUsername(req.body.user);
+    let user = await User.fetchByUsername(req.body.korisnickoIme);
+    console.log("aaaa");
     console.log(user);
-    
 
     //check credentials
-    if(user.email=="null@admin" && user.isPersisted() && user.password=="admin"){
-        req.session.user=user;
-        res.redirect('admin');
-    }
-    else if (user.isPersisted() &&
-        user.checkPassword(req.body.password)) {
 
-
-        //if successful, redirect to the main page
+    if (user.isPersisted() && user.uloga == 'admin') {
+        req.session.user = user;
+        res.redirect("/admin");
+    } else if (user.isPersisted() && user.uloga == 'vlasnik') {
+        req.session.user = user;
+        res.redirect("/owner");
+    } else if (user.isPersisted() && user.checkPassword(req.body.lozinka)) {
         req.session.user = user;
         res.redirect("/")
-
     } else {
-
         res.render('login', {
             title: 'Prijava',
             user: req.session.user,
@@ -53,6 +50,5 @@ router.post('/', async (req, res, next) => {
         });
     }
 });
-
 
 module.exports = router;

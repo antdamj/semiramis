@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    if (req.session.user !== undefined && req.session.user.uloga == 'admin') {
-        res.render('admin', {
-            title: 'Admin page',
+    if (req.session.user !== undefined && req.session.user.uloga == 'vlasnik') {
+        res.render('owner', {
+            title: 'vlasnik page',
             user: req.session.user,
-            linkActive: 'admin'
+            linkActive: 'vlasnik'
         });
     }
     else {

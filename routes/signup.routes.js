@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/UserModel')
-const Address = require('../models/AddressModel')
-const userData = require('../models/UserData');
 const app = require('../server')
 
 //vrati signup stranicu
@@ -49,17 +47,13 @@ router.post('/', function (req, res, next) {
         }
 
         //registriraj novog korisnika
-        user = new User(req.body.email, req.body.firstName, req.body.lastName, req.body.email, req.body.password1)
+        user = new User(req.body.email, req.body.firstName, req.body.lastName, req.body.email, req.body.phoneNumber, req.body.password1)
 
         /*
         req.app.users.createUser(req.body.email, req.body.password1, req.body.email)
         req.app.users.store();
         */
         await user.persist()
-
-        //stvori adresu korisnika
-        address = new Address(user, user.first_name + " " + user.last_name, req.body.street, req.body.postcode, req.body.city, req.body.country)
-        await address.persist()
 
         req.session.user = user;
         res.redirect('/');
