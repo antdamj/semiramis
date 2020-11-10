@@ -13,14 +13,8 @@ router.get('/', function (req, res, next) {
     });
 });
 
-<<<<<<< Updated upstream
 
-//Potrebno je dodati sljedeću funkcionalnost:
-// - ako je prijava uspjela, povezati sjednicu s registriranim korisnikom
-// - napraviti redirect na home stranicu
-=======
 // Ako je prijava uspjela, povezati sjednicu s registriranim korisnikom
->>>>>>> Stashed changes
 router.post('/', function (req, res, next) {
     (async () => {
 
