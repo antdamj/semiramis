@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
     });
 });
 
-//ZADATAK: registracija novog korisnika.
+
 //Potrebno je dodati sljedeću funkcionalnost:
 // - ako je prijava uspjela, povezati sjednicu s registriranim korisnikom
 // - napraviti redirect na home stranicu
@@ -33,10 +33,10 @@ router.post('/', function (req, res, next) {
         }
 
         //dobavi podatke o korisniku iz baze podataka
-        let user = await User.fetchByUsername(req.body.email)
+        let user = await User.fetchByUsername(req.body.username)
 
         //ako korisnik postoji, javi grešku
-        if (user.id !== undefined) {
+        if (user.korisnickoime !== undefined) {
             res.render('Signup', {
                 title: 'Registrirajte se',
                 linkActive: 'signup',
@@ -47,13 +47,10 @@ router.post('/', function (req, res, next) {
         }
 
         //registriraj novog korisnika
-        user = new User(req.body.email, req.body.firstName, req.body.lastName, req.body.email, req.body.phoneNumber, req.body.password1)
-
-        /*
-        req.app.users.createUser(req.body.email, req.body.password1, req.body.email)
-        req.app.users.store();
-        */
+        user = new User(req.body.username, req.body.firstName, req.body.lastName, req.body.email, req.body.password1, req.body.phoneNumber, 'korisnik');
+        //console.log(user);
         await user.persist()
+
 
         req.session.user = user;
         res.redirect('/');

@@ -3,6 +3,8 @@ const db = require('../db')
 //razred User enkapsulira korisnika
 module.exports = class User {
 
+
+
     //konstruktor korisnika
     constructor(user_name, first_name, last_name, email, password, phoneNumber, role = "korisnik") {
         this.korisnickoime = user_name
