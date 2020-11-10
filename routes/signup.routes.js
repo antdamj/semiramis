@@ -13,7 +13,6 @@ router.get('/', function (req, res, next) {
     });
 });
 
-
 // Ako je prijava uspjela, povezati sjednicu s registriranim korisnikom
 router.post('/', function (req, res, next) {
     (async () => {
@@ -45,12 +44,7 @@ router.post('/', function (req, res, next) {
 
         //registriraj novog korisnika
         user = new User(req.body.username, req.body.firstName, req.body.lastName, req.body.email, req.body.password1, req.body.phoneNumber, 'korisnik');
-<<<<<<< Updated upstream
-        //console.log(user);
-=======
->>>>>>> Stashed changes
         await user.persist()
-
 
         req.session.user = user;
         res.redirect('/');
