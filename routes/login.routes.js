@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/UserModel')
-const userData = require('../models/UserData');
 const app = require('../server')
 
 router.get('/', (req, res, next) => {
@@ -27,15 +26,15 @@ router.post('/', async (req, res, next) => {
     }
 
     let user = await User.fetchByUsername(req.body.korisnickoIme);
-    console.log("aaaa");
+    console.log("Login > ");
     console.log(user);
 
     //check credentials
 
-    if (user.isPersisted() && user.uloga == 'admin') {
+    if (user.isPersisted() && user.uloga == 'admin' && user.checkPassword(req.body.lozinka)) {
         req.session.user = user;
         res.redirect("/admin");
-    } else if (user.isPersisted() && user.uloga == 'vlasnik') {
+    } else if (user.isPersisted() && user.uloga == 'vlasnik' && user.checkPassword(req.body.lozinka)) {
         req.session.user = user;
         res.redirect("/owner");
     } else if (user.isPersisted() && user.checkPassword(req.body.lozinka)) {

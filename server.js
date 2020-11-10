@@ -15,7 +15,6 @@ const signupRoute = require('./routes/signup.routes');
 const adminRoute = require('./routes/admin.routes');
 const userRoute = require('./routes/user.routes');
 const ownerRoute = require('./routes/owner.routes');
-const userData = require('./models/UserData');
 
 
 //middleware - predlošci (ejs)
@@ -56,9 +55,6 @@ app.use('/signup', signupRoute)
 app.use('/user', userRoute)
 app.use('/admin', adminRoute);
 app.use('/owner', ownerRoute);
-
-app.users = new userData('./data/users.json');
-app.users.initialize(true);
 
 //pokretanje poslužitelja na portu 3000
 app.get('*', function (req, res) {

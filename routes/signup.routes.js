@@ -13,12 +13,15 @@ router.get('/', function (req, res, next) {
     });
 });
 
+<<<<<<< Updated upstream
 
 //Potrebno je dodati sljedeću funkcionalnost:
 // - ako je prijava uspjela, povezati sjednicu s registriranim korisnikom
 // - napraviti redirect na home stranicu
+=======
+// Ako je prijava uspjela, povezati sjednicu s registriranim korisnikom
+>>>>>>> Stashed changes
 router.post('/', function (req, res, next) {
-
     (async () => {
 
         //provjeri istovjetnost unesenenih zaporki
@@ -48,7 +51,10 @@ router.post('/', function (req, res, next) {
 
         //registriraj novog korisnika
         user = new User(req.body.username, req.body.firstName, req.body.lastName, req.body.email, req.body.password1, req.body.phoneNumber, 'korisnik');
+<<<<<<< Updated upstream
         //console.log(user);
+=======
+>>>>>>> Stashed changes
         await user.persist()
 
 
@@ -56,6 +62,5 @@ router.post('/', function (req, res, next) {
         res.redirect('/');
     })();
 });
-
 
 module.exports = router;
