@@ -21,6 +21,22 @@
 			
 		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
 		
+		    \noindent Za potrebe našeg sustava koristit ćemo relacijsku bazu podataka koja
+            svojom strukturom olakšava modeliranje stvarnog svijeta. Gradivna jedinka
+            baze je relacija, odnosno tablica koja je definirana svojim imenom i 
+            skupom atributa. Zadaća baze podataka je brza i jednostavna pohrana, 
+            izmjena i dohvat podataka za daljnju obradu.
+            Baza podataka ove aplikacije sastoji se od sljedećih entiteta:
+            
+            \begin{packed_item}
+                \item Korisnik
+                \item Poslovnica
+                \item Recenzija
+                \item Rezervacija
+                \item Session
+                \item Vozilo
+            \end{packed_item}
+		
 			\subsection{Opis tablica}
 			
 
@@ -42,6 +58,73 @@
 					email & VARCHAR &   \\ \hline 
 					ime & VARCHAR	&  		\\ \hline 
 					\cellcolor{LightBlue} primjer	& VARCHAR &   	\\ \hline 
+					
+					
+				\end{longtabu}
+				
+				\noindent \textbf{Korisnik} \quad Ovaj entitet sadržava sve važne informacije o korisniku aplikacije. Sadrži atribute: Korisničko ime, ime, prezime, email, lozinku, broj mobitela korisnika i njegovu ulogu. Ovaj entitet u vezi je
+                \textit{One-to-Many} s entitetom Recenzija preko atributa korisničko ime korisnika i u vezi \textit{One-to-Many} s entitetom Rezervacija preko korisničkog imena.
+                
+                \begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Korisnik}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Korisnik}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}Korisničko ime & VARCHAR	&  	korisničko ime korisnika koje je ujedno i jedinstveni identifikator\\ \hline
+					Ime	& VARCHAR &   ime korisnika\\ \hline
+					Prezime	& VARCHAR &   prezime korisnika\\ \hline
+					Email & VARCHAR &   e-mail adresa korisnika\\ \hline
+					Lozinka	& VARCHAR &   lozinka korisnika\\ \hline
+					Broj mobitela	& VARCHAR &   broj mobitela korisnika\\ \hline 
+					Uloga	& VARCHAR &   definira razinu ovlasti korisnika\\ \hline
+					
+					
+				\end{longtabu}
+				
+				\noindent \textbf{Poslovnica} \quad Ovaj entitet sadržava sve važne informacije o poslovnici. Sadrži atribute: ID poslovnice i lokaciju poslovnice.
+				
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Poslovnica}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Poslovnica}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}ID poslovnice & INT	&  	jedinstveni identifikator poslovnice\\ \hline
+					Lokacija	& VARCHAR &   adresa poslovnice\\ \hline
+					
+					
+				\end{longtabu}
+				
+				\noindent \textbf{Recenzija} \quad Ovaj entitet sadržava sve važne informacije vezane za osvrt korisnika o pruženoj usluzi. Sadrži atribute: ID recenzije,
+                ocjenu usluge, opis i korisničko ime korisnika koji ocjenjuje uslugu.
+                Ovaj entitet u vezi je \textit{Many-to-One} s entitetom Korisnik preko korisničkog imena.
+                
+                \begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Recenzija}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Recenzija}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}ID recenzije & INT	&  	jedinstveni identifikator recenzije\\ \hline
+					Ocjena	& INT &   ocjena za uslugu\\ \hline
+					Opis	& VARCHAR &   komentar na ocjenu usluge\\ \hline
+					\cellcolor{LightBlue}Korisničko ime	& VARCHAR &   jedinstveni identifikator korisnika, (korisnik.korisničko ime)	\\ \hline 
 					
 					
 				\end{longtabu}
