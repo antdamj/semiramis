@@ -40,30 +40,11 @@
 			\subsection{Opis tablica}
 			
 
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
+				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ} \newline
 				
-				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
-					
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\[3pt] \hline
-					\endfirsthead
-					
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\[3pt] \hline
-					\endhead
-					
-					\hline 
-					\endlastfoot
-					
-					\cellcolor{LightGreen}IDKorisnik & INT	&  	Quo usque tandem abutere, Catilina, patientia nostra? quam diu etiam furor iste tuus nos eludet? quem ad finem sese effrenata iactabit audacia tua? Nihilne te nocturnum praesidium Palati, nihil urbis vigiliae, nihil timor populi, nihil concursus bonorum omnium, nihil hic munitissimus habendi senatus locus, nihil horum ora voltusque moverunt? 	\\ \hline
-					korisnickoIme	& VARCHAR &   Patere tua consilia non sentis, constrictam iam horum omnium scientia teneri coniurationem tuam non vides? Quid proxima, quid superiore nocte egeris, ubi fueris, quos convocaveris, quid consilii ceperis, quem nostrum ignorare arbitraris?\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\cellcolor{LightBlue} primjer	& VARCHAR &   	\\ \hline 
-					
-					
-				\end{longtabu}
 				
-				\noindent \textbf{Korisnik} \quad Ovaj entitet sadržava sve važne informacije o korisniku aplikacije. Sadrži atribute: Korisničko ime, ime, prezime, email, lozinku, broj mobitela korisnika i njegovu ulogu. Ovaj entitet u vezi je
-                \textit{One-to-Many} s entitetom Recenzija preko atributa korisničko ime korisnika i u vezi \textit{One-to-Many} s entitetom Rezervacija preko korisničkog imena.
+				\noindent \textbf{Korisnik} \quad Ovaj entitet sadržava sve važne informacije o korisniku aplikacije. Sadrži atribute: korisnickoIme, ime, prezime, email, lozinka, brojMobitela i uloga. Ovaj entitet u vezi je
+                \textit{One-to-Many} s entitetom Rezervacija preko atributa korisnickoIme korisnika i u vezi \textit{One-to-Many} s entitetom Session preko korisničkog imena. Atribut sess iz tablice Session jest kolačić tipa json koji u sebi sadrži sve podatke o korisniku. 
                 
                 \begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
@@ -76,18 +57,18 @@
 					\hline 
 					\endlastfoot
 					
-					\cellcolor{LightGreen}Korisničko ime & VARCHAR	&  	korisničko ime korisnika koje je ujedno i jedinstveni identifikator\\ \hline
-					Ime	& VARCHAR &   ime korisnika\\ \hline
-					Prezime	& VARCHAR &   prezime korisnika\\ \hline
-					Email & VARCHAR &   e-mail adresa korisnika\\ \hline
-					Lozinka	& VARCHAR &   lozinka korisnika\\ \hline
-					Broj mobitela	& VARCHAR &   broj mobitela korisnika\\ \hline 
-					Uloga	& VARCHAR &   definira razinu ovlasti korisnika\\ \hline
+					korisnickoIme  & VARCHAR	&  	korisničko ime korisnika koje je ujedno i jedinstveni identifikator\\ \hline
+					ime	& VARCHAR &   ime korisnika\\ \hline
+					prezime	& VARCHAR &   prezime korisnika\\ \hline
+					email & VARCHAR &   e-mail adresa korisnika\\ \hline
+					lozinka	& VARCHAR &   lozinka korisnika\\ \hline
+					brojMobitela	& VARCHAR &   broj mobitela korisnika\\ \hline 
+					uloga	& VARCHAR &   definira razinu ovlasti korisnika\\ \hline
 					
 					
 				\end{longtabu}
 				
-				\noindent \textbf{Poslovnica} \quad Ovaj entitet sadržava sve važne informacije o poslovnici. Sadrži atribute: ID poslovnice i lokaciju poslovnice.
+				\noindent \textbf{Poslovnica} \quad Ovaj entitet sadržava sve važne informacije o poslovnici. Sadrži atribute: idPoslovnica i lokacija.
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
@@ -100,15 +81,15 @@
 					\hline 
 					\endlastfoot
 					
-					\cellcolor{LightGreen}ID poslovnice & INT	&  	jedinstveni identifikator poslovnice\\ \hline
-					Lokacija	& VARCHAR &   adresa poslovnice\\ \hline
+					\cellcolor{LightGreen}idPoslovnica & INT	&  	jedinstveni identifikator poslovnice\\ \hline
+					lokacija	& VARCHAR &   adresa poslovnice\\ \hline
 					
 					
 				\end{longtabu}
 				
-				\noindent \textbf{Recenzija} \quad Ovaj entitet sadržava sve važne informacije vezane za osvrt korisnika o pruženoj usluzi. Sadrži atribute: ID recenzije,
-                ocjenu usluge, opis i korisničko ime korisnika koji ocjenjuje uslugu.
-                Ovaj entitet u vezi je \textit{Many-to-One} s entitetom Korisnik preko korisničkog imena.
+				\noindent \textbf{Recenzija} \quad Ovaj entitet sadržava sve važne informacije vezane za osvrt korisnika o pruženoj usluzi. Sadrži atribute: idRecenzija,
+                ocjena, opis i korisnickoIme.
+                Ovaj entitet u vezi je \textit{One-to-One} s entitetom Rezervacija preko atributa idRezervacija.
                 
                 \begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
@@ -121,19 +102,93 @@
 					\hline 
 					\endlastfoot
 					
-					\cellcolor{LightGreen}ID recenzije & INT	&  	jedinstveni identifikator recenzije\\ \hline
-					Ocjena	& INT &   ocjena za uslugu\\ \hline
-					Opis	& VARCHAR &   komentar na ocjenu usluge\\ \hline
-					\cellcolor{LightBlue}Korisničko ime	& VARCHAR &   jedinstveni identifikator korisnika, (korisnik.korisničko ime)	\\ \hline 
+					\cellcolor{LightGreen}idRecenzija & INT	&  	jedinstveni identifikator recenzije\\ \hline
+					ocjena	& INT &   ocjena za uslugu\\ \hline
+					opis	& VARCHAR &   komentar na ocjenu usluge\\ \hline
+					\cellcolor{LightBlue} korisnickoIme	& VARCHAR &   jedinstveni identifikator korisnika, (korisnik.korisničko ime)	\\ \hline 
+					
+				\end{longtabu}
+				
+				\noindent \textbf{Rezervacija} \quad Ovaj entitet sadržava sve važne informacije vezane uz najam vozila. Sadrži atribute: idRezervacija, vrijemeRezervacije, vrijemePreuzimanja, vrijemeZavršetka, lokacijaPreuzimanja, lokacijaOstavljanja, korisnickoIme, registracija i status. Ovaj entitet u vezi je \textit{Many-to-One} s entitetom Korisnik preko korisničkog imena, u vezi \textit{One-to-One} s entitetom Recenzija preko atributa idRezervacija i u vezi \textit{Many-to-One} s entitetom Vozilo preko registracije. Ima dvije veze \textit{Many-to-One} s entitetom Poslovnica koje ostvaruje preko dva atributa(lokacijaPreuzimanja i lokacijaOstavljanja) koji se spajaju na atribut lokacija entiteta Poslovnica. 
+                
+                \begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Rezervacija}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Rezervacija}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}idRezervacija & INT	&  	jedinstveni identifikator rezervacije\\ \hline
+					vrijeme- Rezervacije & TIMESTAMP &   trenutak u kojem je napravljena rezervacija\\ \hline
+					vrijeme- Preuzimanja	& TIMESTAMP &   trenutak u kojem je korisnik preuzeo iznajmljeno vozilo \\ \hline
+					vrijeme- Završetka & TIMESTAMP &   trenutak u kojem je korisnik vratio iznajmljeno vozilo\\ \hline
+					lokacija- Preuzimanja	& VARCHAR &   lokacija na kojoj se preuzima iznajmljeno vozilo\\ \hline
+					lokacija- Ostavljanja	& VARCHAR &   lokacija na koju se vraća iznajmljeno vozilo\\ \hline 
+					korisnickoIme	& VARCHAR &   jedinstveni identifikator korisnika (korisnik.korisnickoIme)\\ \hline
+					registracija	& VARCHAR &   jedinstveni identifikator vozila (vozilo.registracija)\\ \hline
+					status	& VARCHAR &   definira je li rezervacija aktivna ili završena\\ \hline
+					
+					
+				\end{longtabu}
+				
+				\noindent \textbf{Session} \quad Ovaj entitet sadržava sve važne informacije o sjednici web stranice. Sjednica predstavlja slijed vremenski omeđenih i logički povezanih transakcija između pojedinog klijenta i poslužitelja. Sadrži atribute: sid, sess i expire. Sid tj. jedinstveni identifikator sjednice je pridijeljen svakoj transakciji koja pripada određenoj sjednici. Atribut sess tipa json jest kolačić koji u sebi sadrže sve podatke o korisniku koji je započeo sjednicu. Ovaj entitet je u vezi \textit{One-to-One} s korisnikom.
+
+                
+                \begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Session}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Session}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}sId & INT	&  	jedinstveni identifikator sjednice\\ \hline
+					sess	& JSON &   kolačić sjednice\\ \hline
+					expire	& TIMESTAMP &  vrijeme isteka sjednice \\ \hline
+
+					
+				\end{longtabu}
+				
+				\noindent \textbf{Vozilo} \quad Ovaj entitet sadržava sve važne informacije o vozilu koje se iznajmljuje. Sadrži atribute: registracija, marka, model, kategorija, cijenaDan i slikaURL. Ovaj entitet je u vezi \textit One-To-Many s entitetom Rezervacija preko registracije. 
+                
+                \begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Vozilo}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Vozilo}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}registracija & VARCHAR	&  	jedinstveni identifikator vozila\\ \hline
+					marka	& VARCHAR &   marka vozila\\ \hline
+					model	& VARCHAR &   model vozila \\ \hline
+					kategorija & VARCHAR &   kategorija vozila: niža, srednja ili viša\\ \hline
+					cijenaDan	& NUMERIC &   cijena dnevnog najma \\ \hline
+					slikaURL	& VARCHAR &   URL slike vozila\\ \hline 
 					
 					
 				\end{longtabu}
 			
 			
-			\subsection{Dijagram baze podataka}
+			\newpage\subsection{Dijagram baze podataka}
 				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
 			
-			\eject
+			 \begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm]{slike/ER_dijagram.png}
+                    \caption{ER dijagram baze podataka}
+                    \label{fig:useCase-2}
+                \end{figure}
 			
 			
 		\section{Dijagram razreda}
