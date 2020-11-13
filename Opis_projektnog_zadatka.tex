@@ -14,17 +14,22 @@
 		
 		%\textit{Za pomoć pogledati reference navedene u poglavlju „Popis literature“, a po potrebi konzultirati sadržaj na internetu koji nudi dobre smjernice u tom pogledu.}
 		 \text Naš cilj je napraviti web aplikaciju "Autos" za iznajmljivanje vozila privatnim i poslovnim korisnicima. \par 
-		 \text Cilj projekta je upoznavanje te praktična primijena postupaka oblikovanja programske podrške sa ciljem ostvarenja zahtjeva ovog zadatka, shvaćanje važnosti i značenja projektne dokumentacije te stvaranje iste. Također, od važnosti je i što preciznija implementacija zahtjeva i poboljšanje u svim područjima potrebnim za uspješno implementiranje zadatka. Uz standardno programiranje i rad dokumentacije, jedna od važnijih vještina koje ćemo dobiti je znanje o raspodjeli rada i iskustvo suradnje sa timom ljudi s ciljem ostvarenja zahtjeva. \par 
-		 \text U poslovanju vezanim za iznajmljivanje automobila već postoji znatan broj tvrtki koje nude vrlo sličan model onom koji mi ostvarujemo. Priložen je jedan primjer.\par  
-		 %(tu treba slika) \par 
+		 \text Cilj projekta je upoznavanje te praktična primjena postupaka oblikovanja programske podrške sa zadaćom ostvarenja zahtjeva ovog zadatka, shvaćanje važnosti i značenja projektne dokumentacije te stvaranje iste. Također, od važnosti je i što preciznija implementacija zahtjeva i poboljšanje vještina u svim područjima potrebnim za uspješno implementiranje zadatka. Uz standardno programiranje i rad dokumentacije, jedna od važnijih vještina koje ćemo dobiti je znanje o raspodjeli rada i iskustvo suradnje sa timom ljudi s ciljem ostvarenja zajedničkom projekta na osnovi zahtjeva. \par 
+		 \text U poslovanju vezanim za iznajmljivanje automobila već postoji znatan broj tvrtki koje nude vrlo sličan model onom koji mi ostvarujemo. Priložen je jedan primjer. \par 
+		 \text (izvor rentalcars.com)\par  
+		 \includegraphics[scale=0.3]{slike/stranica1.png}
+		 
 		 \text Kao što vidimo u primjeru se nudi datum i vrijeme preuzimanja i vraćanja vozila te lokacija preuzimanja i vraćanja auta. Također se na stranicu moguće prijaviti i odabrati način plaćanja. \par 
 		%\text (tu još jedna slika)
-		 \text U ovom je primjeru vidljiv i izbor pojedinog automobila za iznajmljivanje. \par 
-		 \text Godišnje oko 580 milijuna ljudi u svijetu koristi usluge iznajmljivanja\par  automobila, a od toga čak 70 je posto online. Ukupan broj korisnika ovih usluga kao i postotak online korištenja je u porastu te se nastavak tog porasta očekuje kroz sljedećih nekoliko godina. 
+		\includegraphics[scale=0.33]{slike/stranica2.png}
+		
+		 \text U ovom je primjeru vidljiv i izbor pojedinog automobila za iznajmljivanje. \par
+		 \text (izvor turo.com) \par 
+		 \text Godišnje oko 580 milijuna ljudi u svijetu koristi usluge iznajmljivanja  automobila, a od toga čak 70 je posto online. Ukupan broj korisnika ovih usluga kao i postotak online korištenja je u porastu te se nastavak tog porasta očekuje kroz sljedećih nekoliko godina. \par
 		 \text Jedan od zahtjeva ovog zadatka je stvoriti mogućnost prijave te registracije korisnika za koju je potrebno ime, prezime,  naziv institucije ili poduzeća (za službene korisnike), adresa (ulica, kućni broj,
 grad, država) i adresa elektroničke pošte. \par 
-         \text Implementacija će sadržavati četiri različite vrste korisnika: administrator, vlasnik sustava,\par 
-korisnik (najmoprimac vozila) i neprijavljeni korisnik (gost).
+         \text Implementacija će sadržavati četiri različite vrste korisnika: administrator, vlasnik sustava,
+korisnik (najmoprimac vozila) i neprijavljeni korisnik (gost). \par
         \text Administrator upisuje sve podatke o poduzeću (kao što su nove poslovnice) i definira tko ima ulogu vlasnika. Može vidjeti koliko je trenutno aktivnih korisnika i njihova imena.\par 
 \text Vlasnik upisuje sve ostale potrebne podatke o vozilima, uključujući njihove tehničke
 karakteristike te slike koje su prikazane na web stranici. Samo su toj ulozi 
@@ -40,11 +45,12 @@ vozilo određeno njegovim VIM brojem. \par
  \text Prilikom svakog iznajmljivanja vozila najmoprimcu vozila (gostu ili korisniku) se izdaje tiskana potvrda o
 preuzimanju vozila na kojoj se uz osobne podatke upisuju i podaci o trenutnom stanju
 prijeđenih kilometara vozila. Također se ispisuju možebitne napomene o vozilima (oštećenja ili sl.).\par 
- \text Za izvršenje zadatka nužno je napraviti i bazu podataka koja će sadržavati sve podatke o poslovnicama, korisnicima, rezervacijama i automobilima. 
- \text Brojne su moguće nadogradnje ove implementacije. Mogli bismo dodati funkcionalnosti koje bi iskorištavale korisnikovu lokaciju i uz Google Maps automatski nudile korisniku najbliže mjesto preuzimanja vozila. Iste bi mogli iskoristiti u slučaju da je vozilo izgubljeno ili ukradeno pa bismo mogli prikazivati njegovu lokaciju i pronaći ga. 
-\text Nadalje, grafička analiza podataka o isplativnosti pojedinih vozila bi vlasnicima olakšala odluke vezane za popravak, zamjenu ili nabavu novog vozila. \par 
-\text Korisna bi bila i mogućnost ostavljanja recenzija za pojedino vozilo, sveukupno osoblje ili web stranicu. Recenzija bi se sastojala od ocjene i kratkog opisa. Sve bi recenzije i prosjek ocjena za svaku kategoriju ocjenjivanja mogao pregledati vlasnik. \par 
-\text Dobro bi došla  funkcionalnost koja mjeri porast ukupnog i aktivnog broja korisnika te bilježi korisnike koji su najčešće mušterije. Tim bi se osobama ili poduzećima omogućilo da uđu u VIP Membership program sa određenim pogodnostima vezanim za vozila i usluge (npr. osoblje odgovara na upite 24/7, last minute rezervacije i najmovi i slično).   \par  
+ \text Za izvršenje zadatka nužno je napraviti i bazu podataka koja će sadržavati sve podatke o poslovnicama, korisnicima, rezervacijama i automobilima. \par
+ \text Za potpunu funkcionalnost stranice potrebno je realizirati registraciju i prijavu korisnika te prijavu admina i vlasnika sustava. Pri registraciji nužno je provjeravati zadovoljavaju li ulazni podaci svoju formu(pravilna e-mail adresa, dovoljno duga lozinka itd.).\par
+ \text Brojne su zamislive nadogradnje ove implementacije. Mogli bismo dodati funkcionalnosti koje bi iskorištavale korisnikovu lokaciju i uz Google Maps automatski nudile korisniku najbliže mjesto preuzimanja vozila. Iste bi mogli iskoristiti u slučaju da je vozilo izgubljeno ili ukradeno pa bismo mogli prikazivati njegovu lokaciju i pronaći ga. 
+\text Nadalje, grafička analiza podataka o isplativosti pojedinih vozila bi vlasnicima olakšala odluke vezane za popravak, zamjenu ili nabavu novog vozila. \par 
+\text Korisna bi bila i mogućnost ostavljanja i obrade recenzija za pojedino vozilo, sveukupno osoblje ili web stranicu. Recenzija bi se sastojala od ocjene i kratkog opisa. Sve bi recenzije i prosjek ocjena za svaku kategoriju ocjenjivanja mogao pregledati vlasnik. \par 
+\text Od koristi bi bila i na primjer, funkcionalnost koja mjeri porast ukupnog i aktivnog broja korisnika te bilježi korisnike koji su najčešće mušterije. Tim bi se osobama ili poduzećima omogućili posebni popusti ili druge pogodnosti vezane za vozila i usluge (npr. osoblje odgovara na upite 24/7, last-minute rezervacije i najam i slično).   \par  
 		\eject
 		
 		
