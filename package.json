@@ -12,7 +12,7 @@
         "express"
     ],
     "author": "Halikarnas",
-    "license": "MIT",
+    "license": "FER",
     "dependencies": {
         "connect-pg-simple": "^6.1.0",
         "ejs": "^3.0.1",

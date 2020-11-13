@@ -29,9 +29,7 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-//middleware - upravljanje sjednicama (+ trajne sjednice u bazi podataka)
-//ZADATAK: postaviti express-sessions midlleware, trajnost sjedničkog kolačića 1 dan,
-//pohrana sjednica u postgres bazu korštenjem connect-pg-simple modula
+
 app.use(session({
     secret: 'armavirumquecanotroiaequiprimusaboris',
     store: new pgSession({

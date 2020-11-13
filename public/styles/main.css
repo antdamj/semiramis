@@ -365,36 +365,11 @@ body {
     margin-bottom: auto;
 }
 
-.cart-box-image {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    margin-bottom: auto;
-}
-
 .gallery {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin-bottom: 1em;
 }
-
-.cart-gallery {
-    display: grid;
-    grid-template-columns: 1fr;
-    align-content: start;
-    margin-top: 2em;
-    margin-bottom: 1em;
-    margin-left: 2em;
-    grid-row-gap: 20px;
-}
-
-.cart-row {
-    display: grid;
-    grid-template-columns: 1fr 3fr 3fr 3fr 3fr;
-    margin-bottom: 1em;
-    grid-column-gap: 10px;
-}
-
 
 .link:hover {
     color: #6495ED;
@@ -483,4 +458,47 @@ label {
 .flex-container {
     display: flex;
     justify-content: space-evenly;
+}
+
+.logoContainer {
+    text-align: center;
+    position: relative;
+    left: 100px;
+}
+
+.accountLogo {
+    background-color: #6495ED;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: transparent solid 3px;
+    line-height: 60px;
+    position: relative;
+    top: calc(50% - 26.5px);
+}
+
+.accountLogo:hover {
+    border-radius: 50%;
+    border: black solid 3px;
+    background-color: #FFD300;
+    animation: pritisniMe 1s infinite
+}
+
+@keyframes pritisniMe {
+    0% {
+        background-color: #6495ED;
+    }
+
+    50% {
+        background-color: #FFD300;
+    }
+
+    100% {
+        background-color: #6495ED;
+    }
+}
+
+.accountLogo>b>a,
+.accountLogo>b>a:hover {
+    color: white;
 }
