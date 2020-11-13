@@ -78,6 +78,7 @@ MVC model sastoji se od sljedećih dijelova:\par
 					
 				\end{longtabu}
 				
+				\newpage
 				\noindent \textbf{Poslovnica} \quad Ovaj entitet sadržava sve važne informacije o poslovnici. Sadrži atribute: idPoslovnica i lokacija.
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
@@ -200,13 +201,41 @@ MVC model sastoji se od sljedećih dijelova:\par
                 \end{figure}
 			
 			
+		\newpage
 		\section{Dijagram razreda}
-		
-			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
 			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
+			Na slikama \ref{fig:classDiagram-1}, \ref{fig:classDiagram-2} i \ref{fig:classDiagram-3} prikazani su razredi \textit{backend} dijela MVC modela aplikacije. Razredi prikazani na slici \ref{fig:classDiagram-1} nasljeđuju Controller razred. Metode implementirane u tim razredima informacijom manipuliraju objektima i to tzv. \textit{Data Transfer Object}, ili, kako smo ih u daljnjem tekstu nazivali, DTO-ima.\\
+	
+	        
+	        \begin{figure}[hp]
+                \centering
+                \includegraphics[width=16cm]{slike/dijagramRazreda1.png}
+                \caption{Dijagram razreda - dio Contollers}
+                \label{fig:classDiagram-1}
+            \end{figure}
+            \newpage
+            
+            \begin{figure}[hp]
+                \centering
+                \includegraphics[width=16cm]{slike/dijagramRazreda2.png}
+                \caption{Dijagram razreda - dio Data Transfer Objects}
+                \label{fig:classDiagram-2}
+            \end{figure}
+            
+            \noindent Dijagram razreda prikazuje strukturu baze podataka aplikacije.\\
+            Razred OpćiKorisnik predstavlja registriranog korisnika. Svaki registrirani korisnik, neovisno o tomu bio on Korisnik, Vlasnik ili Administrator, nasljeđuje razred OpćiKorisnik. Razred Administrator predstavlja administratora sustava, koji ima najveće ovlasti. Razred Vlasnik predstavlja vlasnika sustava, koji ima ovlasti upravljanja vozilima i rezervacijama.
+            Razred Korisnik predstavlja klijenta koji koristi osnovne funkcionalnosti aplikacije. \\
+            Razred Gost predstavlja neregistriranog korisnika koji se može registrirati u sustav unoseći osnovne informacije.\\
+            
+            \newpage
+            
+            \begin{figure}[hp]
+                \centering
+                \includegraphics[width=15cm]{slike/dijagramRazreda3.png}
+                \caption{Dijagram razreda - dio Models}
+                \label{fig:classDiagram-3}
+            \end{figure}
+            \newpage
 			
 			\textbf{\textit{dio 2. revizije}}\\			
 			
