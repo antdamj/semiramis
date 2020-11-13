@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AUTOS!</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="./images/car-icon.png" />
+    <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./styles/main.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+
+<body class="content">
+
+    <%- include(`partials/header`); %>
+
+    <main class="main">
+        <section class="section secondary-color-bg">
+            <div class="container">
+                <img class="scaled-image" src="images/cars.jpg" alt="Company jumbo image">
+            </div>
+        </section>
+
+        <section class="section primary-color-bg">
+            <div class="container">
+                <div class="centered-container">
+                    <div class="separator"></div>
+                    <form action="/login" method="post">
+                        <fieldset>
+                            <legend>Forma za login</legend>
+                            <label for="korisnickoIme">Korisničko ime:</label>
+                            <input type="text" name="korisnickoIme" id="korisnickoIme" maxlength="30" minlength="4">
+                            <br>
+                            <label for="lozinka">Lozinka:</label>
+                            <input type="password" name="lozinka" id="lozinka" minlength="4"> <br>
+                            <br>
+                            <input type="submit"> <input type="reset">
+                            <% if (err !== undefined ) { %>
+                            <p style="justify-content: center; color: red;"><%= err %></p>
+                            <% } %>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="centered-container">
+                <h5 class="infobox-title main-color-emphasized">Novi korisnici trebali bi <a href="/signup">stvoriti
+                        novi </a> račun.</h5>
+            </div>
+
+            <div class="container">
+                <div class="separator"></div>
+            </div>
+            <section class="section container">
+                <div class="container-grid container-grid-halves">
+                    <div class="news">
+                        <h3 class="main-color font-secondary news-title "> Novosti, događanja &amp; i ostalo</h3>
+                        <div class="infobox infobox-news">
+                            <h4 class="infobox-title main-color-emphasized">
+                                Predivni novi auti
+                            </h4>
+                            <h5 class="infobox-subtitle main-color-emphasized">
+                                15. studenog, 2020.
+                            </h5>
+                            <p class="infobox-content">
+                                Proširili smo ponudu vozila! Novi auti su dostupni da ih isprobate!
+
+                            </p>
+                            <a class="link infobox-link" href="#">Pročitaj više</a>
+                        </div>
+                        <div class="infobox infobox-calendar">
+                            <h4 class="infobox-title main-color-emphasized">
+                                Časna pobjeda!
+                            </h4>
+                            <h5 class="infobox-subtitle main-color-emphasized">
+                                14. srpnja, 2020.
+                            </h5>
+                            <p class="infobox-content">
+                                Car Power je proglašena za "Ultimate Car Renting Company". Prestižnu nagradu dodijelila
+                                je...
+
+                            </p>
+                            <a class="link infobox-link" href="#">Pročitaj više</a>
+                        </div>
+                    </div>
+                    <div class="vertical-center">
+                        <img class="scaled-image" src="images/limo.jpg" alt="Limuzina">
+                    </div>
+
+                </div>
+            </section>
+            <div class="separator"></div>
+        </section>
+        <%- include(`partials/footer`); %>
+</body>
+
+</html>
