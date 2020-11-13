@@ -58,4 +58,4 @@ app.use('/owner', ownerRoute);
 app.get('*', function (req, res) {
     res.status(404).send('<h1>404 Error occured</h1><h2>Posjetili ste stranicu koja ne postoji</h2><h2>Pritisnite <a href="/" class="link menu-item">tu</a> da se vratite </h2>');
 });
-app.listen(3000);
+app.listen(3000, 'halikarnas-autos.duckdns.org');
