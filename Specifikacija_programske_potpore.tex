@@ -97,8 +97,6 @@
 			
 				
 			\subsection{Obrasci uporabe}
-				
-				\textbf{\textit{Dio 1. revizije}}\\
 					
 
 					\noindent \underbar{\textbf{UC 1 - Registracija korisnika}}
@@ -679,7 +677,7 @@
 				\eject
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
-					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
+					\text{Prikazan je odnos aktora i obrazaca uporabe UML dijagramima.}
 						
 				\begin{figure}[hp]
                     \centering
@@ -707,9 +705,6 @@
 				
 			\subsection{Sekvencijski dijagrami}
 				
-				\textbf{\textit{dio 1. revizije}}\\
-				
-				\noindent\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}\newline
 
 				\noindent\textbf{Obrazac uporabe 7 - Pretraga vozila}\\
 				
@@ -717,8 +712,8 @@
 				vraćanja vozila. Pri slanju zahtjeva provjerava se točnost
 				unesenih podataka te ako je sve u redu prosljeđuje se upit bazi
 				podataka. Baza podataka šalje popis automobila s njihovim
-				specifikacijama kojeg web-aplikacija prikazuje korisniku. Nakon
-				toga korisnik bira kategoriju vozila koja ga zanima te mu se
+				specifikacijama koji web-aplikacija prikazuje korisniku. Nakon
+				toga korisnik bira kategoriju vozila koja ga zanima pa mu se
 				prikažu dostupni automobili uz nadoknadu za narudžbu van
 				osnovnih uvjeta (početno je 0 kn). Ako ne postoje automobili s
 				njegovim odabirom web-aplikacija mu vraća poruku o
@@ -744,8 +739,7 @@
                 
                 \newpage\noindent\textbf{Obrazac uporabe 19 -  Zatvaranje rezervacije}\\
                 
-				\noindent Vlasnik šalje poslužitelju zahtjev za prikaz liste aktivnih narudžbi. Poslužitelj dohvaća listu aktivnih narudžbi iz baze podataka i šalje je vlasniku. Vlasnik odabire narudžbu koju želi označiti kao gotovu. Poslužitelj prima taj zahtjev i prosljeđuje promjenu bazi podataka, te rezervacija postaje 
-                završena i dodaje se na popis prijašnjih narudžbi.
+				\noindent Vlasnik šalje poslužitelju zahtjev za prikaz liste aktivnih narudžbi. Poslužitelj dohvaća listu aktivnih narudžbi iz baze podataka i šalje je vlasniku. Vlasnik odabire narudžbu koju želi označiti kao gotovu. Poslužitelj prima taj zahtjev i prosljeđuje promjenu bazi podataka; rezervacija postaje završena i dodaje se na popis prijašnjih narudžbi.
 				
 				\begin{figure}[hp]
                     \centering
@@ -754,7 +748,7 @@
                     \label{fig:SD_UC19}
                 \end{figure}
 				
-				
+		\pagebreak
 	
 		\section{Nefunkcionalni zahtjevi}
 		
@@ -763,10 +757,10 @@
 		\begin{packed_item}
 	
 						\item Sustav bi trebao jamčiti točnost i pouzdanost informacija.
-						\item  Unos neispravnih oblika podataka ili upload krivih datoteka ne smije narušiti sustav.
-						\item Odgovor na svaki upit ili zahtjev za nekom radnjom nebi trebao trajati duže od 1 sekunde.
+						\item  Unos neispravnih oblika podataka ili postavljanje neispravnih datoteka na poslužitelj ne smije narušiti sustav.
+						\item Odgovor na svaki upit ili zahtjev za nekom radnjom ne bi trebao trajati duže od 1 sekunde.
 						\item  Dizajn sustava mora omogućiti intuitivnu uporabu sustava.
-						\item Sustav se mora moći nadograditi prema zahtjevima naručitelja
+						\item Sustav se mora moći nadograditi prema zahtjevima naručitelja.
 						
 					\end{packed_item}
 				
@@ -775,10 +769,10 @@
 		 
 			\begin{packed_item}
 	
-						\item Programska podrška je izvedena kao Springboot web aplikacija pisana u Javi.
-						\item  Pohrana podataka je izvedena preko Postgre SQL baze podataka.
-						\item Programska podrška mora bit sposobna na CRUD operacije svih priloženih podataka.
-						\item  Jedan korisnik ne može biti ulogiran na dva različita računala(istovremeno imati dvije aktivne sjednice)
+						\item Programska podrška izvedena je kao Node.js aplikacija pisana u jeziku JavaScript.
+						\item  Pohrana podataka izvedena je preko Postgre SQL baze podataka.
+						\item Programska podrška mora biti sposobna na CRUD operacije svih priloženih podataka.
+						\item  Korisnik ne može biti prijavljen na dva različita računala istovremeno, odn. ne može imati dvije aktivne sjednice.
 						
 					\end{packed_item}
 			 
