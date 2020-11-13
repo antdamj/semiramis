@@ -1,22 +1,22 @@
 \chapter{Arhitektura i dizajn sustava}
 		
-		\textit{Arhitektura sustava koji projektiramo se može razdvojiti na dvije cjeline: Web aplikaciju i bazu podataka.}\\
+		\noindent\text Arhitektura sustava koji projektiramo se može razdvojiti na dvije cjeline: Web aplikaciju
+		i bazu podataka.\par
+		\textit{}\\
+		\text Web aplikacija se sastoji od web preglednika i web poslužitelja.\par
 		
-		\textit{Web aplikacija se sastoji od web preglednika i web poslužitelja.}\\
+		 \underbar{Web preglednik} je grafički prikaz implementacije naše aplikacije koji je lako razumljiv korisniku te se njime korisnik služi kako bi pregledao web-stranicu ili multimedijalni sadržaj pohranjen na njoj. Uloga preglednika je prevođenje koda u lako razumljiv grafički prikaz te omogućava korisniku slanje upita i zahtjeva web poslužitelju.\par
 		
-		\textit{\underline{Web preglednik} je grafički prikaz implementacije naše aplikacije koji je lako razumljiv korisniku te se njime korisnik služi kako bi pregledao web-stranicu ili multimedijalni sadržaj pohranjen na njoj. Uloga preglednika je prevođenje koda u lako razumljiv grafički prikaz te omogućava korisniku slanje upita i zahtjeva web poslužitelju.}\\
-		\\
-		\textit{\underline{Web poslužitelj} služi za komunikaciju i obradu zahtjeva između korisnika i aplikacije. Koristi protokol HTTP za komunikaciju te ovisno o HTTP zahtjevu prosljeđuje ga aplikaciji koja pristupa bazi podataka, nakon čega preko poslužitelja vraća HTML dokument kao odgovor.}\\
-		\\
-		\textit{Programska podrska je izvedena kao Springboot web aplikacija pisana u Javi, te je pohrana podataka izvedena preko Postgre SQL baze podataka.}\\
-		\\
-		\textit{Arhitektura sustava je temeljena na \textbf{MVC modelu}. MVC model omogućava odvojeni razvoj pojedinih dijelova web aplikacije, što omogućava jednostavniji razvoj, ispitivanje i nadogradnju sustava.
-Model View Controller model se sastoji od:
-}\\
+		\underline{Web poslužitelj} služi za komunikaciju i obradu zahtjeva između korisnika i aplikacije. Koristi protokol HTTP za komunikaciju te ovisno o HTTP zahtjevu prosljeđuje ga aplikaciji koja pristupa bazi podataka, nakon čega preko poslužitelja vraća HTML dokument kao odgovor.\par
+		\textit{}\\
+		\text Programska podrška je izvedena kao Springboot web aplikacija pisana u Javi, te je pohrana podataka izvedena preko Postgre SQL baze podataka. \\
+		
+		\noindent\text Arhitektura sustava je temeljena na \textbf{MVC modelu}. MVC model omogućava odvojeni razvoj pojedinih dijelova web aplikacije, što omogućava jednostavniji razvoj, ispitivanje i nadogradnju sustava.
+Model View Controller model se sastoji od:\par
 	\begin{itemize}
-		\item 	\textit{\textbf{Model}  - dinamička struktura podataka, neovisna o korisničkom sučelju. Zadužen za upravljanje logikom i tokom podataka aplikacije.}
-		\item 	\textit{\textbf{View} – grafički prikaz podataka i funkcionalnosti(web preglednik)}
-		\item 	\textit{\textbf{Controller} – njime se korisnik služi za slanje zahtjeva te ih ovisno o njihovom sadržaju prosljeđuje Modelu ili Viewu.}		
+		\item 	\textbf{Model}  - dinamička struktura podataka, neovisna o korisničkom sučelju. Zadužen za upravljanje logikom i tokom podataka aplikacije.
+		\item 	\textbf{View} – grafički prikaz podataka i funkcionalnosti(web preglednik)
+		\item 	\textbf{Controller} – njime se korisnik služi za slanje zahtjeva te ih ovisno o njihovom sadržaju prosljeđuje Modelu ili Viewu.		
 	\end{itemize}
 
 	
