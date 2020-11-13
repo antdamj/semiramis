@@ -58,7 +58,7 @@ const sql_insert_vozilo = `INSERT INTO vozilo
 // RECENZIJA // RECENZIJA //
 
 const sql_create_recenzija = `CREATE TABLE recenzija (
-	idRecenzija		int  GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	idRezervacija		int  GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	ocjena			int,
 	opis			   text,
 	korisnickoIme	text NOT NULL REFERENCES korisnik(korisnickoIme),
