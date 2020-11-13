@@ -1,12 +1,22 @@
 \chapter{Arhitektura i dizajn sustava}
 		
-		\textbf{\textit{dio 1. revizije}}\\
-
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
+		\textit{Arhitektura sustava koji projektiramo se može razdvojiti na dvije cjeline: Web aplikaciju i bazu podataka.}\\
+		
+		\textit{Web aplikacija se sastoji od web preglednika i web poslužitelja.}\\
+		
+		\textit{\underline{Web preglednik} je grafički prikaz implementacije naše aplikacije koji je lako razumljiv korisniku te se njime korisnik služi kako bi pregledao web-stranicu ili multimedijalni sadržaj pohranjen na njoj. Uloga preglednika je prevođenje koda u lako razumljiv grafički prikaz te omogućava korisniku slanje upita i zahtjeva web poslužitelju.}\\
+		\\
+		\textit{\underline{Web poslužitelj} služi za komunikaciju i obradu zahtjeva između korisnika i aplikacije. Koristi protokol HTTP za komunikaciju te ovisno o HTTP zahtjevu prosljeđuje ga aplikaciji koja pristupa bazi podataka, nakon čega preko poslužitelja vraća HTML dokument kao odgovor.}\\
+		\\
+		\textit{Programska podrska je izvedena kao Springboot web aplikacija pisana u Javi, te je pohrana podataka izvedena preko Postgre SQL baze podataka.}\\
+		\\
+		\textit{Arhitektura sustava je temeljena na \textbf{MVC modelu}. MVC model omogućava odvojeni razvoj pojedinih dijelova web aplikacije, što omogućava jednostavniji razvoj, ispitivanje i nadogradnju sustava.
+Model View Controller model se sastoji od:
+}\\
 	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
+		\item 	\textit{\textbf{Model}  - dinamička struktura podataka, neovisna o korisničkom sučelju. Zadužen za upravljanje logikom i tokom podataka aplikacije.}
+		\item 	\textit{\textbf{View} – grafički prikaz podataka i funkcionalnosti(web preglednik)}
+		\item 	\textit{\textbf{Controller} – njime se korisnik služi za slanje zahtjeva te ih ovisno o njihovom sadržaju prosljeđuje Modelu ili Viewu.}		
 	\end{itemize}
 
 	
