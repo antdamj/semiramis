@@ -23,7 +23,7 @@ router.post('/', async (req, res, next) => {
     //provjeri istovjetnost unesenenih zaporki
 
     if (req.body.password1 != req.body.password2) {
-        res.render('User', {
+        res.render('user', {
             title: 'Korisnički profil',
             linkActive: 'user',
             user: req.session.user,
@@ -33,7 +33,7 @@ router.post('/', async (req, res, next) => {
     }
     //ako je nova lozinka jednaka trenutnoj, javi grešku
     if (req.body.password == req.body.password1) {
-        res.render('User', {
+        res.render('user', {
             title: 'Korisnički profil',
             linkActive: 'user',
             user: req.session.user,
@@ -43,7 +43,7 @@ router.post('/', async (req, res, next) => {
     }
 
     if (req.body.password !== req.session.user.lozinka) {
-        res.render('User', {
+        res.render('user', {
             title: 'Korisnički profil',
             linkActive: 'user',
             user: req.session.user,

@@ -4,7 +4,7 @@ const User = require('../models/UserModel')
 
 //vrati signup stranicu
 router.get('/', function (req, res, next) {
-    res.render('Signup', {
+    res.render('signup', {
         title: 'Registrirajte se',
         user: req.session.user,
         linkActive: 'signup',
@@ -18,7 +18,7 @@ router.post('/', function (req, res, next) {
 
         //provjeri istovjetnost unesenenih zaporki
         if (req.body.password1 != req.body.password2) {
-            res.render('Signup', {
+            res.render('signup', {
                 title: 'Registracija',
                 linkActive: 'signup',
                 user: req.session.user,
@@ -32,7 +32,7 @@ router.post('/', function (req, res, next) {
 
         //ako korisnik postoji, javi grešku
         if (user.korisnickoime !== undefined) {
-            res.render('Signup', {
+            res.render('signup', {
                 title: 'Registrirajte se',
                 linkActive: 'signup',
                 user: req.session.user,
