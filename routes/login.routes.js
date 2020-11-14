@@ -25,8 +25,7 @@ router.post('/', async (req, res, next) => {
     }
 
     let user = await User.fetchByUsername(req.body.korisnickoIme);
-    console.log("Login > ");
-    console.log(user);
+
 
     //check credentials
 

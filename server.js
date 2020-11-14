@@ -15,7 +15,7 @@ const signupRoute = require('./routes/signup.routes');
 const adminRoute = require('./routes/admin.routes');
 const userRoute = require('./routes/user.routes');
 const ownerRoute = require('./routes/owner.routes');
-
+const forgotRoute = require('./routes/forgot.routes');
 
 //middleware - predlošci (ejs)
 app.set('views', path.join(__dirname, 'views'));
@@ -53,6 +53,7 @@ app.use('/signup', signupRoute)
 app.use('/user', userRoute)
 app.use('/admin', adminRoute);
 app.use('/owner', ownerRoute);
+app.use('/forgot', forgotRoute);
 
 //pokretanje poslužitelja na portu 3000
 app.get('*', function (req, res) {
