@@ -19,7 +19,8 @@ router.get('/', (req, res, next) => {
         title: 'Prijava',
         linkActive: 'forgot',
         user: undefined,
-        err: undefined
+        err: undefined,
+        msg: undefined
     });
     return;
 });
@@ -64,16 +65,35 @@ router.post('/', async (req, res, next) => {
         to: user.email,
         subject: 'Zaboravljena lozinka',
         text: 'Vaša je lozinka \'' + user.lozinka + '\'. Obavezno promijenite lozinku čim se prijavite!' +
-                'Možete se prijaviti na sljedećoj poveznici: http://halikarnas-autos.duckdns.org/login'
+                ' Možete se prijaviti na sljedećoj poveznici: http://halikarnas-autos.duckdns.org/login'
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
         if(error) {
             console.log(error);
+
+            res.render('forgot', {
+                title: 'Prijava',
+                linkActive: 'forgot',
+                user: undefined,
+                err: error,
+                msg: undefined
+            });
+            return;
         } else {
             console.log('Email sent: ' + info.response);
         }
     });
+
+    res.render('forgot', {
+        title: 'Prijava',
+        linkActive: 'forgot',
+        user: undefined,
+        err: undefined,
+        msg: 'Poveznica za postavljanje nove lozinke poslana Vam je na elektroničku poštu.'
+    });
+    return;
+
 
 });
 
