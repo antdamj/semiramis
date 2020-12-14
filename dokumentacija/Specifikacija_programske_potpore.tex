@@ -44,7 +44,7 @@
 					\item pregled raspoloživih vozila poduzeća
 					\item pregled mjesta razmjene vozila
 					\item pristup osnovnim kontaktima poduzeća
-					\item pregled kategorija po kategoriji i po vrsti
+					\item pregled vozila po kategoriji i po vrsti
 					\item odabir jednog od predloženih mjesta i vremena preuzimanja i isporuke vozila za unajmljivanja
 					\item korištenje posebne usluge odabira vlastitog mjesta i vremena preuzimanja i isporuke za unajmljivanja
 					\item uređivanje najmova
@@ -82,7 +82,7 @@
 					
 				\end{packed_enum}
 			
-				\item  \underbar{Baza podataka (sudionik) može:}
+				\item  \underbar{Baza podataka (sudionik) ima sljedeće mogućnosti:}
 				
 				\begin{packed_enum}
 					
@@ -103,14 +103,14 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Gost
-						\item  \textbf{Cilj: }Unijeti novog korisnika u sustav
+						\item  \textbf{Cilj: }Unos novog korisnika u sustav
 						\item  \textbf{Sudionici: }Baza podataka
 						\item  \textbf{Preduvjet: }-
 						\item  \textbf{Opis osnovnog tijeka: }
 						
 						\item[] \begin{packed_enum}
-							\item Gost ulazi u zaslon za registraciju
-							\item Gost unosi sve potrebne podatke
+							\item Pristup formi za registraciju
+							\item Unos svih potrebnih podataka
 							\item Gost je registriran i postaje korisnikom
 						\end{packed_enum}
 						
@@ -129,14 +129,14 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Gost
-						\item  \textbf{Cilj: }Prijaviti se u sustav
+						\item  \textbf{Cilj: }Prijava se u sustav
 						\item  \textbf{Sudionici: }Baza podataka
 						\item  \textbf{Preduvjet: }Korisnik je registriran u sustavu
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Uđi u zaslon za prijavu u sustav
-							\item Unesi podatke za prijavu
+							\item Pristup formi za prijavu u sustav
+							\item Unos podatka za prijavu
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
@@ -154,9 +154,9 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj: }Dobiti uvid u vlastite podatke spremljene u sustavu
+						\item  \textbf{Cilj: }Uvid u vlastite podatke spremljene u sustavu
 						\item  \textbf{Sudionici: }Baza podataka
-						\item  \textbf{Preduvjet: }Korisnik je prijavljen u sustav
+						\item  \textbf{Preduvjet: }-
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -170,13 +170,13 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj: }Urediti vlastite korisničke podatke u sustavu
+						\item  \textbf{Cilj: }Promjena vlastitih korisničkih podataka u sustavu
 						\item  \textbf{Sudionici: }Baza podataka
-						\item  \textbf{Preduvjet: }Korisnik je prijavljen u sustav
+						\item  \textbf{Preduvjet: } -
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik pristupa svojoj korisničkoj stranici
+							\item Pristup vlasitoj korisničkoj stranici
 							\item Klikom na odgovarajući gumb otvara se sučelje u kojem korisnik ima mogućnost uređivanja podataka
 						\end{packed_enum}
 						
@@ -191,17 +191,17 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC 5 - Pregled prijašnjih rezervacija}}
+					\noindent \underbar{\textbf{UC 5 - Pregled prijašnjih najmova}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj: }Dobiti uvid u sve prijašnje rezervacije vozila
+						\item  \textbf{Cilj: }Uvid u sve prijašnje najmove vozila
 						\item  \textbf{Sudionici: }Baza podataka
-						\item  \textbf{Preduvjet: }Korisnik je prijavljen u sustav
+						\item  \textbf{Preduvjet: }-
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik pristupa svojoj korisničkoj stranici
+							\item Pristup vlastitoj korisničkoj stranici
 							\item Klikom na odgovarajući gumb prikazuju se sve prijašnje korisnikove narudžbe
 						\end{packed_enum}
 						
@@ -212,13 +212,13 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj: }Ukloniti zapis o korisniku iz baze podataka
+						\item  \textbf{Cilj: }Uklanjanje zapisa o korisniku iz baze podataka
 						\item  \textbf{Sudionici: }Baza podataka
-						\item  \textbf{Preduvjet: }Korisnik je prijavljen u sustav
+						\item  \textbf{Preduvjet: }-
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik pristupa svojoj korisničkoj stranici
+							\item Pristup vlastitoj korisničkoj stranici
 							\item Prilikom uređivanja računa ima priliku i izbrisati svoj račun
 							\item Klikom na odgovarajući gumb i potvrdom odabira obriše se korisnički račun
 						\end{packed_enum}
@@ -230,16 +230,16 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Gost, korisnik
-						\item  \textbf{Cilj: }Pretražiti slobodna vozila po određenom kriteriju
+						\item  \textbf{Cilj: }Pretraga slobodnih vozila po određenom kriteriju
 						\item  \textbf{Sudionici: }Baza podataka
 						\item  \textbf{Preduvjet: }-
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik bira datum i mjesto preuzimanja te vraćanja vozila. Za to su mu na raspolaganju kalendar i popis mogućih lokacija te karta
-							\item Korisnik bira kategoriju vozila koje želi unajmiti
+							\item Odabir datuma i mjesta preuzimanja te vraćanja vozila. Za to su na raspolaganju kalendar i popis mogućih lokacija te karta
+							\item Odabir željene kategorije vozila
 							\item Ispisuje se popis svih vozila koje odgovaraju korisnikovim kriterijima
-							\item Klikom na za to predviđeno dugme traži se rezervacija vozila
+							
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja: }
@@ -254,10 +254,8 @@
 							\item[] \begin{packed_enum}
 								\item Za to korisnik plaća dodatnu naknadu
 							\end{packed_enum}
-							\item[4.a] Gost nije prijavljen u sustav i traži rezervaciju
-							\item[] \begin{packed_enum}
-								\item Aplikacija ga preusmjerava na zaslon za prijavu i nakon prijave mu omogućuje rezervaciju
-							\end{packed_enum}
+							
+							
 						\end{packed_item}
 						
 					\end{packed_item}
@@ -268,7 +266,7 @@
 						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj: }Rezervirati vozilo za iznajmljivanje
 						\item  \textbf{Sudionici: }Baze podataka
-						\item  \textbf{Preduvjet: }Korisnik je prijavljen u sustav i postoje slobodna vozila
+						\item  \textbf{Preduvjet: }Obavljena je pretraga vozila te odabiri datuma i mjesta
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -278,6 +276,7 @@
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja: }-
+						
 					\end{packed_item}
 					
 					\newpage
@@ -292,9 +291,9 @@
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik odlazi na popis svojih rezervacija.
-							\item Klikom na odgovarajući gumb ima opciju promijeniti datum preuzimanja vozila (ako vozilo već nije preuzeto) i datum vraćanja vozila.
-							\item Dodatni iznos za plaćanje koji je nastao razriješit će se prilikom povrata vozila.
+							\item Korisnik odlazi na popis svojih rezervacija
+							\item Postoje opcije promijene datuma preuzimanja vozila (ako vozilo već nije preuzeto) i datuma vraćanja vozila
+							\item Dodatni iznos za plaćanje koji je nastao razriješit će se prilikom povrata vozila
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja: }
@@ -314,13 +313,13 @@
 						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj: }Otkazati napravljenu rezervaciju
 						\item  \textbf{Sudionici: }Baza podataka
-						\item  \textbf{Preduvjet: }Korisnik je prijavljen u sustav i postoji aktivna rezervacija, a vozilo još nije preuzeto
+						\item  \textbf{Preduvjet: }Postojanje aktivne rezervacije, a vozilo još nije preuzeto
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik odlazi na popis aktivnih rezervacija.
-							\item Iz popisa bira aktivnu rezervaciju koju želi otkazati
-							\item Klikom na odgovarajući gumb korisnik obriše rezervaciju
+							\item Odlazak na popis aktivnih rezervacija.
+							\item Odabir aktivne rezervacije koja će biti otkazana
+							\item Potvrda otkazivanja
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja: }
@@ -342,7 +341,7 @@
 						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj: }Nakon povrata vozila ostaviti recenziju na uslugu
 						\item  \textbf{Sudionici: }Baza podataka
-						\item  \textbf{Preduvjet: }Korisnik je prijavljen, a usluga koja se ocjenjuje završila je
+						\item  \textbf{Preduvjet: }Završetak pružene usluge
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -362,8 +361,8 @@
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Prikaz karte bit će dostupan na naslovnoj stranici aplikacije i prilikom odabira mjesta preuzimanja te povrata vozila
-							\item Na karti će biti označene poslovnice na koje će se moći kliknuti i vidjeti informacije o toj poslovnici, ili ju odabrati kao lokaciju preuzimanja i/ili povrata vozila
+							\item Prikaz karte jebit će dostupan na naslovnoj stranici aplikacije i prilikom odabira mjesta preuzimanja te povrata vozila
+							\item Na karti su označene poslovnice o kojima se mogu vidjeti informacije ili se može odabrati poslovnicu kao lokaciju preuzimanja i/ili povrata vozila
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja: }-
@@ -375,12 +374,12 @@
 						\item \textbf{Glavni sudionik: }Vlasnik sustava
 						\item  \textbf{Cilj: }Dodati novo vozilo u bazu podataka
 						\item  \textbf{Sudionici: }Baza podataka
-						\item  \textbf{Preduvjet: }Vlasnik je prijavljen u usustav
+						\item  \textbf{Preduvjet: }-
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							\item U sučelju određenom za uređivanje popisa vozila vlasnik ima opciju dodavanja novog vozila
-							\item Vlasnik unosi sve potrebne informacije o vozilu; slike, tehničke specifikacije, kategoriju i slično.
+							\item Unos svih potrebnih informacija o vozilu; slike, tehničke specifikacije, kategoriju i slično.
 							\item Vozilo je sada vidljivo korisnicima i spremno za iznajmljivanje
 						\end{packed_enum}
 						
