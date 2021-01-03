@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%=title%></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="./images/car-icon.png"/>
+    <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./styles/main.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+</head>
+
+<body class="content">
+
+<%- include(`partials/header`); %>
+
+    <% for (let car of cars) { %>
+          
+        <img class="photo-box-image" src="<%= car.slikaurl %>"></img>
+    <% } %>
+
+</body>
+<%- include(`partials/footer`); %>
+</html>
