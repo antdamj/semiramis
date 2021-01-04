@@ -9,6 +9,33 @@
     <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
     <link rel="stylesheet" type="text/css" href="./styles/main.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <script>
+        function filtriraj(){
+            let kategorija=document.getElementById("filter_categories");
+            console.log(kategorija.value);
+            let slike=document.getElementsByName("slike");
+            for(let i=0;i<slike.length;i++){
+                console.log(slike[i].id);
+                if(slike[i].id===kategorija.value){
+                    slike[i].style.display="";
+                    console.log(1);
+                }
+                else{
+                    slike[i].style.display="none";
+                    console.log(2+"\n");
+                }
+            }
+            console.log(slike);
+        }
+        function resetFilter(){
+            let slike=document.getElementsByName("slike");
+            for(let i=0;i<slike.length;i++){
+                slike[i].style.display="";
+            }
+        }
+
+    </script>
+
 </head>
 
 <body class="content">
@@ -35,7 +62,7 @@
         </select></td>
         </tr>
         <tr>
-        <td><input type="date" name="datum_primitka" id="datum_primitka" class="" min="2021-03-01"></td>
+        <td><input type="date" name="datum_primitka" id="datum_primitka" class="" value="2021-01-08"></td>
         
         <td>
         <select name="vrijeme_primitka" class="" id="vrijeme_primitka">
@@ -101,7 +128,7 @@
         </select></td>
         </tr>
         <tr>
-        <td><input type="date" name="datum_povratka" id="datum_povratka" class=" " min="2021-03-01"></td>
+        <td><input type="date" name="datum_povratka" id="datum_povratka" class=" " value="2021-01-09"></td>
         <td>
             <select name="vrijeme_povratka" class="" id="vrijeme_povratka">
                 <option value="00:00">00:00</option>
@@ -159,16 +186,40 @@
         <td colspan="4"><button type="submit" class="" id="button">Pronađi automobile</button></td>
         </tr>
         </tbody></table>
+        <% if (err !== undefined ) { %>
+            <p style="justify-content: center; color: red;"><%= err %></p>
+        <% } %>
         </form>
         </div>
     </div>
         <% }else { %>
+            <div>
+                <h2>Odaberi kategoriju</h2>
+                <select name="categories" class="" id="filter_categories">
+                    <% for(let category of categories){ %>
+                        <option value="<%= category %>" name="kategorija"> <%= category %></option>
+                    <% } %>
+                </select>
+                <button class="btn" onclick="filtriraj()">Filtriraj kategorije</button>
+                <button class="btn" onclick="resetFilter()">Resetiraj Filter</button>
+            </div>
+            <hr>
             <% if(cars!==undefined) { %>
+                <% if(nadoknada) { %>
+                    <h1>Nadoknada: 50 kn</h1> <!-- TODO FRONTEND ZA NADOKNADU -->
+                    <% } %>
+                <form>
+
+                </form>
                 <div class="gallery">
                 <% for (let car of cars) { %>
-                    <div class="photo-box">
+                    <div class="photo-box" id="<%= car.kategorija %>" name="slike">
                         <img class="photo-box-image" src="<%= car.slikaurl %>"></img>
                         <div class=""><%= car.marka %> <%=car.model %> </div>
+                        <div class="buttons">
+                            <button class="btn">Podaci o automobilu</button>
+                        </div>
+                        
                     </div>
                 <% } %>
             </div>

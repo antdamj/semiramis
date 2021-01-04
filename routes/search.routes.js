@@ -6,51 +6,90 @@ router.get('/', async function (req, res, next) {
    
     let poslovnicaDb= await db.query('SELECT * FROM poslovnica');
 
-    /*
-    let datum_primitka = new Date();
-    let datum_povratka = new Date(datum_primitka);
-    datum_povratka.setDate(datum_povratka.getDate() + 1)
-    
-    let day=datum_primitka.getDate();
-    let month=datum_primitka.getMonth()+1;
-    let year=datum_primitka.getFullYear();
-    
-    
-    if(month < 10)
-        month = '0' + month.toString();
-    if(day < 10)
-        day = '0' + day.toString();
-    let maxDate = year + '-' + month + '-' + day; 
-    let newDate=new Date(maxDate);
-    */
-
     res.render('search', {
         title: 'Pretraga',
         user: req.session.user,
         linkActive: 'search',      //TODO 
         locations: poslovnicaDb.rows,
         cars: "",
-        isHidden:false
+        isHidden:false,
+        err: undefined
     });
 });
 
 router.post('/',async function(req,res,next){
-    let carsDb=await db.query('SELECT * FROM vozilo');
+    //let carsDb=await db.query('select * from vozilo left outer join rezervacija on rezervacija.registracija = vozilo.registracija where (zeljeniPocetni) > vrijemePreuzimanja or (zeljeniZavrsni) < vrijemeZavrsetka or idRezervacija is null');
+    //let carsDb=await db.query('select * from vozilo where marka = '+"'Renault'");
+
     let poslovnicaDb= await db.query('SELECT * FROM poslovnica');
 
 
-    console.log(req.body);
-    let date=req.body.datum_primitka+" "+req.body.vrijeme_primitka;
-    console.log(date);
-    res.render('search', {
-        title: 'Pretraga',
-        user: req.session.user,
-        linkActive: 'search',      //TODO 
-        cars: carsDb.rows,
-        locations: poslovnicaDb.rows,
-        isHidden:true
-    });
+    let datum_primitka=req.body.datum_primitka+" "+req.body.vrijeme_primitka+":00";
+    let datum_povratka=req.body.datum_povratka+" "+req.body.vrijeme_povratka+":00";
+    let primitak=new Date(datum_primitka);
+    let povratak=new Date(datum_povratka);
+    
+    let carsDb=await db.query(`select * from vozilo left outer join rezervacija on rezervacija.registracija = vozilo.registracija where  '${datum_primitka}'  > vrijemePreuzimanja or  '${datum_povratka}'  < vrijemeZavrsetka or idRezervacija is null`);
 
-})
+    let today=Date.now();
+    let nadoknada =false;
+    if(primitak.getHours()< 9 || primitak.getHours()>15 || povratak.getHours()<9 || povratak.getHours()>15){
+        nadoknada=true;
+    }
+    else{
+        nadoknada=false;
+    }
+    let categories=[];
+    for(let i=0;i<carsDb.rows.length;i++){
+        if(!categories.includes(carsDb.rows[i].kategorija)){
+            categories.push(carsDb.rows[i].kategorija);
+        }
+    }
+    //console.log(categories);
+
+    //console.log(primitak.getHours());
+    //console.log("Primitak "+primitak+" povratak "+povratak+" danas "+today);
+    //console.log("HELLO: "+newDate.getTime()+" "+Date.now());
+    if(primitak.getTime()<today || povratak.getTime()<today){
+        console.log(1);
+        res.render('search', {
+            title: 'Pretraga',
+            user: req.session.user,
+            linkActive: 'search',      //TODO 
+            cars: carsDb.rows,
+            locations: poslovnicaDb.rows,
+            isHidden:false,
+            err:"Datum primitka ili povratka ne smije biti prije današnjeg datuma."
+        });
+    }
+    else if(povratak.getTime()<=primitak.getTime()){
+        console.log(2);
+        res.render('search', {
+            title: 'Pretraga',
+            user: req.session.user,
+            linkActive: 'search',      //TODO 
+            cars: carsDb.rows,
+            locations: poslovnicaDb.rows,
+            isHidden:false,
+            err:"Datum povratka ne smije biti prije datuma primitka."
+        });
+    }
+    else{
+        res.render('search', {
+            title: 'Pretraga',
+            user: req.session.user,
+            linkActive: 'search',      //TODO 
+            cars: carsDb.rows,
+            locations: poslovnicaDb.rows,
+            isHidden:true,
+            err:undefined,
+            nadoknada:nadoknada,
+            categories: categories
+        });
+    }
+    
+
+});
+
 
 module.exports = router;
