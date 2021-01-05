@@ -29,7 +29,7 @@ router.post('/',async function(req,res,next){
     let primitak=new Date(datum_primitka);
     let povratak=new Date(datum_povratka);
     
-    let carsDb=await db.query(`select * from vozilo left outer join rezervacija on rezervacija.registracija = vozilo.registracija where  '${datum_primitka}'  > vrijemePreuzimanja or  '${datum_povratka}'  < vrijemeZavrsetka or idRezervacija is null`);
+    let carsDb=await db.query(`select vozilo.* from vozilo left outer join rezervacija on rezervacija.registracija = vozilo.registracija where  '${datum_primitka}'  > vrijemePreuzimanja or  '${datum_povratka}'  < vrijemeZavrsetka or idRezervacija is null`);
 
     let today=Date.now();
     let nadoknada =false;
@@ -55,7 +55,7 @@ router.post('/',async function(req,res,next){
         res.render('search', {
             title: 'Pretraga',
             user: req.session.user,
-            linkActive: 'search',      //TODO 
+            linkActive: 'search',     
             cars: carsDb.rows,
             locations: poslovnicaDb.rows,
             isHidden:false,
@@ -67,7 +67,7 @@ router.post('/',async function(req,res,next){
         res.render('search', {
             title: 'Pretraga',
             user: req.session.user,
-            linkActive: 'search',      //TODO 
+            linkActive: 'search',      
             cars: carsDb.rows,
             locations: poslovnicaDb.rows,
             isHidden:false,
@@ -78,7 +78,7 @@ router.post('/',async function(req,res,next){
         res.render('search', {
             title: 'Pretraga',
             user: req.session.user,
-            linkActive: 'search',      //TODO 
+            linkActive: 'search',     
             cars: carsDb.rows,
             locations: poslovnicaDb.rows,
             isHidden:true,
@@ -89,6 +89,60 @@ router.post('/',async function(req,res,next){
     }
     
 
+});
+
+//Ovo je fetch koji se triba napraviti,jos nisan siguran zasto ne funkcionira pravilno
+
+router.get('/:id/:payment', async function (req, res, next) {
+
+    /* 
+    Mos samo ovo 
+         res.status(200).send({registracija: req.params.id,placanje:req.params.payment});
+    */
+
+    //Moj pokusaj reroutanja
+    let poslovnicaDb= await db.query('SELECT * FROM poslovnica');
+
+    if(req.params.payment==="cash"){
+        console.log(1);
+        res.render('search', {
+            title: 'Pretraga',
+            user: req.session.user,
+            linkActive: 'search',      //TODO 
+            locations: poslovnicaDb.rows,
+            cars: "",
+            isHidden:false,
+            err: undefined
+        });
+    }
+    else if(req.params.payment==="card"){
+        console.log(2);
+
+        res.render('search', {
+            title: 'Pretraga',
+            user: req.session.user,
+            linkActive: 'search',      //TODO 
+            locations: poslovnicaDb.rows,
+            cars: "",
+            isHidden:false,
+            err: undefined
+        });
+
+    }
+    else{
+        console.log(3);
+
+        res.render('search', {
+            title: 'Pretraga',
+            user: req.session.user,
+            linkActive: 'search',      //TODO 
+            locations: poslovnicaDb.rows,
+            cars: "",
+            isHidden:false,
+            err: "Nije odabran način plačanja"
+        });
+    }
+    res.end();
 });
 
 
