@@ -275,9 +275,11 @@
                             <div class=""><%= car.marka %> <%=car.model %> </div>
                             <div class="">Cijena: <%= car.cijenadan %> kn po danu</div>
                     
+                    <% if( user !== undefined ) {%>
                         <div class="buttons">
                                 <button class="btn" onClick="pokaziPlacanja(<%= car.registracija %>)">Rezerviraj</button>
                         </div>
+                        <% } %>
                         <div name="paymentClass" style="display:none" id="<%=car.registracija %>">
                             <br>
                             <div name="paymentType">
