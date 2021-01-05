@@ -1,7 +1,8 @@
 const db = require('../db')
+const User = require('../models/UserModel')
 
 module.exports = class Administrator extends User {
-    constructor(user_name, first_name, last_name, email, password, phoneNumber, role = "administrator") {
+    constructor(user_name, first_name, last_name, email, password, phoneNumber, role = "admin") {
         this.korisnickoime = user_name
         this.ime = first_name
         this.prezime = last_name
@@ -11,7 +12,18 @@ module.exports = class Administrator extends User {
         this.uloga = role
     }
 
-    getByRole = async (user_role) => {
+    static getUsers = async () => {
+        const sql = `select * from korisnik`
+        try {
+            const result = await db.query(sql, [])
+            return result.rows
+        } catch (e) {
+            console.log(e)
+            throw e
+        }
+    }
+
+    static getByRole = async (user_role) => {
         const sql = `select * from korisnik where uloga = '` + user_role + `'`
         try {
             const result = await db.query(sql, [])
@@ -22,7 +34,7 @@ module.exports = class Administrator extends User {
         }
     };
 
-    removeUser = async (user_name) => {
+    static removeUser = async (user_name) => {
         const sql = `delete from korisnik where korisnickoIme = '` + user_name + `'`
         try {
             const result = await db.query(sql, [])
@@ -32,7 +44,7 @@ module.exports = class Administrator extends User {
         }
     };
 
-    giveOwnerToUser = async (user_name) => {
+    static giveOwnerToUser = async (user_name) => {
         const sql = `update korisnik set uloga = 'vlasnik' where korisnickoIme = '` + user_name + `'`
         try {
             const result = await db.query(sql, [])
@@ -42,7 +54,7 @@ module.exports = class Administrator extends User {
         }
     }
 
-    addLocation = async (adress) => {
+    static addLocation = async (adress) => {
         const sql = `insert into poslovnica (lokacija) values ('` + adress + `')`
         try {
             const result = await db.query(sql, [])
@@ -52,7 +64,7 @@ module.exports = class Administrator extends User {
         }
     }
 
-    removeLocation = async (id) => {
+    static removeLocation = async (id) => {
         const sql = `delete from poslovnica where idPoslovnica = '` + id + `'`
         try {
             const result = await db.query(sql, [])
@@ -62,7 +74,7 @@ module.exports = class Administrator extends User {
         }
     }
 
-    editLocation = async (id, location) => {
+    static editLocation = async (id, location) => {
         const sql = `update poslovnica set lokacija = '` + location + `' where idPoslovnica = '` + id + `'`
         try {
             const result = await db.query(sql, [])
@@ -72,7 +84,7 @@ module.exports = class Administrator extends User {
         }
     }
 
-    getReviews = async () => {
+    static getReviews = async () => {
         const sql = `select * from recenzija`
         try {
             const result = await db.query(sql, [])
