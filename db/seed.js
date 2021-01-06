@@ -78,7 +78,7 @@ const sql_create_rezervacija = `CREATE TABLE rezervacija
 	lokacijaPreuzimanja text NOT NULL,
 	lokacijaOstavljanja	text NOT NULL,
 	korisnickoIme		text NOT NULL,
-	registracija    	text NOT NULL UNIQUE,
+	registracija    	text NOT NULL,
     status				text NOT NULL,
     tipPlacanja         text NOT NULL,
 	FOREIGN KEY (korisnickoIme) REFERENCES korisnik(korisnickoIme),
