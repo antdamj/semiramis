@@ -84,7 +84,7 @@
                 }
             }
         }
-        //Ovo ti je samo za provjeru kao da bude fancy. Moramo Front-End za ovo da nije normalan alert
+
         function rezerviraj() {
             var txt;
             if (confirm("Jeste li sigurni?")) {
@@ -92,6 +92,14 @@
             } else {
                 return 0;
             }
+        }
+
+        function karticaPrikazi() {
+            let kartica = document.getElementById("karticaThing");
+            console.log(kartica)
+            console.log("bruh")
+            if (kartica.style.display == "none") kartica.style.display = "block";
+            else kartica.style.display = "none"
         }
 
     </script>
@@ -278,14 +286,6 @@
 
                 <% }else { %>
 
-                    <div id="jeboteajde">
-                        <%=reservationData.t1%>
-                            <%=reservationData.t2%>
-                                <%=reservationData.l1%>
-                                    <%=reservationData.l2%>
-                    </div>
-
-
                     <div>
                         <h2>Odaberi kategoriju</h2>
                         <select name="categories" class="" id="filter_categories">
@@ -328,11 +328,22 @@
 
                                                         <form action="/search" , method="POST">
                                                             <input type="radio" id="cash" name="paymentType"
-                                                                value="cash" checked="checked">
+                                                                value="cash" checked="checked"
+                                                                onchange="karticaPrikazi()">
                                                             <label for="all">Gotovina</label><br>
                                                             <input type="radio" id="card" name="paymentType"
-                                                                value="card">
+                                                                value="card" onchange="karticaPrikazi()">
                                                             <label for="all">Kartica</label><br>
+
+                                                            <div id="karticaThing" style="display: none;">
+                                                                <input type="text" name="cardnumber" value=""
+                                                                    minlength="16" maxlength="16"
+                                                                    placeholder="Broj kartice">
+                                                                <input type="text" name="controlNumber" value=""
+                                                                    minlength="3" maxlength="4"
+                                                                    placeholder="Kontrolni broj">
+                                                            </div>
+
                                                             <input type="hidden" name="carId"
                                                                 value="<%=car.registracija %>" />
                                                             <input type="hidden" name="t1"

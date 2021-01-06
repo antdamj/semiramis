@@ -48,18 +48,13 @@ router.post('/', async function (req, res, next) {
             l2: req.body.lokacija_povratka
         }
 
-        console.log(podatciPotrebni)
+        // console.log(podatciPotrebni)
 
         let carsDb = await db.query(`select vozilo.* from vozilo left outer join rezervacija on rezervacija.registracija = vozilo.registracija where  '${datum_primitka}'  > vrijemePreuzimanja or  '${datum_povratka}'  < vrijemeZavrsetka or idRezervacija is null`);
 
         let today = Date.now();
         let nadoknada = false;
-        if (primitak.getHours() < 9 || primitak.getHours() > 15 || povratak.getHours() < 9 || povratak.getHours() > 15) {
-            nadoknada = true;
-        }
-        else {
-            nadoknada = false;
-        }
+        if (primitak.getHours() < 9 || primitak.getHours() > 15 || povratak.getHours() < 9 || povratak.getHours() > 15) nadoknada = true;
         let categories = [];
         for (let i = 0; i < carsDb.rows.length; i++) {
             if (!categories.includes(carsDb.rows[i].kategorija)) {
@@ -91,6 +86,18 @@ router.post('/', async function (req, res, next) {
                 reservationData: podatciPotrebni,
                 isHidden: false,
                 err: "Datum povratka ne smije biti prije datuma primitka."
+            });
+        } else if (povratak.getTime() < primitak.getTime() + 259200000) { // 3 dana u ms; getTime() vraća ms
+            console.log(2);
+            res.render('search', {
+                title: 'Pretraga',
+                user: req.session.user,
+                linkActive: 'search',
+                cars: carsDb.rows,
+                locations: poslovnicaDb.rows,
+                reservationData: podatciPotrebni,
+                isHidden: false,
+                err: "Minimalno trajanje narudžbe mora biti 3 dana."
             });
         }
         else {
