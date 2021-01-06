@@ -2,79 +2,85 @@
 <html>
 
 <head>
-    <title><%=title%></title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>
+        <%=title%>
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="./images/car-icon.png"/>
+    <link rel="shortcut icon" type="image/png" href="./images/car-icon.png" />
     <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
     <link rel="stylesheet" type="text/css" href="./styles/main.css">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script>
 
         //Postavlja filter
-        function filtriraj(){
-            let kategorija=document.getElementById("filter_categories");
+        function filtriraj() {
+            let kategorija = document.getElementById("filter_categories");
             //console.log(kategorija.value);
-            let slike=document.getElementsByName("slike");
-            for(let i=0;i<slike.length;i++){
+            let slike = document.getElementsByName("slike");
+            for (let i = 0; i < slike.length; i++) {
                 console.log(slike[i].id);
-                if(slike[i].id===kategorija.value){
-                    slike[i].style.display="";
+                if (slike[i].id === kategorija.value) {
+                    slike[i].style.display = "";
                     console.log(1);
                 }
-                else{
-                    slike[i].style.display="none";
-                    console.log(2+"\n");
+                else {
+                    slike[i].style.display = "none";
+                    console.log(2 + "\n");
                 }
             }
             //console.log(slike);
         }
         //Resetira filter 
-        function resetFilter(){
-            let slike=document.getElementsByName("slike");
-            for(let i=0;i<slike.length;i++){
-                slike[i].style.display="";
+        function resetFilter() {
+            let slike = document.getElementsByName("slike");
+            for (let i = 0; i < slike.length; i++) {
+                slike[i].style.display = "";
             }
         }
-       
+        /* 
+        Ovo je creme de la crem.
+        Znaci tu ti uzima radio buttona dva i provjerava koji je aktivan
+        Kad napravi to onda fetcha stranicu localhost:3000/search/registracija/placanje
+        */
         async function rezervirajPlacanje(id) {
-            let confirmation=rezerviraj();
-            let payment=""
-            if(confirmation==1){
-                if(document.getElementById("cash").checked){
-                    payment="cash";
-                   
+            let confirmation = rezerviraj();
+            let payment = ""
+            if (confirmation == 1) {
+                if (document.getElementById("cash").checked) {
+                    payment = "cash";
+
                 }
-                else if(document.getElementById("card").checked){
-                    payment="card";
-                    
+                else if (document.getElementById("card").checked) {
+                    payment = "card";
+
                 }
-                else{
+                else {
                     alert("Nije odabran način plačanja")
                 }
-                if(payment!==""){
-                    response = await fetch('/search/' + id.id +"/"+ payment);
+                if (payment !== "") {
+                    response = await fetch('/search/' + id.id + "/" + payment);
                     console.log(response.body);
-                    if( !response.ok )
-                         alert("Error rendering")    
+                    if (!response.ok)
+                        alert("Error rendering")
                     else
                         alert("Success!");
                 }
-            }     
+            }
         }
         //Ovo sluzi da vidis vrste placanja kad se oodlucis za kupovinu 
-        function pokaziPlacanja(registracija){
-            let slike=document.getElementsByName("paymentClass");
+        function pokaziPlacanja(registracija) {
+            let slike = document.getElementsByName("paymentClass");
             console.log(registracija.id)
-            for(let i=0;i<slike.length;i++){
-               console.log(slike[i].id)
+            for (let i = 0; i < slike.length; i++) {
+                console.log(slike[i].id)
             }
-            for(let i=0;i<slike.length;i++){
-                if(slike[i].id==registracija.id){
-                     slike[i].style.display="";
+            for (let i = 0; i < slike.length; i++) {
+                if (slike[i].id == registracija.id) {
+                    slike[i].style.display = "";
                 }
-                else{
-                    slike[i].style.display="none";
+                else {
+                    slike[i].style.display = "none";
                 }
             }
         }
@@ -84,7 +90,7 @@
             if (confirm("Jeste li sigurni?")) {
                 return 1;
             } else {
-               return 0;
+                return 0;
             }
         }
 
@@ -94,206 +100,261 @@
 
 <body class="content">
 
-<%- include(`partials/header`); %>
+    <%- include(`partials/header`); %>
 
-<main class="main">
-    
-    <% if (isHidden==false) { %>
-        <div class=""><p class="" style="margin-bottom:14px;">Online pretraga automobila</p></div>
-    
-        <form name="form1" method="post" action="/search">
-        
-        <table class="">
-        <tbody><tr>
-        <td colspan="2" class="">Lokacija primitka:</td>
-        </tr>
-        <tr>
-        <td colspan="2">
-        <select name="lokacija_primitka" class="" id="lokacija_primitka">
-            <% for(let location of locations){ %>
-                <option value="<%= location.idposlovnica %>"><%=location.lokacija %></option>
-            <% } %>
-        </select></td>
-        </tr>
-        <tr>
-        <td><input type="date" name="datum_primitka" id="datum_primitka" class="" value="2021-01-08"></td>
-        
-        <td>
-        <select name="vrijeme_primitka" class="" id="vrijeme_primitka">
-        <option value="00:00">00:00</option>
-        <option value="00:30">00:30</option> 
-        <option value="01:00">01:00</option>  
-        <option value="01:30">01:30</option>
-        <option value="02:00">02:00</option>
-        <option value="02:30">02:30</option>
-        <option value="03:00">03:00</option>    
-        <option value="03:30">03:30</option>
-        <option value="04:00">04:00</option>
-        <option value="04:30">04:30</option>
-        <option value="05:00">05:00</option>
-        <option value="05:30">05:30</option>
-        <option value="06:00">06:00</option>
-        <option value="06:30">06:30</option>
-        <option value="07:00">07:00</option>
-        <option value="07:30">07:30</option>
-        <option value="08:00" selected="selected">08:00</option>
-        <option value="08:30">08:30</option>
-        <option value="09:00" >09:00</option>
-        <option value="09:30">09:30</option>
-        <option value="10:00">10:00</option>
-        <option value="10:30">10:30</option>
-        <option value="11:00">11:00</option>
-        <option value="11:30">11:30</option>
-        <option value="12:00">12:00</option>
-        <option value="12:30">12:30</option>
-        <option value="13:00">13:00</option>
-        <option value="13:30">13:30</option>
-        <option value="14:00">14:00</option>
-        <option value="14:30">14:30</option>
-        <option value="15:00">15:00</option>
-        <option value="15:30">15:30</option>
-        <option value="16:00">16:00</option>
-        <option value="16:30">16:30</option>
-        <option value="17:00">17:00</option>
-        <option value="17:30">17:30</option>
-        <option value="18:00">18:00</option>
-        <option value="18:30">18:30</option>
-        <option value="19:00">19:00</option>
-        <option value="19:30">19:30</option>
-        <option value="20:00">20:00</option>
-        <option value="20:30">20:30</option>
-        <option value="21:00">21:00</option>
-        <option value="21:30">21:30</option>
-        <option value="22:00">22:00</option>
-        <option value="22:30">22:30</option>
-        <option value="23:00">23:00</option>
-        <option value="23:30">23:30</option>
-        </select></td>
-        </tr>
-        <tr>
-        <td colspan="2" class="">Lokacija povratka: </td>
-        </tr>
-        <tr>
-        <td colspan="2">
-        <select name="lokacija_povratka" class="" id="lokacija_povratka">
-            <% for(let location of locations){ %>
-                <option value="<%= location.idposlovnica %>"><%=location.lokacija %></option>
-            <% } %>
-        </select></td>
-        </tr>
-        <tr>
-        <td><input type="date" name="datum_povratka" id="datum_povratka" class=" " value="2021-01-09"></td>
-        <td>
-            <select name="vrijeme_povratka" class="" id="vrijeme_povratka">
-                <option value="00:00">00:00</option>
-                <option value="00:30">00:30</option> 
-                <option value="01:00">01:00</option>  
-                <option value="01:30">01:30</option>
-                <option value="02:00">02:00</option>
-                <option value="02:30">02:30</option>
-                <option value="03:00">03:00</option>    
-                <option value="03:30">03:30</option>
-                <option value="04:00">04:00</option>
-                <option value="04:30">04:30</option>
-                <option value="05:00">05:00</option>
-                <option value="05:30">05:30</option>
-                <option value="06:00">06:00</option>
-                <option value="06:30">06:30</option>
-                <option value="07:00">07:00</option>
-                <option value="07:30">07:30</option>
-                <option value="08:00" selected="selected">08:00</option>
-                <option value="08:30">08:30</option>
-                <option value="09:00" >09:00</option>
-                <option value="09:30">09:30</option>
-                <option value="10:00">10:00</option>
-                <option value="10:30">10:30</option>
-                <option value="11:00">11:00</option>
-                <option value="11:30">11:30</option>
-                <option value="12:00">12:00</option>
-                <option value="12:30">12:30</option>
-                <option value="13:00">13:00</option>
-                <option value="13:30">13:30</option>
-                <option value="14:00">14:00</option>
-                <option value="14:30">14:30</option>
-                <option value="15:00">15:00</option>
-                <option value="15:30">15:30</option>
-                <option value="16:00">16:00</option>
-                <option value="16:30">16:30</option>
-                <option value="17:00">17:00</option>
-                <option value="17:30">17:30</option>
-                <option value="18:00">18:00</option>
-                <option value="18:30">18:30</option>
-                <option value="19:00">19:00</option>
-                <option value="19:30">19:30</option>
-                <option value="20:00">20:00</option>
-                <option value="20:30">20:30</option>
-                <option value="21:00">21:00</option>
-                <option value="21:30">21:30</option>
-                <option value="22:00">22:00</option>
-                <option value="22:30">22:30</option>
-                <option value="23:00">23:00</option>
-                <option value="23:30">23:30</option>
-                </select></td>
-        </select></td>
-        </tr>
-        <tr>
-        <td colspan="4"><button type="submit" class="" id="button">Pronađi automobile</button></td>
-        </tr>
-        </tbody></table>
-        <% if (err !== undefined ) { %>
-            <p style="justify-content: center; color: red;"><%= err %></p>
-        <% } %>
-        </form>
-        </div>
-    </div>
-        <% }else { %>
-            <div>
-                <h2>Odaberi kategoriju</h2>
-                <select name="categories" class="" id="filter_categories">
-                    <% for(let category of categories){ %>
-                        <option value="<%= category %>" name="kategorija"> <%= category %></option>
-                    <% } %>
-                </select>
-                <button class="btn" onclick="filtriraj()">Filtriraj kategorije</button>
-                <button class="btn" onclick="resetFilter()">Resetiraj Filter</button>
-            </div>
-            <hr>
-            <% if(cars!==undefined) { %>
-                <% if(nadoknada) { %>
-                    <h2>Nadoknada za odabir van radnog vremena [09:00 - 15:00]: <strong>20% dnevne cijene</strong></h2> <!-- TODO FRONTEND ZA NADOKNADU -->
-                    <% } %>
-                <hr>
-                <div class="gallery">
-                <% for (let car of cars) { %>
-                    <div class="photo-box" id="<%= car.kategorija %>" name="slike">
-                        <img class="photo-box-image" src="<%= car.slikaurl %>"></img>
-                        
-                            <div class=""><%= car.marka %> <%=car.model %> </div>
-                            <div class="">Cijena: <%= car.cijenadan %> kn po danu</div>
-                    
-                    <% if( user !== undefined ) {%>
-                        <div class="buttons">
-                                <button class="btn" onClick="pokaziPlacanja(<%= car.registracija %>)">Rezerviraj</button>
-                        </div>
+        <main class="main">
+
+            <% if (isHidden==false) { %>
+                <div class="">
+                    <p class="" style="margin-bottom:14px;">Online pretraga automobila</p>
+                </div>
+
+                <form name="form1" method="post" action="/search">
+
+                    <table class="">
+                        <tbody>
+                            <tr>
+                                <td colspan="2" class="">Lokacija primitka:</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <select name="lokacija_primitka" class="" id="lokacija_primitka">
+                                        <% for(let location of locations){ %>
+                                            <option value="<%= location.idposlovnica %>">
+                                                <%=location.lokacija %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="date" name="datum_primitka" id="datum_primitka" class=""
+                                        value="2021-01-08">
+                                </td>
+
+                                <td>
+                                    <select name="vrijeme_primitka" class="" id="vrijeme_primitka">
+                                        <option value="00:00">00:00</option>
+                                        <option value="00:30">00:30</option>
+                                        <option value="01:00">01:00</option>
+                                        <option value="01:30">01:30</option>
+                                        <option value="02:00">02:00</option>
+                                        <option value="02:30">02:30</option>
+                                        <option value="03:00">03:00</option>
+                                        <option value="03:30">03:30</option>
+                                        <option value="04:00">04:00</option>
+                                        <option value="04:30">04:30</option>
+                                        <option value="05:00">05:00</option>
+                                        <option value="05:30">05:30</option>
+                                        <option value="06:00">06:00</option>
+                                        <option value="06:30">06:30</option>
+                                        <option value="07:00">07:00</option>
+                                        <option value="07:30">07:30</option>
+                                        <option value="08:00" selected="selected">08:00</option>
+                                        <option value="08:30">08:30</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="09:30">09:30</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="10:30">10:30</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="11:30">11:30</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="12:30">12:30</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="13:30">13:30</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="14:30">14:30</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="15:30">15:30</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="16:30">16:30</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="17:30">17:30</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="18:30">18:30</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="19:30">19:30</option>
+                                        <option value="20:00">20:00</option>
+                                        <option value="20:30">20:30</option>
+                                        <option value="21:00">21:00</option>
+                                        <option value="21:30">21:30</option>
+                                        <option value="22:00">22:00</option>
+                                        <option value="22:30">22:30</option>
+                                        <option value="23:00">23:00</option>
+                                        <option value="23:30">23:30</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="">Lokacija povratka: </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <select name="lokacija_povratka" class="" id="lokacija_povratka">
+                                        <% for(let location of locations){ %>
+                                            <option value="<%= location.idposlovnica %>">
+                                                <%=location.lokacija %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="date" name="datum_povratka" id="datum_povratka" class=" "
+                                        value="2021-01-09"></td>
+                                <td>
+                                    <select name="vrijeme_povratka" class="" id="vrijeme_povratka">
+                                        <option value="00:00">00:00</option>
+                                        <option value="00:30">00:30</option>
+                                        <option value="01:00">01:00</option>
+                                        <option value="01:30">01:30</option>
+                                        <option value="02:00">02:00</option>
+                                        <option value="02:30">02:30</option>
+                                        <option value="03:00">03:00</option>
+                                        <option value="03:30">03:30</option>
+                                        <option value="04:00">04:00</option>
+                                        <option value="04:30">04:30</option>
+                                        <option value="05:00">05:00</option>
+                                        <option value="05:30">05:30</option>
+                                        <option value="06:00">06:00</option>
+                                        <option value="06:30">06:30</option>
+                                        <option value="07:00">07:00</option>
+                                        <option value="07:30">07:30</option>
+                                        <option value="08:00" selected="selected">08:00</option>
+                                        <option value="08:30">08:30</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="09:30">09:30</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="10:30">10:30</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="11:30">11:30</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="12:30">12:30</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="13:30">13:30</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="14:30">14:30</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="15:30">15:30</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="16:30">16:30</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="17:30">17:30</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="18:30">18:30</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="19:30">19:30</option>
+                                        <option value="20:00">20:00</option>
+                                        <option value="20:30">20:30</option>
+                                        <option value="21:00">21:00</option>
+                                        <option value="21:30">21:30</option>
+                                        <option value="22:00">22:00</option>
+                                        <option value="22:30">22:30</option>
+                                        <option value="23:00">23:00</option>
+                                        <option value="23:30">23:30</option>
+                                    </select>
+                                </td>
+                                </select></td>
+                            </tr>
+                            <tr>
+
+                            <tr>
+                                <td colspan="4"><button type="submit" class="" id="button">Pronađi automobile</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <% if (err !==undefined ) { %>
+                        <p style="justify-content: center; color: red;">
+                            <%= err %>
+                        </p>
                         <% } %>
-                        <div name="paymentClass" style="display:none" id="<%=car.registracija %>">
-                            <br>
-                            <div name="paymentType">
-                                <input type="radio" id="card" class=""name="payment" autocomplete="off"><label for="card">Card</label>
-                                <input type="radio" id="cash" class=""name="payment" checked='checked' autocomplete="off"> <label for="cash">Cash</label>
-                            </div>
-                            <button class="btn" onClick="rezervirajPlacanje(<%=car.registracija %>)" >Potvrdi rezervaciju</button>
-                            
-                        </div>
+                </form>
 
+                </div>
+                </div>
+
+
+                <% }else { %>
+
+                    <div id="jeboteajde">
+                        <%=reservationData.t1%>
+                            <%=reservationData.t2%>
+                                <%=reservationData.l1%>
+                                    <%=reservationData.l2%>
                     </div>
-                <% } %>
-            </div>
-            <% } %>
-        <% } %>
-    </main>
+
+
+                    <div>
+                        <h2>Odaberi kategoriju</h2>
+                        <select name="categories" class="" id="filter_categories">
+                            <% for(let category of categories){ %>
+                                <option value="<%= category %>" name="kategorija">
+                                    <%= category %>
+                                </option>
+                                <% } %>
+                        </select>
+                        <button class="btn" onclick="filtriraj()">Filtriraj kategorije</button>
+                        <button class="btn" onclick="resetFilter()">Resetiraj Filter</button>
+                    </div>
+                    <hr>
+                    <% if(cars!==undefined) { %>
+                        <% if(nadoknada) { %>
+                            <h2>Nadoknada za odabir van radnog vremena [09:00 - 15:00]: <strong>20% dnevne
+                                    cijene</strong></h2> <!-- TODO FRONTEND ZA NADOKNADU -->
+                            <% } %>
+                                <hr>
+                                <div class="gallery">
+                                    <% for (let car of cars) { %>
+                                        <div class="photo-box" id="<%= car.kategorija %>" name="slike">
+                                            <img class="photo-box-image" src="<%= car.slikaurl %>"></img>
+
+                                            <div class="">
+                                                <%= car.marka %>
+                                                    <%=car.model %>
+                                            </div>
+                                            <div class="">Cijena: <%= car.cijenadan %> kn po danu</div>
+
+                                            <% if( user !==undefined ) {%>
+                                                <div class="buttons">
+                                                    <button class="btn"
+                                                        onClick="pokaziPlacanja(<%= car.registracija %>)">Rezerviraj</button>
+                                                </div>
+                                                <% } %>
+                                                    <div name="paymentClass" style="display:none"
+                                                        id="<%=car.registracija %>">
+                                                        <br>
+
+                                                        <form action="/search" , method="POST">
+                                                            <input type="radio" id="cash" name="paymentType"
+                                                                value="cash" checked="checked">
+                                                            <label for="all">Gotovina</label><br>
+                                                            <input type="radio" id="card" name="paymentType"
+                                                                value="card">
+                                                            <label for="all">Kartica</label><br>
+                                                            <input type="hidden" name="carId"
+                                                                value="<%=car.registracija %>" />
+                                                            <input type="hidden" name="t1"
+                                                                value="<%=reservationData.t1%>" />
+                                                            <input type="hidden" name="t2"
+                                                                value="<%=reservationData.t2%>" />
+                                                            <input type="hidden" name="l1"
+                                                                value="<%=reservationData.l1%>" />
+                                                            <input type="hidden" name="l2"
+                                                                value="<%=reservationData.l1%>" />
+                                                            <button class="btn">Potvrda</button>
+                                                        </form>
+
+                                                    </div>
+
+                                        </div>
+                                        <% } %>
+                                </div>
+                                <% } %>
+                                    <% } %>
+        </main>
         <%- include(`partials/footer`); %>
 </body>
 
 </html>
-
