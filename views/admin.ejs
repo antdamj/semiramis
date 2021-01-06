@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<% var users=[]; %>
+
 
     <head>
         <title>AUTOS!</title>
@@ -21,22 +21,26 @@
 
                 <span>Ispis korisnika:</span>
                 <form action="/admin" method="POST">
-                    <input type="radio" id="all" name="getUsers" value="all" checked="checked">
+                    <input type="radio" id="all" name="getUsers" value="" checked="checked">
                     <label for="all">Svi</label><br>
-                    <input type="radio" id="user" name="getUsers" value="user">
+                    <input type="radio" id="user" name="getUsers" value="korisnik">
                     <label for="user">Obični korisnici</label><br>
-                    <input type="radio" id="admin" name="getUsers" value="owner">
+                    <input type="radio" id="admin" name="getUsers" value="vlasnik">
                     <label for="owner">Vlasnici sustava</label>
                     <button>Prikaz korisnika</button>
                 </form>
                 <div>
-                    <%= users.length %>
-                        <%= users %>
+                    
+                    <% if(users.length>0){ %>
+                        <hr>
+                   Broj: <%= users.length %>
+                       <hr>
                             <% for (let user of users) { %>
                                 <div>
                                     <%= user.korisnickoime %>
                                 </div>
                                 <% } %>
+                            <% } %>
                 </div>
                 <div class="centered-container">
                     <div class="separator"></div>
@@ -74,6 +78,19 @@
                     <input type="hidden" name="getLocations" />
                     <input type="submit" value="Prikaz poslovnica" />
                 </form>
+                <div>
+                    
+                    <% if(locations.length>0){ %>
+                        <hr>
+                     Broj: <%= locations.length %>
+                       <hr>
+                            <% for (let location of locations) { %>
+                                <div>
+                                    <%= location.lokacija %>
+                                </div>
+                                <% } %>
+                    <% } %>
+                </div>
 
                 <div class=" centered-container">
                     <div class="separator"></div>

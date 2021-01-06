@@ -9,7 +9,8 @@ router.get('/', (req, res, next) => {
             title: 'Admin page',
             user: req.session.user,
             linkActive: 'admin',
-            users: ""
+            users: "",
+            locations:""
         });
     }
     else {
@@ -24,12 +25,12 @@ router.post('/', async (req, res) => {
 
         if (req.body.getUsers.length == 0) tablice = await Administrator.getUsers();
         else tablice = await Administrator.getByRole(req.body.getUsers);
-
+       
         res.render('admin', {
             title: 'Admin page',
             user: req.session.user,
             linkActive: 'admin',
-            users: tablice,
+            users: tablice.rows,
             locations: ""
         });
     }
@@ -66,7 +67,7 @@ router.post('/', async (req, res) => {
             user: req.session.user,
             linkActive: 'admin',
             users: "",
-            locations: tablice
+            locations: tablice.rows
         });
     }
 
