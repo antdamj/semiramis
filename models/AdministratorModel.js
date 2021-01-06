@@ -16,7 +16,7 @@ module.exports = class Administrator extends User {
         const sql = `select * from korisnik`
         try {
             const result = await db.query(sql, [])
-            return result.rows
+            return result
         } catch (e) {
             console.log(e)
             throw e
@@ -25,9 +25,10 @@ module.exports = class Administrator extends User {
 
     static getByRole = async (user_role) => {
         const sql = `select * from korisnik where uloga = '` + user_role + `'`
+        console.log("HI "+sql);
         try {
-            const result = await db.query(sql, [])
-            return result.rows
+            const result = await db.query(sql)
+            return result;
         } catch (e) {
             console.log(e)
             throw e
@@ -57,8 +58,8 @@ module.exports = class Administrator extends User {
     static getLocations = async () => {
         const sql = `select * from poslovnica`
         try {
-            const result = await db.query(sql, [])
-            return result.rows
+            const result = await db.query(sql)
+            return result
         } catch (e) {
             console.log(e)
             throw e
