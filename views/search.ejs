@@ -10,9 +10,11 @@
     <link rel="stylesheet" type="text/css" href="./styles/main.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <script>
+
+        //Postavlja filter
         function filtriraj(){
             let kategorija=document.getElementById("filter_categories");
-            console.log(kategorija.value);
+            //console.log(kategorija.value);
             let slike=document.getElementsByName("slike");
             for(let i=0;i<slike.length;i++){
                 console.log(slike[i].id);
@@ -25,12 +27,68 @@
                     console.log(2+"\n");
                 }
             }
-            console.log(slike);
+            //console.log(slike);
         }
+        //Resetira filter 
         function resetFilter(){
             let slike=document.getElementsByName("slike");
             for(let i=0;i<slike.length;i++){
                 slike[i].style.display="";
+            }
+        }
+        /* 
+        Ovo je creme de la crem.
+        Znaci tu ti uzima radio buttona dva i provjerava koji je aktivan
+        Kad napravi to onda fetcha stranicu localhost:3000/search/registracija/placanje
+        */
+        async function rezervirajPlacanje(id) {
+            let confirmation=rezerviraj();
+            let payment=""
+            if(confirmation==1){
+                if(document.getElementById("cash").checked){
+                    payment="cash";
+                   
+                }
+                else if(document.getElementById("card").checked){
+                    payment="card";
+                    
+                }
+                else{
+                    alert("Nije odabran način plačanja")
+                }
+                if(payment!==""){
+                    response = await fetch('/search/' + id.id +"/"+ payment);
+                    console.log(response.body);
+                    if( !response.ok )
+                         alert("Error rendering")    
+                    else
+                        alert("Success!");
+                }
+            }     
+        }
+        //Ovo sluzi da vidis vrste placanja kad se oodlucis za kupovinu 
+        function pokaziPlacanja(registracija){
+            let slike=document.getElementsByName("paymentClass");
+            console.log(registracija.id)
+            for(let i=0;i<slike.length;i++){
+               console.log(slike[i].id)
+            }
+            for(let i=0;i<slike.length;i++){
+                if(slike[i].id==registracija.id){
+                     slike[i].style.display="";
+                }
+                else{
+                    slike[i].style.display="none";
+                }
+            }
+        }
+        //Ovo ti je samo za provjeru kao da bude fancy. Moramo Front-End za ovo da nije normalan alert
+        function rezerviraj() {
+            var txt;
+            if (confirm("Jeste li sigurni?")) {
+                return 1;
+            } else {
+               return 0;
             }
         }
 
@@ -206,20 +264,32 @@
             <hr>
             <% if(cars!==undefined) { %>
                 <% if(nadoknada) { %>
-                    <h1>Nadoknada: 50 kn</h1> <!-- TODO FRONTEND ZA NADOKNADU -->
+                    <h2>Nadoknada za odabir van radnog vremena [09:00 - 15:00]: <strong>20% dnevne cijene</strong></h2> <!-- TODO FRONTEND ZA NADOKNADU -->
                     <% } %>
-                <form>
-
-                </form>
+                <hr>
                 <div class="gallery">
                 <% for (let car of cars) { %>
                     <div class="photo-box" id="<%= car.kategorija %>" name="slike">
                         <img class="photo-box-image" src="<%= car.slikaurl %>"></img>
-                        <div class=""><%= car.marka %> <%=car.model %> </div>
-                        <div class="buttons">
-                            <button class="btn">Podaci o automobilu</button>
-                        </div>
                         
+                            <div class=""><%= car.marka %> <%=car.model %> </div>
+                            <div class="">Cijena: <%= car.cijenadan %> kn po danu</div>
+                    
+                    <% if( user !== undefined ) {%>
+                        <div class="buttons">
+                                <button class="btn" onClick="pokaziPlacanja(<%= car.registracija %>)">Rezerviraj</button>
+                        </div>
+                        <% } %>
+                        <div name="paymentClass" style="display:none" id="<%=car.registracija %>">
+                            <br>
+                            <div name="paymentType">
+                                <input type="radio" id="card" class=""name="payment" autocomplete="off"><label for="card">Card</label>
+                                <input type="radio" id="cash" class=""name="payment" checked='checked' autocomplete="off"> <label for="cash">Cash</label>
+                            </div>
+                            <button class="btn" onClick="rezervirajPlacanje(<%=car.registracija %>)" >Potvrdi rezervaciju</button>
+                            
+                        </div>
+
                     </div>
                 <% } %>
             </div>
