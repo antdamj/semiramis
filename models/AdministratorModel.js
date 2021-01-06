@@ -54,6 +54,17 @@ module.exports = class Administrator extends User {
         }
     }
 
+    static getLocations = async () => {
+        const sql = `select * from poslovnica`
+        try {
+            const result = await db.query(sql, [])
+            return result.rows
+        } catch (e) {
+            console.log(e)
+            throw e
+        }
+    }
+
     static addLocation = async (adress) => {
         const sql = `insert into poslovnica (lokacija) values ('` + adress + `')`
         try {
