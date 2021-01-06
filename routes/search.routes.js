@@ -11,6 +11,7 @@ router.get('/', async function (req, res, next) {
         user: req.session.user,
         linkActive: 'search',      //TODO 
         locations: poslovnicaDb.rows,
+        date: new Date().toISOString().slice(0, 19).replace('T', ' ').substring(0, 10), // html kalendaru vrati datum u obliku yyyy-mm-dd
         cars: "",
         reservationData: {},
         isHidden: false,
@@ -70,6 +71,7 @@ router.post('/', async function (req, res, next) {
                 linkActive: 'search',
                 cars: carsDb.rows,
                 locations: poslovnicaDb.rows,
+                date: new Date().toISOString().slice(0, 19).replace('T', ' ').substring(0, 10),
                 reservationData: podatciPotrebni,
                 isHidden: false,
                 err: "Datum primitka ili povratka ne smije biti prije današnjeg datuma."
@@ -83,6 +85,7 @@ router.post('/', async function (req, res, next) {
                 linkActive: 'search',
                 cars: carsDb.rows,
                 locations: poslovnicaDb.rows,
+                date: new Date().toISOString().slice(0, 19).replace('T', ' ').substring(0, 10),
                 reservationData: podatciPotrebni,
                 isHidden: false,
                 err: "Datum povratka ne smije biti prije datuma primitka."
@@ -95,6 +98,7 @@ router.post('/', async function (req, res, next) {
                 linkActive: 'search',
                 cars: carsDb.rows,
                 locations: poslovnicaDb.rows,
+                date: new Date().toISOString().slice(0, 19).replace('T', ' ').substring(0, 10),
                 reservationData: podatciPotrebni,
                 isHidden: false,
                 err: "Minimalno trajanje narudžbe mora biti 3 dana."
@@ -107,6 +111,7 @@ router.post('/', async function (req, res, next) {
                 linkActive: 'search',
                 cars: carsDb.rows,
                 locations: poslovnicaDb.rows,
+                date: new Date().toISOString().slice(0, 19).replace('T', ' ').substring(0, 10),
                 reservationData: podatciPotrebni,
                 isHidden: true,
                 err: undefined,
