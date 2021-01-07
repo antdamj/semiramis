@@ -16,6 +16,7 @@ const adminRoute = require('./routes/admin.routes');
 const userRoute = require('./routes/user.routes');
 const ownerRoute = require('./routes/owner.routes');
 const forgotRoute = require('./routes/forgot.routes');
+const resetRoute = require('./routes/reset.routes');
 const searchRoute = require('./routes/search.routes');
 
 //middleware - predlošci (ejs)
@@ -55,6 +56,7 @@ app.use('/user', userRoute)
 app.use('/admin', adminRoute);
 app.use('/owner', ownerRoute);
 app.use('/forgot', forgotRoute);
+app.use('/reset', resetRoute);
 app.use('/search',searchRoute);
 
 //pokretanje poslužitelja na portu 3000

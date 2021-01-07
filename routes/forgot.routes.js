@@ -19,7 +19,8 @@ router.get('/', (req, res, next) => {
         title: 'Prijava',
         linkActive: 'forgot',
         user: undefined,
-        err: undefined
+        err: undefined,
+        msg: undefined
     });
     return;
 });
@@ -51,26 +52,45 @@ router.post('/', async (req, res, next) => {
     }
     
     const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'halikarnas.autos@gmail.com',
-        pass: 'HalikarnaS!'
-    }
+        host: 'smtp.zoho.eu',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'halikarnas.autos@zohomail.eu',
+            pass: 'HalikarnaS!'
+        }
     
     });
 
     const mailOptions = {
-        from: 'halikarnas.autos@gmail.com',
+        from: 'halikarnas.autos@zohomail.eu',
         to: user.email,
         subject: 'Zaboravljena lozinka',
-        text: 'Vaša je lozinka \'' + user.lozinka + '\'. Obavezno promijenite lozinku čim se prijavite!' +
-                'Možete se prijaviti na sljedećoj poveznici: http://halikarnas-autos.duckdns.org/login'
+        text: 'Poštovani, možete promijeniti lozinku na sljedećoj poveznici: http://halikarnas-autos.duckdns.org/reset/' + user.lozinka + '/' + user.korisnickoime + '    Želimo Vam ugodan dan, HALIKARNAS!'
     };
+
+    
 
     transporter.sendMail(mailOptions, (error, info) => {
         if(error) {
             console.log(error);
+
+            res.render('forgot', {
+                title: 'Prijava',
+                linkActive: 'forgot',
+                user: undefined,
+                err: error,
+                msg: undefined
+            });
+            return;
         } else {
+            res.render('forgot', {
+                title: 'Prijava',
+                linkActive: 'forgot',
+                user: undefined,
+                err: undefined,
+                msg: 'Poveznica za postavljanje nove lozinke poslana Vam je na elektroničku poštu.'
+            });
             console.log('Email sent: ' + info.response);
         }
     });

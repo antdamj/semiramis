@@ -4,4 +4,7 @@ Možete joj pristupiti sljedećom poveznicom:
 http://halikarnas-autos.duckdns.org/
 
 Omogućena je registracija, prijava, odjava, promjena lozinke korisnika i povratak lozinke u slučaju zaborava.
-Posljednje navedena funkcionalnost trenutno je implementirana samo u kodu i nije još podignuta na poslužitelj.
+
+
+7.1.2021.
+Proveden 'hash' lozinki.
