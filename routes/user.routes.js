@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/UserModel');
+const crypto = require('crypto');
+
+
 
 //prikaz podataka o korisniku (podaci o korisniku, adrese, narudžbe)
 router.get('/', function (req, res, next) {
@@ -41,8 +44,9 @@ router.post('/', async (req, res, next) => {
         })
         return
     }
+    const hashed_password = crypto.createHash("sha1").update(req.body.password).digest("hex");
 
-    if (req.body.password !== req.session.user.lozinka) {
+    if (hashed_password !== req.session.user.lozinka) {
         res.render('user', {
             title: 'Korisnički profil',
             linkActive: 'user',
@@ -51,8 +55,9 @@ router.post('/', async (req, res, next) => {
         })
         return
     }
-    User.changePassword(req.session.user.korisnickoime, req.body.password1);
-    req.session.user.lozinka = req.body.password1;
+    const new_hashed_password = crypto.createHash("sha1").update(req.body.password1).digest("hex");
+    User.changePassword(req.session.user.korisnickoime, new_hashed_password);
+    req.session.user.lozinka = new_hashed_password;
     res.redirect('/');
 });
 

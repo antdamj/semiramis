@@ -16,6 +16,7 @@ const adminRoute = require('./routes/admin.routes');
 const userRoute = require('./routes/user.routes');
 const ownerRoute = require('./routes/owner.routes');
 const forgotRoute = require('./routes/forgot.routes');
+const resetRoute = require('./routes/reset.routes');
 
 //middleware - predlošci (ejs)
 app.set('views', path.join(__dirname, 'views'));
@@ -54,7 +55,7 @@ app.use('/user', userRoute)
 app.use('/admin', adminRoute);
 app.use('/owner', ownerRoute);
 app.use('/forgot', forgotRoute);
-
+app.use('/reset', resetRoute);
 //pokretanje poslužitelja na portu 3000
 app.get('*', function (req, res) {
     res.status(404).send('<h1>404 Error occured</h1><h2>Posjetili ste stranicu koja ne postoji</h2><h2>Pritisnite <a href="/" class="link menu-item">tu</a> da se vratite </h2>');
