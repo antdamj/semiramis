@@ -51,7 +51,7 @@ router.post('/', async function (req, res, next) {
 
         // console.log(podatciPotrebni)
 
-        let carsDb = await db.query(`select vozilo.* from vozilo left outer join rezervacija on rezervacija.registracija = vozilo.registracija where  '${datum_primitka}'  > vrijemePreuzimanja or  '${datum_povratka}'  < vrijemeZavrsetka or idRezervacija is null`);
+        let carsDb = await db.query(`select distinct vozilo.* from vozilo left outer join rezervacija on rezervacija.registracija = vozilo.registracija where  '${datum_primitka}'  > vrijemePreuzimanja or  '${datum_povratka}'  < vrijemeZavrsetka or idRezervacija is null`);
 
         let today = Date.now();
         let nadoknada = false;
