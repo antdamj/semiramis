@@ -3,145 +3,151 @@
 
 
 
-    <head>
-        <title>AUTOS!</title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" type="image/png" href="./images/car-icon.png" />
-        <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
-        <link rel="stylesheet" type="text/css" href="./styles/main.css">
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    </head>
+<head>
+    <title>AUTOS!</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="./images/car-icon.png" />
+    <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./styles/main.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
 
-    <body class="content">
-        <%- include(`partials/header`); %>
-            <h1 style="text-align:center">ADMIN</h1>
+<body class="content">
+    <%- include(`partials/header`); %>
+        <h1 style="text-align:center">ADMIN</h1>
 
-            <div class="container">
+        <div class="container">
 
-                <span>Ispis korisnika:</span>
-                <form action="/admin" method="POST">
-                    <input type="radio" id="all" name="getUsers" value="" checked="checked">
-                    <label for="all">Svi</label><br>
-                    <input type="radio" id="user" name="getUsers" value="korisnik">
-                    <label for="user">Obični korisnici</label><br>
-                    <input type="radio" id="admin" name="getUsers" value="vlasnik">
-                    <label for="owner">Vlasnici sustava</label>
-                    <button>Prikaz korisnika</button>
-                </form>
-                <div>
-                    
-                    <% if(users.length>0){ %>
+            <span>Ispis korisnika:</span>
+            <form action="/admin" method="POST">
+                <input type="radio" id="all" name="getUsers" value="" checked="checked">
+                <label for="all" style="width: 150px;">Svi</label><br>
+                <input type="radio" id="user" name="getUsers" value="korisnik">
+                <label for="user" style="width: 150px;">Obični korisnici</label><br>
+                <input type="radio" id="admin" name="getUsers" value="vlasnik">
+                <label for="owner" style="width: 150px;">Vlasnici sustava</label><br>
+                <button>Prikaz korisnika</button>
+            </form>
+            <div>
+
+                <% if(users.length>0){ %>
+                    <hr>
+                    Broj korisnika: <%= users.length %>
                         <hr>
-                   Broj: <%= users.length %>
-                       <hr>
-                            <% for (let user of users) { %>
-                                <div>
-                                    <%= user.korisnickoime %>
-                                </div>
-                                <% } %>
+                        <% for (let user of users) { %>
+                            <div>
+                                <%= user.korisnickoime %>
+                            </div>
                             <% } %>
-                </div>
-                <div class="centered-container">
-                    <div class="separator"></div>
-                    <form action="/admin" method="post">
-                        <fieldset class="fieldset">
-                            <legend class="main-color-emphasized">Brisanje korisnika</legend>
-
-                            <label for="korisnickoIme">Korisničko ime:</label>
-                            <input type="text" name="userDelete" id="korisnickoImeToBeDeleted" maxlength="30"
-                                minlength="4">
-                            <br>
-                            <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                            <br>
-                        </fieldset>
-                    </form>
-                </div>
-
-                <div class="centered-container">
-                    <div class="separator"></div>
-                    <form action="/admin" method="post">
-                        <fieldset class="fieldset">
-                            <legend class="main-color-emphasized">Promjena razine korisnika</legend>
-
-                            <label for="korisnickoIme">Korisničko ime:</label>
-                            <input type="text" name="userEdit" id="korisnickoIme" maxlength="30" minlength="4">
-                            <br>
-
-                            <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                            <br>
-                        </fieldset>
-                    </form>
-                </div>
-
-                <form action="/admin" method="POST">
-                    <input type="hidden" name="getLocations" />
-                    <input type="submit" value="Prikaz poslovnica" />
-                </form>
-                <div>
-                    
-                    <% if(locations.length>0){ %>
-                        <hr>
-                     Broj: <%= locations.length %>
-                       <hr>
-                            <% for (let location of locations) { %>
-                                <div>
-                                    <%= location.lokacija %>
-                                </div>
                                 <% } %>
-                    <% } %>
-                </div>
-
-                <div class=" centered-container">
-                    <div class="separator"></div>
-                    <form action="/admin" method="post">
-                        <fieldset class="fieldset">
-                            <legend class="main-color-emphasized">Dodavanje poslovnice</legend>
-
-                            <label for="lokacija">Lokacija:</label>
-                            <input type="text" name="locationAdd" id="lokacija" maxlength="20" minlength="2">
-                            <br>
-
-                            <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                            <br>
-                        </fieldset>
-                    </form>
-                </div>
-
-                <div class="centered-container">
-                    <div class="separator"></div>
-                    <form action="/admin" method="post">
-                        <fieldset class="fieldset">
-                            <legend class="main-color-emphasized">Uklanjanje poslovnice</legend>
-
-                            <label for="idPoslovnica">Id Poslovnice:</label>
-                            <input type="text" name="locationRemove" id="idPoslovnica" maxlength="4" minlength="1">
-                            <br>
-
-                            <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                            <br>
-                        </fieldset>
-                    </form>
-                </div>
-
-                <div class="centered-container">
-                    <div class="separator"></div>
-                    <form action="/admin" method="post">
-                        <fieldset class="fieldset">
-                            <legend class="main-color-emphasized">Uređivanje poslovnice</legend>
-
-                            <label for="idPoslovnica">Id Poslovnice:</label>
-                            <input type="text" name="locationEdit" id="idPoslovnica" maxlength="4" minlength="1">
-                            <br>
-
-                            <label for="lokacija">Lokacija:</label>
-                            <input type="text" name="locationEdit" id="lokacija" maxlength="20" minlength="2">
-                            <br>
-
-                            <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                            <br>
-                        </fieldset>
-                    </form>
-                </div>
             </div>
-    </body>
+            <div class="centered-container">
+                <div class="separator"></div>
+                <form action="/admin" method="post">
+                    <fieldset class="fieldset">
+                        <legend class="main-color-emphasized">Brisanje korisnika</legend>
+
+                        <label for="korisnickoIme">Korisničko ime:</label>
+                        <input type="text" name="userDelete" id="korisnickoImeToBeDeleted" maxlength="30" minlength="4">
+                        <br>
+                        <input type="submit" style="margin-top: 3px;"> <input type="reset">
+                        <br>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="centered-container">
+                <div class="separator"></div>
+                <form action="/admin" method="post">
+                    <fieldset class="fieldset">
+                        <legend class="main-color-emphasized">Promjena razine korisnika</legend>
+
+                        <label for="korisnickoIme">Korisničko ime:</label>
+                        <input type="text" name="userEdit" id="korisnickoIme" maxlength="30" minlength="4">
+                        <br>
+
+                        <input type="submit" style="margin-top: 3px;"> <input type="reset">
+                        <br>
+                    </fieldset>
+                </form>
+            </div>
+            <br>
+            <form action="/admin" method="POST">
+                <input type="hidden" name="getLocations" />
+                <input type="submit" value="Prikaz poslovnica" />
+            </form>
+            <div>
+
+                <% if(locations.length>0){ %>
+                    <hr>
+                    Broj poslovnica: <%= locations.length %>
+                        <hr>
+                        <table>
+                            <% for (let location of locations) { %>
+                                <tr>
+                                    <td style="padding-right: 20px;">
+                                        Id poslovnice: <%= location.idposlovnica %>
+                                    </td>
+                                    <td>
+                                        Adresa: <%= location.lokacija %>
+                                    </td>
+                                </tr>
+                                <% } %>
+                        </table>
+                        <% } %>
+            </div>
+
+            <div class=" centered-container">
+                <div class="separator"></div>
+                <form action="/admin" method="post">
+                    <fieldset class="fieldset">
+                        <legend class="main-color-emphasized">Dodavanje poslovnice</legend>
+
+                        <label for="lokacija">Lokacija:</label>
+                        <input type="text" name="locationAdd" id="lokacija" maxlength="20" minlength="2">
+                        <br>
+
+                        <input type="submit" style="margin-top: 3px;"> <input type="reset">
+                        <br>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="centered-container">
+                <div class="separator"></div>
+                <form action="/admin" method="post">
+                    <fieldset class="fieldset">
+                        <legend class="main-color-emphasized">Uklanjanje poslovnice</legend>
+
+                        <label for="idPoslovnica">Id Poslovnice:</label>
+                        <input type="text" name="locationRemove" id="idPoslovnica" maxlength="4" minlength="1">
+                        <br>
+
+                        <input type="submit" style="margin-top: 3px;"> <input type="reset">
+                        <br>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="centered-container">
+                <div class="separator"></div>
+                <form action="/admin" method="post">
+                    <fieldset class="fieldset">
+                        <legend class="main-color-emphasized">Uređivanje poslovnice</legend>
+
+                        <label for="idPoslovnica">Id Poslovnice:</label>
+                        <input type="text" name="locationEdit" id="idPoslovnica" maxlength="4" minlength="1">
+                        <br>
+
+                        <label for="lokacija">Lokacija:</label>
+                        <input type="text" name="locationEdit" id="lokacija" maxlength="20" minlength="2">
+                        <br>
+
+                        <input type="submit" style="margin-top: 3px;"> <input type="reset">
+                        <br>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+</body>
