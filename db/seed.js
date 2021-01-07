@@ -77,9 +77,10 @@ const sql_create_rezervacija = `CREATE TABLE rezervacija
 	vrijemeZavrsetka   	TIMESTAMP,
 	lokacijaPreuzimanja text NOT NULL,
 	lokacijaOstavljanja	text NOT NULL,
-	korisnickoIme		text NOT NULL UNIQUE,
-	registracija    	text NOT NULL UNIQUE,
-	status				text NOT NULL,
+	korisnickoIme		text NOT NULL,
+	registracija    	text NOT NULL,
+    status				text NOT NULL,
+    tipPlacanja         text NOT NULL,
 	FOREIGN KEY (korisnickoIme) REFERENCES korisnik(korisnickoIme),
 	FOREIGN KEY (registracija) REFERENCES vozilo(registracija)
 )`;
