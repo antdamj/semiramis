@@ -106,9 +106,16 @@ const sql_create_poslovnica = ` CREATE TABLE poslovnica (
     lokacija        text NOT NULL
 );`
 
+
+
 const sql_insert_poslovnica = `INSERT INTO poslovnica 
-    (idPoslovnica, lokacija) VALUES 
-    (762178673, 'Zadarska ulica 51')`;
+    (lokacija) VALUES 
+    ('Zadarska ulica 51'), ('Unska ulica 3'), ('Kaptol ulica 30'), ('Nova cesta 73'), ('Trg Josipa Jurja Strossmayera 3'),
+    ('Kalčićeva ulica 2'), ('Jarunska ulica 2'), ('Maksimirska 132'), ('Lučko 5');`;
+
+    const sql_insert_recenzija = ';';
+    const sql_insert_rezervacija = ';';
+    const sql_insert_session = ';';
 
 const sql_create_poslovnica_index = `CREATE INDEX idx_idPoslovnica ON poslovnica(idPoslovnica)`;
 
@@ -134,7 +141,11 @@ let tables = [
 
 let table_data = [
     sql_insert_korisnik,
-    sql_insert_vozilo
+    sql_insert_vozilo,
+    sql_insert_recenzija,
+    sql_insert_rezervacija,
+    sql_insert_session,
+    sql_insert_poslovnica
 ];
 
 let indexes = [
