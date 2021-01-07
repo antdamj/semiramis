@@ -25,10 +25,10 @@ const sql_create_korisnik = `CREATE TABLE korisnik
 
 const sql_insert_korisnik = `INSERT INTO korisnik 
 (korisnickoIme, ime, prezime, email, lozinka, brojMobitela, uloga) VALUES 
-    ('admin', 'Josip', 'Hrvatić', 'josip.hrvatic@fer.hr', 'admin123', '0996753456', 'admin'),
-    ('toni', 'Antonio', 'Damjanović', 'antonio.damjanovic@fer.hr', 'toni1234', '0916729911', 'vlasnik'),
-    ('kreso', 'Krešimir', 'Blaić', 'kresimir.blaic@fer.hr', 'kreso123', '0956723334', 'korisnik'),
-    ('megi', 'Magda', 'Smolić - Ročak', 'magda.smolic-rocak@fer.hr', 'megi1234', '0919241827', 'korisnik')`;
+    ('admin', 'Josip', 'Hrvatić', 'josip.hrvatic@fer.hr', 'f865b53623b121fd34ee5426c792e5c33af8c227', '0996753456', 'admin'),
+    ('toni', 'Antonio', 'Damjanović', 'antonio.damjanovic@fer.hr', '957c6ab90fbe71ad6387b3f34c5ff37bee1179e7', '0916729911', 'vlasnik'),
+    ('kreso', 'Krešimir', 'Blaić', 'kresimir.blaic@fer.hr', '62f2a6f1ff2cdeff37ed7c0267d6aa75ce2cd31a', '0956723334', 'korisnik'),
+    ('megi', 'Magda', 'Smolić - Ročak', 'magda.smolic-rocak@fer.hr', 'd8ee18d8e3a8061cfee6f38ba62aee7bb2402a55', '0919241827', 'korisnik')`;
 
 const sql_create_korisnik_korisnickoIme_index = `CREATE INDEX idx_korisnickoIme ON korisnik(korisnickoIme)`;
 
