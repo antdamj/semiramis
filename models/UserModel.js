@@ -48,6 +48,50 @@ module.exports = class User {
         }
     }
 
+    // promjena imena
+    static async changeName(username, name) {
+        const sql = `UPDATE korisnik SET ime = '` + name + `' WHERE korisnickoime = '` + username + `'`;
+        try {
+            await db.query(sql, []);
+        } catch (err) {
+            console.log(err);
+            throw err
+        }
+    }
+
+    // promjena prezimena
+    static async changeLastName(username, lastname) {
+        const sql = `UPDATE korisnik SET prezime = '` + lastname + `' WHERE korisnickoime = '` + username + `'`;
+        try {
+            await db.query(sql, []);
+        } catch (err) {
+            console.log(err);
+            throw err
+        }
+    }
+
+    // promjena emaila
+    static async changeEmail(username, email) {
+        const sql = `UPDATE korisnik SET email = '` + email + `' WHERE korisnickoime = '` + username + `'`;
+        try {
+            await db.query(sql, []);
+        } catch (err) {
+            console.log(err);
+            throw err
+        }
+    }
+
+    // brisanje korisnickog racuna
+    static async deleteUser(username) {
+        const sql = `DELETE * FROM korisnik WHERE korisnickoime = '` + username + `'`;
+            try {
+                await db.query(sql, []);
+            } catch (err) {
+                console.log(err);
+                throw err
+            }
+    }
+
     //pohrana korisnika u bazu podataka
     async persist() {
         try {
@@ -85,3 +129,29 @@ dbNewUser = async (user) => {
         throw err
     }
 }
+
+//dohvat aktivnih rezervacija korisnika
+dbGetActiveReservations = async (user_name) => {
+    const sql = `SELECT * FROM rezervacija WHERE korisnickoIme = '` + user_name + `' && status = 'aktivna'`;
+    try {
+        const result = await db.query(sql, []);
+        return result.rows;
+    } catch (err) {
+        console.log(err);
+        throw err
+    }
+}; 
+
+//dohvat završenih rezervacija korisnika
+dbGetPastReservations = async (user_name) => {
+    const sql = `SELECT * FROM rezervacija WHERE korisnickoIme = '` + user_name + `' && status = 'aktivna'`;
+    try {
+        const result = await db.query(sql, []);
+        return result.rows;
+    } catch (err) {
+        console.log(err);
+        throw err
+    }
+}; 
+
+

@@ -14,3 +14,8 @@ module.exports = class Rezervacija {
          this.status = status
       }
 }
+
+/*STATUS moze biti definiran kao:
+   status = aktivna
+   status = zavrsena
+*/

@@ -13,20 +13,22 @@
                     <img class="scaled-image scaled-image-fixed" src="../images/logo.svg" alt="Company logo">
                 </a>
             <% } else { %>
-            <a href=" /order" class="link menu-item <%if (linkActive === 'order') {%>  link-active  <%}%>">Naruči</a>
-            <a href="/" class="link">
-                <img class="scaled-image scaled-image-fixed" src="../images/logo.svg" alt="Company logo">
-            </a>
-            <a href="/cart" class="link menu-item <%if (linkActive === 'cart') {%>  link-active  <%}%>">Naruči</a>
+                <% if(user == undefined){ %>
+                    <a href="/" class="link">
+                    <img class="scaled-image scaled-image-fixed" src="../images/logo.svg" alt="Company logo">
+                    </a>
+                <% } %>
             <% } %>
 
+            <a href=" /search" class="link menu-item <%if (linkActive === 'search') {%>  link-active  <%}%>">Pretraga</a>
+
             <% if( user !== undefined ) {%>
-            <a href=" /user" class="link menu-item">Postavke računa</a>
-            <a href="/logout" class="link menu-item <%if (linkActive === 'logout') {%>  link-active  <%}%>">Odjava</a>
+            <a href="/cart" style="text-align: center;"class="link menu-item <%if (linkActive === 'cart') {%>  link-active  <%}%>">Moje rezervacije</a>
+            <a href=" /user" class="link menu-item" style="text-align: center;">Postavke računa</a>
+            <a href="/logout" id="logout-link" class="link menu-item <%if (linkActive === 'logout') {%>  link-active  <%}%>">Odjava</a>
             <% } else {%>
             <a href=" /login" class="link menu-item <%if (linkActive === 'login') {%>  link-active  <%}%>">Prijava</a>
             <% } %>
-            <a href=" /search" class="link menu-item <%if (linkActive === 'search') {%>  link-active  <%}%>">Pretraga</a>
 
             <% if(user !== undefined) { %>
                 <div class="logoContainer">

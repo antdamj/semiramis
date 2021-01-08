@@ -18,6 +18,7 @@ const ownerRoute = require('./routes/owner.routes');
 const forgotRoute = require('./routes/forgot.routes');
 const resetRoute = require('./routes/reset.routes');
 const searchRoute = require('./routes/search.routes');
+const cartRoute = require('./routes/cart.routes');
 
 //middleware - predlošci (ejs)
 app.set('views', path.join(__dirname, 'views'));
@@ -58,6 +59,7 @@ app.use('/owner', ownerRoute);
 app.use('/forgot', forgotRoute);
 app.use('/reset', resetRoute);
 app.use('/search',searchRoute);
+app.use('/cart',cartRoute);
 
 //pokretanje poslužitelja na portu 3000
 app.get('*', function (req, res) {

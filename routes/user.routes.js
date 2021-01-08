@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/UserModel');
 const crypto = require('crypto');
+const { fetchByUsername } = require('../models/UserModel');
 
 
 
@@ -23,8 +24,50 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', async (req, res, next) => {
-    //provjeri istovjetnost unesenenih zaporki
+    console.log(req.body)
+    //promjena korisničkih podataka
+    if ('name' in req.body || 'lastname' in req.body || 'email' in req.body) {
+        console.log("Promjena korisničkih podataka")
+        if('name' in req.body && req.body.name != '') {
+            await User.changeName(req.session.user.korisnickoime, req.body.name);
+        }
+        if('lastname' in req.body && req.body.lastname != '') {
+            await User.changeLastName(req.session.user.korisnickoime, req.body.lastname);
+        }
+        if('email' in req.body && req.body.email != '') {
+            await User.changeEmail(req.session.user.korisnickoime, req.body.email);
+        }
+        if (req.body.name.length > 0) req.session.user.ime = req.body.name
+        if (req.body.lastname.length > 0) req.session.user.prezime = req.body.lastname
+        if (req.body.email.length > 0) req.session.user.email = req.body.email
+        res.render('user', {
+            title: 'User page',
+            user: req.session.user,
+            linkActive: 'user',
+            users: "",
+            locations: "",
+            err: undefined
+        })
+        return
+    }
 
+    //brisanje korisničkog računa
+    if ('delete' in req.body) {
+        console.log("Brisanje korisničkog računa")
+        await User.deleteUser(req.session.user.korisnickoime)
+        res.render('user', {
+            title: 'User page',
+            user: req.session.user,
+            linkActive: 'user',
+            users: "",
+            locations: "",
+            err: undefined
+        })
+        return
+    }
+
+    //----------------LOZINKE----------------
+    //provjeri istovjetnost unesenenih zaporki
     if (req.body.password1 != req.body.password2) {
         res.render('user', {
             title: 'Korisnički profil',
