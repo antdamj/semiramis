@@ -16,8 +16,8 @@ module.exports = {
         return pool.query(text, params)
             .then(res => {
                 const duration = Date.now() - start;
-                 console.log('executed query', { text, params, duration, rows: res.rows }); // ispis zagusi konzolu
-                //console.log('Izvrsen upit:', { text })
+                 //console.log('executed query', { text, params, duration, rows: res.rows }); // ispis zagusi konzolu
+                console.log('Izvrsen upit:', { text })
                 return res;
             });
     },
