@@ -16,7 +16,11 @@
     <h1 style="text-align:center">Trenutne rezervacije</h1>
     <hr>
     <div class="gallery">
-      
+        <% for (let rez of aktivne) { %>
+            <div>
+                <%= rez.registracija %>
+            </div>
+            <% } %>
     </div>
     
 

@@ -102,6 +102,32 @@ module.exports = class User {
             throw err
         }
     }
+
+    //dohvat aktivnih rezervacija korisnika
+    static async getActiveReservations(user_name) {
+        const sql = `SELECT * FROM rezervacija WHERE korisnickoime = '` + user_name + `' AND (status = 'aktivna' OR status = 'neaktivna')`;
+        try {
+            const result = await db.query(sql, []);
+            return result.rows;
+        } catch (err) {
+            console.log(err);
+            throw err
+        }
+    }
+    
+
+    //dohvat završenih rezervacija korisnika
+    static async getPastReservations(user_name) {
+        const sql = `SELECT * FROM rezervacija WHERE korisnickoime = '` + user_name + `' AND status = 'zavrsena'`;
+        try {
+            const result = await db.query(sql, []);
+            return result.rows;
+        } catch (err) {
+            console.log(err);
+            throw err
+        }
+    }
+
 }
 
 //dohvat korisnika iz baze podataka na osnovu korisničkog imena (stupac korisnickoIme)
@@ -130,28 +156,6 @@ dbNewUser = async (user) => {
     }
 }
 
-//dohvat aktivnih rezervacija korisnika
-dbGetActiveReservations = async (user_name) => {
-    const sql = `SELECT * FROM rezervacija WHERE korisnickoIme = '` + user_name + `' && status = 'aktivna'`;
-    try {
-        const result = await db.query(sql, []);
-        return result.rows;
-    } catch (err) {
-        console.log(err);
-        throw err
-    }
-}; 
 
-//dohvat završenih rezervacija korisnika
-dbGetPastReservations = async (user_name) => {
-    const sql = `SELECT * FROM rezervacija WHERE korisnickoIme = '` + user_name + `' && status = 'aktivna'`;
-    try {
-        const result = await db.query(sql, []);
-        return result.rows;
-    } catch (err) {
-        console.log(err);
-        throw err
-    }
-}; 
 
 
