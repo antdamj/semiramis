@@ -19,7 +19,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', async (req, res) => {
-
+    
     if ('getUsers' in req.body) {
         console.log("Pretraga korisnika.")
 
@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
     }
 
     if ('userEdit' in req.body) {
-        console.log("Dodavanje vlasnickih prava korisniku.")
+       // console.log("Dodavanje vlasnickih prava korisniku.")
         await Administrator.giveOwnerToUser(req.body.userEdit);
         res.render('admin', {
             title: 'Admin page',

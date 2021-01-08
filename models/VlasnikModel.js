@@ -16,9 +16,9 @@ module.exports = class Vlasnik extends User {
 
 
 
-    static addVehicle = async (vozilo) => {
+    static addVehicle = async (registracija, marka, model, kategorija, cijenadan, slikaurl) => {
         const sql = `insert into vozilo (registracija, marka, model, kategorija, cijenadan, slikaurl) 
-        values ('` + vozilo.registracija + `', '` + vozilo.marka + `', '` + vozilo.model + `', '` + vozilo.kategorija + `', '` + vozilo.cijenadan + `', '` + vozilo.slikaurl + `',)`
+        values ('` + registracija + `', '` + marka + `', '` + model + `', '` + kategorija + `', '` + cijenadan + `', '` + slikaurl + `')`
         try {
             const result = await db.query(sql, [])
         } catch (e) {
@@ -35,9 +35,9 @@ module.exports = class Vlasnik extends User {
             throw e
         }
     }
-    static editVozilo = async (vozilo) => {
-        const sql = `update vozilo set kategorija = '` + vozilo.kategorija + `', cijenadan = '` + vozilo.cijenadan + `', slikaurl = '` + vozilo.slikaurl + `'
-        where registracija = '` + vozilo.registracija + `'`
+    static editVozilo = async (registracija, kategorija, cijenadan, slikaurl) => {
+        const sql = `update vozilo set kategorija = '` + kategorija + `', cijenadan = '` + cijenadan + `', slikaurl = '` + slikaurl + `'
+        where registracija = '` + registracija + `'`
         try {
             const result = await db.query(sql, [])
         } catch (e) {
@@ -56,7 +56,7 @@ module.exports = class Vlasnik extends User {
         }
     }
     static getActiveReservations = async () => {
-        const sql = `select * from rezervacija where status = aktivna`
+        const sql = `select * from rezervacija where status = 'aktivna'`
         try {
             const result = await db.query(sql, [])
             return result.rows
@@ -66,7 +66,7 @@ module.exports = class Vlasnik extends User {
         }
     }
     static closeReservation = async (idrezervacija) => {
-        const sql = `update rezervacija set status = zavrsena
+        const sql = `update rezervacija set status = 'zavrsena'
         where idrezervacija = '` + idrezervacija + `'`
         try {
             const result = await db.query(sql, [])
@@ -77,7 +77,8 @@ module.exports = class Vlasnik extends User {
     }
     static getAvailableVehicles = async () => {
         const sql = `select distinct vozilo.* 
-        from vozilo left join rezervacija where status <> aktivna`
+        from vozilo left join rezervacija on vozilo.registracija = rezervacija.registracija 
+        where status <> 'aktivna' or status is null` 
         try {
             const result = await db.query(sql, [])
             return result.rows
