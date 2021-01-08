@@ -13,146 +13,144 @@
 
 <body class="content">
     <%- include(`partials/header`); %>
-    <h1 style="text-align:center">VLASNIK</h1>
-    <div class="container"></div>
-    <div class="container">
-        <form action="/owner" method="POST">
-            <input type="hidden" name="getActiveRes" />
-            <input type="submit" value="Prikaz aktivnih rezervacija" />
-        </form> 
-        <div>
-            
-            <% if(reservations != undefined){ %>
-                <hr>
-             Broj: <%= reservations.length %>
-               <hr>
-                    <% for (let r of reservations) { %>
-                        <div>
-                            <%= r.idrezervacija %>
-                            <%= r.korisnickoime %>
-                            
-                            <%= r.vrijemezavrsetka %>
+        <h1 style="text-align:center">VLASNIK</h1>
+        <div class="container">
+            <div class="container"></div>
+            <div class="container">
+                <form action="/owner" method="POST">
+                    <input type="hidden" name="getActiveRes" />
+                    <input type="submit" value="Prikaz aktivnih rezervacija" />
+                </form>
+                <div>
 
-                        </div>
-                        <% } %>
-            <% } %>
+                    <% if(reservations !=undefined){ %>
+                        <hr>
+                        Broj: <%= reservations.length %>
+                            <hr>
+                            <% for (let r of reservations) { %>
+                                <div>
+                                    <%= r.idrezervacija %>
+                                        <%= r.korisnickoime %>
+
+                                            <%= r.vrijemezavrsetka %>
+
+                                </div>
+                                <% } %>
+                                    <% } %>
+                </div>
+            </div>
+            <div class="container">
+                <form action="/owner" method="POST">
+                    <input type="hidden" name="getVehicles" />
+                    <input type="submit" value="Prikaz dostupnih vozila" />
+                </form>
+                <div>
+
+                    <% if(vehicles !=undefined){ %>
+                        <hr>
+                        Broj: <%= vehicles.length %>
+                            <hr>
+                            <% for (let vehicle of vehicles) { %>
+                                <div>
+                                    <%= vehicle.registracija %>
+                                </div>
+                                <% } %>
+                                    <% } %>
+                </div>
+            </div>
+            <div class="centered-container">
+                <div class="separator"></div>
+                <form action="/owner" method="post">
+                    <fieldset class="fieldset">
+                        <legend class="main-color-emphasized">Dodavanje vozila</legend>
+
+                        <label for="registracija">registracija:</label>
+                        <input type="text" name="registracijaAdd" id="registracija" maxlength="20" minlength="1">
+                        <br>
+
+                        <label for="marka">marka:</label>
+                        <input type="text" name="markaAdd" id="marka" maxlength="20" minlength="2">
+                        <br>
+
+                        <label for="model">model:</label>
+                        <input type="text" name="modelAdd" id="model" maxlength="20" minlength="2">
+                        <br>
+
+                        <label for="kategorija">kategorija:</label>
+                        <input type="text" name="kategorijaAdd" id="kategorija" maxlength="20" minlength="2">
+                        <br>
+
+                        <label for="cijenadan">dnevna cijena:</label>
+                        <input type="text" name="cijenadanAdd" id="cijenadan" maxlength="20" minlength="2">
+                        <br>
+
+                        <label for="slikaurl">slika:</label>
+                        <input type="text" name="slikaurlAdd" id="slikaurl" maxlength="20" minlength="2">
+                        <br>
+
+                        <input type="submit" style="margin-top: 3px;"> <input type="reset">
+                        <br>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="centered-container">
+                <div class="separator"></div>
+                <form action="/owner" method="post">
+                    <fieldset class="fieldset">
+                        <legend class="main-color-emphasized">Brisanje vozila</legend>
+
+                        <label for="registracija">registracija:</label>
+                        <input type="text" name="registracijaDel" id="registracijad" maxlength="20" minlength="2">
+                        <br>
+                        <input type="submit" style="margin-top: 3px;"> <input type="reset">
+                        <br>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="centered-container">
+                <div class="separator"></div>
+                <form action="/owner" method="post">
+                    <fieldset class="fieldset">
+                        <legend class="main-color-emphasized">Uređivanje automobila</legend>
+
+                        <label for="registracija">registracija:</label>
+                        <input type="text" name="registracijaEdit" id="registracijaE" maxlength="20" minlength="2">
+                        <br>
+
+                        <label for="kategorija">kategorija:</label>
+                        <input type="text" name="kategorijaEdit" id="kategorijaE" maxlength="20" minlength="2">
+                        <br>
+
+                        <label for="cijenadan">dnevna cijena:</label>
+                        <input type="text" name="cijenadanEdit" id="cijenadanE" maxlength="20" minlength="2">
+                        <br>
+
+                        <label for="slikaurl">slika:</label>
+                        <input type="text" name="slikaurlEdit" id="slikaurlE" maxlength="20" minlength="2">
+                        <br>
+
+                        <input type="submit" style="margin-top: 3px;"> <input type="reset">
+                        <br>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="centered-container">
+                <div class="separator"></div>
+                <form action="/owner" method="post">
+                    <fieldset class="fieldset">
+                        <legend class="main-color-emphasized">Zatvaranje rezervacije</legend>
+
+                        <label for="idrezervacija">ID rezervacije:</label>
+                        <input type="text" name="rezervacijaClose" id="rezervacijaC" maxlength="20" minlength="1">
+                        <br>
+                        <input type="submit" style="margin-top: 3px;"> <input type="reset">
+                        <br>
+                    </fieldset>
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="container">
-        <form action="/owner" method="POST">
-            <input type="hidden" name="getVehicles" />
-            <input type="submit" value="Prikaz dostupnih vozila" />
-        </form> 
-        <div>
-            
-            <% if(vehicles != undefined){ %>
-                <hr>
-             Broj: <%= vehicles.length %>
-               <hr>
-                    <% for (let vehicle of vehicles) { %>
-                        <div>
-                            <%= vehicle.registracija %>
-                        </div>
-                        <% } %>
-            <% } %>
         </div>
-    </div>
-        <div class="centered-container">
-            <div class="separator"></div>
-            <form action="/owner" method="post">
-                <fieldset class="fieldset">
-                    <legend class="main-color-emphasized">Dodavanje vozila</legend>
-
-                    <label for="registracija">registracija:</label>
-                    <input type="text" name="registracijaAdd" id="registracija" maxlength="20" minlength="1">
-                    <br>
-
-                    <label for="marka">marka:</label>
-                    <input type="text" name="markaAdd" id="marka" maxlength="20" minlength="2">
-                    <br>
-
-                    <label for="model">model:</label>
-                    <input type="text" name="modelAdd" id="model" maxlength="20" minlength="2">
-                    <br>
-
-                    <label for="kategorija">kategorija:</label>
-                    <input type="text" name="kategorijaAdd" id="kategorija" maxlength="20" minlength="2">
-                    <br>
-
-                    <label for="cijenadan">dnevna cijena:</label>
-                    <input type="text" name="cijenadanAdd" id="cijenadan" maxlength="20" minlength="2">
-                    <br>
-
-                    <label for="slikaurl">slika:</label>
-                    <input type="text" name="slikaurlAdd" id="slikaurl" maxlength="20" minlength="2">
-                    <br>
-
-                    <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                    <br>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="centered-container">
-            <div class="separator"></div>
-            <form action="/owner" method="post">
-                <fieldset class="fieldset">
-                    <legend class="main-color-emphasized">Brisanje vozila</legend>
-
-                    <label for="registracija">registracija:</label>
-                    <input type="text" name="registracijaDel" id="registracijad" maxlength="20"
-                        minlength="2">
-                    <br>
-                    <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                    <br>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="centered-container">
-            <div class="separator"></div>
-            <form action="/owner" method="post">
-                <fieldset class="fieldset">
-                    <legend class="main-color-emphasized">Uređivanje automobila</legend>
-
-                    <label for="registracija">registracija:</label>
-                    <input type="text" name="registracijaEdit" id="registracijaE" maxlength="20" minlength="2">
-                    <br>
-
-                    <label for="kategorija">kategorija:</label>
-                    <input type="text" name="kategorijaEdit" id="kategorijaE" maxlength="20" minlength="2">
-                    <br>
-
-                    <label for="cijenadan">dnevna cijena:</label>
-                    <input type="text" name="cijenadanEdit" id="cijenadanE" maxlength="20" minlength="2">
-                    <br>
-
-                    <label for="slikaurl">slika:</label>
-                    <input type="text" name="slikaurlEdit" id="slikaurlE" maxlength="20" minlength="2">
-                    <br>
-
-                    <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                    <br>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="centered-container">
-            <div class="separator"></div>
-            <form action="/owner" method="post">
-                <fieldset class="fieldset">
-                    <legend class="main-color-emphasized">Zatvaranje rezervacije</legend>
-
-                    <label for="idrezervacija">ID rezervacije:</label>
-                    <input type="text" name="rezervacijaClose" id="rezervacijaC" maxlength="20"
-                        minlength="1">
-                    <br>
-                    <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                    <br>
-                </fieldset>
-            </form>
-        </div>
-
-
-    </div>
 </body>
