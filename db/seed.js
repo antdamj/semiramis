@@ -84,7 +84,14 @@ const sql_create_rezervacija = `CREATE TABLE rezervacija
 	FOREIGN KEY (korisnickoIme) REFERENCES korisnik(korisnickoIme),
 	FOREIGN KEY (registracija) REFERENCES vozilo(registracija)
 )`;
-
+const sql_insert_rezervacija = `INSERT INTO rezervacija
+    (vrijemeRezervacije, vrijemePreuzimanja, vrijemeZavrsetka, lokacijaPreuzimanja, lokacijaOstavljanja, korisnickoIme, registracija, status, tipPlacanja)
+    VALUES
+    ('2021-1-1 00:00:05', '2021-1-2 00:00:05', '2021-1-6 19:00:05', 'Unska ulica 3', 'Unska ulica 3', 'megi', 'ZG139JH', 'neaktivna', 'cash'),
+    ('2021-1-2 14:00:06', '2021-1-11 00:00:05', '2021-1-21 19:00:05', 'Kalčićeva ulica 2', 'Unska ulica 3', 'kreso', 'BJ467BB', 'aktivna', 'kartica'),
+    ('2021-1-3 13:00:07', '2021-1-10 00:00:05', '2021-1-25 19:00:05', 'Jarunska ulica 2', 'Kalčićeva ulica 2', 'megi', 'ST558BF', 'aktivna', 'cash'),
+    ('2021-1-4 12:00:08', '2021-1-5 00:00:05', '2021-1-9 19:00:05', 'Maksimirska 132', 'Maksimirska 132', 'megi', 'RI812HT', 'zavrsena', 'kartica'),
+    ('2021-1-5 11:00:09', '2021-1-6 00:00:05', '2021-1-10 19:00:05', 'Unska ulica 3', 'Jarunska ulica 2', 'kreso', 'ZD674UT', 'zavrsena', 'cash')`;
 const sql_create_rezervacija_korisnickoIme_index = `CREATE INDEX idx_reservationId ON rezervacija(idRezervacija)`;
 
 // SESSION // SESSION //
@@ -114,7 +121,7 @@ const sql_insert_poslovnica = `INSERT INTO poslovnica
     ('Kalčićeva ulica 2'), ('Jarunska ulica 2'), ('Maksimirska 132'), ('Lučko 5');`;
 
     const sql_insert_recenzija = ';';
-    const sql_insert_rezervacija = ';';
+    //noconst sql_insert_rezervacija = ';';
     const sql_insert_session = ';';
 
 const sql_create_poslovnica_index = `CREATE INDEX idx_idPoslovnica ON poslovnica(idPoslovnica)`;

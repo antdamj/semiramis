@@ -9,7 +9,9 @@ router.get('/', (req, res, next) => {
             user: req.session.user,
             linkActive: 'vlasnik',
             vehicles: "",
-            reservations: ""
+            reservations: "",
+            allReservations: "",
+            allVehicles: ""
         });
     }
     else {
@@ -28,7 +30,9 @@ router.post('/', async (req, res) => {
             user: req.session.user,
             linkActive: 'vlasnik',
             vehicles: "",
-            reservations: ""
+            reservations: "",
+            allReservations: "",
+            allVehicles: ""
         });
 
     } 
@@ -39,7 +43,9 @@ router.post('/', async (req, res) => {
             user: req.session.user,
             linkActive: 'vlasnik',
             vehicles: "",
-            reservations: ""
+            reservations: "",
+            allReservations: "",
+            allVehicles: ""
         });
     }
     if('registracijaEdit' in req.body) {
@@ -49,7 +55,9 @@ router.post('/', async (req, res) => {
             user: req.session.user,
             linkActive: 'vlasnik',
             vehicles: "",
-            reservations: ""
+            reservations: "",
+            allReservations: "",
+            allVehicles: ""
         });
     } 
     if('rezervacijaClose' in req.body) {
@@ -59,7 +67,9 @@ router.post('/', async (req, res) => {
             user: req.session.user,
             linkActive: 'vlasnik',
             vehicles: "",
-            reservations: ""
+            reservations: "",
+            allReservations: "",
+            allVehicles: ""
         });
     } 
     if('getVehicles' in req.body) {
@@ -69,7 +79,9 @@ router.post('/', async (req, res) => {
             user: req.session.user,
             linkActive: 'vlasnik',
             vehicles: tablice,
-            reservations: ""
+            reservations: "",
+            allReservations: "",
+            allVehicles: ""
         });
     }
     if('getActiveRes' in req.body) {
@@ -79,8 +91,34 @@ router.post('/', async (req, res) => {
             user: req.session.user,
             linkActive: 'vlasnik',
             vehicles: "",
-            reservations: tablice
+            reservations: tablice,
+            allReservations: "",
+            allVehicles: ""
         });
     }
+    if('getAllRes' in req.body) {
+            let tablice=await Vlasnik.getAllReservations();
+            res.render('owner', {
+                title: 'vlasnik page',
+                user: req.session.user,
+                linkActive: 'vlasnik',
+                vehicles: "",
+                reservations: "",
+                allReservations: tablice,
+                allVehicles: ""
+            });
+    }
+    if('getAllVehicles' in req.body) {
+        let tablice=await Vlasnik.getAllVehicles();
+        res.render('owner', {
+            title: 'vlasnik page',
+            user: req.session.user,
+            linkActive: 'vlasnik',
+            vehicles: "",
+            reservations: "",
+            allReservations: "",
+            allVehicles: tablice
+        });
+}
 });
 module.exports = router;

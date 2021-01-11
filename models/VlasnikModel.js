@@ -65,11 +65,31 @@ module.exports = class Vlasnik extends User {
             throw e
         }
     }
+    static getAllReservations = async () => {
+        const sql = `select * from rezervacija`
+        try {
+            const result = await db.query(sql, [])
+            return result.rows
+        } catch (e) {
+            console.log(e)
+            throw e
+        }
+    }
     static closeReservation = async (idrezervacija) => {
         const sql = `update rezervacija set status = 'zavrsena'
         where idrezervacija = '` + idrezervacija + `'`
         try {
             const result = await db.query(sql, [])
+        } catch (e) {
+            console.log(e)
+            throw e
+        }
+    }
+    static getAllVehicles = async () => {
+        const sql = `select * from vozilo` 
+        try {
+            const result = await db.query(sql, [])
+            return result.rows
         } catch (e) {
             console.log(e)
             throw e

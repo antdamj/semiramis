@@ -18,6 +18,29 @@
             <div class="container"></div>
             <div class="container">
                 <form action="/owner" method="POST">
+                    <input type="hidden" name="getAllRes" />
+                    <input type="submit" value="Prikaz svih rezervacija" />
+                </form>
+                <div>
+
+                    <% if(allReservations !=undefined){ %>
+                        <hr>
+                        Broj: <%= allReservations.length %>
+                            <hr>
+                            <% for (let r of allReservations) { %>
+                                <div>
+                                    <%= r.idrezervacija %>
+                                        <%= r.korisnickoime %>
+
+                                            <%= r.vrijemezavrsetka %>
+
+                                </div>
+                                <% } %>
+                                    <% } %>
+                </div>
+            </div>
+            <div class="container">
+                <form action="/owner" method="POST">
                     <input type="hidden" name="getActiveRes" />
                     <input type="submit" value="Prikaz aktivnih rezervacija" />
                 </form>
@@ -31,7 +54,7 @@
                                 <div>
                                     <%= r.idrezervacija %>
                                         <%= r.korisnickoime %>
-
+                                        <%= r.vrijemepreuzimanja%>
                                             <%= r.vrijemezavrsetka %>
 
                                 </div>
@@ -51,6 +74,25 @@
                         Broj: <%= vehicles.length %>
                             <hr>
                             <% for (let vehicle of vehicles) { %>
+                                <div>
+                                    <%= vehicle.registracija %>
+                                </div>
+                                <% } %>
+                                    <% } %>
+                </div>
+            </div>
+            <div class="container">
+                <form action="/owner" method="POST">
+                    <input type="hidden" name="getAllVehicles" />
+                    <input type="submit" value="Prikaz svih vozila" />
+                </form>
+                <div>
+
+                    <% if(allVehicles !=undefined){ %>
+                        <hr>
+                        Broj: <%= allVehicles.length %>
+                            <hr>
+                            <% for (let vehicle of allVehicles) { %>
                                 <div>
                                     <%= vehicle.registracija %>
                                 </div>
@@ -92,6 +134,7 @@
                         <br>
                     </fieldset>
                 </form>
+                
             </div>
 
             <div class="centered-container">
