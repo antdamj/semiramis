@@ -11,6 +11,15 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 </head>
 
+<script>
+    function pritisak(a) {
+        console.log(a)
+        var e = document.getElementById(a)
+        if(e.style.display === "none") e.style.display = "block"
+        else e.style.display = "none"
+    }
+</script>
+
 <body class="content">
     <%- include(`partials/header`); %>
         <h1 style="text-align:center">VLASNIK</h1>
@@ -100,100 +109,80 @@
                                     <% } %>
                 </div>
             </div>
-            <div class="centered-container">
-                <div class="separator"></div>
-                <form action="/owner" method="post">
-                    <fieldset class="fieldset">
-                        <legend class="main-color-emphasized">Dodavanje vozila</legend>
+            
+            <div class="centered-container formContainer">
+                <button class="submitButton" onclick="pritisak('dodavanjeVozila')">Dodavanje vozila</button>
+                <form action="/owner", method="post" id="dodavanjeVozila" style="display: none;">
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="registracijaAdd" placeholder="Registracija oznaka" maxlength="8" minlength="7">
+                    </div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="markaAdd" placeholder="Marka vozila" minlength="4">
+                    </div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="modelAdd" placeholder="Model vozila" minlength="4">
+                    </div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="kategorijaAdd" placeholder="Kategorija vozila" minlength="4">
+                    </div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="cijenadanAdd" placeholder="Dnevna cijena" minlength="1" maxlength="4">
+                    </div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="slikaurlAdd" placeholder="Fotografija (URL)" minlength="4">
+                    </div>
 
-                        <label for="registracija">registracija:</label>
-                        <input type="text" name="registracijaAdd" id="registracija" maxlength="20" minlength="1">
-                        <br>
-
-                        <label for="marka">marka:</label>
-                        <input type="text" name="markaAdd" id="marka" maxlength="20" minlength="2">
-                        <br>
-
-                        <label for="model">model:</label>
-                        <input type="text" name="modelAdd" id="model" maxlength="20" minlength="2">
-                        <br>
-
-                        <label for="kategorija">kategorija:</label>
-                        <input type="text" name="kategorijaAdd" id="kategorija" maxlength="20" minlength="2">
-                        <br>
-
-                        <label for="cijenadan">dnevna cijena:</label>
-                        <input type="text" name="cijenadanAdd" id="cijenadan" maxlength="20" minlength="2">
-                        <br>
-
-                        <label for="slikaurl">slika:</label>
-                        <input type="text" name="slikaurlAdd" id="slikaurl" maxlength="20" minlength="2">
-                        <br>
-
-                        <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                        <br>
-                    </fieldset>
+                    <div class="formItem col-12"></div>
+                    <div class="formItem col-12">
+                        <button type="submit" value="Submit" class="submitButton">Dodaj vozilo</button>
+                    </div>
                 </form>
                 
             </div>
 
-            <div class="centered-container">
-                <div class="separator"></div>
-                <form action="/owner" method="post">
-                    <fieldset class="fieldset">
-                        <legend class="main-color-emphasized">Brisanje vozila</legend>
-
-                        <label for="registracija">registracija:</label>
-                        <input type="text" name="registracijaDel" id="registracijad" maxlength="20" minlength="2">
-                        <br>
-                        <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                        <br>
-                    </fieldset>
+            <div class="centered-container formContainer">
+                <button class="submitButton" onclick="pritisak('uklanjanjeVozila')">Uklanjanje vozila</button>
+                <form action="/owner" method="post" id="uklanjanjeVozila" style="display: none;">
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="registracijaDel" placeholder="Registracijska oznaka" minlength="4">
+                    </div>
+                    <div class="formItem col-12">
+                        <button type="submit" value="Submit" class="submitButton">Ukloni vozilo</button>
+                    </div>
                 </form>
             </div>
 
-            <div class="centered-container">
-                <div class="separator"></div>
-                <form action="/owner" method="post">
-                    <fieldset class="fieldset">
-                        <legend class="main-color-emphasized">Uređivanje automobila</legend>
-
-                        <label for="registracija">registracija:</label>
-                        <input type="text" name="registracijaEdit" id="registracijaE" maxlength="20" minlength="2">
-                        <br>
-
-                        <label for="kategorija">kategorija:</label>
-                        <input type="text" name="kategorijaEdit" id="kategorijaE" maxlength="20" minlength="2">
-                        <br>
-
-                        <label for="cijenadan">dnevna cijena:</label>
-                        <input type="text" name="cijenadanEdit" id="cijenadanE" maxlength="20" minlength="2">
-                        <br>
-
-                        <label for="slikaurl">slika:</label>
-                        <input type="text" name="slikaurlEdit" id="slikaurlE" maxlength="20" minlength="2">
-                        <br>
-
-                        <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                        <br>
-                    </fieldset>
+            <div class="centered-container formContainer">
+                <button class="submitButton" onclick="pritisak('uredivanjeVozila')">Uklanjanje vozila</button>
+                <form action="/owner" method="post" id="uredivanjeVozila" style="display: none;">
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="registracijaEdit" placeholder="Nova registracijska oznaka" minlength="4">
+                    </div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="kategorijaEdit" placeholder="Nova kategorija vozila" minlength="4">
+                    </div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="cijenadanEdit" placeholder="Nova dnevna cijena" minlength="4">
+                    </div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="slikaurlEdit" placeholder="Nova fotografija (URL)" minlength="4">
+                    </div>
+                    <div class="formItem col-12">
+                        <button type="submit" value="Submit" class="submitButton">Ukloni vozilo</button>
+                    </div>
                 </form>
             </div>
 
-            <div class="centered-container">
-                <div class="separator"></div>
-                <form action="/owner" method="post">
-                    <fieldset class="fieldset">
-                        <legend class="main-color-emphasized">Zatvaranje rezervacije</legend>
-
-                        <label for="idrezervacija">ID rezervacije:</label>
-                        <input type="text" name="rezervacijaClose" id="rezervacijaC" maxlength="20" minlength="1">
-                        <br>
-                        <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                        <br>
-                    </fieldset>
+            <div class="centered-container formContainer">
+                <button class="submitButton" onclick="pritisak('zatvaranjeRezervacije')">Zatvaranje rezervacije</button>
+                <form action="/owner" method="post" id="zatvaranjeRezervacije" style="display: none;">
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="rezervacijaClose" placeholder="ID rezervacije" minlength="4">
+                    </div>
+                    <div class="formItem col-12">
+                        <button type="submit" value="Submit" class="submitButton">Zatvori rezervaciju</button>
+                    </div>
                 </form>
             </div>
-        </div>
         </div>
 </body>

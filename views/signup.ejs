@@ -11,19 +11,65 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 </head>
 
-<body class="content">
+<script>
+    function greska () {
+        var greska = <%- JSON.stringify(err) %>
+        if(greska != undefined) alert(greska)
+    }
+</script>
+
+<body class="content" onload="greska()">
 
     <%- include(`partials/header`); %>
 
     <main class="main">
-        <section class="section secondary-color-bg">
-            <div class="container">
-                <img class="scaled-image" src="images/cars.jpg" alt="Company jumbo image">
-            </div>
-        </section>
-
         <section class="section primary-color-bg">
             <div class="container">
+                <div class="centered-container formContainer">
+                    <form action="/signup" method="post">
+                        <div class="formItem col-12" style="font-size: 28px !important;">
+                            <!--    naslov za formu    -->
+                            REGISTRACIJA
+                        </div>
+
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="firstName" id="firstName" placeholder="Ime" maxlength="20" minlength="4">
+                        </div>
+
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="lastName" id="lastName" placeholder="Prezime" maxlength="20" minlength="4">
+                        </div>
+
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="email" placeholder="E-pošta" maxlength="30" minlength="4">
+                        </div>
+
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="username" placeholder="Korisničko ime" maxlength="10" minlength="4">
+                        </div>
+
+                        <div class="formItem inputField col-12">
+                            <input type="password" name="password1" placeholder="Lozinka" maxlength="20" minlength="8">
+                        </div>
+
+                        <div class="formItem inputField col-12">
+                            <input type="password" name="password2" placeholder="Ponovljena lozinka" maxlength="20" minlength="8">
+                        </div>
+
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="phoneNumber" placeholder="Lozinka" maxlength="12" minlength="10">
+                        </div>
+
+                        <div class="formItem col-12"></div>
+                        <div class="formItem col-12">
+                            <button type="submit" value="Submit" class="submitButton">Registracija</button>
+                        </div>
+                        <div class="formItem col-12" style="margin-top: 20px; font-size: 15px;">
+                            Već imate račun? <a href="/login">Prijavite se</a>.
+                        </div>
+                    </form>
+                </div>
+                <!--
                 <div class="centered-container">
                     <div class="separator"></div>
                     <form action="/signup" method="post">
@@ -63,6 +109,7 @@
                     </form>
                 </div>
             </div>
+            -->
             <div class="container">
                 <div class="separator"></div>
             </div>

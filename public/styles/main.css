@@ -194,7 +194,7 @@ body {
 }
 
 .navigation {
-    padding: 10px;
+    /*padding: 10px;*/
 }
 
 .centered-container {
@@ -213,6 +213,102 @@ body {
 
 .hidden {
     display: none;
+}
+
+/* MENU TOP MENU */
+
+.topMenuDiv {
+    width: 120px;
+    line-height: 150px;
+    height: 150px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #00bfff;
+    text-decoration: none;
+    outline: none;
+    transition: 0.5s;
+}
+
+.topMenuDiv:hover {
+    background-color: #003d52;
+    color: white;
+}
+
+.topMenuDiv > img {
+    height: 120px;
+    margin: 15px 0;
+    display: block;
+    margin: auto;
+}
+
+/**/
+
+.formContainer {
+    position: relative;
+    background-color: #f7f7f7;
+    max-width: 650px;
+    margin: auto;
+}
+
+.formContainer > * {
+    text-align: center;
+    color: white;
+}
+
+.formItem {
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #1818b4;
+}
+
+.inputField{
+    margin-top: 20px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.inputField > input {
+    outline: none;
+    border: none;
+    border-bottom: 2px #848484 solid;
+    width: 80%;
+    min-height: 40px;
+    padding: 0 25px;
+    transition: 0.5s;
+    box-sizing: border-box;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.inputField > input:focus {
+    border-color: #1818b4;
+    border-width: 3px;
+    background-color: rgb(218, 227, 238);
+}
+
+.submitButton {
+    min-height: 48px;
+    width: 50%;
+    margin: auto;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #1818b4;
+    transition: 0.3s;
+    box-sizing: border-box;
+    border: #1818b4 3px solid;
+}
+
+.submitButton:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.submitButton:focus {
+    outline: none;
+    background-color: #5858f4;
 }
 
 .link {
@@ -236,6 +332,8 @@ body {
     text-transform: uppercase;
     padding: 20px;
 }
+
+/* MENU TOP MENU END */
 
 .summary {
     display: flex;
@@ -265,6 +363,19 @@ body {
 }
 
 .scaled-image-fixed {
+    display: block;
+    width: 200px;
+}
+
+.company-image {
+    display: block;
+    max-width: 50%;
+    max-height: 50%;
+    margin: 0;
+    float: right;
+}
+
+.company-image-fixed {
     display: block;
     width: 200px;
 }

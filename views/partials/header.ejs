@@ -1,39 +1,66 @@
 <header class="header primary-color-bg">
     <nav class="navigation container">
         <div class="menu">
-            <a href="/" class="link menu-item <%if (linkActive === 'home') {%>  link-active  <%}%>">Naslovnica</a>
-            <% if(user !== undefined && user.uloga == 'admin'){ %>
-                <a href=" /admin" class="link menu-item <%if (linkActive === 'admin') {%>  link-active  <%}%>">Admin</a>
-                <a href="/" class="link">
-                    <img class="scaled-image scaled-image-fixed" src="../images/logo.svg" alt="Company logo">
+            <% if (user==undefined || user.uloga=='korisnik' ) { %>
+                <a href = "/" class="topMenuDiv <%if (linkActive === 'home') {%> link-active<%}%>">
+                    <div>Naslovnica</div>
                 </a>
-            <% } else if(user !== undefined && user.uloga == 'vlasnik'){ %>
-                <a href=" /owner" class="link menu-item <%if (linkActive === 'owner') {%>  link-active  <%}%>">Vlasnik</a>
-                <a href="/" class="link">
-                    <img class="scaled-image scaled-image-fixed" src="../images/logo.svg" alt="Company logo">
+                <a href="/search" class="topMenuDiv <%if (linkActive === 'search') {%> link-active<%}%>">
+                    <div>Pretraga</div>
                 </a>
-            <% } else { %>
-                <% if(user == undefined){ %>
-                    <a href="/" class="link">
-                    <img class="scaled-image scaled-image-fixed" src="../images/logo.svg" alt="Company logo">
-                    </a>
-                <% } %>
             <% } %>
 
-            <a href=" /search" class="link menu-item <%if (linkActive === 'search') {%>  link-active  <%}%>">Pretraga</a>
-
-            <% if( user !== undefined ) {%>
-            <a href="/cart" style="text-align: center;"class="link menu-item <%if (linkActive === 'cart') {%>  link-active  <%}%>">Moje rezervacije</a>
-            <a href=" /user" class="link menu-item" style="text-align: center;">Postavke računa</a>
-            <a href="/logout" id="logout-link" class="link menu-item <%if (linkActive === 'logout') {%>  link-active  <%}%>">Odjava</a>
-            <% } else {%>
-            <a href=" /login" class="link menu-item <%if (linkActive === 'login') {%>  link-active  <%}%>">Prijava</a>
+            <% if(user==undefined || user.uloga=='korisnik' ){ %>
+                <a href="/" class="topMenuDiv">
+                    <img src="../images/logo.svg" alt="Company logo">
+                </a>
             <% } %>
 
-            <% if(user !== undefined) { %>
+            <% if (user !=undefined ) { %>
+                <a href=" /user" class ="topMenuDiv <%if (linkActive === 'user') {%> link-active<%}%>">
+                    <div>Račun</div>
+                </a>
+            <% } %>
+
+            <% if (user !=undefined && user.uloga=='korisnik' ) { %>
+                <a href="/cart" class="topMenuDiv <%if (linkActive === 'cart') {%> link-active<%}%>">
+                    <div>Moje rezervacije</div>
+                </a>
+            <% } %>
+
+            <% if (user !=undefined && user.uloga=='vlasnik' ) { %>
+                <a href="/owner" class="topMenuDiv <%if (linkActive === 'vlasnik') {%> link-active<%}%>">
+                    <div>Vlasnik</div>
+                </a>
+            <% } %>
+
+            <% if (user !=undefined && user.uloga=='admin' ) { %>
+                <a href="/admin" class="topMenuDiv <%if (linkActive === 'admin') {%> link-active<%}%>">
+                    <div>Admin</div>
+                </a>
+            <% } %>
+
+            <% if (user==undefined) { %>
+                <a href="/login" class="topMenuDiv <%if (linkActive === 'login') {%> link-active<%}%>">
+                    <div>Login</div>
+                </a>
+                <a href="/signup" class="topMenuDiv <%if (linkActive === 'signup') {%> link-active<%}%>">
+                    <div>Registracija</div>
+                </a>
+            <% } %>
+
+            <% if (user !==undefined) { %>
+                <a href="/logout" class="topMenuDiv <%if (linkActive === 'logout') {%> link-active<%}%>">
+                    <div>Odjava</div>
+                </a>
+            <% } %>
+
+            <% if(user !==undefined && user.uloga=='korisnik' ) { %>
                 <div class="logoContainer">
                     <div class="accountLogo">
-                        <b><a href="/user" class="link menu-item" ><%=user.korisnickoime.charAt(0)%></a></b>
+                        <b><a href="/user" class="menu-item">
+                            <%=user.korisnickoime.charAt(0)%>
+                        </a></b>
                     </div>
                 </div>
             <% } %>
