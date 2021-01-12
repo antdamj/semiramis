@@ -3,14 +3,21 @@ const Administrator = require('../models/AdministratorModel');
 const router = express.Router();
 const db = require('../db')
 
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res) => {
     if (req.session.user !== undefined && req.session.user.uloga == 'admin') {
+
+        let u = await Administrator.getUsers()
+        u = u.rows
+        let l = await Administrator.getLocations()
+        l = l.rows
+
         res.render('admin', {
             title: 'Admin page',
             user: req.session.user,
             linkActive: 'admin',
-            users: "",
-            locations:""
+            users: u,
+            locations: l,
+            poruka: ""
         });
     }
     else {
@@ -19,93 +26,52 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', async (req, res) => {
-    
-    if ('getUsers' in req.body) {
-        console.log("Pretraga korisnika.")
 
-        if (req.body.getUsers.length == 0) tablice = await Administrator.getUsers();
-        else tablice = await Administrator.getByRole(req.body.getUsers);
-       
-        res.render('admin', {
-            title: 'Admin page',
-            user: req.session.user,
-            linkActive: 'admin',
-            users: tablice.rows,
-            locations: ""
-        });
-    }
+    let postMsg
 
     if ('userDelete' in req.body) {
         console.log("Brisanje korisnika.")
-        await Administrator.removeUser(req.body.userDelete);
-        res.render('admin', {
-            title: 'Admin page',
-            user: req.session.user,
-            linkActive: 'admin',
-            users: "",
-            locations: ""
-        });
+        await Administrator.removeUser(req.body.userDelete)
+        postMsg = "Korisnik uspješno izbrisan!"
     }
 
     if ('userEdit' in req.body) {
-       // console.log("Dodavanje vlasnickih prava korisniku.")
+        console.log("Dodavanje vlasnickih prava korisniku.")
         await Administrator.giveOwnerToUser(req.body.userEdit);
-        res.render('admin', {
-            title: 'Admin page',
-            user: req.session.user,
-            linkActive: 'admin',
-            users: "",
-            locations: ""
-        });
-    }
-
-    if ('getLocations' in req.body) {
-        console.log("Pretraga poslovnica.")
-        let tablice = await Administrator.getLocations();
-        res.render('admin', {
-            title: 'Admin page',
-            user: req.session.user,
-            linkActive: 'admin',
-            users: "",
-            locations: tablice.rows
-        });
+        postMsg = "Korisnik uspješno pretvoren u vlasnika!"
     }
 
     if ('locationAdd' in req.body) {
         console.log("Dodavanje poslovnice.")
-        await Administrator.addLocation(req.body.locationAdd);
-        res.render('admin', {
-            title: 'Admin page',
-            user: req.session.user,
-            linkActive: 'admin',
-            users: "",
-            locations: ""
-        });
+        await Administrator.addLocation(req.body.locationAdd, req.body.phoneAdd);
+        postMsg = "Lokacija uspješno dodana!"
     }
 
     if ('locationRemove' in req.body) {
         console.log("Uklanjanje poslovnice.")
         await Administrator.removeLocation(req.body.locationRemove);
-        res.render('admin', {
-            title: 'Admin page',
-            user: req.session.user,
-            linkActive: 'admin',
-            users: "",
-            locations: ""
-        });
+        postMsg = "Lokacija uspješno izbrisana!"
     }
 
     if ('locationEdit' in req.body) {
         console.log("Uredivanje poslovnice.")
-        await Administrator.editLocation(req.body.locationEdit[0], req.body.locationEdit[1]);
-        res.render('admin', {
-            title: 'Admin page',
-            user: req.session.user,
-            linkActive: 'admin',
-            users: "",
-            locations: ""
-        });
+        await Administrator.editLocation(req.body.locationEdit[0], req.body.locationEdit[1], req.body.phoneEdit);
+        postMsg = "Lokacija uspješno uređena!"
     }
+
+    let u = await Administrator.getUsers()
+    u = u.rows
+    let l = await Administrator.getLocations()
+    l = l.rows
+
+    res.render('admin', {
+        title: 'Admin page',
+        user: req.session.user,
+        linkActive: 'admin',
+        users: u,
+        locations: l,
+        poruka: postMsg
+    });
 });
 
 module.exports = router;
