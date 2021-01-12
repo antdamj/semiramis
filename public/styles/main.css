@@ -300,6 +300,79 @@ body {
     border: #1818b4 3px solid;
 }
 
+.containerOA {
+    width: 700px;
+    margin: 0 auto;
+    /*border: black solid 2px;*/
+}
+
+.containerOA > table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.th, .td {
+    border-bottom: 1px solid #ddd;
+}
+
+.th {
+    background-color: darkslateblue;
+    color: white;
+    font-weight: bold;
+    line-height: 28px;
+    text-align: left;
+}
+
+.td {
+    line-height: 32px;
+}
+
+.tdButtonArea {
+    text-align: right;
+}
+
+.tr:hover {
+    background-color: thistle;
+}
+
+.smallsvg {
+    max-width: 24px;
+    width: 24px;
+    padding: 4px 5px;
+}
+
+.smallsvg:hover {
+    cursor: pointer;
+}
+
+.choiceButtonContainer {
+    text-align: center;
+    margin: 3% auto;
+}
+
+.choiceButton {
+    display: inline-block;
+    width: 130px;
+    border: none;
+    border-radius: 4px;
+    min-height: 30px;
+    background-color: white;
+    text-transform: uppercase;
+}
+
+.cbSoft {
+    border: rgb(194, 186, 186) 3px solid;
+}
+
+.cbHard {
+    border: rgb(78, 75, 75) 3px solid;
+}
+
+.choiceButton:hover {
+    cursor: pointer;
+    border: rgb(156, 149, 149) 3px solid;
+}
+
 .submitButton:hover {
     background-color: white;
     color: black;
@@ -348,6 +421,9 @@ body {
 }
 
 .footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -422,6 +498,7 @@ body {
 .infobox-title {
     margin-top: 0.2em;
     margin-bottom: 0.5em;
+    font-size: large;
 }
 
 .infobox-subtitle {
