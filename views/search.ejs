@@ -10,6 +10,10 @@
     <link rel="shortcut icon" type="image/png" href="./images/car-icon.png" />
     <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
     <link rel="stylesheet" type="text/css" href="./styles/main.css">
+    <link rel="stylesheet" type="text/css" href="./styles/bs.css">
+    <link rel="stylesheet" type="text/css" href="./styles/search.css">
+  
+
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script>
 
@@ -113,177 +117,196 @@
         <main class="main">
 
             <% if (isHidden==false) { %>
-                <div class="">
-                    <p class="" style="margin-bottom:14px;">Online pretraga automobila</p>
-                </div>
-
-                <form name="form1" method="post" action="/search">
-
-                    <table class="">
-                        <tbody>
-                            <tr>
-                                <td colspan="2" class="">Lokacija primitka:</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <select name="lokacija_primitka" class="" id="lokacija_primitka">
-                                        <% for(let location of locations){ %>
-                                            <option value="<%= location.idposlovnica %>">
-                                                <%=location.lokacija %>
-                                            </option>
-                                            <% } %>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="date" name="datum_primitka" id="datum_primitka" class=""
-                                        value="<%=date%>">
-                                </td>
-
-                                <td>
-                                    <select name="vrijeme_primitka" class="" id="vrijeme_primitka">
-                                        <option value="00:00">00:00</option>
-                                        <option value="00:30">00:30</option>
-                                        <option value="01:00">01:00</option>
-                                        <option value="01:30">01:30</option>
-                                        <option value="02:00">02:00</option>
-                                        <option value="02:30">02:30</option>
-                                        <option value="03:00">03:00</option>
-                                        <option value="03:30">03:30</option>
-                                        <option value="04:00">04:00</option>
-                                        <option value="04:30">04:30</option>
-                                        <option value="05:00">05:00</option>
-                                        <option value="05:30">05:30</option>
-                                        <option value="06:00">06:00</option>
-                                        <option value="06:30">06:30</option>
-                                        <option value="07:00">07:00</option>
-                                        <option value="07:30">07:30</option>
-                                        <option value="08:00" selected="selected">08:00</option>
-                                        <option value="08:30">08:30</option>
-                                        <option value="09:00">09:00</option>
-                                        <option value="09:30">09:30</option>
-                                        <option value="10:00">10:00</option>
-                                        <option value="10:30">10:30</option>
-                                        <option value="11:00">11:00</option>
-                                        <option value="11:30">11:30</option>
-                                        <option value="12:00">12:00</option>
-                                        <option value="12:30">12:30</option>
-                                        <option value="13:00">13:00</option>
-                                        <option value="13:30">13:30</option>
-                                        <option value="14:00">14:00</option>
-                                        <option value="14:30">14:30</option>
-                                        <option value="15:00">15:00</option>
-                                        <option value="15:30">15:30</option>
-                                        <option value="16:00">16:00</option>
-                                        <option value="16:30">16:30</option>
-                                        <option value="17:00">17:00</option>
-                                        <option value="17:30">17:30</option>
-                                        <option value="18:00">18:00</option>
-                                        <option value="18:30">18:30</option>
-                                        <option value="19:00">19:00</option>
-                                        <option value="19:30">19:30</option>
-                                        <option value="20:00">20:00</option>
-                                        <option value="20:30">20:30</option>
-                                        <option value="21:00">21:00</option>
-                                        <option value="21:30">21:30</option>
-                                        <option value="22:00">22:00</option>
-                                        <option value="22:30">22:30</option>
-                                        <option value="23:00">23:00</option>
-                                        <option value="23:30">23:30</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="">Lokacija povratka: </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <select name="lokacija_povratka" class="" id="lokacija_povratka">
-                                        <% for(let location of locations){ %>
-                                            <option value="<%= location.idposlovnica %>">
-                                                <%=location.lokacija %>
-                                            </option>
-                                            <% } %>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="date" name="datum_povratka" id="datum_povratka" class=" "
-                                        value="<%=date%>"></td>
-                                <td>
-                                    <select name="vrijeme_povratka" class="" id="vrijeme_povratka">
-                                        <option value="00:00">00:00</option>
-                                        <option value="00:30">00:30</option>
-                                        <option value="01:00">01:00</option>
-                                        <option value="01:30">01:30</option>
-                                        <option value="02:00">02:00</option>
-                                        <option value="02:30">02:30</option>
-                                        <option value="03:00">03:00</option>
-                                        <option value="03:30">03:30</option>
-                                        <option value="04:00">04:00</option>
-                                        <option value="04:30">04:30</option>
-                                        <option value="05:00">05:00</option>
-                                        <option value="05:30">05:30</option>
-                                        <option value="06:00">06:00</option>
-                                        <option value="06:30">06:30</option>
-                                        <option value="07:00">07:00</option>
-                                        <option value="07:30">07:30</option>
-                                        <option value="08:00" selected="selected">08:00</option>
-                                        <option value="08:30">08:30</option>
-                                        <option value="09:00">09:00</option>
-                                        <option value="09:30">09:30</option>
-                                        <option value="10:00">10:00</option>
-                                        <option value="10:30">10:30</option>
-                                        <option value="11:00">11:00</option>
-                                        <option value="11:30">11:30</option>
-                                        <option value="12:00">12:00</option>
-                                        <option value="12:30">12:30</option>
-                                        <option value="13:00">13:00</option>
-                                        <option value="13:30">13:30</option>
-                                        <option value="14:00">14:00</option>
-                                        <option value="14:30">14:30</option>
-                                        <option value="15:00">15:00</option>
-                                        <option value="15:30">15:30</option>
-                                        <option value="16:00">16:00</option>
-                                        <option value="16:30">16:30</option>
-                                        <option value="17:00">17:00</option>
-                                        <option value="17:30">17:30</option>
-                                        <option value="18:00">18:00</option>
-                                        <option value="18:30">18:30</option>
-                                        <option value="19:00">19:00</option>
-                                        <option value="19:30">19:30</option>
-                                        <option value="20:00">20:00</option>
-                                        <option value="20:30">20:30</option>
-                                        <option value="21:00">21:00</option>
-                                        <option value="21:30">21:30</option>
-                                        <option value="22:00">22:00</option>
-                                        <option value="22:30">22:30</option>
-                                        <option value="23:00">23:00</option>
-                                        <option value="23:30">23:30</option>
-                                    </select>
-                                </td>
-                                </select></td>
-                            </tr>
-                            <tr>
-
-                            <tr>
-                                <td colspan="4"><button type="submit" class="" id="button">Pronađi automobile</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <% if (err !==undefined ) { %>
-                        <p style="justify-content: center; color: red;">
-                            <%= err %>
-                        </p>
-                        <% } %>
-                </form>
-
-                </div>
-                </div>
-
-
+                <div class="section" id="booking" style="overflow: hidden;">
+                    <div class="section-center">
+                        <div class="row">
+                            <div class="booking-form">
+                                <div class="form-header">
+                                    <h1>Pretraga</h1>
+                                </div>
+                                <form name="form1" method="post" action="/search">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <span class="form-label">Lokacija primitka:</span>
+                                                    <select class="form-control"   name="lokacija_primitka"  id="lokacija_primitka">
+                                                        <% for(let location of locations){ %>
+                                                            <option value="<%= location.idposlovnica %>">
+                                                                <%=location.lokacija %>
+                                                            </option>
+                                                            <% } %>
+                                                    </select>
+                                                    <span class="select-arrow"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        
+                                                            <span  class="form-label">Datum primitka:</span>
+                                                                <input type="date" name="datum_primitka" id="datum_primitka" class="form-control" required
+                                                                    value="<%=date%>"> </input>
+                                                        </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Vrijeme primitka:</span>
+                                                            <select class="form-control" name="vrijeme_primitka"  id="vrijeme_primitka">
+                                                                <option value="00:00">00:00</option>
+                                                                <option value="00:30">00:30</option>
+                                                                <option value="01:00">01:00</option>
+                                                                <option value="01:30">01:30</option>
+                                                                <option value="02:00">02:00</option>
+                                                                <option value="02:30">02:30</option>
+                                                                <option value="03:00">03:00</option>
+                                                                <option value="03:30">03:30</option>
+                                                                <option value="04:00">04:00</option>
+                                                                <option value="04:30">04:30</option>
+                                                                <option value="05:00">05:00</option>
+                                                                <option value="05:30">05:30</option>
+                                                                <option value="06:00">06:00</option>
+                                                                <option value="06:30">06:30</option>
+                                                                <option value="07:00">07:00</option>
+                                                                <option value="07:30">07:30</option>
+                                                                <option value="08:00" selected="selected">08:00</option>
+                                                                <option value="08:30">08:30</option>
+                                                                <option value="09:00">09:00</option>
+                                                                <option value="09:30">09:30</option>
+                                                                <option value="10:00">10:00</option>
+                                                                <option value="10:30">10:30</option>
+                                                                <option value="11:00">11:00</option>
+                                                                <option value="11:30">11:30</option>
+                                                                <option value="12:00">12:00</option>
+                                                                <option value="12:30">12:30</option>
+                                                                <option value="13:00">13:00</option>
+                                                                <option value="13:30">13:30</option>
+                                                                <option value="14:00">14:00</option>
+                                                                <option value="14:30">14:30</option>
+                                                                <option value="15:00">15:00</option>
+                                                                <option value="15:30">15:30</option>
+                                                                <option value="16:00">16:00</option>
+                                                                <option value="16:30">16:30</option>
+                                                                <option value="17:00">17:00</option>
+                                                                <option value="17:30">17:30</option>
+                                                                <option value="18:00">18:00</option>
+                                                                <option value="18:30">18:30</option>
+                                                                <option value="19:00">19:00</option>
+                                                                <option value="19:30">19:30</option>
+                                                                <option value="20:00">20:00</option>
+                                                                <option value="20:30">20:30</option>
+                                                                <option value="21:00">21:00</option>
+                                                                <option value="21:30">21:30</option>
+                                                                <option value="22:00">22:00</option>
+                                                                <option value="22:30">22:30</option>
+                                                                <option value="23:00">23:00</option>
+                                                                <option value="23:30">23:30</option>
+                                                            </select>
+                                                            <span class="select-arrow"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <hr style="background-color:blue">
+                                        
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <span class="form-label">Lokacija povratka:</span>
+                                                        <select class="form-control"   name="lokacija_povratka"  id="lokacija_povratka">
+                                                            <% for(let location of locations){ %>
+                                                                <option value="<%= location.idposlovnica %>">
+                                                                    <%=location.lokacija %>
+                                                                </option>
+                                                                <% } %>
+                                                        </select>
+                                                        <span class="select-arrow"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            
+                                                                <span  class="form-label">Datum povratka:</span>
+                                                                    <input type="date" name="datum_povratka" id="datum_povratka" class="form-control" required
+                                                                        value="<%=date%>"> </input>
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <span class="form-label">Vrijeme Povratka:</span>
+                                                                <select class="form-control" name="vrijeme_povratka"  id="vrijeme_povratka">
+                                                                    <option value="00:00">00:00</option>
+                                                                    <option value="00:30">00:30</option>
+                                                                    <option value="01:00">01:00</option>
+                                                                    <option value="01:30">01:30</option>
+                                                                    <option value="02:00">02:00</option>
+                                                                    <option value="02:30">02:30</option>
+                                                                    <option value="03:00">03:00</option>
+                                                                    <option value="03:30">03:30</option>
+                                                                    <option value="04:00">04:00</option>
+                                                                    <option value="04:30">04:30</option>
+                                                                    <option value="05:00">05:00</option>
+                                                                    <option value="05:30">05:30</option>
+                                                                    <option value="06:00">06:00</option>
+                                                                    <option value="06:30">06:30</option>
+                                                                    <option value="07:00">07:00</option>
+                                                                    <option value="07:30">07:30</option>
+                                                                    <option value="08:00" selected="selected">08:00</option>
+                                                                    <option value="08:30">08:30</option>
+                                                                    <option value="09:00">09:00</option>
+                                                                    <option value="09:30">09:30</option>
+                                                                    <option value="10:00">10:00</option>
+                                                                    <option value="10:30">10:30</option>
+                                                                    <option value="11:00">11:00</option>
+                                                                    <option value="11:30">11:30</option>
+                                                                    <option value="12:00">12:00</option>
+                                                                    <option value="12:30">12:30</option>
+                                                                    <option value="13:00">13:00</option>
+                                                                    <option value="13:30">13:30</option>
+                                                                    <option value="14:00">14:00</option>
+                                                                    <option value="14:30">14:30</option>
+                                                                    <option value="15:00">15:00</option>
+                                                                    <option value="15:30">15:30</option>
+                                                                    <option value="16:00">16:00</option>
+                                                                    <option value="16:30">16:30</option>
+                                                                    <option value="17:00">17:00</option>
+                                                                    <option value="17:30">17:30</option>
+                                                                    <option value="18:00">18:00</option>
+                                                                    <option value="18:30">18:30</option>
+                                                                    <option value="19:00">19:00</option>
+                                                                    <option value="19:30">19:30</option>
+                                                                    <option value="20:00">20:00</option>
+                                                                    <option value="20:30">20:30</option>
+                                                                    <option value="21:00">21:00</option>
+                                                                    <option value="21:30">21:30</option>
+                                                                    <option value="22:00">22:00</option>
+                                                                    <option value="22:30">22:30</option>
+                                                                    <option value="23:00">23:00</option>
+                                                                    <option value="23:30">23:30</option>
+                                                                </select>
+                                                                <span class="select-arrow"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <div class="form-btn">
+                                            <button class="submit-btn">Pretraži</button>
+                                        </div>
+                                    </div>
+                                    <% if (err !==undefined ) { %>
+                                        <p style="justify-content: center; color: red;">
+                                            <%= err %>
+                                        </p>
+                                        <% } %>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 <% }else { %>
 
                     <div>
