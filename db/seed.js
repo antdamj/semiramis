@@ -110,19 +110,26 @@ const sql_create_session_index2 = `CREATE INDEX IDX_session_expire ON session(ex
 
 const sql_create_poslovnica = ` CREATE TABLE poslovnica (
     idPoslovnica    int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    lokacija        text NOT NULL
+    lokacija        text NOT NULL,
+    brojTelefona    text NOT NULL
 );`
 
-
-
 const sql_insert_poslovnica = `INSERT INTO poslovnica 
-    (lokacija) VALUES 
-    ('Zadarska ulica 51'), ('Unska ulica 3'), ('Kaptol ulica 30'), ('Nova cesta 73'), ('Trg Josipa Jurja Strossmayera 3'),
-    ('Kalčićeva ulica 2'), ('Jarunska ulica 2'), ('Maksimirska 132'), ('Lučko 5');`;
+    (lokacija, brojTelefona) VALUES 
+    ('Zadarska ulica 51', '013954617'),
+	('Unska ulica 3', '017691348'),
+	('Kaptol ulica 30', '013671966'),
+	('Nova cesta 73', '013617624'),
+	('Trg Josipa Jurja Strossmayera 3', '012395714'),
+    ('Kalčićeva ulica 2', '014976228'),
+	('Jarunska ulica 2', '019697216'),
+	('Maksimirska 132', '016831973'),
+    ('Lučko 5', '019736618'),
+    ('Hercegovačka ulica 11', '039705249');`;
 
-    const sql_insert_recenzija = ';';
-    //noconst sql_insert_rezervacija = ';';
-    const sql_insert_session = ';';
+const sql_insert_recenzija = ';';
+//noconst sql_insert_rezervacija = ';';
+const sql_insert_session = ';';
 
 const sql_create_poslovnica_index = `CREATE INDEX idx_idPoslovnica ON poslovnica(idPoslovnica)`;
 
