@@ -25,7 +25,7 @@ module.exports = class Administrator extends User {
 
     static getByRole = async (user_role) => {
         const sql = `select * from korisnik where uloga = '` + user_role + `'`
-        console.log("HI "+sql);
+        console.log("HI " + sql);
         try {
             const result = await db.query(sql)
             return result;
@@ -66,8 +66,8 @@ module.exports = class Administrator extends User {
         }
     }
 
-    static addLocation = async (adress) => {
-        const sql = `insert into poslovnica (lokacija) values ('` + adress + `')`
+    static addLocation = async (adress, callerNo) => {
+        const sql = `insert into poslovnica (lokacija, brojTelefona) values ('` + adress + `', '` + callerNo + `');`
         try {
             const result = await db.query(sql, [])
         } catch (e) {
@@ -86,8 +86,8 @@ module.exports = class Administrator extends User {
         }
     }
 
-    static editLocation = async (id, location) => {
-        const sql = `update poslovnica set lokacija = '` + location + `' where idPoslovnica = '` + id + `'`
+    static editLocation = async (id, location, callerNo) => {
+        const sql = `update poslovnica set lokacija = '` + location + `', brojTelefona = '` + callerNo + `' where idPoslovnica = '` + id + `'`
         try {
             const result = await db.query(sql, [])
         } catch (e) {

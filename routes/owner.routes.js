@@ -17,7 +17,8 @@ router.get('/', async (req, res, next) => {
             vehicles: v,
             reservations: r,
             allReservations: ar,
-            allVehicles: av
+            allVehicles: av,
+            poruka: ""
         });
     }
     else {
@@ -29,23 +30,29 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res) => {
 
+    let postMsg
+
+    if ('registracijaAdd' in req.body) {
+        await Vlasnik.addVehicle(req.body.registracijaAdd, req.body.markaAdd, req.body.modelAdd, req.body.kategorijaAdd, req.body.cijenadanAdd, req.body.slikaurlAdd);
+        postMsg = "Vozilo uspješno dodano!"
+    }
+    if ('registracijaDel' in req.body) {
+        await Vlasnik.removeVehicle(req.body.registracijaDel);
+        postMsg = "Vozilo uspješno uklonjeno!"
+    }
+    if ('registracijaEdit' in req.body) {
+        await Vlasnik.editVozilo(req.body.registracijaEdit, req.body.kategorijaEdit, req.body.cijenadanEdit, req.body.slikaurlEdit);
+        postMsg = "Vozilo uspješno uređeno!"
+    }
+    if ('rezervacijaClose' in req.body) {
+        await Vlasnik.closeReservation(req.body.rezervacijaClose);
+        postMsg = "Rezervacija uspješno zatvorena!"
+    }
+
     let v = await Vlasnik.getAvailableVehicles();
     let r = await Vlasnik.getActiveReservations();
     let ar = await Vlasnik.getAllReservations();
     let av = await Vlasnik.getAllVehicles();
-
-    if ('registracijaAdd' in req.body) {
-        await Vlasnik.addVehicle(req.body.registracijaAdd, req.body.markaAdd, req.body.modelAdd, req.body.kategorijaAdd, req.body.cijenadanAdd, req.body.slikaurlAdd);
-    }
-    if ('registracijaDel' in req.body) {
-        await Vlasnik.removeVehicle(req.body.registracijaDel);
-    }
-    if ('registracijaEdit' in req.body) {
-        await Vlasnik.editVozilo(req.body.registracijaEdit, req.body.kategorijaEdit, req.body.cijenadanEdit, req.body.slikaurlEdit);
-    }
-    if ('rezervacijaClose' in req.body) {
-        await Vlasnik.closeReservation(req.body.rezervacijaClose);
-    }
 
     res.render('owner', {
         title: 'vlasnik page',
@@ -54,7 +61,8 @@ router.post('/', async (req, res) => {
         vehicles: v,
         reservations: r,
         allReservations: ar,
-        allVehicles: av
+        allVehicles: av,
+        poruka: postMsg
     });
 });
 module.exports = router;

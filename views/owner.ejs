@@ -104,9 +104,15 @@
             return
         }
     }
+
+    function poruka() {
+        let poruka = <%- JSON.stringify(poruka) %>
+        if(poruka.length > 0) alert(poruka)
+        else return
+    }
 </script>
 
-<body class="content">
+<body class="content" onload="poruka()">
     <%- include(`partials/header`); %>
         <h1 style="text-align:center">VLASNIK</h1>
 
