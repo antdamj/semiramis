@@ -24,7 +24,7 @@ module.exports = class Vlasnik extends User {
         } catch (e) {
             console.log(e)
             throw e
-        	}
+        }
     }
     static removeVehicle = async (registracija) => {
         const sql = `delete from vozilo where registracija = '` + registracija + `'`
@@ -44,7 +44,7 @@ module.exports = class Vlasnik extends User {
             console.log(e)
             throw e
         }
-    }    
+    }
     static getReviews = async () => {
         const sql = `select * from recenzija`
         try {
@@ -86,7 +86,7 @@ module.exports = class Vlasnik extends User {
         }
     }
     static getAllVehicles = async () => {
-        const sql = `select * from vozilo` 
+        const sql = `select * from vozilo`
         try {
             const result = await db.query(sql, [])
             return result.rows
@@ -98,7 +98,7 @@ module.exports = class Vlasnik extends User {
     static getAvailableVehicles = async () => {
         const sql = `select distinct vozilo.* 
         from vozilo left join rezervacija on vozilo.registracija = rezervacija.registracija 
-        where status <> 'aktivna' or status is null` 
+        where status = 'zavrsena' or status is null`
         try {
             const result = await db.query(sql, [])
             return result.rows

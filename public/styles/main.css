@@ -125,6 +125,10 @@ body {
     min-height: 100%;
 }
 
+.header {
+    background-color: #003d52;
+}
+
 .primary-color-bg {
     background-color: #f7f7f7;
 }
@@ -219,19 +223,22 @@ body {
 
 .topMenuDiv {
     width: 120px;
-    line-height: 150px;
-    height: 150px;
+    min-height: 150px;
     text-align: center;
     text-transform: uppercase;
-    color: #00bfff;
+    color: white;
     text-decoration: none;
     outline: none;
     transition: 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.topMenuDiv:hover {
-    background-color: #003d52;
+.topMenuDiv:hover, a.topMenuDiv:hover {
+    background-color: #002633;
     color: white;
+    text-decoration: none;
 }
 
 .topMenuDiv > img {
@@ -259,7 +266,7 @@ body {
     height: 40px;
     line-height: 40px;
     font-size: 16px;
-    color: #1818b4;
+    color: #003d52;
 }
 
 .inputField{
@@ -282,9 +289,9 @@ body {
 }
 
 .inputField > input:focus {
-    border-color: #1818b4;
+    border-color: #003d52;
     border-width: 3px;
-    background-color: rgb(218, 227, 238);
+    background-color: #beced38e;
 }
 
 .submitButton {
@@ -294,10 +301,10 @@ body {
     border: none;
     border-radius: 5px;
     color: white;
-    background-color: #1818b4;
+    background-color: #003d52;
     transition: 0.3s;
     box-sizing: border-box;
-    border: #1818b4 3px solid;
+    border: #003d52 3px solid;
 }
 
 .containerOA {
@@ -317,7 +324,7 @@ body {
 }
 
 .th {
-    background-color: darkslateblue;
+    background-color: #013344;
     color: white;
     font-weight: bold;
     line-height: 32px;
@@ -333,7 +340,7 @@ body {
 }
 
 .tr:hover {
-    background-color: thistle;
+    background-color: #beced38e;
 }
 
 .smallsvg {
@@ -382,7 +389,7 @@ body {
 
 .submitButton:focus {
     outline: none;
-    background-color: #5858f4;
+    background-color: #003d52;
 }
 
 .link {
@@ -430,7 +437,7 @@ body {
     justify-content: space-around;
     padding-top: 30px;
     padding-bottom: 30px;
-    background-color: #6495ED;
+    background-color: #003d52;
 }
 
 .scaled-image {
@@ -561,12 +568,12 @@ body {
 }
 
 .link:hover {
-    color: #6495ED;
+    color: white;
 }
 
 .link-active {
-    text-decoration: underline;
-    color: #6495ED;
+    color: white;
+    background-color: #013344;
 }
 
 .legend {

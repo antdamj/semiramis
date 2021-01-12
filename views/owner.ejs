@@ -24,9 +24,12 @@
             else {
                 document.getElementById("cb2").classList.remove('cbHard')
                 document.getElementById("cb2").classList.add('cbSoft')
+                document.getElementById("cb3").classList.remove('cbHard')
+                document.getElementById("cb3").classList.add('cbSoft')
                 document.getElementById("cb1").classList.remove('cbSoft')
                 document.getElementById("cb1").classList.add('cbHard')
                 document.getElementById("rezervacijeContainer").style.display = "none"
+                document.getElementById("statistikaContainer").style.display = "none"
                 document.getElementById("vozilaContainer").style.display = "block"
             }
         } else if (arg == "cb2") {
@@ -34,10 +37,26 @@
             else {
                 document.getElementById("cb1").classList.remove('cbHard')
                 document.getElementById("cb1").classList.add('cbSoft')
+                document.getElementById("cb3").classList.remove('cbHard')
+                document.getElementById("cb3").classList.add('cbSoft')
                 document.getElementById("cb2").classList.remove('cbSoft')
                 document.getElementById("cb2").classList.add('cbHard')
                 document.getElementById("vozilaContainer").style.display = "none"
+                document.getElementById("statistikaContainer").style.display = "none"
                 document.getElementById("rezervacijeContainer").style.display = "block"
+            }
+        } else if (arg == "cb3") {
+            if(document.getElementById("cb3").classList.contains('cbHard')) return
+            else {
+                document.getElementById("cb1").classList.remove('cbHard')
+                document.getElementById("cb1").classList.add('cbSoft')
+                document.getElementById("cb2").classList.remove('cbHard')
+                document.getElementById("cb2").classList.add('cbSoft')
+                document.getElementById("cb3").classList.remove('cbSoft')
+                document.getElementById("cb3").classList.add('cbHard')
+                document.getElementById("vozilaContainer").style.display = "none"
+                document.getElementById("rezervacijeContainer").style.display = "none"
+                document.getElementById("statistikaContainer").style.display = "block"
             }
         }
     }
@@ -106,6 +125,15 @@
     }
 
     function poruka() {
+
+        let v = <%- JSON.stringify(vehicles) %>
+        let av = <%- JSON.stringify(allVehicles) %>
+
+        console.log("**********************************")
+        console.log(v)
+        console.log(av)
+        console.log("**********************************")
+
         let poruka = <%- JSON.stringify(poruka) %>
         if(poruka.length > 0) alert(poruka)
         else return
@@ -119,6 +147,7 @@
         <div class="choiceButtonContainer">
             <button class="choiceButton cbHard" id="cb1" onclick="cbclick('cb1')">Vozila</button>
             <button class="choiceButton cbSoft" id="cb2" onclick="cbclick('cb2')">Rezervacije</button>
+            <button class="choiceButton cbSoft" id="cb3" onclick="cbclick('cb3')">Statistika</button>
         </div>
 
         <div class="containerOA" id="vozilaContainer">
@@ -277,5 +306,9 @@
                     </form>
                 </div>
             </div>
+        </div>
+
+        <div class="containerOA" id="statistikaContainer" style="display: none;">
+            Tu će doći prikaz statistike / isplatljivosti procesa.
         </div>
 </body>
