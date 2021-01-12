@@ -298,15 +298,19 @@
                                             <button class="submit-btn">Pretraži</button>
                                         </div>
                                     </div>
-                                    <% if (err !==undefined ) { %>
-                                        <p style="justify-content: center; color: red;">
-                                            <%= err %>
-                                        </p>
-                                        <% } %>
+                                    
                                 </form>
                             </div>
                         </div>
+                        <% if (err !==undefined ) { %>
+                            
+                            <div class="alert alert-danger" role="alert"> 
+                                        <%= err %>
+                            </div>
+                                <% } %>
+                            
                     </div>
+                    
                 <% }else { %>
 
                     <div>

@@ -158,3 +158,15 @@
 .booking-form .submit-btn:hover {
     background-color: #1c3191;
 }
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    position:absolute;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    bottom: 50px; 
+    left: 25%;
+  }
