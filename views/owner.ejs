@@ -57,6 +57,53 @@
         document.getElementById("dvdiv").style.display = "none"
         document.getElementById("uredivanjeVozila").style.display = "block"
     }
+
+    function provjera (arg) { // treba popravit
+        let v = <%- JSON.stringify(vehicles) %>
+        let av = <%- JSON.stringify(allVehicles) %>
+        let trenutnoVozilo
+
+        for(let i = 0; i < av.length; i++) {
+            if(arg == av[i].registracija) trenutnoVozilo = av[i]
+        }
+
+        let izlaz = "NE"
+        for(let i = 0; i < v.length; i++) {
+            if(JSON.stringify(trenutnoVozilo) == JSON.stringify(v[i])){
+                izlaz = "DA"
+            }
+        }
+        document.write(izlaz)
+    }
+
+    function formatirajVrijeme(arg) {
+        document.write(arg.substring(4, 15))
+    }
+
+    function imeVozila(arg) {
+        console.log(arg)
+        let av = <%- JSON.stringify(allVehicles) %>
+        console.log(av)
+        let izlaz = ""
+        for(let i = 0; i < av.length; i++) {
+            if(av[i].registracija == arg){
+                izlaz = izlaz.concat(av[i].marka)
+                izlaz = izlaz.concat(" ")
+                izlaz = izlaz.concat(av[i].model)
+            }
+        }
+        document.write(izlaz)
+    }
+
+    function zatvaranjeRezervacije (arg) {
+        if(confirm('Želite li zatvoriti tu rezervaciju?')) {
+            document.getElementById("zr").value = arg
+            document.getElementById("zdBtn").click()
+        } else {
+            alert('Rezervacija nije zatvorena.')
+            return
+        }
+    }
 </script>
 
 <body class="content">
@@ -85,15 +132,13 @@
                             <td class="td" style="width: 20%;"><%= v.registracija %></td>
                             <td class="td" style="width: 35%;"><%= v.marka %> <%= v.model %></td>
                             <td class="td" style="width: 10%;"><%= v.cijenadan %></td>
-                            <% if (v in vehicles) { %>
-                                <td class="td" style="width: 10%;">DA</td>
-                            <% } else { %>
-                                <td class="td" style="width: 10%;">NE</td>
-                            <% } %>
+
+                            <td class="td" style="width: 10%;">
+                                <script>provjera('<%= v.registracija %>')</script>
+                            </td>
+
                             <td class="td tdButtonArea" style="width: 25%;">
-                                <!--<button onclick="ukloniVozilo('<%= v.registracija %>')">ukloni</button>-->
                                 <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="ukloniVozilo('<%= v.registracija %>')">
-                                <!--<button onclick="urediVozilo('<%= v.registracija %>')">uredi</button>-->
                                 <img class="smallsvg" src="../images/pencil.svg" alt="edit" onclick="urediVozilo('<%= v.registracija %>')">
                             </td>
                         </tr>
@@ -101,7 +146,7 @@
                 <% } %>
             </table>
 
-            <div class="formItem">
+            <div class="formItem"> <!-- inače filler, sad tu nek stoji ovaj credit  -->
                 <!--
                 <div>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                 -->
@@ -109,6 +154,7 @@
 
             <div class="container">
                 <div class="centered-container formContainer" id="dvdiv">
+                    <div class="formItem"></div>
                     <button class="submitButton" onclick="pritisak('dodavanjeVozila')">Dodavanje vozila</button>
                     <form action="/owner", method="post" id="dodavanjeVozila" style="display: none;">
                         <div class="formItem"></div>
@@ -136,7 +182,10 @@
                             <button type="submit" value="Submit" class="submitButton">Dodaj vozilo</button>
                         </div>
                     </form>
+                        <div class="formItem"></div>
                 </div>
+
+                <div class="formItem"></div>
 
                 <div class="centered-container formContainer">
                     <!--<button class="submitButton" onclick="pritisak('uklanjanjeVozila')">Uklanjanje vozila</button>-->
@@ -180,17 +229,29 @@
         <div class="containerOA" id="rezervacijeContainer" style="display: none;">
             <table class="rezervacijeTable">
                 <tr>
-                    <th class="th">ID</th>
-                    <th class="th">Korisnik</th>
-                    <th class="th">Vrijeme</th>
+                    <th class="th" style="width: 15%;">Korisnik</th>
+                    <th class="th" style="width: 25%;">Početak</th>
+                    <th class="th" style="width: 25%;">Kraj</th>
+                    <th class="th" style="width: 25%;">Vozilo</th>
+                    <th class="th" style="width: 10%;"></th>
                 </tr>
 
                 <% if (allReservations != undefined) { %>
                     <% for (let r of allReservations) { %>
-                        <tr  class="tr">
-                            <td class="td"><%=r.idrezervacija%></td>
-                            <td class="td"><%=r.korisnickoime%></td>
-                            <td class="td"><%=r.vrijemerezervacije%></td>
+                        <tr class="tr">
+                            <td class="td" style="width: 15%;"><%=r.korisnickoime%></td>
+                            <td class="td" style="width: 25%;">
+                                <script>formatirajVrijeme('<%= r.vrijemepreuzimanja %>')</script>
+                            </td>
+                            <td class="td" style="width: 25%;">
+                                <script>formatirajVrijeme('<%= r.vrijemezavrsetka %>')</script>
+                            </td>
+                            <td class="td" style="width: 25%;">
+                                <script>imeVozila('<%= r.registracija %>')</script>
+                            </td>
+                            <td class="td tdButtonArea">
+                                <img class="smallsvg" src="../images/check.svg" alt="finish" onclick="zatvaranjeRezervacije('<%= r.idrezervacija %>')">
+                            </td>
                         </tr>
                     <% } %>
                 <% } %>
@@ -198,18 +259,17 @@
             </table>
 
             <div class="container">
-                <div class="centered-container formContainer">
-                    <button class="submitButton" onclick="pritisak('zatvaranjeRezervacije')">Zatvaranje rezervacije</button>
+                <div class="centered-container formContainer" >
+                    <!--<button class="submitButton" onclick="pritisak('zatvaranjeRezervacije')">Zatvaranje rezervacije</button>-->
                     <form action="/owner" method="post" id="zatvaranjeRezervacije" style="display: none;">
                         <div class="formItem inputField col-12">
-                            <input type="text" name="rezervacijaClose" placeholder="ID rezervacije" minlength="4">
+                            <input type="text" id="zr" name="rezervacijaClose" placeholder="ID rezervacije" minlength="4">
                         </div>
                         <div class="formItem col-12">
-                            <button type="submit" value="Submit" class="submitButton">Zatvori rezervaciju</button>
+                            <button type="submit" id="zrBtn" value="Submit" class="submitButton">Zatvori rezervaciju</button>
                         </div>
                     </form>
                 </div>
             </div>
-
         </div>
 </body>
