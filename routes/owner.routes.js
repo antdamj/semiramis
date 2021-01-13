@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
         let av = await Vlasnik.getAllVehicles();
         let rat = await db.query(`select * from rezervacija natural join recenzija`)
         rat = rat.rows
-        let st = await db.query(`select to_char(rezervacija.vrijemeZavrsetka, 'YYYY-MM') as mjesec, sum(vozilo.cijenadan) as zarada from rezervacija natural join vozilo group by mjesec order by mjesec`)
+        let st = await db.query(`select to_char(rezervacija.vrijemeZavrsetka, 'YYYY-MM') as mjesec, sum((rezervacija.vrijemezavrsetka::date - rezervacija.vrijemepreuzimanja::date) * vozilo.cijenadan) as zarada from rezervacija natural join vozilo group by mjesec order by mjesec`)
         st = st.rows
 
         res.render('owner', {

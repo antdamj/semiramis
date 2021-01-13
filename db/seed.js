@@ -101,9 +101,7 @@ const sql_create_rezervacija = `CREATE TABLE rezervacija
 	korisnickoIme		text NOT NULL,
 	registracija    	text NOT NULL,
     status				text NOT NULL,
-    tipPlacanja         text NOT NULL,
-	FOREIGN KEY (korisnickoIme) REFERENCES korisnik(korisnickoIme),
-	FOREIGN KEY (registracija) REFERENCES vozilo(registracija)
+    tipPlacanja         text NOT NULL
 )`;
 const sql_insert_rezervacija = `INSERT INTO rezervacija
     (vrijemeRezervacije, vrijemePreuzimanja, vrijemeZavrsetka, lokacijaPreuzimanja, lokacijaOstavljanja, korisnickoIme, registracija, status, tipPlacanja)
@@ -185,7 +183,6 @@ const sql_insert_poslovnica = `INSERT INTO poslovnica
     ('Lučko 5', '019736618'),
     ('Hercegovačka ulica 11', '039705249');`;
 
-const sql_insert_recenzija = ';';
 //noconst sql_insert_rezervacija = ';';
 const sql_insert_session = ';';
 
