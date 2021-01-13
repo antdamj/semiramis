@@ -26,9 +26,12 @@
                 document.getElementById("cb2").classList.add('cbSoft')
                 document.getElementById("cb3").classList.remove('cbHard')
                 document.getElementById("cb3").classList.add('cbSoft')
+                document.getElementById("cb4").classList.remove('cbHard')
+                document.getElementById("cb4").classList.add('cbSoft')
                 document.getElementById("cb1").classList.remove('cbSoft')
                 document.getElementById("cb1").classList.add('cbHard')
                 document.getElementById("rezervacijeContainer").style.display = "none"
+                document.getElementById("recenzijeContainer").style.display = "none"
                 document.getElementById("statistikaContainer").style.display = "none"
                 document.getElementById("vozilaContainer").style.display = "block"
             }
@@ -39,9 +42,12 @@
                 document.getElementById("cb1").classList.add('cbSoft')
                 document.getElementById("cb3").classList.remove('cbHard')
                 document.getElementById("cb3").classList.add('cbSoft')
+                document.getElementById("cb4").classList.remove('cbHard')
+                document.getElementById("cb4").classList.add('cbSoft')
                 document.getElementById("cb2").classList.remove('cbSoft')
                 document.getElementById("cb2").classList.add('cbHard')
                 document.getElementById("vozilaContainer").style.display = "none"
+                document.getElementById("recenzijeContainer").style.display = "none"
                 document.getElementById("statistikaContainer").style.display = "none"
                 document.getElementById("rezervacijeContainer").style.display = "block"
             }
@@ -52,10 +58,29 @@
                 document.getElementById("cb1").classList.add('cbSoft')
                 document.getElementById("cb2").classList.remove('cbHard')
                 document.getElementById("cb2").classList.add('cbSoft')
+                document.getElementById("cb4").classList.remove('cbHard')
+                document.getElementById("cb4").classList.add('cbSoft')
                 document.getElementById("cb3").classList.remove('cbSoft')
                 document.getElementById("cb3").classList.add('cbHard')
                 document.getElementById("vozilaContainer").style.display = "none"
                 document.getElementById("rezervacijeContainer").style.display = "none"
+                document.getElementById("statistikaContainer").style.display = "none"
+                document.getElementById("recenzijeContainer").style.display = "block"
+            }
+        } else if (arg == "cb4") {
+            if(document.getElementById("cb4").classList.contains('cbHard')) return
+            else {
+                document.getElementById("cb1").classList.remove('cbHard')
+                document.getElementById("cb1").classList.add('cbSoft')
+                document.getElementById("cb2").classList.remove('cbHard')
+                document.getElementById("cb2").classList.add('cbSoft')
+                document.getElementById("cb3").classList.remove('cbHard')
+                document.getElementById("cb3").classList.add('cbSoft')
+                document.getElementById("cb4").classList.remove('cbSoft')
+                document.getElementById("cb4").classList.add('cbHard')
+                document.getElementById("vozilaContainer").style.display = "none"
+                document.getElementById("rezervacijeContainer").style.display = "none"
+                document.getElementById("recenzijeContainer").style.display = "none"
                 document.getElementById("statistikaContainer").style.display = "block"
             }
         }
@@ -124,15 +149,35 @@
         }
     }
 
+    function ukloniRecenziju (arg) {
+        if(confirm('Želite li ukloniti tu recenziju?')) {
+            document.getElementById("rd").value = arg
+            document.getElementById("rdBtn").click()
+        } else {
+            alert('Recenzija nije uklonjena.')
+            return
+        }
+    }
+
+    function sirina (arg) {
+        let s = <%- JSON.stringify(stats) %>
+        let max = parseInt(0)
+        for(let i = 0; i < s.length; i++) {
+            if(parseInt(s[i].zarada) > max){
+                max = parseInt(s[i].zarada)
+            }
+        }           
+        
+        let udio = Math.round((arg / max)*100)
+
+        let izlaz = '<div style="float: left; color: white; text-align: center; height: 40px; line-height: 40px; margin: 5px 0; background-color: #003d52; width: ' + udio + '%;">' + arg + ' kn</div>'
+        document.write(izlaz)
+    }
+
     function poruka() {
 
         let v = <%- JSON.stringify(vehicles) %>
         let av = <%- JSON.stringify(allVehicles) %>
-
-        console.log("**********************************")
-        console.log(v)
-        console.log(av)
-        console.log("**********************************")
 
         let poruka = <%- JSON.stringify(poruka) %>
         if(poruka.length > 0) alert(poruka)
@@ -147,7 +192,8 @@
         <div class="choiceButtonContainer">
             <button class="choiceButton cbHard" id="cb1" onclick="cbclick('cb1')">Vozila</button>
             <button class="choiceButton cbSoft" id="cb2" onclick="cbclick('cb2')">Rezervacije</button>
-            <button class="choiceButton cbSoft" id="cb3" onclick="cbclick('cb3')">Statistika</button>
+            <button class="choiceButton cbSoft" id="cb3" onclick="cbclick('cb3')">Ocjene</button>
+            <button class="choiceButton cbSoft" id="cb4" onclick="cbclick('cb4')">Statistika</button>
         </div>
 
         <div class="containerOA" id="vozilaContainer">
@@ -308,7 +354,70 @@
             </div>
         </div>
 
+        <div class="containerOA" id="recenzijeContainer" style="display: none;">
+            
+            <table>
+                <tr>
+                    <th class="th" style="width: 20%;">Korisnik</th>
+                    <th class="th" style="width: 30%;">Vozilo</th>
+                    <th class="th" style="width: 30%;">Datum</th>
+                    <th class="th" style="width: 10%;">Ocjena</th>
+                    <th class="th" style="width: 10%;"></th>
+                </tr>
+    
+                <% if (ratings != undefined) { %>
+                    <% for (let r of ratings) { %>
+                        <tr class="tr">
+                            <td class="td" style="width: 20%;"><%= r.korisnickoime%></td>
+                            <td class="td" style="width: 30%;">
+                                <script>imeVozila('<%= r.registracija %>')</script>
+                            </td>
+                            <td class="td" style="width: 30%;">
+                                <script>formatirajVrijeme('<%= r.vrijemezavrsetka %>')</script>
+                            </td>
+                            <td class="td" style="width: 10%;"><%= r.ocjena%></td>
+    
+                            <td class="td tdButtonArea" style="width: 10%;">
+                                <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="ukloniRecenziju('<%= r.idrezervacija %>')">
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } %>
+            </table>
+
+            <div class="container">
+                <div class="centered-container formContainer" >
+                    <!--<button class="submitButton" onclick="pritisak('zatvaranjeRezervacije')">Zatvaranje rezervacije</button>-->
+                    <form action="/owner" method="post" id="brisanjeRecenzije" style="display: none;">
+                        <div class="formItem inputField col-12">
+                            <input type="text" id="rd" name="recenzijaDelete" placeholder="ID rezervacije" minlength="4">
+                        </div>
+                        <div class="formItem col-12">
+                            <button type="submit" id="rdBtn" value="Submit" class="submitButton">Obriši recenziju</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="containerOA" id="statistikaContainer" style="display: none;">
-            Tu će doći prikaz statistike / isplatljivosti procesa.
+            
+            <table>
+                <% if(stats != undefined) { %>
+                    <% for (let s of stats) { %>
+                        <tr>
+                            <td style="width: 15%;"><%= s.mjesec %></td>
+                            <td style="width: 85%;">
+                                <script>
+                                    sirina('<%= s.zarada %>')
+                                </script>
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } %>
+            </table>
+
+            
+
         </div>
 </body>
