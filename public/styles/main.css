@@ -698,3 +698,72 @@ label {
 .accountLogo>b>a:hover {
     color: white;
 }
+
+
+
+/* Dodano - Magda */
+
+
+.myBlock {
+    background-color: white;
+}
+
+#reservation-msg {
+    font-size: x-large;
+    color: blue;
+    text-align: center;
+}
+
+#myReservationHeader {
+    background-color: lightblue;
+    height: 60px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 12px;
+}
+
+.myReservationTable {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.star {
+    max-width: 55px;
+    width: 55px;
+    background-position-y: top;
+    padding-bottom: 4px;
+    padding-left: -2px;
+}
+
+#smallIcons {
+    align-items: center;
+}
+
+#left-element {
+    padding-left: 60px;
+}
+
+#right-element:hover {
+    display:none;
+    content: url('../images/star-empty.png')
+}
+
+.h1User {
+    font-family: 'Times New Roman', Times, serif;
+    color:#003d52;
+    text-shadow: #003d52;
+}
+
+.hUser {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color:#003d52;
+}
+
+.myData {
+    background-color: #c5eaf75e;
+    padding-top: 1;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 15px;
+}

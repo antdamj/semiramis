@@ -68,7 +68,7 @@ const sql_create_recenzija = `CREATE TABLE recenzija (
 	CHECK (ocjena BETWEEN 1 AND 5) 
 );`
 
-const sql_insert_recenzija = ` insert into recenzija values 
+const sql_insert_recenzija = ` INSERT into recenzija VALUES 
     (1, 1, 'loša usluga'),
     (3, 2, 'dovoljno dobro'),
     (4, 3, 'dobro'),
@@ -96,8 +96,8 @@ const sql_create_rezervacija = `CREATE TABLE rezervacija
 	vrijemeRezervacije 	TIMESTAMP,
 	vrijemePreuzimanja 	TIMESTAMP,
 	vrijemeZavrsetka   	TIMESTAMP,
-	lokacijaPreuzimanja text NOT NULL,
-	lokacijaOstavljanja	text NOT NULL,
+	lokacijaPreuzimanja int NOT NULL,
+	lokacijaOstavljanja	int NOT NULL,
 	korisnickoIme		text NOT NULL,
 	registracija    	text NOT NULL,
     status				text NOT NULL,
@@ -106,47 +106,42 @@ const sql_create_rezervacija = `CREATE TABLE rezervacija
 const sql_insert_rezervacija = `INSERT INTO rezervacija
     (vrijemeRezervacije, vrijemePreuzimanja, vrijemeZavrsetka, lokacijaPreuzimanja, lokacijaOstavljanja, korisnickoIme, registracija, status, tipPlacanja)
     VALUES
-    ('2020-10-1 00:00:05', '2020-10-1 00:00:05', '2020-10-4 00:00:05', 'iNSERT INTO rezervacija
-    (vrijemeRezervacije, vrijemePreuzimanja, vrijemeZavrsetka, lokacijaPreuzimanja, lokacijaOstavljanja, korisnickoIme, registracija, status, tipPlacanja)
-    VALUES
-
-Unska ulica 3', 'Unska ulica 3', 'megi', 'BJ467BB', 'zavrsena', 'cash'),
-    ('2020-10-1 00:00:05', '2020-10-2 00:00:05', '2020-10-6 00:00:05', 'Zadarska ulica 51', 'Unska ulica 3', 'kreso', 'ZG139JH', 'zavrsena', 'card'),
-    ('2020-10-3 00:00:05', '2020-10-3 00:00:05', '2020-10-7 00:00:05', 'Unska ulica 3', 'Unska ulica 3', 'megi', 'DU567OG', 'zavrsena', 'cash'),
-    ('2020-10-5 00:00:05', '2020-10-6 00:00:05', '2020-10-10 00:00:05', 'Unska ulica 3', 'Zadarska ulica 51', 'petra', 'ST558BF', 'zavrsena', 'card'),
-    ('2020-10-7 00:00:05', '2020-10-8 00:00:05', '2020-10-11 00:00:05', 'Unska ulica 3', 'Unska ulica 3', 'marta', 'BJ467BB', 'zavrsena', 'cash'),
-    ('2020-10-11 00:00:05', '2020-10-11 00:00:05', '2020-10-15 00:00:05', 'Unska ulica 3', 'Unska ulica 3', 'matej', 'ZG139JH', 'zavrsena', 'card'),
-    ('2020-10-13 00:00:05', '2020-10-14 00:00:05', '2020-10-17 00:00:05', 'Zadarska ulica 51', 'Unska ulica 3', 'marko', 'DU567OG', 'zavrsena', 'cash'),
-    ('2020-10-17 00:00:05', '2020-10-17 00:00:05', '2020-10-21 00:00:05', 'Kaptol ulica 30', 'Kaptol ulica 30', 'megi', 'ZG139JH', 'zavrsena', 'card'),
-    ('2020-10-19 00:00:05', '2020-10-20 00:00:05', '2020-10-25 00:00:05', 'Hercegovačka ulica 11', 'Hercegovačka ulica 11', 'kreso', 'ST558BF', 'zavrsena', 'cash'),
-    ('2020-10-23 00:00:05', '2020-10-24 00:00:05', '2020-10-27 00:00:05', 'Unska ulica 3', 'Unska ulica 3', 'petra', 'BJ467BB', 'zavrsena', 'card'),
-    ('2020-11-1 00:00:05', '2020-11-2 00:00:05', '2020-11-5 00:00:05', 'Zadarska ulica 51', 'Zadarska ulica 51', 'marko', 'RI812HT', 'zavrsena', 'cash'),
-    ('2020-11-3 00:00:05', '2020-11-4 00:00:05', '2020-11-7 00:00:05', 'Unska ulica 3', 'Unska ulica 3', 'megi', 'ZD674UT', 'zavrsena', 'card'),
-    ('2020-11-5 00:00:05', '2020-11-6 00:00:05', '2020-11-9 00:00:05', 'Unska ulica 3', 'Unska ulica 3', 'marta', 'BJ467BB', 'zavrsena', 'cash'),
-    ('2020-11-7 00:00:05', '2020-11-8 00:00:05', '2020-11-14 00:00:05', 'Unska ulica 3', 'Unska ulica 3', 'megi', 'ZG139JH', 'zavrsena', 'card'),
-    ('2020-11-11 00:00:05', '2020-11-12 00:00:05', '2020-11-17 00:00:05', 'Zadarska ulica 51', 'Zadarska ulica 51', 'matej', 'ZG139JH', 'zavrsena', 'cash'),
-    ('2020-11-13 00:00:05', '2020-11-14 00:00:05', '2020-11-19 00:00:05', 'Kaptol ulica 30', 'Unska ulica 3', 'kreso', 'BJ467BB', 'zavrsena', 'card'),
-    ('2020-11-17 00:00:05', '2020-11-20 00:00:05', '2020-11-27 00:00:05', 'Unska ulica 3', 'Kaptol ulica 30', 'petra', 'RI812HT', 'zavrsena', 'cash'),
-    ('2020-11-19 00:00:05', '2020-11-20 00:00:05', '2020-11-27 00:00:05', 'Zadarska ulica 51', 'Zadarska ulica 51', 'marta', 'ZG139JH', 'zavrsena', 'card'),
-    ('2020-11-23 00:00:05', '2020-11-24 00:00:05', '2020-11-27 00:00:05', 'Hercegovačka ulica 11', 'Hercegovačka ulica 11', 'marko', 'ST558BF', 'zavrsena', 'cash'),
-    ('2020-11-29 00:00:05', '2020-11-30 00:00:05', '2020-12-7 00:00:05', 'Unska ulica 3', 'Unska ulica 3', 'matej', 'BJ467BB', 'zavrsena', 'card'),
-    ('2020-12-1 00:00:05', '2020-12-2 00:00:05', '2020-12-7 00:00:05', 'Unska ulica 3', 'Unska ulica 3', 'petra', 'ZG139JH', 'zavrsena', 'cash'),
-    ('2020-12-2 00:00:05', '2020-12-2 00:00:05', '2020-12-7 00:00:05', 'Zadarska ulica 51', 'Zadarska ulica 51', 'kreso', 'ZG139JH', 'zavrsena', 'card'),
-    ('2020-12-3 00:00:05', '2020-12-5 00:00:05', '2020-12-9 00:00:05', 'Hercegovačka ulica 11', 'Hercegovačka ulica 11', 'marta', 'BJ467BB', 'zavrsena', 'cash'),
-    ('2020-12-5 00:00:05', '2020-12-6 00:00:05', '2020-12-11 00:00:05', 'Unska ulica 3', 'Unska ulica 3', 'megi', 'ZG139JH', 'zavrsena', 'card'),
-    ('2020-12-7 00:00:05', '2020-12-8 00:00:05', '2020-12-14 00:00:05', 'Zadarska ulica 51', 'Zadarska ulica 51', 'matej', 'DU567OG', 'zavrsena', 'cash'),
-    ('2020-12-11 00:00:05', '2020-12-11 00:00:05', '2020-12-16 00:00:05', 'Kaptol ulica 30', 'Unska ulica 3', 'kreso', 'ZG139JH', 'zavrsena', 'card'),
-    ('2020-12-13 00:00:05', '2020-12-13 00:00:05', '2020-12-17 00:00:05', 'Hercegovačka ulica 11', 'Unska ulica 3', 'petra', 'BJ467BB', 'zavrsena', 'cash'),
-    ('2020-12-17 00:00:05', '2020-12-20 00:00:05', '2020-12-24 00:00:05', 'Zadarska ulica 51', 'Zadarska ulica 51', 'marta', 'ZD674UT', 'zavrsena', 'card'),
-    ('2020-12-19 00:00:05', '2020-12-21 00:00:05', '2020-12-28 00:00:05', 'Unska ulica 3', 'Kaptol ulica 30', 'marko', 'BJ467BB', 'zavrsena', 'cash'),
-    ('2020-12-23 00:00:05', '2020-12-23 00:00:05', '2020-12-28 00:00:05', 'Unska ulica 3', 'Kaptol ulica 30', 'matej', 'RI812HT', 'zavrsena', 'card'),
-    ('2020-12-29 00:00:05', '2020-12-30 00:00:05', '2021-1-5 00:00:05', 'Zadarska ulica 51', 'Zadarska ulica 51', 'petra', 'BJ467BB', 'zavrsena', 'cash'),
-    ('2020-12-31 00:00:05', '2020-12-31 00:00:05', '2021-1-7 00:00:05', 'Kaptol ulica 30', 'Kaptol ulica 30', 'kreso', 'ST558BF', 'zavrsena', 'card'),
-    ('2021-1-1 00:00:05', '2021-1-2 00:00:05', '2021-1-6 19:00:05', 'Unska ulica 3', 'Unska ulica 3', 'megi', 'ZG139JH', 'neaktivna', 'cash'),
-    ('2021-1-2 14:00:06', '2021-1-11 00:00:05', '2021-1-21 19:00:05', 'Kalčićeva ulica 2', 'Unska ulica 3', 'kreso', 'BJ467BB', 'aktivna', 'kartica'),
-    ('2021-1-3 13:00:07', '2021-1-10 00:00:05', '2021-1-25 19:00:05', 'Jarunska ulica 2', 'Kalčićeva ulica 2', 'megi', 'ST558BF', 'aktivna', 'cash'),
-    ('2021-1-4 12:00:08', '2021-1-5 00:00:05', '2021-1-9 19:00:05', 'Maksimirska 132', 'Maksimirska 132', 'megi', 'RI812HT', 'zavrsena', 'kartica'),
-    ('2021-1-5 11:00:09', '2021-1-6 00:00:05', '2021-1-10 19:00:05', 'Unska ulica 3', 'Jarunska ulica 2', 'kreso', 'ZD674UT', 'zavrsena', 'cash')
+    ('2020-10-1 00:00:05', '2020-10-2 00:00:05', '2020-10-6 00:00:05', '1', '2', 'kreso', 'ZG139JH', 'zavrsena', 'card'),
+    ('2020-10-3 00:00:05', '2020-10-3 00:00:05', '2020-10-7 00:00:05', '2', '2', 'megi', 'DU567OG', 'zavrsena', 'cash'),
+    ('2020-10-5 00:00:05', '2020-10-6 00:00:05', '2020-10-10 00:00:05', '3', '3', 'petra', 'ST558BF', 'zavrsena', 'card'),
+    ('2020-10-7 00:00:05', '2020-10-8 00:00:05', '2020-10-11 00:00:05', '4', '5', 'marta', 'BJ467BB', 'zavrsena', 'cash'),
+    ('2020-10-11 00:00:05', '2020-10-11 00:00:05', '2020-10-15 00:00:05', '6', '6', 'matej', 'ZG139JH', 'zavrsena', 'card'),
+    ('2020-10-13 00:00:05', '2020-10-14 00:00:05', '2020-10-17 00:00:05', '7', '7', 'marko', 'DU567OG', 'zavrsena', 'cash'),
+    ('2020-10-17 00:00:05', '2020-10-17 00:00:05', '2020-10-21 00:00:05', '1', '2', 'megi', 'ZG139JH', 'zavrsena', 'card'),
+    ('2020-10-19 00:00:05', '2020-10-20 00:00:05', '2020-10-25 00:00:05', '3', '4', 'kreso', 'ST558BF', 'zavrsena', 'cash'),
+    ('2020-10-23 00:00:05', '2020-10-24 00:00:05', '2020-10-27 00:00:05', '4', '5', 'petra', 'BJ467BB', 'zavrsena', 'card'),
+    ('2020-11-1 00:00:05', '2020-11-2 00:00:05', '2020-11-5 00:00:05', '6', '7', 'marko', 'RI812HT', 'zavrsena', 'cash'),
+    ('2020-11-3 00:00:05', '2020-11-4 00:00:05', '2020-11-7 00:00:05', '2', '6', 'megi', 'ZD674UT', 'zavrsena', 'card'),
+    ('2020-11-5 00:00:05', '2020-11-6 00:00:05', '2020-11-9 00:00:05', '7', '1', 'marta', 'BJ467BB', 'zavrsena', 'cash'),
+    ('2020-11-7 00:00:05', '2020-11-8 00:00:05', '2020-11-14 00:00:05', '5', '5', 'megi', 'ZG139JH', 'zavrsena', 'card'),
+    ('2020-11-11 00:00:05', '2020-11-12 00:00:05', '2020-11-17 00:00:05', '6', '2', 'matej', 'ZG139JH', 'zavrsena', 'cash'),
+    ('2020-11-13 00:00:05', '2020-11-14 00:00:05', '2020-11-19 00:00:05', '4', '2', 'kreso', 'BJ467BB', 'zavrsena', 'card'),
+    ('2020-11-17 00:00:05', '2020-11-20 00:00:05', '2020-11-27 00:00:05', '3', '4', 'petra', 'RI812HT', 'zavrsena', 'cash'),
+    ('2020-11-19 00:00:05', '2020-11-20 00:00:05', '2020-11-27 00:00:05', '3', '1', 'marta', 'ZG139JH', 'zavrsena', 'card'),
+    ('2020-11-23 00:00:05', '2020-11-24 00:00:05', '2020-11-27 00:00:05', '2', '5', 'marko', 'ST558BF', 'zavrsena', 'cash'),
+    ('2020-11-29 00:00:05', '2020-11-30 00:00:05', '2020-12-7 00:00:05', '3', '2', 'matej', 'BJ467BB', 'zavrsena', 'card'),
+    ('2020-12-1 00:00:05', '2020-12-2 00:00:05', '2020-12-7 00:00:05', '2', '1', 'petra', 'ZG139JH', 'zavrsena', 'cash'),
+    ('2020-12-2 00:00:05', '2020-12-2 00:00:05', '2020-12-7 00:00:05', '1', '3', 'kreso', 'ZG139JH', 'zavrsena', 'card'),
+    ('2020-12-3 00:00:05', '2020-12-5 00:00:05', '2020-12-9 00:00:05', '3', '5', 'marta', 'BJ467BB', 'zavrsena', 'cash'),
+    ('2020-12-5 00:00:05', '2020-12-6 00:00:05', '2020-12-11 00:00:05', '1', '1', 'megi', 'ZG139JH', 'zavrsena', 'card'),
+    ('2020-12-7 00:00:05', '2020-12-8 00:00:05', '2020-12-14 00:00:05', '2', '2', 'matej', 'DU567OG', 'zavrsena', 'cash'),
+    ('2020-12-11 00:00:05', '2020-12-11 00:00:05', '2020-12-16 00:00:05', '3', '3', 'kreso', 'ZG139JH', 'zavrsena', 'card'),
+    ('2020-12-13 00:00:05', '2020-12-13 00:00:05', '2020-12-17 00:00:05', '3', '5', 'petra', 'BJ467BB', 'zavrsena', 'cash'),
+    ('2020-12-17 00:00:05', '2020-12-20 00:00:05', '2020-12-24 00:00:05', '6', '4', 'marta', 'ZD674UT', 'zavrsena', 'card'),
+    ('2020-12-19 00:00:05', '2020-12-21 00:00:05', '2020-12-28 00:00:05', '1', '8', 'marko', 'BJ467BB', 'zavrsena', 'cash'),
+    ('2020-12-23 00:00:05', '2020-12-23 00:00:05', '2020-12-28 00:00:05', '1', '4', 'matej', 'RI812HT', 'zavrsena', 'card'),
+    ('2020-12-29 00:00:05', '2020-12-30 00:00:05', '2021-1-5 00:00:05', '4', '5', 'petra', 'BJ467BB', 'zavrsena', 'cash'),
+    ('2020-12-31 00:00:05', '2020-12-31 00:00:05', '2021-1-7 00:00:05', '2', '7', 'kreso', 'ST558BF', 'zavrsena', 'card'),
+    ('2021-1-1 00:00:05', '2021-1-2 00:00:05', '2021-1-6 19:00:05', '8', '8', 'megi', 'ZG139JH', 'neaktivna', 'cash'),
+    ('2021-1-2 14:00:06', '2021-1-11 00:00:05', '2021-1-21 19:00:05', '9', '1', 'kreso', 'BJ467BB', 'aktivna', 'kartica'),
+    ('2021-1-3 13:00:07', '2021-1-10 00:00:05', '2021-1-25 19:00:05', '4', '4', 'megi', 'ST558BF', 'aktivna', 'cash'),
+    ('2021-1-4 12:00:08', '2021-1-5 00:00:05', '2021-1-9 19:00:05', '2', '5', 'megi', 'RI812HT', 'zavrsena', 'kartica'),
+    ('2021-1-5 11:00:09', '2021-1-6 00:00:05', '2021-1-10 19:00:05', '5', '6', 'kreso', 'ZD674UT', 'zavrsena', 'cash')
     `;
 const sql_create_rezervacija_korisnickoIme_index = `CREATE INDEX idx_reservationId ON rezervacija(idRezervacija)`;
 

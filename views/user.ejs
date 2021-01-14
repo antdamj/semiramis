@@ -39,25 +39,32 @@
     <%- include(`partials/header`); %>
 
     <main class="main">
-        <section class="section primary-color-bg">
-            <div class="container">
-                <h1 class="decorated-title font-secondary main-color">Korisnički profil</h1>
-                <h3 class="infobox-title main-color-emphasized">
-                    Korisničko ime: <%= user.korisnickoime %>
+        <section>
+            <br>
+            <div class="container" >
+                <span class ="myDataPic">
+                <div class="myData">
+                <h1 class="h1User">Korisnički profil</h1>
+                <h3 class="hUser">
+                    KORISNIČKO IME: <%= user.korisnickoime %>
                 </h3>
-                <h3 class="infobox-title main-color-emphasized">
-                    Ime: <%= user.ime %>
+                <h3 class="hUser">
+                    IME: <%= user.ime %>
                 </h3>
-                <h3 class="infobox-title main-color-emphasized">
-                    Prezime: <%= user.prezime %>
+                <h3 class="hUser">
+                    PREZIME: <%= user.prezime %>
                 </h3>
-                <h3 class="infobox-title main-color-emphasized">
-                    E-mail: <%= user.email %>
+                <h3 class="hUser">
+                    E-MAIL: <%= user.email %>
                 </h3>
+                </div>
+                <div>
+                    <img class="smallsvg" url="../images/user-img.png">
+                </div>
 
                 <button onclick="editDataForm()" class="btn">Uredi korisničke podatke</button>
                 <section class="section container">
-                    <form action="/user" method="post" id="form" style = "display: none;">
+                    <form class="form-control" action="/user" method="post" id="form" style = "display: none;">
                         <fieldset>
                             <legend>Forma za promjenu korisničkih podataka</legend>
     
@@ -77,6 +84,7 @@
                             <% } %>
                         </fieldset>
                     </form>
+                    <br><br>
 
                     <button name="delete" class="btn" value="true" onclick="del()">Obriši korisnički račun</button>
 
@@ -86,9 +94,7 @@
                     </form> -->
                 </section>
             </div>
-            <div class="container">
-                <div class="separator"></div>
-            </div>
+            <br><br>
 
             <section class="section container">
                 <form action="/user" method="post">
@@ -111,16 +117,12 @@
                         <% } %>
                     </fieldset>
                 </form>
+                <br><br>
             </section>
-
-            <div class="container">
-                <div class="separator"></div>
-            </div>
         </section>
     </main>
 
-    <%- include(`partials/footer`); %>
-
 </body>
+<%- include(`partials/footer`); %>
 
 </html>
