@@ -274,8 +274,8 @@ MVC model sastoji se od sljedećih dijelova:\par
 			\eject
 		\section{Dijagram komponenti}
 		
-			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije. TODO text}
-			 \centering
+			\begin{flushleft}
+			 \text Dijagram komponenti prikazan na slici ispod opisuje međuodnos komponenti našega sustava. U projektu smo koristili MVC model. "Frontend" informacije korisnik dobiva preko sučelja za prijenos HTML, CSS i JS datoteka. Router je komponenta koja na upit url-om odlučuje koja se datoteka poslužuje. JS datoteke svoj naziv dobivaju po funkciji koju obavljaju ili po vrsti aktora koji im pristupaju. Preko sučelja za dohvat JSON-a se poslužuju podaci o "backendu" stranice. Baza sa stranicom komunicira izmjenom Data Transfer Objecta.View komponenta koju je korisnik dobio od stranice preko sučelja za HTML, CSS i JS osvježava prikaz ovisno o korisnikovim akcijama i komunikacijom sa web stranicom.
+			 \end{flushleft}
+		    \centering
 			 \includegraphics[width=16cm]{slike/dijagram komponenti.png}
