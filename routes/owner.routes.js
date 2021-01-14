@@ -8,11 +8,12 @@ router.get('/', async (req, res, next) => {
 
         let v = await Vlasnik.getAvailableVehicles();
         let r = await Vlasnik.getActiveReservations();
-        let ar = await Vlasnik.getAllReservations();
         let av = await Vlasnik.getAllVehicles();
-        let rat = await db.query(`select * from rezervacija natural join recenzija`)
+        let ar = await db.query(`select * from rezervacija order by vrijemepreuzimanja desc`)
+        ar = ar.rows
+        let rat = await db.query(`select * from rezervacija natural join recenzija order by vrijemepreuzimanja desc`)
         rat = rat.rows
-        let st = await db.query(`select to_char(rezervacija.vrijemeZavrsetka, 'YYYY-MM') as mjesec, sum((rezervacija.vrijemezavrsetka::date - rezervacija.vrijemepreuzimanja::date) * vozilo.cijenadan) as zarada from rezervacija natural join vozilo group by mjesec order by mjesec`)
+        let st = await db.query(`select to_char(vrijemeZavrsetka, 'YYYY-MM') as mjesec, sum((vrijemezavrsetka::date - vrijemepreuzimanja::date) * cijenadan) as zarada from rezervacija natural join vozilo group by mjesec order by mjesec`)
         st = st.rows
 
         res.render('owner', {
@@ -29,7 +30,7 @@ router.get('/', async (req, res, next) => {
         });
     }
     else {
-        res.status(403).send('<h1>Nemate dovoljna prava za ovu stranicu</h1> <h2>403 Forbidden!</h2>')
+        res.status(403).render ('error', {greska: 1});
     }
 }
 
@@ -62,11 +63,12 @@ router.post('/', async (req, res) => {
 
     let v = await Vlasnik.getAvailableVehicles();
     let r = await Vlasnik.getActiveReservations();
-    let ar = await Vlasnik.getAllReservations();
     let av = await Vlasnik.getAllVehicles();
-    let rat = await db.query(`select * from rezervacija natural join recenzija`)
+    let ar = db.query(`select * from rezervacija order by vrijemezavrsetka desc`)
+    ar = ar.rows
+    let rat = await db.query(`select * from rezervacija natural join recenzija order by vrijemepreuzimanja desc`)
     rat = rat.rows
-    let st = await db.query(`select to_char(rezervacija.vrijemeZavrsetka, 'YYYY-MM') as mjesec, sum(vozilo.cijenadan) from rezervacija natural join vozilo group by mjesec order by mjesec`)
+    let st = await db.query(`select to_char(vrijemeZavrsetka, 'YYYY-MM') as mjesec, sum((vrijemezavrsetka::date - vrijemepreuzimanja::date) * cijenadan) as zarada from rezervacija natural join vozilo group by mjesec order by mjesec`)
     st = st.rows
 
     res.render('owner', {

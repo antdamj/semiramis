@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
         });
     }
     else {
-        res.status(403).send('<h1>Nemate dovoljna prava za ovu stranicu</h1> <h2>403 Forbidden!</h2>')
+        res.status(403).render ('error', {greska: 1});
     }
 });
 

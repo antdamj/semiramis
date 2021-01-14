@@ -62,7 +62,13 @@ app.use('/search',searchRoute);
 app.use('/cart',cartRoute);
 
 //pokretanje poslužitelja na portu 3000
+/*
 app.get('*', function (req, res) {
     res.status(404).send('<h1>404 Error occured</h1><h2>Posjetili ste stranicu koja ne postoji</h2><h2>Pritisnite <a href="/" class="link menu-item">tu</a> da se vratite </h2>');
+});*/
+
+app.get('*', function (req, res) {
+    res.status(404).render ('error', {greska: 0});
 });
+    
 app.listen(3000);

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="./public/images/car-icon.png" />
+    <link rel="stylesheet" type="text/css" href="../../vendor/normalize.css">
+    <link rel="stylesheet" type="text/css" href= "../../styles/main.css">
+</head>
+
+<body class="content">
+    <main class="main">
+        <section class="section primary-color-bg" style="min-height: 100vh; display: flex;">
+            <div class="container" style="text-align: center;">
+
+                <% if (greska == 0) { %> <!-- 404 -->
+                    <div>
+                        <span style="display: block; font-size: 120px; font-weight: bold;">404</span>
+                        <span style="display: block; font-size: 20px;">Posjetili ste stranicu koja ne postoji.</span>
+                        <br>
+                        <a href="/" style="text-decoration: none;">Vrati se na naslovnicu</a>
+                <% } else { %> <!-- 403 -->
+                        <span style="display: block; font-size: 120px; font-weight: bold;">403</span>
+                        <span style="display: block; font-size: 20px;">Nemate pravo pristupa ovoj stranici!</span>
+                        <br>
+                        <a href="/" style="text-decoration: none;">Vrati se na naslovnicu</a>
+                <% } %>
+
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
