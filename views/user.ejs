@@ -26,9 +26,8 @@
         function del() {
             if (confirm('Jeste li sigurni da želite obrisati svoj korisnički račun?') == true) {
                 //obrisi racun
-                //document.getElementById("del-link").click();
+                document.getElementById("del-link").click();
                 //odjava
-                document.getElementById("logout-link").click();
             } else {
                 //odustani
             }
@@ -42,6 +41,7 @@
         <section>
             <br>
             <div class="container" >
+                <br>
                 <div class="myData">
                     <div class="up">
                         <h1 class="h1User">Korisnički profil
@@ -54,10 +54,12 @@
                                 <span class="tooltiptext">Obriši korisnički račun</span>
                             </div>
                         </h1>
+                        <% if(user !== undefined) { %> 
                         <h3 class="hUser">KORISNIČKO IME: <%= user.korisnickoime %></h3>
                         <h3 class="hUser">IME: <%= user.ime %></h3>
                         <h3 class="hUser">PREZIME: <%= user.prezime %></h3>
                         <h3 class="hUser">E-MAIL: <%= user.email %></h3>
+                        <% } %>
                     </div>
                     <div class="down">
                         <img style="max-height: 250px;" src="../images/user-img.png">
@@ -68,6 +70,7 @@
                 <section class="section container">
                     <br><br>
                     <form class="centered-container formContainer" action="/user" method="post" id="form" style = "display: none;">
+                        <div class="formItem inputField col-12"></div>
                         <fieldset id="field">
                             <legend style="color: #003d52">Uredi korisničke podatke</legend>
     
@@ -82,17 +85,16 @@
                             </div>
                             <br>
                             <input value="Promijeni" class="promijeniButton" type="submit"> <input type="reset" class="promijeniButton" value="Poništi">
-                            <br>
-                            <% if (err !== undefined ) { %>
-                            <p style="justify-content: center; color: red;"><%= err %></p>
-                            <% } %>
+                            <br><br>
                         </fieldset>
                     </form>
-                    
-                    <!--<form action="/user" method="POST">
-                        <input type="hidden" name="delete">
-                        <input type="submit" value="delete">
-                    </form> -->
+                    <!--Sakriveni botun-->
+                    <form action="/user" method="POST">
+                        <div class="formItem inputField col-12">
+                            <input type="hidden" id="deleteIn" name="delete">
+                        </div>
+                        <button type="submit" id="del-link" value="Submit" style="display: none;"></button>
+                    </form>
                 </section>
             </div>
             <br><br>
@@ -100,7 +102,8 @@
             <section class="section container">
                 <div class="centered-container formContainer" style="width: 110%;">
                     <form action="/user" method="post" id="forma">
-                        <fieldset>
+                        <div class="formItem inputField col-12"></div>
+                        <fieldset id="field">
                             <legend style="color: #003d52">Promijeni lozinku</legend>
 
                             <div class="formItem inputField col-12" >
@@ -120,6 +123,10 @@
                             <% if (err !== undefined ) { %>
                             <p style="justify-content: center; color: red;"><%= err %></p>
                             <% } %>
+                            <% if (msg !== undefined ) { %>
+                                <p style="justify-content: center; color: green;"><%= msg %></p>
+                            <% } %>
+                            
                         </fieldset>
                     </form>
                 </div>

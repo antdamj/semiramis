@@ -3,14 +3,14 @@ const router = express.Router();
 const User = require('../models/UserModel');
 const crypto = require('crypto');
 const { fetchByUsername } = require('../models/UserModel');
-
+const db = require('../db')
 
 
 //prikaz podataka o korisniku (podaci o korisniku, adrese, narudžbe)
 router.get('/', function (req, res, next) {
     (async () => {
         if (req.session.user === undefined) {
-            res.redirect('/')
+            res.redirect('/user')
             return
         }
 
@@ -18,13 +18,13 @@ router.get('/', function (req, res, next) {
             title: 'Korisnički profil',
             user: req.session.user,
             linkActive: 'user',
-            err: undefined
+            err: undefined,
+            msg: undefined
         });
     })()
 });
 
 router.post('/', async (req, res, next) => {
-    console.log(req.body)
     //promjena korisničkih podataka
     if ('name' in req.body || 'lastname' in req.body || 'email' in req.body) {
         console.log("Promjena korisničkih podataka")
@@ -46,7 +46,8 @@ router.post('/', async (req, res, next) => {
             linkActive: 'user',
             users: "",
             locations: "",
-            err: undefined
+            err: undefined,
+            msg: undefined
         })
         return
     }
@@ -55,14 +56,17 @@ router.post('/', async (req, res, next) => {
     if ('delete' in req.body) {
         console.log("Brisanje korisničkog računa")
         await User.deleteUser(req.session.user.korisnickoime)
-        res.render('user', {
-            title: 'User page',
-            user: req.session.user,
+        
+        req.session.user = undefined;
+        req.session.destroy((err) => {
+        if (err) console.log(err) })
+        res.render('home', {
+            title: 'Korisnički profil',
             linkActive: 'user',
-            users: "",
-            locations: "",
-            err: undefined
-        })
+            user: undefined,
+            err: undefined,
+            msg: undefined
+        });
         return
     }
 
@@ -73,7 +77,8 @@ router.post('/', async (req, res, next) => {
             title: 'Korisnički profil',
             linkActive: 'user',
             user: req.session.user,
-            err: "Lozinke se ne podudaraju."
+            err: "Lozinke se ne podudaraju.",
+            msg: undefined
         })
         return
     }
@@ -83,7 +88,9 @@ router.post('/', async (req, res, next) => {
             title: 'Korisnički profil',
             linkActive: 'user',
             user: req.session.user,
-            err: "Nova lozinka jednaka je trenutnoj lozinci."
+            err: "Nova lozinka jednaka je trenutnoj lozinci.",
+            msg: undefined
+
         })
         return
     }
@@ -94,14 +101,21 @@ router.post('/', async (req, res, next) => {
             title: 'Korisnički profil',
             linkActive: 'user',
             user: req.session.user,
-            err: "Neispravna trenutna lozinka."
+            err: "Neispravna trenutna lozinka.",
+            msg: undefined
         })
         return
     }
     const new_hashed_password = crypto.createHash("sha1").update(req.body.password1).digest("hex");
     User.changePassword(req.session.user.korisnickoime, new_hashed_password);
     req.session.user.lozinka = new_hashed_password;
-    res.redirect('/');
+    res.render('user', {
+        title: 'Korisnički profil',
+        linkActive: 'user',
+        user: req.session.user,
+        err: undefined,
+        msg: "Uspješno promijenjena lozinka"
+    })
 });
 
 module.exports = router;

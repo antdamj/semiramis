@@ -83,7 +83,7 @@ module.exports = class User {
 
     // brisanje korisnickog racuna
     static async deleteUser(username) {
-        const sql = `DELETE * FROM korisnik WHERE korisnickoime = '` + username + `'`;
+        const sql = `DELETE FROM korisnik WHERE korisnickoime = '` + username + `'`;
             try {
                 await db.query(sql, []);
             } catch (err) {
