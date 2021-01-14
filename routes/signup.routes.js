@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/UserModel')
+const crypto = require('crypto');
 
 //vrati signup stranicu
 router.get('/', function (req, res, next) {
@@ -41,8 +42,10 @@ router.post('/', function (req, res, next) {
             return
         }
 
+        const hashed_password = crypto.createHash("sha1").update(req.body.password1).digest("hex");
+
         //registriraj novog korisnika
-        user = new User(req.body.username, req.body.firstName, req.body.lastName, req.body.email, req.body.password1, req.body.phoneNumber, 'korisnik');
+        user = new User(req.body.username, req.body.firstName, req.body.lastName, req.body.email, hashed_password, req.body.phoneNumber, 'korisnik');
         await user.persist()
 
         req.session.user = user;

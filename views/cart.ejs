@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AUTOS!</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="./images/car-icon.png" />
+    <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./styles/main.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+
+    <%- include(`partials/header`); %>
+
+    <!-- Trenutne rezervacije -->
+
+    <div id="aktivneBlock">
+        <h1 style="text-align:center" id="myReservationHeader">Trenutne rezervacije</h1>
+        <hr>
+        <% if(aktivnePostoji == true) { %>
+        <div class="myBlock">
+            <table class="myReservationTable">
+                <tr>
+                    <th class="th" style="width: 10%;">Slika</th>
+                    <th class="th" style="width: 10%;">Rezervirano vozilo</th>
+                    <th class="th" style="width: 5%;">Registracija</th>
+                    <th class="th" style="width: 10%;">Adresa preuzimanja</th>
+                    <th class="th" style="width: 10%;">Adresa ostavljanja</th>
+                    <th class="th" style="width: 10%;">Vrijeme preuzimanja</th>
+                    <th class="th" style="width: 10%;">Vrijeme ostavljanja</th>
+                    <th class="th" style="width: 5%;">Tip plaćanja</th>
+                    <th class="th" style="width: 5%;">Cijena</th>
+                    <th class="th" style="width: 10%;">Status</th>
+                    <th class="th" style="width: 20%;"></th>
+                </tr>
+            <% for (let rez of aktivne) { %>
+                <div>
+                    <tr class="tr">
+                        <td class="td" style="width: 10%;">
+                            <img class="photo-box-image" src= "<%= rez.slikaURL %>">
+                        </td>
+                        <td class="td" style="width: 10%;"><%= rez.marka %> <%= rez.model %> </td>
+                        <td class="td" style="width: 5%;"><%= rez.registracija %></td>
+                        <td class="td" style="width: 10%;"><%= rez.lokacijapreuzimanja %></td>
+                        <td class="td" style="width: 10%;"><%= rez.lokacijaostavljanja %></td>
+                        <td class="td" style="width: 10%;">
+                            <%= rez.vrijemepreuzimanja %>
+
+                        </td>
+                        <td class="td" style="width: 10%;"><%= rez.vrijemezavrsetka %></td>
+                        <td class="td" style="width: 5%;">
+                            <% if(rez.tipplacanja == 'cash' || rez.tipplacanja == 'gotovina') { %>Gotovina
+                            <% } else { %> Kartica <% }%>
+                        </td>
+                        <td class="td" style="width: 5%;">Cijena</td>
+                        <td class="td" style="width: 10%;">
+                            <% if(rez.status == 'aktivna') { %> Aktivna rezervacija
+                                <% } else { %> Neaktivna rezervacija <% }%>
+                        </td>
+                        <td class="td" id="smallIcons" style="width: 15%;">
+                            <img class="smallsvg" id="left-element" src="../images/delete.svg" alt="remove">
+                            <img class="smallsvg" id="middle-element"src="../images/pencil.svg" alt="edit">
+                            <img class="star" id="right-element" src="../images/star-empty.png" alt="review">
+                        </td>
+                    </tr>
+                </div>
+                <% } %>
+            </table>
+        </div>
+        <% } else { %>
+            <div id="reservation-msg">
+                <h1> Nemate trenutnih rezervacija.</h1>
+            </div>
+        <% } %>
+    </div>
+    
+    <br><br><br>
+
+    <!-- Završene rezervacije -->
+    <div id="zavrseneBlock">
+        <h1 id="myReservationHeader">Završene rezervacije</h1>
+        <hr>
+        <% if(zavrsenePostoji == true) { %>
+        <div class="myBlock">
+            <table class="myReservationTable">
+                <tr>
+                    <th class="th" style="width: 10%;">Slika</th>
+                    <th class="th" style="width: 10%;">Rezervirano vozilo</th>
+                    <th class="th" style="width: 10%;">Registracija</th>
+                    <th class="th" style="width: 10%;">Adresa preuzimanja</th>
+                    <th class="th" style="width: 10%;">Adresa ostavljanja</th>
+                    <th class="th" style="width: 10%;">Vrijeme preuzimanja</th>
+                    <th class="th" style="width: 10%;">Vrijeme ostavljanja</th>
+                    <th class="th" style="width: 10%;">Tip plaćanja</th>
+                    <th class="th" style="width: 10%;">Cijena</th>
+                    <th class="th" style="width: 10%;">Status</th>
+                    <th class="th" style="width: 10%;"></th>
+                </tr>
+            <% for (let rez of zavrsene) { %>
+            <div>
+                <tr class="tr">
+                    <td class="td" style="width: 10%;">
+                        <img class="photo-box-image" src= "<%= rez.slikaURL %>">
+                    </td>
+                    <td class="td" style="width: 10%;"><%= rez.marka %> <%= rez.model %> </td>
+                    <td class="td" style="width: 10%;"><%= rez.registracija %></td>
+                    <td class="td" style="width: 10%;"><%= rez.lokacijapreuzimanja %></td>
+                    <td class="td" style="width: 10%;"><%= rez.lokacijaostavljanja %></td>
+                    <td class="td" style="width: 10%;"><%= rez.vrijemepreuzimanja %></td>
+                    <td class="td" style="width: 10%;"><%= rez.vrijemezavrsetka %></td>
+                    <td class="td" style="width: 10%;">
+                        <% if(rez.tipplacanja == 'cash' || rez.tipplacanja == 'gotovina') { %>Gotovina
+                        <% } else { %> Kartica <% }%>
+                    </td>
+                    <td class="td" style="width: 10%;">Cijena</td>
+                    <td class="td" style="width: 10%;">
+                        <% if(rez.status == 'aktivna') { %> Aktivna rezervacija
+                            <% } else { %> Neaktivna rezervacija <% }%>
+                    </td>
+                    <td class="td tdButtonArea" style="width: 15%;">
+                        <img class="smallsvg" src="../images/delete.svg" alt="remove">
+                        <img class="smallsvg" src="../images/pencil.svg" alt="edit">
+                    </td>
+                </tr>
+            </div>
+            <% } %>
+            </table>
+        </div>
+        <% } else { %>
+            <div id="reservation-msg">
+                <br> Nemate završenih rezervacija. <br><br>
+            </div>
+        <% } %>
+    </div>
+    
+</body>
+
+<%- include(`partials/footer`); %>

@@ -125,6 +125,10 @@ body {
     min-height: 100%;
 }
 
+.header {
+    background-color: #003d52;
+}
+
 .primary-color-bg {
     background-color: #f7f7f7;
 }
@@ -194,7 +198,7 @@ body {
 }
 
 .navigation {
-    padding: 10px;
+    /*padding: 10px;*/
 }
 
 .centered-container {
@@ -213,6 +217,179 @@ body {
 
 .hidden {
     display: none;
+}
+
+/* MENU TOP MENU */
+
+.topMenuDiv {
+    width: 120px;
+    min-height: 150px;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    outline: none;
+    transition: 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topMenuDiv:hover, a.topMenuDiv:hover {
+    background-color: #002633;
+    color: white;
+    text-decoration: none;
+}
+
+.topMenuDiv > img {
+    height: 120px;
+    margin: 15px 0;
+    display: block;
+    margin: auto;
+}
+
+/**/
+
+.formContainer {
+    position: relative;
+    background-color: #f7f7f7;
+    max-width: 650px;
+    margin: auto;
+}
+
+.formContainer > * {
+    text-align: center;
+    color: white;
+}
+
+.formItem {
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #003d52;
+}
+
+.inputField{
+    margin-top: 20px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.inputField > input {
+    outline: none;
+    border: none;
+    border-bottom: 2px #848484 solid;
+    width: 80%;
+    min-height: 40px;
+    padding: 0 25px;
+    transition: 0.5s;
+    box-sizing: border-box;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.inputField > input:focus {
+    border-color: #003d52;
+    border-width: 3px;
+    background-color: #beced38e;
+}
+
+.submitButton {
+    min-height: 48px;
+    width: 50%;
+    margin: auto;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #003d52;
+    transition: 0.3s;
+    box-sizing: border-box;
+    border: #003d52 3px solid;
+}
+
+.containerOA {
+    width: 700px;
+    margin: 0 auto;
+    /*border: black solid 2px;*/
+}
+
+.containerOA > table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.th, .td {
+    border-bottom: 1px solid #ddd;
+    padding-left: 10px;
+}
+
+.th {
+    background-color: #013344;
+    color: white;
+    font-weight: bold;
+    line-height: 32px;
+    text-align: left;
+}
+
+.td {
+    line-height: 32px;
+}
+
+.tdButtonArea {
+    text-align: right;
+}
+
+.tr:hover {
+    background-color: #beced38e;
+}
+
+.smallsvg {
+    max-width: 24px;
+    width: 24px;
+    padding: 10px;
+}
+
+.smallsvg:hover {
+    cursor: pointer;
+}
+
+.choiceButtonContainer {
+    text-align: center;
+    margin: 3% auto;
+}
+
+.choiceButton {
+    display: inline-block;
+    width: 130px;
+    border: none;
+    border-radius: 4px;
+    min-height: 30px;
+    background-color: white;
+    text-transform: uppercase;
+}
+
+.cbSoft {
+    border: rgb(194, 186, 186) 3px solid;
+}
+
+.cbHard {
+    border: rgb(78, 75, 75) 3px solid;
+}
+
+.choiceButton:hover {
+    cursor: pointer;
+    border: rgb(156, 149, 149) 3px solid;
+}
+
+.submitButton:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.submitButton:focus {
+    outline: none;
+    background-color: #003d52;
 }
 
 .link {
@@ -237,6 +414,8 @@ body {
     padding: 20px;
 }
 
+/* MENU TOP MENU END */
+
 .summary {
     display: flex;
     flex-direction: column;
@@ -250,12 +429,15 @@ body {
 }
 
 .footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding-top: 30px;
     padding-bottom: 30px;
-    background-color: #6495ED;
+    background-color: #003d52;
 }
 
 .scaled-image {
@@ -265,6 +447,19 @@ body {
 }
 
 .scaled-image-fixed {
+    display: block;
+    width: 200px;
+}
+
+.company-image {
+    display: block;
+    max-width: 50%;
+    max-height: 50%;
+    margin: 0;
+    float: right;
+}
+
+.company-image-fixed {
     display: block;
     width: 200px;
 }
@@ -311,6 +506,7 @@ body {
 .infobox-title {
     margin-top: 0.2em;
     margin-bottom: 0.5em;
+    font-size: large;
 }
 
 .infobox-subtitle {
@@ -372,12 +568,12 @@ body {
 }
 
 .link:hover {
-    color: #6495ED;
+    color: white;
 }
 
 .link-active {
-    text-decoration: underline;
-    color: #6495ED;
+    color: white;
+    background-color: #013344;
 }
 
 .legend {
@@ -501,4 +697,161 @@ label {
 .accountLogo>b>a,
 .accountLogo>b>a:hover {
     color: white;
+}
+
+
+
+/* Dodano - Magda */
+
+
+.myBlock {
+    background-color: white;
+}
+
+#reservation-msg {
+    font-size: x-large;
+    color: blue;
+    text-align: center;
+}
+
+#myReservationHeader {
+    background-color: lightblue;
+    height: 60px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 12px;
+}
+
+.myReservationTable {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.star {
+    max-width: 55px;
+    width: 55px;
+    background-position-y: top;
+    padding-bottom: 4px;
+    padding-left: -2px;
+}
+
+#smallIcons {
+    align-items: center;
+}
+
+#left-element {
+    padding-left: 60px;
+}
+
+#right-element:hover {
+    display:none;
+    content: url('../images/star-empty.png')
+}
+
+.h1User {
+    color:#003d52;
+    text-shadow: #003d52;
+}
+
+.hUser {
+    color:#003d52;
+}
+
+.myData {
+    background-color: #c5eaf75e;
+    padding-top: 1;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+.up {
+    padding-left: 5%;
+    padding-top: 2%;
+    width: 60%;
+}
+
+.down {
+    width: 40%;
+    padding-top: 6%;
+    padding-left: 5%;
+    padding-bottom: 5%;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #003d52;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 105%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 15px;
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 0.9;
+  }
+
+#forma {
+    background-color: #c5eaf75e;
+    border-radius: 15px;
+}
+
+#form {
+    background-color: #c5eaf75e;
+    border-radius: 15px;
+}
+
+.promijeniButton {
+    min-height: 48px;
+    width: 20%;
+    margin: auto;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #003d52;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.promijeniButton:hover {
+    background-color: rgb(0, 61, 82, 0.85);
+    color: white;
+    cursor: pointer;
+}
+
+.promijeniButton:focus {
+    outline: none;
+    background-color: #003d52;
+}
+
+#field {
+    border: 0;
 }

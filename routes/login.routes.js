@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/UserModel')
+const crypto = require('crypto');
+
 
 router.get('/', (req, res, next) => {
     res.render('login', {
@@ -25,18 +27,18 @@ router.post('/', async (req, res, next) => {
     }
 
     let user = await User.fetchByUsername(req.body.korisnickoIme);
-    console.log("Login > ");
-    console.log(user);
+
 
     //check credentials
+    const hashed_password = crypto.createHash("sha1").update(req.body.lozinka).digest("hex");
 
-    if (user.isPersisted() && user.uloga == 'admin' && user.checkPassword(req.body.lozinka)) {
+    if (user.isPersisted() && user.uloga == 'admin' && user.checkPassword(hashed_password)) {
         req.session.user = user;
         res.redirect("/admin");
-    } else if (user.isPersisted() && user.uloga == 'vlasnik' && user.checkPassword(req.body.lozinka)) {
+    } else if (user.isPersisted() && user.uloga == 'vlasnik' && user.checkPassword(hashed_password)) {
         req.session.user = user;
         res.redirect("/owner");
-    } else if (user.isPersisted() && user.checkPassword(req.body.lozinka)) {
+    } else if (user.isPersisted() && user.checkPassword(hashed_password)) {
         req.session.user = user;
         res.redirect("/")
     } else {

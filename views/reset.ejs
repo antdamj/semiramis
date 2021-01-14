@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="./public/images/car-icon.png" />
+    <link rel="stylesheet" type="text/css" href="../../vendor/normalize.css">
+    <link rel="stylesheet" type="text/css" href= "../../styles/main.css">
+</head>
+
+<script>
+    function greska () {
+        var greska = <%- JSON.stringify(err) %>
+        if(greska != undefined) alert(greska)
+    }
+</script>
+
+<body class="content" onload="greska()">
+    <main class="main"">
+        <section class="section primary-color-bg" style="min-height: 100vh; display: flex;">
+            <div class="container">
+                <div class="centered-container formContainer" style="margin: auto;">
+                    <form action="/reset" method="post">
+                        <div class="formItem"></div>
+                        <div class="formItem col-12" style="font-size: 28px !important;">
+                            PROMJENA LOZINKE
+                        </div>
+                        <div class="formItem inputField col-12">
+                            <input type="password" name="password1" placeholder="Nova lozinka" minlength="8">
+                        </div>
+                        <div class="formItem inputField col-12">
+                            <input type="password" name="password2" placeholder="Ponovljena lozinka" minlength="8">
+                        </div>
+                        <div class="formItem"></div>
+                        <div class="formItem col-12">
+                            <button type="submit" value="Submit" class="submitButton">Promijeni lozinku</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
