@@ -33,7 +33,7 @@
 			
 			\begin{figure}[hp]
                     \centering
-                    \includegraphics[width=15cm]{dokumentacija/slike/KorisnikModel.png}
+                    \includegraphics[width=15cm]{slike/KorisnikModel.png}
                     \caption{Testiranje KorisnikModela}
                     \label{fig:useCase-2}
                 \end{figure}
@@ -41,7 +41,7 @@
 			
 			\begin{figure}[hp]
                     \centering
-                    \includegraphics[width=15cm]{dokumentacija/slike/AdministratorModel.png}
+                    \includegraphics[width=15cm]{slike/AdministratorModel.png}
                     \caption{Testiranje AdministratorModela}
                     \label{fig:useCase-2}
                 \end{figure}
@@ -50,7 +50,7 @@
 			
 			\begin{figure}[hp]
                     \centering
-                    \includegraphics[width=15cm]{dokumentacija/slike/VlasnikModel.png}
+                    \includegraphics[width=15cm]{slike/VlasnikModel.png}
                     \caption{Testiranje VlasnikModela}
                     \label{fig:useCase-2}
                 \end{figure}
@@ -58,7 +58,7 @@
 			
 			\begin{figure}[hp]
                     \centering
-                    \includegraphics[width=15cm]{dokumentacija/slike/rjesenjeeeee.png}
+                    \includegraphics[width=15cm]{slike/rjesenjeeeee.png}
                     \caption{Rezultati testova}
                     \label{fig:useCase-2}
                 \end{figure}
@@ -67,15 +67,126 @@
 			
 			
 			\subsection{Ispitivanje sustava}
+			    
+			    \noindent{Ispitivanje sustava proveli smo koristeći Selenium WebDriver (\textit{https://selenium.dev/documentation/en/selenium-installation/}) unutar JUnit testova. Kodovi za ispitivanje ispravne i neisprave prijave dani su na slikama 5.6 i 5.7, a rezultati testa vidljivi su na slici 5.8.}
 			
-			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
-			 
-			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
-			 \begin{itemize}
-			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
-			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
-			 \end{itemize}
-		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
+			\begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm]{slike/koddobraprijava.png}
+                    \caption{Kod ispravne prijave}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
+            
+            \begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm]{slike/kodlosaprijava.png}
+                    \caption{Kod neispravne prijave}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
+			
+			\begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm, height=10cm]{slike/logintests.png}
+                    \caption{Rezultati testova}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
+			
+			    \noindent{Kodovi za ispitivanje ispravne i neisprave pretrage vozila dani su na slikama 5.9 i 5.10, a rezultati testa vidljivi su na slici 5.11. Kod dobre pretrage nakon unosa datuma, klikom na gumb prikazuju nam se auti koji se mogu rezervirati. U slučaju unosa neispravnog datuma, stranica nas o tom obavještava pomoću alert box-a.}
+			
+			\begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm]{slike/koddobrapretraga.png}
+                    \caption{Kod ispravne pretrage}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
+			
+			\begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm]{slike/kodlosapretraga.png}
+                    \caption{Kod neispravne pretrage}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
+			
+			\begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm, height=10cm]{slike/searchtests.png}
+                    \caption{Rezultati testova}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
+			
+			\noindent{Kodovi za ispitivanje uspješne i neuspješne lozinke dani su na slikama 5.12 i 5.13, a rezultati testova dani su na slikama 5.14 i 5.15. U slučaju uspješne promjene lozinke, korisnik se preusmjerava na početnu stranicu, dok u slučaju neuspješne promjene korisnik dobije poruku o neuspjehu.}
+			
+			\begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm]{slike/koddobrapromjenalozinke.png}
+                    \caption{Uspješna promjena lozinke}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
+			
+			\begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm]{slike/kodlosapromjenalozinke.png}
+                    \caption{Neuspješna promjena lozinke}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
+			
+			\begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm, height=5cm]{slike/passwordgood.png}
+                    \caption{Rezultat testa uspješne promjene lozinke}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
+			
+			\begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm, height=5cm]{slike/passwordbad.png}
+                    \caption{Rezultat testa neuspješne promjene lozinke}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
+			
+			\noindent{Kodovi za ispitivanje rezervacije vozila dani su na slikama 5.16 i 5.17, a rezultati testova dani su na slikama 5.18 i 5.19. Prijavljeni korisnik može rezervirati auto, dok neprijavljeni korisnik ne može zato što mu gumb za rezervaciju nije vidljiv.}
+			
+			\begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm]{slike/koddobrarezervacija.png}
+                    \caption{Uspješna rezervacija}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
+			
+			\begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm]{slike/kodlosarezervacija.png}
+                    \caption{Neuspješna rezervacija}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
+			
+			\begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm, height=5cm]{slike/reservationgood.png}
+                    \caption{Rezultat testa uspješne rezervacije}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
+			
+			\begin{figure}[hp]
+                    \centering
+                    \includegraphics[width=15cm, height=5cm]{slike/reservationbad.png}
+                    \caption{Rezultat testa neuspješne rezervacije}
+                    \label{fig:useCase-2}
+                \end{figure}
+			\eject
 			
 			\eject 
 		
