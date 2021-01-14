@@ -11,24 +11,419 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 </head>
 
-<body class="content">
+<script>
+    function pritisak(arg) {
+        var e = document.getElementById(arg)
+        if(e.style.display === "none") e.style.display = "block"
+        else e.style.display = "none"
+    }
+
+    function cbclick(arg) {
+        if(arg == "cb1") {
+            if(document.getElementById("cb1").classList.contains('cbHard')) return
+            else {
+                document.getElementById("cb2").classList.remove('cbHard')
+                document.getElementById("cb2").classList.add('cbSoft')
+                document.getElementById("cb3").classList.remove('cbHard')
+                document.getElementById("cb3").classList.add('cbSoft')
+                document.getElementById("cb4").classList.remove('cbHard')
+                document.getElementById("cb4").classList.add('cbSoft')
+                document.getElementById("cb1").classList.remove('cbSoft')
+                document.getElementById("cb1").classList.add('cbHard')
+                document.getElementById("rezervacijeContainer").style.display = "none"
+                document.getElementById("recenzijeContainer").style.display = "none"
+                document.getElementById("statistikaContainer").style.display = "none"
+                document.getElementById("vozilaContainer").style.display = "block"
+            }
+        } else if (arg == "cb2") {
+            if(document.getElementById("cb2").classList.contains('cbHard')) return
+            else {
+                document.getElementById("cb1").classList.remove('cbHard')
+                document.getElementById("cb1").classList.add('cbSoft')
+                document.getElementById("cb3").classList.remove('cbHard')
+                document.getElementById("cb3").classList.add('cbSoft')
+                document.getElementById("cb4").classList.remove('cbHard')
+                document.getElementById("cb4").classList.add('cbSoft')
+                document.getElementById("cb2").classList.remove('cbSoft')
+                document.getElementById("cb2").classList.add('cbHard')
+                document.getElementById("vozilaContainer").style.display = "none"
+                document.getElementById("recenzijeContainer").style.display = "none"
+                document.getElementById("statistikaContainer").style.display = "none"
+                document.getElementById("rezervacijeContainer").style.display = "block"
+            }
+        } else if (arg == "cb3") {
+            if(document.getElementById("cb3").classList.contains('cbHard')) return
+            else {
+                document.getElementById("cb1").classList.remove('cbHard')
+                document.getElementById("cb1").classList.add('cbSoft')
+                document.getElementById("cb2").classList.remove('cbHard')
+                document.getElementById("cb2").classList.add('cbSoft')
+                document.getElementById("cb4").classList.remove('cbHard')
+                document.getElementById("cb4").classList.add('cbSoft')
+                document.getElementById("cb3").classList.remove('cbSoft')
+                document.getElementById("cb3").classList.add('cbHard')
+                document.getElementById("vozilaContainer").style.display = "none"
+                document.getElementById("rezervacijeContainer").style.display = "none"
+                document.getElementById("statistikaContainer").style.display = "none"
+                document.getElementById("recenzijeContainer").style.display = "block"
+            }
+        } else if (arg == "cb4") {
+            if(document.getElementById("cb4").classList.contains('cbHard')) return
+            else {
+                document.getElementById("cb1").classList.remove('cbHard')
+                document.getElementById("cb1").classList.add('cbSoft')
+                document.getElementById("cb2").classList.remove('cbHard')
+                document.getElementById("cb2").classList.add('cbSoft')
+                document.getElementById("cb3").classList.remove('cbHard')
+                document.getElementById("cb3").classList.add('cbSoft')
+                document.getElementById("cb4").classList.remove('cbSoft')
+                document.getElementById("cb4").classList.add('cbHard')
+                document.getElementById("vozilaContainer").style.display = "none"
+                document.getElementById("rezervacijeContainer").style.display = "none"
+                document.getElementById("recenzijeContainer").style.display = "none"
+                document.getElementById("statistikaContainer").style.display = "block"
+            }
+        }
+    }
+
+    function ukloniVozilo (arg) {
+        if(confirm('Jeste li sigurni da želite ukloniti vozilo?')) {
+            document.getElementById("registracijaDel").value = arg
+            document.getElementById("delBtn").click()
+        } else{
+            alert('Vozilo nije uklonjeno.')
+            return
+        }
+    }
+
+    function urediVozilo (arg) {
+        document.getElementById("registracijaEdit").value = arg
+        document.getElementById("dvdiv").style.display = "none"
+        document.getElementById("uredivanjeVozila").style.display = "block"
+    }
+
+    function provjera (arg) { // treba popravit
+        let v = <%- JSON.stringify(vehicles) %>
+        let av = <%- JSON.stringify(allVehicles) %>
+        let trenutnoVozilo
+
+        for(let i = 0; i < av.length; i++) {
+            if(arg == av[i].registracija) trenutnoVozilo = av[i]
+        }
+
+        let izlaz = "NE"
+        for(let i = 0; i < v.length; i++) {
+            if(JSON.stringify(trenutnoVozilo) == JSON.stringify(v[i])){
+                izlaz = "DA"
+            }
+        }
+        document.write(izlaz)
+    }
+
+    function formatirajVrijeme(arg) {
+        document.write(arg.substring(4, 15))
+    }
+
+    function imeVozila(arg) {
+        console.log(arg)
+        let av = <%- JSON.stringify(allVehicles) %>
+        console.log(av)
+        let izlaz = ""
+        for(let i = 0; i < av.length; i++) {
+            if(av[i].registracija == arg){
+                izlaz = izlaz.concat(av[i].marka)
+                izlaz = izlaz.concat(" ")
+                izlaz = izlaz.concat(av[i].model)
+            }
+        }
+        document.write(izlaz)
+    }
+
+    function zatvaranjeRezervacije (arg) {
+        if(confirm('Želite li zatvoriti tu rezervaciju?')) {
+            document.getElementById("zr").value = arg
+            document.getElementById("zdBtn").click()
+        } else {
+            alert('Rezervacija nije zatvorena.')
+            return
+        }
+    }
+
+    function ukloniRecenziju (arg) {
+        if(confirm('Želite li ukloniti tu recenziju?')) {
+            document.getElementById("rd").value = arg
+            document.getElementById("rdBtn").click()
+        } else {
+            alert('Recenzija nije uklonjena.')
+            return
+        }
+    }
+
+    function sirina (arg) {
+        let s = <%- JSON.stringify(stats) %>
+        let max = parseInt(0)
+        for(let i = 0; i < s.length; i++) {
+            if(parseInt(s[i].zarada) > max){
+                max = parseInt(s[i].zarada)
+            }
+        }           
+        
+        let udio = Math.round((arg / max)*100)
+
+        let izlaz = '<div style="float: left; color: white; text-align: center; height: 40px; line-height: 40px; margin: 5px 0; background-color: #003d52; width: ' + udio + '%;">' + arg + ' kn</div>'
+        document.write(izlaz)
+    }
+
+    function poruka() {
+
+        let v = <%- JSON.stringify(vehicles) %>
+        let av = <%- JSON.stringify(allVehicles) %>
+
+        let poruka = <%- JSON.stringify(poruka) %>
+        if(poruka.length > 0) alert(poruka)
+        else return
+    }
+</script>
+
+<body class="content" onload="poruka()">
     <%- include(`partials/header`); %>
-    <h1 style="text-align:center">VLASNIK</h1>
-    <div class="container">
-        <div class="centered-container">
-            <div class="separator"></div>
-            <form action="/admin" method="post">
-                <fieldset class="fieldset">
-                    <legend class="main-color-emphasized">Pregled korisnika</legend>
+        <div class="formItem"></div>
+        <h3 style="text-align:center"><img class="bigsvg" src="../images/owner.svg"></h3>
+        <h3 style="text-align:center">Vlasnik sustava - upravljačka ploča</h3>
 
-                    <label for="korisnickoIme">Korisničko ime:</label>
-                    <input type="text" name="korisnickoIme" id="korisnickoIme" maxlength="30" minlength="4">
-                    <br>
-
-                    <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                    <br>
-                </fieldset>
-            </form>
+        <div class="choiceButtonContainer">
+            <button class="choiceButton cbHard" id="cb1" onclick="cbclick('cb1')">Vozila</button>
+            <button class="choiceButton cbSoft" id="cb2" onclick="cbclick('cb2')">Rezervacije</button>
+            <button class="choiceButton cbSoft" id="cb3" onclick="cbclick('cb3')">Ocjene</button>
+            <button class="choiceButton cbSoft" id="cb4" onclick="cbclick('cb4')">Statistika</button>
         </div>
-    </div>
+
+        <div class="containerOA" id="vozilaContainer">
+
+            <table>
+                <tr>
+                    <th class="th" style="width: 20%;">Registracija</th>
+                    <th class="th" style="width: 35%;">Vozilo</th>
+                    <th class="th" style="width: 10%;">Cijena</th>
+                    <th class="th" style="width: 10%;">Dostupnost</th>
+                    <th class="th" style="width: 25%;"></th>
+                </tr>
+
+                <% if (allVehicles != undefined) { %>
+                    <% for (let v of allVehicles) { %>
+                        <tr class="tr">
+                            <td class="td" style="width: 20%;"><%= v.registracija %></td>
+                            <td class="td" style="width: 35%;"><%= v.marka %> <%= v.model %></td>
+                            <td class="td" style="width: 10%;"><%= v.cijenadan %></td>
+
+                            <td class="td" style="width: 10%;">
+                                <script>provjera('<%= v.registracija %>')</script>
+                            </td>
+
+                            <td class="td tdButtonArea" style="width: 25%;">
+                                <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="ukloniVozilo('<%= v.registracija %>')">
+                                <img class="smallsvg" src="../images/pencil.svg" alt="edit" onclick="urediVozilo('<%= v.registracija %>')">
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } %>
+            </table>
+
+            <div class="formItem"> <!-- inače filler, sad tu nek stoji ovaj credit  -->
+                <!--
+                <div>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                -->
+            </div>
+
+            <div class="container">
+                <div class="centered-container formContainer" id="dvdiv">
+                    <div class="formItem"></div>
+                    <button class="submitButton" onclick="pritisak('dodavanjeVozila')">Dodavanje vozila</button>
+                    <form action="/owner", method="post" id="dodavanjeVozila" style="display: none;">
+                        <div class="formItem"></div>
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="registracijaAdd" placeholder="Registracija oznaka" maxlength="8" minlength="7">
+                        </div>
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="markaAdd" placeholder="Marka vozila" minlength="4">
+                        </div>
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="modelAdd" placeholder="Model vozila" minlength="4">
+                        </div>
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="kategorijaAdd" placeholder="Kategorija vozila" minlength="4">
+                        </div>
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="cijenadanAdd" placeholder="Dnevna cijena" minlength="1" maxlength="4">
+                        </div>
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="slikaurlAdd" placeholder="Fotografija (URL)" minlength="4">
+                        </div>
+
+                        <div class="formItem col-12"></div>
+                        <div class="formItem col-12">
+                            <button type="submit" value="Submit" class="submitButton">Dodaj vozilo</button>
+                        </div>
+                    </form>
+                        <div class="formItem"></div>
+                </div>
+
+                <div class="formItem"></div>
+
+                <div class="centered-container formContainer">
+                    <!--<button class="submitButton" onclick="pritisak('uklanjanjeVozila')">Uklanjanje vozila</button>-->
+                    <form action="/owner" method="post" id="uklanjanjeVozila" style="display: none;">
+                        <div class="formItem"></div>
+                        <div class="formItem inputField col-12">
+                            <input type="text" id="registracijaDel" name="registracijaDel" placeholder="Registracijska oznaka" minlength="4">
+                        </div>
+                        <div class="formItem col-12">
+                            <button type="submit" id="delBtn" value="Submit" class="submitButton">Ukloni vozilo</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="centered-container formContainer">
+                    <!--<button class="submitButton" onclick="pritisak('uredivanjeVozila')">Uređivanje vozila</button>-->
+                    <form action="/owner" method="post" id="uredivanjeVozila" style="display: none;">
+                        <div class="formItem"></div>
+                        <div class="formItem inputField col-12">
+                            <input type="text" id="registracijaEdit" name="registracijaEdit" placeholder="Registracijska oznaka" minlength="4">
+                        </div>
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="kategorijaEdit" placeholder="Nova kategorija vozila" minlength="4">
+                        </div>
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="cijenadanEdit" placeholder="Nova dnevna cijena" minlength="4">
+                        </div>
+                        <div class="formItem inputField col-12">
+                            <input type="text" name="slikaurlEdit" placeholder="Nova fotografija (URL)" minlength="4">
+                        </div>
+                        <div class="formItem"></div>
+                        <div class="formItem col-12">
+                            <button type="submit" value="Submit" class="submitButton">Uredi vozilo</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="containerOA" id="rezervacijeContainer" style="display: none;">
+            <table class="rezervacijeTable">
+                <tr>
+                    <th class="th" style="width: 15%;">Korisnik</th>
+                    <th class="th" style="width: 25%;">Početak</th>
+                    <th class="th" style="width: 25%;">Kraj</th>
+                    <th class="th" style="width: 25%;">Vozilo</th>
+                    <th class="th" style="width: 10%;"></th>
+                </tr>
+
+                <% if (allReservations != undefined) { %>
+                    <% for (let r of allReservations) { %>
+                        <tr class="tr">
+                            <td class="td" style="width: 15%;"><%=r.korisnickoime%></td>
+                            <td class="td" style="width: 25%;">
+                                <script>formatirajVrijeme('<%= r.vrijemepreuzimanja %>')</script>
+                            </td>
+                            <td class="td" style="width: 25%;">
+                                <script>formatirajVrijeme('<%= r.vrijemezavrsetka %>')</script>
+                            </td>
+                            <td class="td" style="width: 25%;">
+                                <script>imeVozila('<%= r.registracija %>')</script>
+                            </td>
+                            <td class="td tdButtonArea">
+                                <img class="smallsvg" src="../images/check.svg" alt="finish" onclick="zatvaranjeRezervacije('<%= r.idrezervacija %>')">
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } %>
+
+            </table>
+
+            <div class="formItem"></div><div class="formItem"></div>
+
+            <div class="container">
+                <div class="centered-container formContainer" >
+                    <!--<button class="submitButton" onclick="pritisak('zatvaranjeRezervacije')">Zatvaranje rezervacije</button>-->
+                    <form action="/owner" method="post" id="zatvaranjeRezervacije" style="display: none;">
+                        <div class="formItem inputField col-12">
+                            <input type="text" id="zr" name="rezervacijaClose" placeholder="ID rezervacije" minlength="4">
+                        </div>
+                        <div class="formItem col-12">
+                            <button type="submit" id="zrBtn" value="Submit" class="submitButton">Zatvori rezervaciju</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="containerOA" id="recenzijeContainer" style="display: none;">
+            
+            <table>
+                <tr>
+                    <th class="th" style="width: 20%;">Korisnik</th>
+                    <th class="th" style="width: 30%;">Vozilo</th>
+                    <th class="th" style="width: 30%;">Datum</th>
+                    <th class="th" style="width: 10%;">Ocjena</th>
+                    <th class="th" style="width: 10%;"></th>
+                </tr>
+    
+                <% if (ratings != undefined) { %>
+                    <% for (let r of ratings) { %>
+                        <tr class="tr">
+                            <td class="td" style="width: 20%;"><%= r.korisnickoime%></td>
+                            <td class="td" style="width: 30%;">
+                                <script>imeVozila('<%= r.registracija %>')</script>
+                            </td>
+                            <td class="td" style="width: 30%;">
+                                <script>formatirajVrijeme('<%= r.vrijemezavrsetka %>')</script>
+                            </td>
+                            <td class="td" style="width: 10%;"><%= r.ocjena%></td>
+    
+                            <td class="td tdButtonArea" style="width: 10%;">
+                                <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="ukloniRecenziju('<%= r.idrezervacija %>')">
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } %>
+            </table>
+
+            <div class="formItem"></div><div class="formItem"></div>
+
+            <div class="container">
+                <div class="centered-container formContainer" >
+                    <!--<button class="submitButton" onclick="pritisak('zatvaranjeRezervacije')">Zatvaranje rezervacije</button>-->
+                    <form action="/owner" method="post" id="brisanjeRecenzije" style="display: none;">
+                        <div class="formItem inputField col-12">
+                            <input type="text" id="rd" name="recenzijaDelete" placeholder="ID rezervacije" minlength="4">
+                        </div>
+                        <div class="formItem col-12">
+                            <button type="submit" id="rdBtn" value="Submit" class="submitButton">Obriši recenziju</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="containerOA" id="statistikaContainer" style="display: none;">
+            
+            <table>
+                <% if(stats != undefined) { %>
+                    <% for (let s of stats) { %>
+                        <tr>
+                            <td style="width: 15%;"><%= s.mjesec %></td>
+                            <td style="width: 85%;">
+                                <script>
+                                    sirina('<%= s.zarada %>')
+                                </script>
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } %>
+            </table>
+
+            
+
+        </div>
 </body>

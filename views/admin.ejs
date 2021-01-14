@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 
+
+
 <head>
     <title>AUTOS!</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -11,108 +13,219 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 </head>
 
-<body class="content">
+<script>
+    function korisnikDelete(arg) {
+        if (confirm('Jeste li sigurni da želite ukloniti korisnika?')) {
+            document.getElementById("userDelete").value = arg
+            document.getElementById("userDelBtn").click()
+        } else {
+            alert('Korisnik nije izbrisan.')
+        }
+    }
+
+    function korisnikPromote(arg) {
+        if (confirm('Radnja će korisniku dati status vlasnika sustava.')) {
+            document.getElementById("userPromote").value = arg
+            document.getElementById("userProBtn").click()
+        } else {
+            alert('Korisnik nije dobio status korisnika.')
+        }
+    }
+
+    function locationEdit (arg) {
+        document.getElementById("locationId").value = arg
+        document.getElementById("lediv").style.display = "block"
+    }
+
+    function locationDelete (arg) {
+        if(confirm('Jeste li sigurni da želite ukloniti poslovnicu?')) {
+            document.getElementById("locationDelete").value = arg
+            document.getElementById("locationDelBtn").click()
+        } else {
+            alert('Poslovnica nije obrisana.')
+            return
+        }
+    }
+
+    function cbclick(arg) {
+        if(arg == "cb1") {
+            if(document.getElementById("cb1").classList.contains('cbHard')) return
+            else {
+                document.getElementById("cb2").classList.remove('cbHard')
+                document.getElementById("cb2").classList.add('cbSoft')
+                document.getElementById("cb1").classList.remove('cbSoft')
+                document.getElementById("cb1").classList.add('cbHard')
+                document.getElementById("poslovniceContainer").style.display = "none"
+                document.getElementById("korisniciContainer").style.display = "block"
+            }
+        } else if (arg == "cb2") {
+            if(document.getElementById("cb2").classList.contains('cbHard')) return
+            else {
+                document.getElementById("cb1").classList.remove('cbHard')
+                document.getElementById("cb1").classList.add('cbSoft')
+                document.getElementById("cb2").classList.remove('cbSoft')
+                document.getElementById("cb2").classList.add('cbHard')
+                document.getElementById("korisniciContainer").style.display = "none"
+                document.getElementById("poslovniceContainer").style.display = "block"
+            }
+        }
+    }
+
+    function pritisak (arg) {
+        let e = document.getElementById(arg)
+        if(e.style.display == "none") e.style.display = "block"
+        else e.style.display = "none"
+    }
+
+    function poruka() {
+        let poruka = <%- JSON.stringify(poruka) %>
+        if(poruka.length > 0) alert(poruka)
+        else return
+    }
+</script>
+
+<body class="content" onload="poruka()">
     <%- include(`partials/header`); %>
-    <h1 style="text-align:center">ADMIN</h1>
-    <div class="container">
-        <div class="centered-container">
-            <div class="separator"></div>
-            <form action="/admin" method="post">
-                <fieldset class="fieldset">
-                    <legend class="main-color-emphasized">Pregled korisnika</legend>
+        
+        <div class="formItem"></div>
+        <h3 style="text-align:center"><img class="bigsvg" src="../images/admin.svg"></h3>
+        <h3 style="text-align:center">Administrator sustava - upravljačka ploča</h3>
 
-                    <label for="korisnickoIme">Korisničko ime:</label>
-                    <input type="text" name="korisnickoIme" id="korisnickoIme" maxlength="30" minlength="4">
-                    <br>
-                    <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                    <br>
-                </fieldset>
-            </form>
+        <div class="choiceButtonContainer">
+            <button class="choiceButton cbHard" id="cb1" onclick="cbclick('cb1')">Korisnici</button>
+            <button class="choiceButton cbSoft" id="cb2" onclick="cbclick('cb2')">Poslovnice</button>
         </div>
 
-        <div class="centered-container">
-            <div class="separator"></div>
-            <form action="/admin" method="post">
-                <fieldset class="fieldset">
-                    <legend class="main-color-emphasized">Brisanje korisnika</legend>
+        <div class="containerOA" id="korisniciContainer">
+            <table>
+                <tr>
+                    <th class="th" style="width: 20%;">Korisničko ime</th>
+                    <th class="th" style="width: 25%;">Ime</th>
+                    <th class="th" style="width: 25%;">Prezime</th>
+                    <th class="th" style="width: 15%;">Uloga</th>
+                    <th class="th" style="width: 15%;"></th>
+                </tr>
 
-                    <label for="korisnickoIme">Korisničko ime:</label>
-                    <input type="text" name="korisnickoIme" id="korisnickoIme" maxlength="30" minlength="4">
-                    <br>
-                    <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                    <br>
-                </fieldset>
-            </form>
+                <% if (users != undefined) { %>
+                    <% for (let u of users) { %>
+                        <% if (u.uloga != 'admin') { %>
+                            <tr class="tr">
+                                <td class="td" style="width: 20%;"><%= u.korisnickoime %></td>
+                                <td class="td" style="width: 25%;"><%= u.ime %></td>
+                                <td class="td" style="width: 25%;"><%= u.prezime %></td>
+                                <td class="td" style="width: 15%;"><%= u.uloga %></td>
+                                <td class="td tdButtonArea" style="width: 15%;">
+                                    <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="korisnikDelete('<%= u.korisnickoime %>')">
+                                    <img class="smallsvg" src="../images/pencil.svg" alt="edit" onclick="korisnikPromote('<%= u.korisnickoime %>')">
+                                </td>
+                            </tr>
+                        <% } %>
+                    <% } %>
+                <% } %>
+            </table>
+
+            <div class="formItem"></div><div class="formItem"></div>
+
+            <div class="centered-container formContainer">
+                <form action="/admin" method="post" style="display: none;">
+                    <div class="formItem"></div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" id="userDelete" name="userDelete" placeholder="Korisničko ime" minlength="4">
+                    </div>
+                    <div class="formItem col-12">
+                        <button type="submit" id="userDelBtn" value="Submit" class="submitButton">Ukloni korisnika</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="centered-container formContainer">
+                <form action="/admin" method="post" style="display: none;">
+                    <div class="formItem"></div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" id="userPromote" name="userEdit" placeholder="Korisničko ime" minlength="4">
+                    </div>
+                    <div class="formItem col-12">
+                        <button type="submit" id="userProBtn" value="Submit" class="submitButton">Promijeni prava korisnika</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
-        <div class="centered-container">
-            <div class="separator"></div>
-            <form action="/admin" method="post">
-                <fieldset class="fieldset">
-                    <legend class="main-color-emphasized">Promjena razine korisnika</legend>
+        <div class="containerOA" id="poslovniceContainer" style="display: none;">
+            <table>
+                <tr>
+                    <th class="th" style="width: 10%;">ID</th>
+                    <th class="th" style="width: 40%;">Adresa</th>
+                    <th class="th" style="width: 30%;">Broj telefona</th>
+                    <th class="th" style="width: 20%;"></th>
+                </tr>
 
-                    <label for="korisnickoIme">Korisničko ime:</label>
-                    <input type="text" name="korisnickoIme" id="korisnickoIme" maxlength="30" minlength="4">
-                    <br>
+                <% if (locations != undefined) { %>
+                    <% for (let l of locations) { %>
+                        <tr class="tr">
+                            <td class="td" style="width: 10%;"><%= l.idposlovnica %></td>
+                            <td class="td" style="width: 40%;"><%= l.lokacija %></td>
+                            <td class="td" style="width: 30%;"><%= l.brojtelefona %></td>
+                            <td class="td tdButtonArea" style="width: 20%;">
+                                <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="locationDelete('<%= l.idposlovnica %>')">
+                                <img class="smallsvg" src="../images/pencil.svg" alt="edit" onclick="locationEdit('<%= l.idposlovnica %>')">
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } %>
+            </table>
+            <div class="formItem"></div>
 
-                    <label for="uloga">Nova uloga:</label>
-                    <input type="text" name="uloga" id="uloga" maxlength="30" minlength="4"> <br>
+            <div class="centered-container formContainer">
+                <form action="/admin" method="post" style="display: none;">
+                    <div class="formItem"></div>
+                    <div class="formItem inputField col-12">
+                        <input type="hidden" id="locationDelete" name="locationRemove" placeholder="ID lokacije" ime" minlength="4">
+                    </div>
+                    <div class="formItem col-12">
+                        <button type="submit" id="locationDelBtn" value="Submit" class="submitButton">Izbriši poslovnicu</button>
+                    </div>
+                </form>
+            </div>
 
-                    <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                    <br>
-                </fieldset>
-            </form>
+            <div class="centered-container formContainer">
+                <form action="/admin" method="post" style="display: none;" id="lediv">
+                    <div class="formItem"></div>
+                    <div class="formItem inputField col-12">
+                        <input type="hidden" id="locationId" name="locationEdit" placeholder="ID lokacije" ime" minlength="4">
+                    </div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="locationEdit" placeholder="Nova lokacija" minlength="4">
+                    </div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="phoneEdit" placeholder="Novi broj telefona" minlength="4">
+                    </div>
+                    <div class="formItem col-12">
+                        <button type="submit" id="locationEdiBtn" value="Submit" class="submitButton">Uredi poslovnicu</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="centered-container formContainer">
+                <div class="formItem"></div>
+                <button class="submitButton" onclick="pritisak('dodavanjeLokacije')">Dodavanje poslovnice</button>
+                <form action="/admin" method="post" style="display: none;" id="dodavanjeLokacije">
+                    <div class="formItem"></div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="locationAdd" placeholder="Lokacija" minlength="4">
+                    </div>
+                    <div class="formItem inputField col-12">
+                        <input type="text" name="phoneAdd" placeholder="Broj telefona" minlength="4">
+                    </div>
+                    <div class="formItem"></div>
+                    <div class="formItem col-12">
+                        <button type="submit" id="locationEdiBtn" value="Submit" class="submitButton">Dodaj poslovnicu</button>
+                    </div>
+                    <div class="formItem"></div>
+                </form>
+                <div class="formItem"></div>
+            </div>
+
+            <div class="formItem"></div>
         </div>
-
-        <div class="centered-container">
-            <div class="separator"></div>
-            <form action="/admin" method="post">
-                <fieldset class="fieldset">
-                    <legend class="main-color-emphasized">Dodavanje poslovnice</legend>
-
-                    <label for="idPoslovnica">Id Poslovnice:</label>
-                    <input type="text" name="idPoslovnica" id="idPoslovnica" maxlength="30" minlength="4"> <br>
-
-                    <label for="lokacija">Lokacija:</label>
-                    <input type="text" name="lokacija" id="lokacija" maxlength="20" minlength="2"> <br>
-
-                    <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                    <br>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="centered-container">
-            <div class="separator"></div>
-            <form action="/signup" method="post">
-                <fieldset class="fieldset">
-                    <legend class="main-color-emphasized">Uklanjanje poslovnice</legend>
-
-                    <label for="idPoslovnica">Id Poslovnice:</label>
-                    <input type="text" name="idPoslovnica" id="idPoslovnica" maxlength="30" minlength="4"> <br>
-
-                    <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                    <br>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="centered-container">
-            <div class="separator"></div>
-            <form action="/signup" method="post">
-                <fieldset class="fieldset">
-                    <legend class="main-color-emphasized">Uređivanje poslovnice</legend>
-
-                    <label for="idPoslovnica">Id Poslovnice:</label>
-                    <input type="text" name="idPoslovnica" id="idPoslovnica" maxlength="30" minlength="4"> <br>
-
-                    <label for="lokacija">Lokacija:</label>
-                    <input type="text" name="lokacija" id="lokacija" maxlength="20" minlength="2"> <br>
-
-                    <input type="submit" style="margin-top: 3px;"> <input type="reset">
-                    <br>
-                </fieldset>
-            </form>
-        </div>
-    </div>
 </body>
