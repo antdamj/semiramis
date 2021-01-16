@@ -27,20 +27,13 @@ router.post('/', async (req, res, next) => {
     }
 
     let user = await User.fetchByUsername(req.body.korisnickoIme);
-
-
-    //check credentials
     const hashed_password = crypto.createHash("sha1").update(req.body.lozinka).digest("hex");
 
-    if (user.isPersisted() && user.uloga == 'admin' && user.checkPassword(hashed_password)) {
-        req.session.user = user;
-        res.redirect("/admin");
-    } else if (user.isPersisted() && user.uloga == 'vlasnik' && user.checkPassword(hashed_password)) {
-        req.session.user = user;
-        res.redirect("/owner");
-    } else if (user.isPersisted() && user.checkPassword(hashed_password)) {
-        req.session.user = user;
-        res.redirect("/")
+    if (user.isPersisted() && user.checkPassword(hashed_password)) {
+        req.session.user = user
+        if (user.uloga == 'admin') res.redirect("/admin")
+        if (user.uloga == 'vlasnik') res.redirect("/owner")
+        else res.redirect("/")
     } else {
         res.render('login', {
             title: 'Prijava',
