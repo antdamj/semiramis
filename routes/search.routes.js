@@ -5,13 +5,19 @@ const router = express.Router();
 router.get('/', async function (req, res, next) {
 
     let poslovnicaDb = await db.query('SELECT * FROM poslovnica');
+    let d1 = new Date()
+    let d2 = new Date()
+    d2.setDate(d1.getDate() + 3)
+    d1 = d1.toISOString().slice(0, 19).replace('T', ' ').substring(0, 10) // html kalendaru vrati datum u obliku yyyy-mm-dd
+    d2 = d2.toISOString().slice(0, 19).replace('T', ' ').substring(0, 10)
 
     res.render('search', {
         title: 'Pretraga',
         user: req.session.user,
         linkActive: 'search',      //TODO 
         locations: poslovnicaDb.rows,
-        date: new Date().toISOString().slice(0, 19).replace('T', ' ').substring(0, 10), // html kalendaru vrati datum u obliku yyyy-mm-dd
+        date1: d1,
+        date2: d2,
         cars: "",
         reservationData: {},
         isHidden: false,
@@ -63,6 +69,12 @@ router.post('/', async function (req, res, next) {
             }
         }
 
+        let d1 = new Date()
+        let d2 = new Date()
+        d2.setDate(d1.getDate() + 3)
+        d1 = d1.toISOString().slice(0, 19).replace('T', ' ').substring(0, 10) // html kalendaru vrati datum u obliku yyyy-mm-dd
+        d2 = d2.toISOString().slice(0, 19).replace('T', ' ').substring(0, 10)
+
         if (primitak.getTime() < today || povratak.getTime() < today) {
             console.log(1);
             res.render('search', {
@@ -71,7 +83,8 @@ router.post('/', async function (req, res, next) {
                 linkActive: 'search',
                 cars: carsDb.rows,
                 locations: poslovnicaDb.rows,
-                date: new Date().toISOString().slice(0, 19).replace('T', ' ').substring(0, 10),
+                date1: req.body.datum_primitka,
+                date2: req.body.datum_povratka,
                 reservationData: podatciPotrebni,
                 isHidden: false,
                 err: "Datum primitka ili povratka ne smije biti prije današnjeg datuma."
@@ -85,7 +98,8 @@ router.post('/', async function (req, res, next) {
                 linkActive: 'search',
                 cars: carsDb.rows,
                 locations: poslovnicaDb.rows,
-                date: new Date().toISOString().slice(0, 19).replace('T', ' ').substring(0, 10),
+                date1: req.body.datum_primitka,
+                date2: req.body.datum_povratka,
                 reservationData: podatciPotrebni,
                 isHidden: false,
                 err: "Datum povratka ne smije biti prije datuma primitka."
@@ -98,7 +112,8 @@ router.post('/', async function (req, res, next) {
                 linkActive: 'search',
                 cars: carsDb.rows,
                 locations: poslovnicaDb.rows,
-                date: new Date().toISOString().slice(0, 19).replace('T', ' ').substring(0, 10),
+                date1: req.body.datum_primitka,
+                date2: req.body.datum_povratka,
                 reservationData: podatciPotrebni,
                 isHidden: false,
                 err: "Minimalno trajanje narudžbe mora biti 3 dana."
@@ -111,7 +126,8 @@ router.post('/', async function (req, res, next) {
                 linkActive: 'search',
                 cars: carsDb.rows,
                 locations: poslovnicaDb.rows,
-                date: new Date().toISOString().slice(0, 19).replace('T', ' ').substring(0, 10),
+                date1: d1,
+                date2: d2,
                 reservationData: podatciPotrebni,
                 isHidden: true,
                 err: undefined,

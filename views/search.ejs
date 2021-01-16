@@ -98,12 +98,18 @@
             }
         }
 
-        function karticaPrikazi() {
-            let kartica = document.getElementById("karticaThing");
+        function karticaPrikazi (arg, a2) {
+            let auto = "auto".concat(arg)
+            console.log(auto)
+            let kartica = document.getElementById(auto);
             console.log(kartica)
-            if (kartica.style.display == "none") kartica.style.display = "block";
+
+            if(a2 == "card") kartica.style.display = "block"
             else kartica.style.display = "none"
+
+            document.getElementById("paymentMethod").value = a2
         }
+
         function cbclick(arg) {
             console.log(arg);
         if(arg == "sve") {
@@ -161,6 +167,21 @@
         }
     }
 
+    function izaberi(arg, reg) {
+        console.log(arg, reg)
+        if(arg == "btn1") {
+            let act = "btn1".concat(reg)
+            document.getElementById(act).classList.add('activePayBtn')
+            let una = "btn2".concat(reg)
+            document.getElementById(una).classList.remove('activePayBtn')
+        } else if (arg == "btn2") {
+            let act = "btn2".concat(reg)
+            document.getElementById(act).classList.add('activePayBtn')
+            let una = "btn1".concat(reg)
+            document.getElementById(una).classList.remove('activePayBtn')
+        }
+    }
+
     </script>
 
 </head>
@@ -168,46 +189,126 @@
 <body class="content">
 
     <%- include(`partials/header`); %>
-
-        <main class="main">
-
-            <% if (isHidden==false) { %>
-                <div class="section" id="booking" style="overflow: hidden;">
-                    <div class="section-center">
-                        <div class="row">
-                            <div class="booking-form">
-                                <div class="form-header">
-                                    <h1>Pretraga</h1>
-                                </div>
-                                <form name="form1" method="post" action="/search">
+    <main class="main">
+        <% if (isHidden==false) { %>
+            <div class="section" id="booking" style="overflow: hidden;">
+                <div class="section-center">
+                    <div class="row">
+                        <div class="booking-form">
+                            <div class="form-header">
+                                <h1>Pretraga</h1>
+                            </div>
+                            <form name="form1" method="post" action="/search">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <span class="form-label">Lokacija primitka:</span>
+                                                <select class="form-control"   name="lokacija_primitka"  id="lokacija_primitka">
+                                                    <% for(let location of locations){ %>
+                                                        <option value="<%= location.idposlovnica %>">
+                                                            <%=location.lokacija %>
+                                                        </option>
+                                                    <% } %>
+                                                </select>
+                                            <span class="select-arrow"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <span class="form-label">Datum primitka:</span>
+                                                        <input type="date" name="datum_primitka" id="datum_primitka" class="form-control" required value="<%=date1%>"> </input>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <span class="form-label">Vrijeme primitka:</span>
+                                                        <select class="form-control" name="vrijeme_primitka"  id="vrijeme_primitka">
+                                                            <option value="00:00">00:00</option>
+                                                            <option value="00:30">00:30</option>
+                                                            <option value="01:00">01:00</option>
+                                                            <option value="01:30">01:30</option>
+                                                            <option value="02:00">02:00</option>
+                                                            <option value="02:30">02:30</option>
+                                                            <option value="03:00">03:00</option>
+                                                            <option value="03:30">03:30</option>
+                                                            <option value="04:00">04:00</option>
+                                                            <option value="04:30">04:30</option>
+                                                            <option value="05:00">05:00</option>
+                                                            <option value="05:30">05:30</option>
+                                                            <option value="06:00">06:00</option>
+                                                            <option value="06:30">06:30</option>
+                                                            <option value="07:00">07:00</option>
+                                                            <option value="07:30">07:30</option>
+                                                            <option value="08:00">08:00</option>
+                                                            <option value="08:30">08:30</option>
+                                                            <option value="09:00" selected="selected">09:00</option>
+                                                            <option value="09:30">09:30</option>
+                                                            <option value="10:00">10:00</option>
+                                                            <option value="10:30">10:30</option>
+                                                            <option value="11:00">11:00</option>
+                                                            <option value="11:30">11:30</option>
+                                                            <option value="12:00">12:00</option>
+                                                            <option value="12:30">12:30</option>
+                                                            <option value="13:00">13:00</option>
+                                                            <option value="13:30">13:30</option>
+                                                            <option value="14:00">14:00</option>
+                                                            <option value="14:30">14:30</option>
+                                                            <option value="15:00">15:00</option>
+                                                            <option value="15:30">15:30</option>
+                                                            <option value="16:00">16:00</option>
+                                                            <option value="16:30">16:30</option>
+                                                            <option value="17:00">17:00</option>
+                                                            <option value="17:30">17:30</option>
+                                                            <option value="18:00">18:00</option>
+                                                            <option value="18:30">18:30</option>
+                                                            <option value="19:00">19:00</option>
+                                                            <option value="19:30">19:30</option>
+                                                            <option value="20:00">20:00</option>
+                                                            <option value="20:30">20:30</option>
+                                                            <option value="21:00">21:00</option>
+                                                            <option value="21:30">21:30</option>
+                                                            <option value="22:00">22:00</option>
+                                                            <option value="22:30">22:30</option>
+                                                            <option value="23:00">23:00</option>
+                                                            <option value="23:30">23:30</option>
+                                                        </select>
+                                                        <span class="select-arrow"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <hr style="background-color:#003d52">
+                                    
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <span class="form-label">Lokacija primitka:</span>
-                                                    <select class="form-control"   name="lokacija_primitka"  id="lokacija_primitka">
+                                                <span class="form-label">Lokacija povratka:</span>
+                                                    <select class="form-control"   name="lokacija_povratka"  id="lokacija_povratka">
                                                         <% for(let location of locations){ %>
                                                             <option value="<%= location.idposlovnica %>">
                                                                 <%=location.lokacija %>
                                                             </option>
-                                                            <% } %>
+                                                        <% } %>
                                                     </select>
-                                                    <span class="select-arrow"></span>
+                                                <span class="select-arrow"></span>
                                             </div>
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        
-                                                            <span  class="form-label">Datum primitka:</span>
-                                                                <input type="date" name="datum_primitka" id="datum_primitka" class="form-control" required
-                                                                    value="<%=date%>"> </input>
-                                                        </div>
+                                                        <span  class="form-label">Datum povratka:</span>
+                                                            <input type="date" name="datum_povratka" id="datum_povratka" class="form-control" required value="<%=date2%>"> </input>
+                                                    </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <span class="form-label">Vrijeme primitka:</span>
-                                                            <select class="form-control" name="vrijeme_primitka"  id="vrijeme_primitka">
+                                                        <span class="form-label">Vrijeme Povratka:</span>
+                                                            <select class="form-control" name="vrijeme_povratka"  id="vrijeme_povratka">
                                                                 <option value="00:00">00:00</option>
                                                                 <option value="00:30">00:30</option>
                                                                 <option value="01:00">01:00</option>
@@ -224,9 +325,9 @@
                                                                 <option value="06:30">06:30</option>
                                                                 <option value="07:00">07:00</option>
                                                                 <option value="07:30">07:30</option>
-                                                                <option value="08:00" selected="selected">08:00</option>
+                                                                <option value="08:00">08:00</option>
                                                                 <option value="08:30">08:30</option>
-                                                                <option value="09:00">09:00</option>
+                                                                <option value="09:00" selected="selected">09:00</option>
                                                                 <option value="09:30">09:30</option>
                                                                 <option value="10:00">10:00</option>
                                                                 <option value="10:30">10:30</option>
@@ -263,98 +364,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
-                                        <hr style="background-color:blue">
-                                        
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <span class="form-label">Lokacija povratka:</span>
-                                                        <select class="form-control"   name="lokacija_povratka"  id="lokacija_povratka">
-                                                            <% for(let location of locations){ %>
-                                                                <option value="<%= location.idposlovnica %>">
-                                                                    <%=location.lokacija %>
-                                                                </option>
-                                                                <% } %>
-                                                        </select>
-                                                        <span class="select-arrow"></span>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            
-                                                                <span  class="form-label">Datum povratka:</span>
-                                                                    <input type="date" name="datum_povratka" id="datum_povratka" class="form-control" required
-                                                                        value="<%=date%>"> </input>
-                                                            </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <span class="form-label">Vrijeme Povratka:</span>
-                                                                <select class="form-control" name="vrijeme_povratka"  id="vrijeme_povratka">
-                                                                    <option value="00:00">00:00</option>
-                                                                    <option value="00:30">00:30</option>
-                                                                    <option value="01:00">01:00</option>
-                                                                    <option value="01:30">01:30</option>
-                                                                    <option value="02:00">02:00</option>
-                                                                    <option value="02:30">02:30</option>
-                                                                    <option value="03:00">03:00</option>
-                                                                    <option value="03:30">03:30</option>
-                                                                    <option value="04:00">04:00</option>
-                                                                    <option value="04:30">04:30</option>
-                                                                    <option value="05:00">05:00</option>
-                                                                    <option value="05:30">05:30</option>
-                                                                    <option value="06:00">06:00</option>
-                                                                    <option value="06:30">06:30</option>
-                                                                    <option value="07:00">07:00</option>
-                                                                    <option value="07:30">07:30</option>
-                                                                    <option value="08:00" selected="selected">08:00</option>
-                                                                    <option value="08:30">08:30</option>
-                                                                    <option value="09:00">09:00</option>
-                                                                    <option value="09:30">09:30</option>
-                                                                    <option value="10:00">10:00</option>
-                                                                    <option value="10:30">10:30</option>
-                                                                    <option value="11:00">11:00</option>
-                                                                    <option value="11:30">11:30</option>
-                                                                    <option value="12:00">12:00</option>
-                                                                    <option value="12:30">12:30</option>
-                                                                    <option value="13:00">13:00</option>
-                                                                    <option value="13:30">13:30</option>
-                                                                    <option value="14:00">14:00</option>
-                                                                    <option value="14:30">14:30</option>
-                                                                    <option value="15:00">15:00</option>
-                                                                    <option value="15:30">15:30</option>
-                                                                    <option value="16:00">16:00</option>
-                                                                    <option value="16:30">16:30</option>
-                                                                    <option value="17:00">17:00</option>
-                                                                    <option value="17:30">17:30</option>
-                                                                    <option value="18:00">18:00</option>
-                                                                    <option value="18:30">18:30</option>
-                                                                    <option value="19:00">19:00</option>
-                                                                    <option value="19:30">19:30</option>
-                                                                    <option value="20:00">20:00</option>
-                                                                    <option value="20:30">20:30</option>
-                                                                    <option value="21:00">21:00</option>
-                                                                    <option value="21:30">21:30</option>
-                                                                    <option value="22:00">22:00</option>
-                                                                    <option value="22:30">22:30</option>
-                                                                    <option value="23:00">23:00</option>
-                                                                    <option value="23:30">23:30</option>
-                                                                </select>
-                                                                <span class="select-arrow"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <div class="form-btn">
-                                            <button class="submit-btn">Pretraži</button>
-                                        </div>
+                                    <div class="form-btn">
+                                        <button class="submitButton" style="position: relative; left: 25%;">Pretraži</button>
                                     </div>
-                                    
-                                </form>
+                                </div>
+                                
+                            </form>
                             </div>
                         </div>
                         <% if (err !==undefined ) { %>
@@ -377,87 +392,94 @@
                             <button class="choiceButton cbSoft" id="niza" onclick="cbclick('niza')">Niža</button>
                             <button class="choiceButton cbSoft" id="srednja" onclick="cbclick('srednja')">Srednja</button>
                             <button class="choiceButton cbSoft" id="visa" onclick="cbclick('visa')">Viša</button>
-                        </div> 
+                        </div>
                         <hr style="background-color: #003d52">
-                    <hr style="background-color: #003d52">
+                        <hr style="background-color: #003d52">
                     </div>
                     
                     <% if(cars!==undefined) { %>
                         <% if(nadoknada) { %>
-                            <% } %>
-                            
-                            <div class="container">
-                                <div class="row">
-                                    <% for (let car of cars) { %>
-                                        <div class="col-sm-6 col-lg-3 py-2"id="<%=car.kategorija %>" name="slike">
-                                        <div class="card h-100 bg-light mb-3" style="max-width: 18rem;" >
-                                            <img class="card-img-top " src="<%=car.slikaurl %>" alt="Slika" name="slika">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><%= car.marka %> <%= car.model %></h5>
-                                                <p class="card-text">Kategorija: <strong> <%= car.kategorija %></strong></p>
-                                                <% if( user !==undefined ) {%>
-                                                    <div class="buttons">
-                                                        <button class="btn btn-secondary"
-                                                            onClick="pokaziPlacanja(<%= car.registracija %>)">Rezerviraj</button>
-                                                    </div>
-                                                    <% } %>
-                                                    <div name="paymentClass" style="display:none"
-                                                        id="<%=car.registracija %>">
-                                                        <hr style="background-color: #003d52">
 
-
-                                                        <form action="/search" , method="POST">
-                                                        
-                                                            <input type="radio" id="cash" name="paymentType"
-                                                                value="cash" checked="checked"
-                                                                onchange="karticaPrikazi()" class="btn-check">
-                                                            <label for="cash" class="btn ">Gotovina</label><br>
-                                                            <input type="radio" id="card" name="paymentType"
-                                                                value="card" onchange="karticaPrikazi()" class="btn-check" >
-                                                            <label for="card" class="btn ">Kartica</label><br>
-                                                        
-                                                            <div id="karticaThing" style="display: none;">
-                                                                <input type="text" name="cardnumber" value=""
-                                                                    minlength="16" maxlength="16"
-                                                                    placeholder="Broj kartice">
-                                                                <input type="text" name="controlNumber" value=""
-                                                                    minlength="3" maxlength="4"
-                                                                    placeholder="Kontrolni broj">
-                                                            </div>
-
-                                                            <input type="hidden" name="carId"
-                                                                value="<%=car.registracija %>" />
-                                                            <input type="hidden" name="t1"
-                                                                value="<%=reservationData.t1%>" />
-                                                            <input type="hidden" name="t2"
-                                                                value="<%=reservationData.t2%>" />
-                                                            <input type="hidden" name="l1"
-                                                                value="<%=reservationData.l1%>" />
-                                                            <input type="hidden" name="l2"
-                                                                value="<%=reservationData.l1%>" />
-                                                            <button class="btn btn-secondary">Potvrda</button>
-                                                        </form>
-                                            </div>
-                                            <div class="card-footer" style="background-color: #f8f9fa;">
-                                                <small class="text-muted">Cijena po danu: <%= car.cijenadan %> kn <br> + <strong>
-                                                        <% if(nadoknada) { %>
-                                                             20% nadoknade
-                                                            <% } %> 
-                                                        </strong>
-                                                    
+                        <% } %>
+                        
+                        <div class="container">
+                            <div class="row">
+                                <% for (let car of cars) { %>
+                                    <div class="col-xs-12 col-sm-12 col-lg-4 py-2"id="<%=car.kategorija %>" name="slike">
+                                    <div class="card h-100 bg-light mb-3">
+                                        <img class="card-img-top " src="<%=car.slikaurl %>" alt="Slika" name="slika">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= car.marka %> <%= car.model %></h5>
+                                            <p class="card-text">Kategorija: <strong> <%= car.kategorija %></strong></p>
+                                            <% if( user !==undefined ) {%>
+                                                <div class="buttons">
+                                                    <button class="btn btn-secondary" onClick="pokaziPlacanja(<%= car.registracija %>)">Rezerviraj</button><br><br>
+                                                </div>
+                                            <% } %>
+                                            <small class="text-muted">Cijena po danu: <%= car.cijenadan %> kn <br>
+                                                <strong>
+                                                    <% if(nadoknada) { %>
+                                                            + 20% nadoknade
+                                                    <% } %> 
+                                                </strong>
                                                 </small>
-                                          </div>
+                                                <div name="paymentClass" style="display:none"
+                                                    id="<%=car.registracija %>">
+                                                    <hr style="background-color: #003d52">
+
+                                                    <div class="paymentSection">
+                                                        <div style="width: 50%;">
+                                                            <button onclick="karticaPrikazi('<%= car.registracija %>', 'cash'); izaberi('btn1', '<%=car.registracija %>')" id="btn1<%=car.registracija %>" class="payButton activePayBtn" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px">Gotovina</button>
+                                                        </div>
+                                                        <div style="width: 50%;">
+                                                            <button onclick="karticaPrikazi('<%= car.registracija %>', 'card'); izaberi('btn2', '<%=car.registracija %>')" id="btn2<%=car.registracija %>" class="payButton" style="border-top-right-radius: 10px; border-bottom-right-radius: 10px;">Kartica</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <form action="/search" method="POST">
+
+                                                        <div id="auto<%= car.registracija %>" style="display: none;">
+                                                            <div class="inputField">
+                                                                <input type="text" name="cardnumber" value="" minlength="16" maxlength="16" placeholder="Broj kartice" style="width: 100%;">
+                                                            </div>
+                                                            <div class="inputField">
+                                                                <input type="text" name="controlNumber" value="" minlength="3" maxlength="4" placeholder="Kontrolni broj" style="width: 100%;">
+                                                            </div>
+                                                        </div>
+
+                                                        <input type="hidden" id="paymentMethod" name="paymentType" value="cash">
+                                                        <input type="hidden" name="carId" value="<%=car.registracija %>" />
+                                                        <input type="hidden" name="t1" value="<%=reservationData.t1%>" />
+                                                        <input type="hidden" name="t2" value="<%=reservationData.t2%>" />
+                                                        <input type="hidden" name="l1" value="<%=reservationData.l1%>" />
+                                                        <input type="hidden" name="l2" value="<%=reservationData.l1%>" />
+                                                        <button class="btn btn-secondary" style="width: 50%; margin: 15px 0 15px 25%;">Potvrda</button>
+                                                    </form>
+
+
                                         </div>
-                                    </div>
-                                    </div>
-                                        <% } %>
+                                        <!----
+                                        <div class="card-footer" style="background-color: #f8f9fa;">
+                                            <small class="text-muted">Cijena po danu: <%= car.cijenadan %> kn <br>
+                                            <strong>
+                                                <% if(nadoknada) { %>
+                                                        + 20% nadoknade
+                                                <% } %> 
+                                            </strong>
+                                            </small>
+                                        </div>
+                                    -->
                                     </div>
                                 </div>
-                            </div>
-                                <% } %>
+                                </div>
                                     <% } %>
-        </main>
-        <%- include(`partials/footer`); %>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } %>
+    </main>
+    <%- include(`partials/footer`); %>
 </body>
 
 </html>

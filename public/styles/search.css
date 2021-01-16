@@ -39,6 +39,8 @@
     background-image: url('../images/background.jpeg');
 	background-size: cover;
 	background-position: center;
+	min-height: 100vh;
+    margin-top: -150px;
 }
 
 #booking::before {
@@ -55,6 +57,8 @@
 	max-width: 642px;
 	width: 100%;
 	margin: auto;
+	position: relative;
+	top: 75px;
 }
 
 .booking-form .form-header {
@@ -66,7 +70,7 @@
 	font-size: 58px;
 	text-transform: uppercase;
 	font-weight: 700;
-	color: #2644c9;
+	color: #ffffff;
 	margin: 0px;
 }
 
@@ -159,6 +163,26 @@
     background-color: #1c3191;
 }
 
+.paymentSection {
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+}
+
+.payButton {
+	width: 100%;
+	padding: 10px 0;
+	background-color: #beced38e;
+	border: none;
+	outline: none !important;
+	color: grey;
+}
+
+.activePayBtn {
+	background-color: #013344;
+	color: white;
+}
+
 .alert-danger {
     color: #721c24;
     background-color: #f8d7da;
@@ -169,34 +193,39 @@
     justify-content: center;
     bottom: 50px; 
     left: 25%;
-  }
+}
 
-  .card {
-	border:1px solid #c9d0d878
-  }
-  .card-body ul li {
+.card {
+	border: 3px solid #3b4c5f78;
+}
+
+.card-body ul li {
 	line-height:1.8;
 	font-size:14px
-  }
-  .color-dots span {
+}
+
+.color-dots span {
 	width:10px;
 	height:10px;
-  }
-  .card-img-top {
+}
+
+.card-img-top {
 	width: 100%;
 	height: 20vh;
 	object-fit: contain;
-	}
+}
+
 .text-muted{
 	color: black !important;
 }
+
 .card:hover{
-	border:3px solid #c9d0d878
+	border: 3px solid #c9d0d878;
 }
+
 .text-muted-addon{
 	color: #323333 !important;
 }
-
 
 .btn2 {
 	display: inline-block;
