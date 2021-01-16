@@ -86,8 +86,18 @@ module.exports = class Administrator extends User {
         }
     }
 
-    static editLocation = async (id, location, callerNo) => {
-        const sql = `update poslovnica set lokacija = '` + location + `', brojTelefona = '` + callerNo + `' where idPoslovnica = '` + id + `'`
+    static editLocationLocation = async (id, location) => {
+        const sql = `update poslovnica set lokacija = '` + location + `' where idPoslovnica = '` + id + `'`
+        try {
+            const result = await db.query(sql, [])
+        } catch (e) {
+            console.log(e)
+            throw e
+        }
+    }
+
+    static editLocationNumber = async (id, callerNo) => {
+        const sql = `update poslovnica set brojTelefona = '` + callerNo + `' where idPoslovnica = '` + id + `'`
         try {
             const result = await db.query(sql, [])
         } catch (e) {

@@ -142,7 +142,7 @@
     function zatvaranjeRezervacije (arg) {
         if(confirm('Želite li zatvoriti tu rezervaciju?')) {
             document.getElementById("zr").value = arg
-            document.getElementById("zdBtn").click()
+            document.getElementById("zrBtn").click()
         } else {
             alert('Rezervacija nije zatvorena.')
             return
@@ -288,13 +288,13 @@
                     <form action="/owner" method="post" id="uredivanjeVozila" style="display: none;">
                         <div class="formItem"></div>
                         <div class="formItem inputField col-12">
-                            <input type="text" id="registracijaEdit" name="registracijaEdit" placeholder="Registracijska oznaka" minlength="4">
+                            <input type="text" id="registracijaEdit" name="registracijaEdit" placeholder="Registracijska oznaka" minlength="4" readonly>
                         </div>
                         <div class="formItem inputField col-12">
                             <input type="text" name="kategorijaEdit" placeholder="Nova kategorija vozila" minlength="4">
                         </div>
                         <div class="formItem inputField col-12">
-                            <input type="text" name="cijenadanEdit" placeholder="Nova dnevna cijena" minlength="4">
+                            <input type="text" name="cijenadanEdit" placeholder="Nova dnevna cijena" minlength="2">
                         </div>
                         <div class="formItem inputField col-12">
                             <input type="text" name="slikaurlEdit" placeholder="Nova fotografija (URL)" minlength="4">
@@ -303,8 +303,10 @@
                         <div class="formItem col-12">
                             <button type="submit" value="Submit" class="submitButton">Uredi vozilo</button>
                         </div>
+                        <div class="formItem"></div>
                     </form>
                 </div>
+                <div class="formItem"></div>
             </div>
 
         </div>

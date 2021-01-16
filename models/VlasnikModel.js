@@ -35,9 +35,9 @@ module.exports = class Vlasnik extends User {
             throw e
         }
     }
-    static editVozilo = async (registracija, kategorija, cijenadan, slikaurl) => {
-        const sql = `update vozilo set kategorija = '` + kategorija + `', cijenadan = '` + cijenadan + `', slikaurl = '` + slikaurl + `'
-        where registracija = '` + registracija + `'`
+    
+    static editVoziloCategory = async (registracija, kategorija) => {
+        const sql = `update vozilo set kategorija = '` + kategorija + `' where registracija = '` + registracija + `'`
         try {
             const result = await db.query(sql, [])
         } catch (e) {
@@ -45,6 +45,27 @@ module.exports = class Vlasnik extends User {
             throw e
         }
     }
+
+    static editVoziloPrice = async (registracija, cijena) => {
+        const sql = `update vozilo set cijenadan = '` + cijena + `' where registracija = '` + registracija + `'`
+        try {
+            const result = await db.query(sql, [])
+        } catch (e) {
+            console.log(e)
+            throw e
+        }
+    }
+
+    static editVoziloImg = async (registracija, slikaurl) => {
+        const sql = `update vozilo set slikaurl = '` + slikaurl + `' where registracija = '` + registracija + `'`
+        try {
+            const result = await db.query(sql, [])
+        } catch (e) {
+            console.log(e)
+            throw e
+        }
+    }
+
     static getReviews = async () => {
         const sql = `select * from recenzija`
         try {

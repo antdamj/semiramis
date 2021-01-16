@@ -49,7 +49,9 @@ router.post('/', async (req, res) => {
         postMsg = "Vozilo uspješno uklonjeno!"
     }
     if ('registracijaEdit' in req.body) {
-        await Vlasnik.editVozilo(req.body.registracijaEdit, req.body.kategorijaEdit, req.body.cijenadanEdit, req.body.slikaurlEdit);
+        if (req.body.kategorijaEdit != '') await Vlasnik.editVoziloCategory(req.body.registracijaEdit, req.body.kategorijaEdit)
+        if (req.body.cijenadanEdit != '') await Vlasnik.editVoziloPrice(req.body.registracijaEdit, req.body.cijenadanEdit)
+        if (req.body.req.body.slikaurlEdit != '') await Vlasnik.editVoziloImg(req.body.registracijaEdit, req.body.slikaurlEdit)
         postMsg = "Vozilo uspješno uređeno!"
     }
     if ('rezervacijaClose' in req.body) {

@@ -33,6 +33,7 @@
     }
 
     function locationEdit (arg) {
+        document.getElementById("la").style.display = "none"
         document.getElementById("locationId").value = arg
         document.getElementById("lediv").style.display = "block"
     }
@@ -190,7 +191,6 @@
 
             <div class="centered-container formContainer">
                 <form action="/admin" method="post" style="display: none;" id="lediv">
-                    <div class="formItem"></div>
                     <div class="formItem inputField col-12">
                         <input type="hidden" id="locationId" name="locationEdit" placeholder="ID lokacije" ime" minlength="4">
                     </div>
@@ -200,13 +200,15 @@
                     <div class="formItem inputField col-12">
                         <input type="text" name="phoneEdit" placeholder="Novi broj telefona" minlength="4">
                     </div>
+                    <div class="formItem"></div>
                     <div class="formItem col-12">
                         <button type="submit" id="locationEdiBtn" value="Submit" class="submitButton">Uredi poslovnicu</button>
                     </div>
+                    <div class="formItem"></div>
                 </form>
             </div>
 
-            <div class="centered-container formContainer">
+            <div class="centered-container formContainer" id="la">
                 <div class="formItem"></div>
                 <button class="submitButton" onclick="pritisak('dodavanjeLokacije')">Dodavanje poslovnice</button>
                 <form action="/admin" method="post" style="display: none;" id="dodavanjeLokacije">
