@@ -178,7 +178,12 @@
 	color: grey;
 }
 
-.activePayBtn {
+.payButton:hover {
+	background-color: #779aa38e;
+	color: rgb(92, 92, 92);
+}
+
+.activePayBtn, .activePayBtn:hover {
 	background-color: #013344;
 	color: white;
 }
