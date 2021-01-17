@@ -884,6 +884,7 @@ label {
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
+    border-color: #003d52 transparent transparent transparent;
   }
   
   .tooltip:hover .tooltiptext {
