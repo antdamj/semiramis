@@ -72,10 +72,12 @@
         document.write(ukCijena.toFixed(2).concat(" kn"));
     };
 
-    function delReservation() {
+    function delReservation (arg) {
             if (confirm('Jeste li sigurni da želite obrisati ovu rezervaciju?') == true) {
+                let x = "brisanje".concat(arg)
+                console.log(x)
                 //obrisi racun
-                document.getElementById("del-reservation-link").click();
+                document.getElementById(x).click();
                 //odjava
             } else {
                 //odustani
@@ -147,7 +149,7 @@
                         </td>
                         <td class="td" style="align-items: center;" id="smallIcons" style="width: 10%;">
                             <div class="tooltip">
-                                <img class="smallsvg" id="reservation-del" src="../images/delete.svg" value="true" onclick="delReservation()">
+                                <img class="smallsvg" id="reservation-del" src="../images/delete.svg" value="true" onclick="delReservation('<%= rez.idrezervacija%>')">
                                 <span class="tooltiptext">Obriši rezervaciju</span>
                             </div>
                             <div class="tooltip">
@@ -155,11 +157,11 @@
                                 <span class="tooltiptext">Uredi rezervaciju</span>
                             </div>
                             <!--Sakriveni botun-->
-                            <form action="/user" method="POST" style="display: none;">
+                            <form action="/cart" method="POST" style="display: none;">
                                 <div class="formItem inputField col-12">
                                     <input type="hidden" id="deleteIn" name="delReservation" value="<%= rez.idrezervacija%>">
                                 </div>
-                                <button type="submit" id="del-reservation-link" value="Submit" style="display: none;"></button>
+                                <button type="submit" id="brisanje<%= rez.idrezervacija%>" value="Submit" style="display: none;"></button>
                             </form>
                         </td>
                     </tr>

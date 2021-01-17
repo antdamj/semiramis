@@ -70,22 +70,7 @@ router.post('/', async (req, res, next) => {
         });
         return
     }
-     //brisanje rezervacije
-     if('delReservation' in req.body) {
-        console.log("Brisanje rezervacije");
-        console.log(req.body);
-        await User.deleteReservation(req.session.user.korisnickoime, req.body.delReservation);
-
-        res.render('cart', {
-            title: 'Moje rezervacije',
-            linkActive: 'cart',
-            user: undefined,
-            err: undefined,
-            msg: undefined
-        });
-        return
-    }
-
+    
     //----------------LOZINKE----------------
     //provjeri istovjetnost unesenenih zaporki
     if (req.body.password1 != req.body.password2) {

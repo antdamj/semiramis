@@ -37,6 +37,24 @@ router.post('/', async function (req, res, next) {
     let zavrsenePostoji = await User.doneExists(req.session.user.korisnickoime);
    
     
+    if('delReservation' in req.body) {
+        console.log("Brisanje rezervacije");
+        console.log(req.body);
+        await User.deleteReservation(req.session.user.korisnickoime, req.body.delReservation);
+
+        res.render('cart', {
+            title: 'Moje rezervacije',
+            user: req.session.user,
+            linkActive: 'cart',
+            aktivne: aktivneRezervacije,
+            zavrsene: zavrseneRezervacije,
+            isHidden: false,
+            err: undefined,
+            aktivnePostoji: aktivnePostoji,
+            zavrsenePostoji: zavrsenePostoji
+        });
+        return
+    }
 
 });
 
