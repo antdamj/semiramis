@@ -62,11 +62,16 @@ router.post('/', async (req, res, next) => {
     
     });
 
-    const mailOptions = {
+   const mailOptions = {
         from: 'halikarnas.autos@zohomail.eu',
         to: user.email,
         subject: 'Zaboravljena lozinka',
-        text: 'Poštovani, možete promijeniti lozinku na sljedećoj poveznici: http://halikarnas-autos.duckdns.org/reset/' + user.lozinka + '/' + user.korisnickoime + '    Želimo Vam ugodan dan, HALIKARNAS!'
+        html: 'Poštovani, ' + user.korisnickoime  + ' možete promijeniti lozinku na sljedećoj poveznici: http://halikarnas-autos.duckdns.org/reset/' + user.lozinka + '/' + user.korisnickoime + '  <br/>  Želimo Vam ugodan dan, HALIKARNAS! <br/> <img src="425"/>',
+        attachments: [{
+                filename: 'logo.svg',
+                path: './public/images/logo.svg',
+                cid: '425'
+        }]
     };
 
     

@@ -113,55 +113,39 @@
         function cbclick(arg) {
             console.log(arg);
         if(arg == "sve") {
-            if(document.getElementById("sve").classList.contains('cbHard')) return
+            if(document.getElementById("sve").classList.contains('activePayBtn')) return
             else {
-                document.getElementById("niza").classList.remove('cbHard')
-                document.getElementById("niza").classList.add('cbSoft')
-                document.getElementById("srednja").classList.remove('cbHard')
-                document.getElementById("srednja").classList.add('cbSoft')
-                document.getElementById("visa").classList.remove('cbHard')
-                document.getElementById("visa").classList.add('cbSoft')
-                document.getElementById("sve").classList.remove('cbSoft')
-                document.getElementById("sve").classList.add('cbHard')
+                document.getElementById("niza").classList.remove('activePayBtn')
+                document.getElementById("srednja").classList.remove('activePayBtn')
+                document.getElementById("visa").classList.remove('activePayBtn')
+                document.getElementById("sve").classList.add('activePayBtn')
                resetFilter();
             }
         } else if (arg == "niza") {
-            if(document.getElementById("niza").classList.contains('cbHard')) return
+            if(document.getElementById("niza").classList.contains('activePayBtn')) return
             else {
-                document.getElementById("sve").classList.remove('cbHard')
-                document.getElementById("sve").classList.add('cbSoft')
-                document.getElementById("srednja").classList.remove('cbHard')
-                document.getElementById("srednja").classList.add('cbSoft')
-                document.getElementById("visa").classList.remove('cbHard')
-                document.getElementById("visa").classList.add('cbSoft')
-                document.getElementById("niza").classList.remove('cbSoft')
-                document.getElementById("niza").classList.add('cbHard')
+                document.getElementById("sve").classList.remove('activePayBtn')
+                document.getElementById("srednja").classList.remove('activePayBtn')
+                document.getElementById("visa").classList.remove('activePayBtn')
+                document.getElementById("niza").classList.add('activePayBtn')
                 filtriraj('niža')
             }
         } else if (arg == "srednja") {
-            if(document.getElementById("srednja").classList.contains('cbHard')) return
+            if(document.getElementById("srednja").classList.contains('activePayBtn')) return
             else {
-                document.getElementById("sve").classList.remove('cbHard')
-                document.getElementById("sve").classList.add('cbSoft')
-                document.getElementById("niza").classList.remove('cbHard')
-                document.getElementById("niza").classList.add('cbSoft')
-                document.getElementById("visa").classList.remove('cbHard')
-                document.getElementById("visa").classList.add('cbSoft')
-                document.getElementById("srednja").classList.remove('cbSoft')
-                document.getElementById("srednja").classList.add('cbHard')
+                document.getElementById("sve").classList.remove('activePayBtn')
+                document.getElementById("niza").classList.remove('activePayBtn')
+                document.getElementById("visa").classList.remove('activePayBtn')
+                document.getElementById("srednja").classList.add('activePayBtn')
                 filtriraj('srednja');
             }
         } else if (arg == "visa") {
-            if(document.getElementById("visa").classList.contains('cbHard')) return
+            if(document.getElementById("visa").classList.contains('activePayBtn')) return
             else {
-                document.getElementById("sve").classList.remove('cbHard')
-                document.getElementById("sve").classList.add('cbSoft')
-                document.getElementById("niza").classList.remove('cbHard')
-                document.getElementById("niza").classList.add('cbSoft')
-                document.getElementById("srednja").classList.remove('cbHard')
-                document.getElementById("srednja").classList.add('cbSoft')
-                document.getElementById("visa").classList.remove('cbSoft')
-                document.getElementById("visa").classList.add('cbHard')
+                document.getElementById("sve").classList.remove('activePayBtn')
+                document.getElementById("niza").classList.remove('activePayBtn')
+                document.getElementById("srednja").classList.remove('activePayBtn')
+                document.getElementById("visa").classList.add('activePayBtn')
                 filtriraj('viša');
             }
         }
@@ -182,11 +166,18 @@
         }
     }
 
+    function h() {
+        document.getElementById("header").style.opacity = 0.85
+        let x = <%- JSON.stringify(isHidden) %>
+        if(x == false) document.getElementById("footer").style.display = "none"
+        else document.getElementById("footer").style.display = "block"
+    }
+
     </script>
 
 </head>
 
-<body class="content">
+<body class="content" onload="h()">
 
     <%- include(`partials/header`); %>
     <main class="main">
@@ -200,7 +191,7 @@
                             </div>
                             <form name="form1" method="post" action="/search">
                                 <div class="row">
-                                    <div class="col-sm-4">
+                                    <div class="col-md-4 col-sm-12">
                                         <div class="form-group">
                                             <span class="form-label">Lokacija primitka:</span>
                                                 <select class="form-control"   name="lokacija_primitka"  id="lokacija_primitka">
@@ -213,7 +204,7 @@
                                             <span class="select-arrow"></span>
                                         </div>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-md-8 col-sm-12">
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
@@ -284,7 +275,7 @@
                                     <hr style="background-color:#003d52">
                                     
                                     <div class="row">
-                                        <div class="col-sm-4">
+                                        <div class="col-md-4 col-sm-12">
                                             <div class="form-group">
                                                 <span class="form-label">Lokacija povratka:</span>
                                                     <select class="form-control"   name="lokacija_povratka"  id="lokacija_povratka">
@@ -297,7 +288,7 @@
                                                 <span class="select-arrow"></span>
                                             </div>
                                         </div>
-                                        <div class="col-sm-8">
+                                        <div class="col-md-8 col-sm-12">
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
@@ -364,6 +355,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <br>
                                     <div class="form-btn">
                                         <button class="submitButton" style="position: relative; left: 25%;">Pretraži</button>
                                     </div>
@@ -387,12 +379,22 @@
                         <div class="formItem col-12" style="font-size: 28px !important;">
                             KATEGORIJE
                         </div>
-                        <div class="choiceButtonContainer">
-                            <button class="choiceButton cbHard" id="sve" onclick="cbclick('sve')">Sve</button>
-                            <button class="choiceButton cbSoft" id="niza" onclick="cbclick('niza')">Niža</button>
-                            <button class="choiceButton cbSoft" id="srednja" onclick="cbclick('srednja')">Srednja</button>
-                            <button class="choiceButton cbSoft" id="visa" onclick="cbclick('visa')">Viša</button>
+
+                        <div class="choiceButtonContainer paymentSection">
+                            <div style="width: 130px; margin-left: calc(50vw - 260px);">
+                                <button class="payButton activePayBtn" id="sve" onclick="cbclick('sve')" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px">Sve</button>
+                            </div>
+                            <div style="width: 130px;">
+                                <button class="payButton" id="niza" onclick="cbclick('niza')">Niža</button>
+                            </div>
+                            <div style="width: 130px;">
+                                <button class="payButton" id="srednja" onclick="cbclick('srednja')">Srednja</button>
+                            </div>
+                            <div style="width: 130px;">
+                                <button class="payButton" id="visa" onclick="cbclick('visa')" style="border-top-right-radius: 10px; border-bottom-right-radius: 10px">Viša</button>
+                            </div>
                         </div>
+
                         <hr style="background-color: #003d52">
                         <hr style="background-color: #003d52">
                     </div>

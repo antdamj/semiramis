@@ -10,6 +10,7 @@
     <link rel="shortcut icon" type="image/png" href="./images/car-icon.png" />
     <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
     <link rel="stylesheet" type="text/css" href="./styles/main.css">
+    <link rel="stylesheet" type="text/css" href="./styles/search.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 </head>
 
@@ -50,22 +51,18 @@
 
     function cbclick(arg) {
         if(arg == "cb1") {
-            if(document.getElementById("cb1").classList.contains('cbHard')) return
+            if(document.getElementById("cb1").classList.contains('activePayBtn')) return
             else {
-                document.getElementById("cb2").classList.remove('cbHard')
-                document.getElementById("cb2").classList.add('cbSoft')
-                document.getElementById("cb1").classList.remove('cbSoft')
-                document.getElementById("cb1").classList.add('cbHard')
+                document.getElementById("cb2").classList.remove('activePayBtn')
+                document.getElementById("cb1").classList.add('activePayBtn')
                 document.getElementById("poslovniceContainer").style.display = "none"
                 document.getElementById("korisniciContainer").style.display = "block"
             }
         } else if (arg == "cb2") {
-            if(document.getElementById("cb2").classList.contains('cbHard')) return
+            if(document.getElementById("cb2").classList.contains('activePayBtn')) return
             else {
-                document.getElementById("cb1").classList.remove('cbHard')
-                document.getElementById("cb1").classList.add('cbSoft')
-                document.getElementById("cb2").classList.remove('cbSoft')
-                document.getElementById("cb2").classList.add('cbHard')
+                document.getElementById("cb1").classList.remove('activePayBtn')
+                document.getElementById("cb2").classList.add('activePayBtn')
                 document.getElementById("korisniciContainer").style.display = "none"
                 document.getElementById("poslovniceContainer").style.display = "block"
             }
@@ -92,9 +89,13 @@
         <h3 style="text-align:center"><img class="bigsvg" src="../images/admin.svg"></h3>
         <h3 style="text-align:center">Administrator sustava - upravljačka ploča</h3>
 
-        <div class="choiceButtonContainer">
-            <button class="choiceButton cbHard" id="cb1" onclick="cbclick('cb1')">Korisnici</button>
-            <button class="choiceButton cbSoft" id="cb2" onclick="cbclick('cb2')">Poslovnice</button>
+        <div class="choiceButtonContainer paymentSection">
+            <div style="width: 130px;">
+                <button class="payButton activePayBtn" id="cb1" onclick="cbclick('cb1')" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px">Korisnici</button>
+            </div>
+            <div style="width: 130px;">
+                <button class="payButton" id="cb2" onclick="cbclick('cb2')" style="border-top-right-radius: 10px; border-bottom-right-radius: 10px">Poslovnice</button>
+            </div>
         </div>
 
         <div class="containerOA" id="korisniciContainer">
@@ -116,7 +117,7 @@
                                 <td class="td" style="width: 25%;"><%= u.prezime %></td>
                                 <td class="td" style="width: 15%;"><%= u.uloga %></td>
                                 <td class="td tdButtonArea" style="width: 15%;">
-                                    <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="korisnikDelete('<%= u.korisnickoime %>')">
+                                    <img class="smallsvg" src="../images/trash.svg" alt="remove" onclick="korisnikDelete('<%= u.korisnickoime %>')">
                                     <img class="smallsvg" src="../images/pencil.svg" alt="edit" onclick="korisnikPromote('<%= u.korisnickoime %>')">
                                 </td>
                             </tr>
@@ -168,7 +169,7 @@
                             <td class="td" style="width: 40%;"><%= l.lokacija %></td>
                             <td class="td" style="width: 30%;"><%= l.brojtelefona %></td>
                             <td class="td tdButtonArea" style="width: 20%;">
-                                <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="locationDelete('<%= l.idposlovnica %>')">
+                                <img class="smallsvg" src="../images/trash.svg" alt="remove" onclick="locationDelete('<%= l.idposlovnica %>')">
                                 <img class="smallsvg" src="../images/pencil.svg" alt="edit" onclick="locationEdit('<%= l.idposlovnica %>')">
                             </td>
                         </tr>

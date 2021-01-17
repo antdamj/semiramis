@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/png" href="./images/car-icon.png" />
     <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
     <link rel="stylesheet" type="text/css" href="./styles/main.css">
+    <link rel="stylesheet" type="text/css" href="./styles/search.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 </head>
 
@@ -20,64 +21,48 @@
 
     function cbclick(arg) {
         if(arg == "cb1") {
-            if(document.getElementById("cb1").classList.contains('cbHard')) return
+            if(document.getElementById("cb1").classList.contains('activePayBtn')) return
             else {
-                document.getElementById("cb2").classList.remove('cbHard')
-                document.getElementById("cb2").classList.add('cbSoft')
-                document.getElementById("cb3").classList.remove('cbHard')
-                document.getElementById("cb3").classList.add('cbSoft')
-                document.getElementById("cb4").classList.remove('cbHard')
-                document.getElementById("cb4").classList.add('cbSoft')
-                document.getElementById("cb1").classList.remove('cbSoft')
-                document.getElementById("cb1").classList.add('cbHard')
+                document.getElementById("cb2").classList.remove('activePayBtn')
+                document.getElementById("cb3").classList.remove('activePayBtn')
+                document.getElementById("cb4").classList.remove('activePayBtn')
+                document.getElementById("cb1").classList.add('activePayBtn')
                 document.getElementById("rezervacijeContainer").style.display = "none"
                 document.getElementById("recenzijeContainer").style.display = "none"
                 document.getElementById("statistikaContainer").style.display = "none"
                 document.getElementById("vozilaContainer").style.display = "block"
             }
         } else if (arg == "cb2") {
-            if(document.getElementById("cb2").classList.contains('cbHard')) return
+            if(document.getElementById("cb2").classList.contains('activePayBtn')) return
             else {
-                document.getElementById("cb1").classList.remove('cbHard')
-                document.getElementById("cb1").classList.add('cbSoft')
-                document.getElementById("cb3").classList.remove('cbHard')
-                document.getElementById("cb3").classList.add('cbSoft')
-                document.getElementById("cb4").classList.remove('cbHard')
-                document.getElementById("cb4").classList.add('cbSoft')
-                document.getElementById("cb2").classList.remove('cbSoft')
-                document.getElementById("cb2").classList.add('cbHard')
+                document.getElementById("cb1").classList.remove('activePayBtn')
+                document.getElementById("cb3").classList.remove('activePayBtn')
+                document.getElementById("cb4").classList.remove('activePayBtn')
+                document.getElementById("cb2").classList.add('activePayBtn')
                 document.getElementById("vozilaContainer").style.display = "none"
                 document.getElementById("recenzijeContainer").style.display = "none"
                 document.getElementById("statistikaContainer").style.display = "none"
                 document.getElementById("rezervacijeContainer").style.display = "block"
             }
         } else if (arg == "cb3") {
-            if(document.getElementById("cb3").classList.contains('cbHard')) return
+            if(document.getElementById("cb3").classList.contains('activePayBtn')) return
             else {
-                document.getElementById("cb1").classList.remove('cbHard')
-                document.getElementById("cb1").classList.add('cbSoft')
-                document.getElementById("cb2").classList.remove('cbHard')
-                document.getElementById("cb2").classList.add('cbSoft')
-                document.getElementById("cb4").classList.remove('cbHard')
-                document.getElementById("cb4").classList.add('cbSoft')
-                document.getElementById("cb3").classList.remove('cbSoft')
-                document.getElementById("cb3").classList.add('cbHard')
+                document.getElementById("cb1").classList.remove('activePayBtn')
+                document.getElementById("cb2").classList.remove('activePayBtn')
+                document.getElementById("cb4").classList.remove('activePayBtn')
+                document.getElementById("cb3").classList.add('activePayBtn')
                 document.getElementById("vozilaContainer").style.display = "none"
                 document.getElementById("rezervacijeContainer").style.display = "none"
                 document.getElementById("statistikaContainer").style.display = "none"
                 document.getElementById("recenzijeContainer").style.display = "block"
             }
         } else if (arg == "cb4") {
-            if(document.getElementById("cb4").classList.contains('cbHard')) return
+            if(document.getElementById("cb4").classList.contains('activePayBtn')) return
             else {
-                document.getElementById("cb1").classList.remove('cbHard')
-                document.getElementById("cb1").classList.add('cbSoft')
-                document.getElementById("cb2").classList.remove('cbHard')
-                document.getElementById("cb2").classList.add('cbSoft')
-                document.getElementById("cb3").classList.remove('cbHard')
-                document.getElementById("cb3").classList.add('cbSoft')
-                document.getElementById("cb4").classList.remove('cbSoft')
-                document.getElementById("cb4").classList.add('cbHard')
+                document.getElementById("cb1").classList.remove('activePayBtn')
+                document.getElementById("cb2").classList.remove('activePayBtn')
+                document.getElementById("cb3").classList.remove('activePayBtn')
+                document.getElementById("cb4").classList.add('activePayBtn')
                 document.getElementById("vozilaContainer").style.display = "none"
                 document.getElementById("rezervacijeContainer").style.display = "none"
                 document.getElementById("recenzijeContainer").style.display = "none"
@@ -121,7 +106,53 @@
     }
 
     function formatirajVrijeme(arg) {
-        document.write(arg.substring(4, 15))
+        let n = arg.substring(4, 15)
+        let m = n.substring(0, 3)
+        switch (m) {
+            case "Jan":
+                m = "siječnja"
+                break;
+            case "Feb":
+                m = "veljače"
+                break;
+            case "Mar":
+                m = "ožujka"
+                break;
+            case "Apr":
+                m = "travnja"
+                break;
+            case "May":
+                m = "svibnja"
+                break;
+            case "Jun":
+                m = "lipnja"
+                break;
+            case "Jul":
+                m = "srpnja"
+                break;
+            case "Aug":
+                m = "kolovoza"
+                break;
+            case "Sep":
+                m = "rujna"
+                break;
+            case "Oct":
+                m = "listopada"
+                break;
+            case "Nov":
+                m = "studenoga"
+                break;
+            case "Dec":
+                m = "prosinca"
+                break;
+            default:
+                break;
+        }
+        let dd = n.substring(4, 6)
+        if(dd[0] == "0") dd = dd[1]
+        let yy = n.substring(7, 11)        
+        let rez = dd.concat(". ").concat(m).concat(" ").concat(yy).concat(".")
+        document.write(rez)
     }
 
     function imeVozila(arg) {
@@ -170,7 +201,7 @@
         
         let udio = Math.round((arg / max)*100)
 
-        let izlaz = '<div style="float: left; color: white; text-align: center; height: 40px; line-height: 40px; margin: 5px 0; background-color: #003d52; width: ' + udio + '%;">' + arg + ' kn</div>'
+        let izlaz = '<div style="float: left; color: white; text-align: center; height: 40px; line-height: 40px; margin: 5px 0; background-color: #003d52; width: ' + udio + '%; border-top-right-radius: 5px; border-bottom-right-radius: 5px;">' + arg + ' kn</div>'
         document.write(izlaz)
     }
 
@@ -189,13 +220,21 @@
     <%- include(`partials/header`); %>
         <div class="formItem"></div>
         <h3 style="text-align:center"><img class="bigsvg" src="../images/owner.svg"></h3>
-        <h3 style="text-align:center">Vlasnik sustava - upravljačka ploča</h3>
+        <h3 style="text-align:center; margin-bottom: 0;">Vlasnik sustava - upravljačka ploča</h3>
 
-        <div class="choiceButtonContainer">
-            <button class="choiceButton cbHard" id="cb1" onclick="cbclick('cb1')">Vozila</button>
-            <button class="choiceButton cbSoft" id="cb2" onclick="cbclick('cb2')">Rezervacije</button>
-            <button class="choiceButton cbSoft" id="cb3" onclick="cbclick('cb3')">Ocjene</button>
-            <button class="choiceButton cbSoft" id="cb4" onclick="cbclick('cb4')">Statistika</button>
+        <div class="choiceButtonContainer paymentSection">
+            <div style="width: 130px;">
+                <button class="payButton activePayBtn" id="cb1" onclick="cbclick('cb1')" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px">Vozila</button>
+            </div>
+            <div style="width: 130px;">
+                <button class="payButton" id="cb2" onclick="cbclick('cb2')">Rezervacije</button>
+            </div>
+            <div style="width: 130px;">
+                <button class="payButton" id="cb3" onclick="cbclick('cb3')">Ocjene</button>
+            </div>
+            <div style="width: 130px;">
+                <button class="payButton" id="cb4" onclick="cbclick('cb4')" style="border-top-right-radius: 10px; border-bottom-right-radius: 10px">Statistika</button>
+            </div>
         </div>
 
         <div class="containerOA" id="vozilaContainer">
@@ -221,7 +260,7 @@
                             </td>
 
                             <td class="td tdButtonArea" style="width: 25%;">
-                                <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="ukloniVozilo('<%= v.registracija %>')">
+                                <img class="smallsvg" src="../images/trash.svg" alt="remove" onclick="ukloniVozilo('<%= v.registracija %>')">
                                 <img class="smallsvg" src="../images/pencil.svg" alt="edit" onclick="urediVozilo('<%= v.registracija %>')">
                             </td>
                         </tr>
@@ -384,7 +423,7 @@
                             <td class="td" style="width: 10%;"><%= r.ocjena%></td>
     
                             <td class="td tdButtonArea" style="width: 10%;">
-                                <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="ukloniRecenziju('<%= r.idrezervacija %>')">
+                                <img class="smallsvg" src="../images/trash.svg" alt="remove" onclick="ukloniRecenziju('<%= r.idrezervacija %>')">
                             </td>
                         </tr>
                     <% } %>
