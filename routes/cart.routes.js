@@ -28,34 +28,30 @@ router.get('/', async function (req, res, next) {
     });
 });
 
-router.post('/', async function (req, res, next) {
+router.post('/', async function (req, res) {
+
+    if('delReservation' in req.body) {
+        console.log("Brisanje rezervacije");
+        await User.deleteReservation(req.session.user.korisnickoime, req.body.delReservation);
+    }
 
     //potrebni podatci
     let aktivneRezervacije = await User.getActiveReservations(req.session.user.korisnickoime);
     let zavrseneRezervacije = await User.getPastReservations(req.session.user.korisnickoime);
     let aktivnePostoji = await User.activeExists(req.session.user.korisnickoime);
     let zavrsenePostoji = await User.doneExists(req.session.user.korisnickoime);
-   
-    
-    if('delReservation' in req.body) {
-        console.log("Brisanje rezervacije");
-        console.log(req.body);
-        await User.deleteReservation(req.session.user.korisnickoime, req.body.delReservation);
 
-        res.render('cart', {
-            title: 'Moje rezervacije',
-            user: req.session.user,
-            linkActive: 'cart',
-            aktivne: aktivneRezervacije,
-            zavrsene: zavrseneRezervacije,
-            isHidden: false,
-            err: undefined,
-            aktivnePostoji: aktivnePostoji,
-            zavrsenePostoji: zavrsenePostoji
-        });
-        return
-    }
-
+    res.render('cart', {
+        title: 'Moje rezervacije',
+        user: req.session.user,
+        linkActive: 'cart',
+        aktivne: aktivneRezervacije,
+        zavrsene: zavrseneRezervacije,
+        isHidden: false,
+        err: undefined,
+        aktivnePostoji: aktivnePostoji,
+        zavrsenePostoji: zavrsenePostoji
+    });
 });
 
 module.exports = router;
