@@ -40,7 +40,18 @@
 	background-size: cover;
 	background-position: center;
 	min-height: 100vh;
-    margin-top: -150px;
+}
+
+@media only screen and (max-width: 768px) {
+    #booking {
+        margin-top: -10vh;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    #booking {
+        margin-top: -150px;
+    }
 }
 
 #booking::before {
@@ -176,6 +187,7 @@
 	border: none;
 	outline: none !important;
 	color: grey;
+	line-height: 35px;
 }
 
 .payButton:hover {
