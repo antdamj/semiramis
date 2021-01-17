@@ -9,6 +9,69 @@
     <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
     <link rel="stylesheet" type="text/css" href="./styles/main.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <script>
+       function formatiraj(arg) {
+        let n = arg.substring(4, 15)
+        let m = n.substring(0, 3)
+        switch (m) {
+            case "Jan":
+                m = "siječnja"
+                break;
+            case "Feb":
+                m = "veljače"
+                break;
+            case "Mar":
+                m = "ožujka"
+                break;
+            case "Apr":
+                m = "travnja"
+                break;
+            case "May":
+                m = "svibnja"
+                break;
+            case "Jun":
+                m = "lipnja"
+                break;
+            case "Jul":
+                m = "srpnja"
+                break;
+            case "Aug":
+                m = "kolovoza"
+                break;
+            case "Sep":
+                m = "rujna"
+                break;
+            case "Oct":
+                m = "listopada"
+                break;
+            case "Nov":
+                m = "studenoga"
+                break;
+            case "Dec":
+                m = "prosinca"
+                break;
+            default:
+                break;
+        }
+        let dd = n.substring(4, 6)
+        if(dd[0] == "0") dd = dd[1]
+        let yy = n.substring(7, 11)        
+        let rez = dd.concat(". ").concat(m).concat(".").concat(" ").concat(yy).concat(".")
+        document.write(rez)
+    }; 
+
+    function izracunajUkCijenu(dat1, dat2, cijena) {
+        let prvi = new Date(dat1);
+        let drugi = new Date(dat2);
+        var difference_in_time = drugi.getTime() - prvi.getTime();
+        var difference_in_days = difference_in_time / (1000 * 3600 * 24);
+        var ukCijena = difference_in_days.toFixed() * cijena;
+        document.write(ukCijena.toFixed(2).concat(" kn"));
+    };
+
+    </script>
+
 </head>
 
 <body>
@@ -40,22 +103,31 @@
                 <div>
                     <tr class="tr">
                         <td class="td" style="width: 10%;">
-                            <img class="photo-box-image" src= "<%= rez.slikaURL %>">
+                            <img id="myImg" alt="<%=rez.marka%> <%=rez.model%>" class="photo-box-image" src= "<%= rez.slikaurl %>">
+                            <!-- The Modal -->
+                            <div id="myModal" class="modal">
+                                <span class="close">&times;</span>
+                                <img class="modal-content" id="img01">
+                                <div id="caption"></div>
+                            </div>
                         </td>
                         <td class="td" style="width: 10%;"><%= rez.marka %> <%= rez.model %> </td>
                         <td class="td" style="width: 5%;"><%= rez.registracija %></td>
                         <td class="td" style="width: 10%;"><%= rez.lokacijapreuzimanja %></td>
                         <td class="td" style="width: 10%;"><%= rez.lokacijaostavljanja %></td>
                         <td class="td" style="width: 10%;">
-                            <%= rez.vrijemepreuzimanja %>
-
+                            <script>formatiraj('<%= rez.vrijemepreuzimanja %>');</script>
                         </td>
-                        <td class="td" style="width: 10%;"><%= rez.vrijemezavrsetka %></td>
+                        <td class="td" style="width: 10%;">
+                            <script>formatiraj('<%= rez.vrijemezavrsetka %>');</script>
+                        </td>
                         <td class="td" style="width: 5%;">
                             <% if(rez.tipplacanja == 'cash' || rez.tipplacanja == 'gotovina') { %>Gotovina
                             <% } else { %> Kartica <% }%>
                         </td>
-                        <td class="td" style="width: 5%;">Cijena</td>
+                        <td class="td" style="width: 5%;">
+                            <script>izracunajUkCijenu('<%= rez.vrijemepreuzimanja %>', '<%= rez.vrijemezavrsetka %>', '<%= rez.cijenadan %>');</script>
+                        </td>
                         <td class="td" style="width: 10%;">
                             <% if(rez.status == 'aktivna') { %> Aktivna rezervacija
                                 <% } else { %> Neaktivna rezervacija <% }%>
@@ -63,7 +135,6 @@
                         <td class="td" id="smallIcons" style="width: 15%;">
                             <img class="smallsvg" id="left-element" src="../images/delete.svg" alt="remove">
                             <img class="smallsvg" id="middle-element"src="../images/pencil.svg" alt="edit">
-                            <img class="star" id="right-element" src="../images/star-empty.png" alt="review">
                         </td>
                     </tr>
                 </div>
@@ -79,9 +150,10 @@
     
     <br><br><br>
 
-    <!-- Završene rezervacije -->
-    <div id="zavrseneBlock">
-        <h1 id="myReservationHeader">Završene rezervacije</h1>
+     <!-- Zavrsene rezervacije -->
+
+     <div id="aktivneBlock">
+        <h1 style="text-align:center" id="myReservationHeader">Završene rezervacije</h1>
         <hr>
         <% if(zavrsenePostoji == true) { %>
         <div class="myBlock">
@@ -89,53 +161,86 @@
                 <tr>
                     <th class="th" style="width: 10%;">Slika</th>
                     <th class="th" style="width: 10%;">Rezervirano vozilo</th>
-                    <th class="th" style="width: 10%;">Registracija</th>
+                    <th class="th" style="width: 5%;">Registracija</th>
                     <th class="th" style="width: 10%;">Adresa preuzimanja</th>
                     <th class="th" style="width: 10%;">Adresa ostavljanja</th>
                     <th class="th" style="width: 10%;">Vrijeme preuzimanja</th>
                     <th class="th" style="width: 10%;">Vrijeme ostavljanja</th>
-                    <th class="th" style="width: 10%;">Tip plaćanja</th>
-                    <th class="th" style="width: 10%;">Cijena</th>
+                    <th class="th" style="width: 5%;">Tip plaćanja</th>
+                    <th class="th" style="width: 5%;">Cijena</th>
                     <th class="th" style="width: 10%;">Status</th>
-                    <th class="th" style="width: 10%;"></th>
+                    <th class="th" style="width: 20%;"></th>
                 </tr>
             <% for (let rez of zavrsene) { %>
-            <div>
-                <tr class="tr">
-                    <td class="td" style="width: 10%;">
-                        <img class="photo-box-image" src= "<%= rez.slikaURL %>">
-                    </td>
-                    <td class="td" style="width: 10%;"><%= rez.marka %> <%= rez.model %> </td>
-                    <td class="td" style="width: 10%;"><%= rez.registracija %></td>
-                    <td class="td" style="width: 10%;"><%= rez.lokacijapreuzimanja %></td>
-                    <td class="td" style="width: 10%;"><%= rez.lokacijaostavljanja %></td>
-                    <td class="td" style="width: 10%;"><%= rez.vrijemepreuzimanja %></td>
-                    <td class="td" style="width: 10%;"><%= rez.vrijemezavrsetka %></td>
-                    <td class="td" style="width: 10%;">
-                        <% if(rez.tipplacanja == 'cash' || rez.tipplacanja == 'gotovina') { %>Gotovina
-                        <% } else { %> Kartica <% }%>
-                    </td>
-                    <td class="td" style="width: 10%;">Cijena</td>
-                    <td class="td" style="width: 10%;">
-                        <% if(rez.status == 'aktivna') { %> Aktivna rezervacija
-                            <% } else { %> Neaktivna rezervacija <% }%>
-                    </td>
-                    <td class="td tdButtonArea" style="width: 15%;">
-                        <img class="smallsvg" src="../images/delete.svg" alt="remove">
-                        <img class="smallsvg" src="../images/pencil.svg" alt="edit">
-                    </td>
-                </tr>
-            </div>
-            <% } %>
+                <div>
+                    <tr class="tr">
+                        <td class="td" style="width: 10%;">
+                            <img id="myImg" alt="<%=rez.marka%> <%=rez.model%>" class="photo-box-image" src= "<%= rez.slikaurl %>">
+                            <!-- The Modal -->
+                            <div id="myModal" class="modal">
+                                <span class="close">&times;</span>
+                                <img class="modal-content" id="img01">
+                                <div id="caption"></div>
+                            </div>
+                        </td>
+                        <td class="td" style="width: 10%;"><%= rez.marka %> <%= rez.model %> </td>
+                        <td class="td" style="width: 5%;"><%= rez.registracija %></td>
+                        <td class="td" style="width: 10%;"><%= rez.lokacijapreuzimanja %></td>
+                        <td class="td" style="width: 10%;"><%= rez.lokacijaostavljanja %></td>
+                        <td class="td" style="width: 10%;">
+                            <script>formatiraj('<%= rez.vrijemepreuzimanja %>');</script>
+                        </td>
+                        <td class="td" style="width: 10%;">
+                            <script>formatiraj('<%= rez.vrijemezavrsetka %>');</script>
+                        </td>
+                        <td class="td" style="width: 5%;">
+                            <% if(rez.tipplacanja == 'cash' || rez.tipplacanja == 'gotovina') { %>Gotovina
+                            <% } else { %> Kartica <% }%>
+                        </td>
+                        <td class="td" style="width: 5%;">
+                            <script>izracunajUkCijenu('<%= rez.vrijemepreuzimanja %>', '<%= rez.vrijemezavrsetka %>', '<%= rez.cijenadan %>');</script>
+                        </td>
+                        <td class="td" style="width: 10%;">
+                            Završena rezervacija
+                        </td>
+                        <td class="td" id="smallIcons" style="width: 15%;">
+                            <img class="smallsvg" src="../images/pencil.svg" alt="edit">
+                        </td>
+                    </tr>
+                </div>
+                <% } %>
             </table>
         </div>
         <% } else { %>
             <div id="reservation-msg">
-                <br> Nemate završenih rezervacija. <br><br>
+                <h1> Nemate završenih rezervacija.</h1>
             </div>
         <% } %>
     </div>
-    
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById("myImg");
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img.onclick = function(){
+          modal.style.display = "block";
+          modalImg.src = this.src;
+          captionText.innerHTML = this.alt;
+        }
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() { 
+          modal.style.display = "none";
+        }
+
+        </script>
 </body>
 
 <%- include(`partials/footer`); %>
