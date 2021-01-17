@@ -155,7 +155,7 @@
         
         let udio = Math.round((arg / max)*100)
 
-        let izlaz = '<div style="float: left; color: white; text-align: center; height: 40px; line-height: 40px; margin: 5px 0; background-color: #003d52; width: ' + udio + '%;">' + arg + ' kn</div>'
+        let izlaz = '<div style="float: left; color: white; text-align: center; height: 40px; line-height: 40px; margin: 5px 0; background-color: #003d52; width: ' + udio + '%; border-top-right-radius: 5px; border-bottom-right-radius: 5px;">' + arg + ' kn</div>'
         document.write(izlaz)
     }
 
@@ -214,7 +214,7 @@
                             </td>
 
                             <td class="td tdButtonArea" style="width: 25%;">
-                                <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="ukloniVozilo('<%= v.registracija %>')">
+                                <img class="smallsvg" src="../images/trash.svg" alt="remove" onclick="ukloniVozilo('<%= v.registracija %>')">
                                 <img class="smallsvg" src="../images/pencil.svg" alt="edit" onclick="urediVozilo('<%= v.registracija %>')">
                             </td>
                         </tr>
@@ -377,7 +377,7 @@
                             <td class="td" style="width: 10%;"><%= r.ocjena%></td>
     
                             <td class="td tdButtonArea" style="width: 10%;">
-                                <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="ukloniRecenziju('<%= r.idrezervacija %>')">
+                                <img class="smallsvg" src="../images/trash.svg" alt="remove" onclick="ukloniRecenziju('<%= r.idrezervacija %>')">
                             </td>
                         </tr>
                     <% } %>

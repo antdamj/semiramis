@@ -117,7 +117,7 @@
                                 <td class="td" style="width: 25%;"><%= u.prezime %></td>
                                 <td class="td" style="width: 15%;"><%= u.uloga %></td>
                                 <td class="td tdButtonArea" style="width: 15%;">
-                                    <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="korisnikDelete('<%= u.korisnickoime %>')">
+                                    <img class="smallsvg" src="../images/trash.svg" alt="remove" onclick="korisnikDelete('<%= u.korisnickoime %>')">
                                     <img class="smallsvg" src="../images/pencil.svg" alt="edit" onclick="korisnikPromote('<%= u.korisnickoime %>')">
                                 </td>
                             </tr>
@@ -169,7 +169,7 @@
                             <td class="td" style="width: 40%;"><%= l.lokacija %></td>
                             <td class="td" style="width: 30%;"><%= l.brojtelefona %></td>
                             <td class="td tdButtonArea" style="width: 20%;">
-                                <img class="smallsvg" src="../images/delete.svg" alt="remove" onclick="locationDelete('<%= l.idposlovnica %>')">
+                                <img class="smallsvg" src="../images/trash.svg" alt="remove" onclick="locationDelete('<%= l.idposlovnica %>')">
                                 <img class="smallsvg" src="../images/pencil.svg" alt="edit" onclick="locationEdit('<%= l.idposlovnica %>')">
                             </td>
                         </tr>
