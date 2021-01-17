@@ -961,6 +961,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
   display: block;
   width: 80%;
   max-width: 700px;
+  padding-top: 5%;
+  border-radius: 20px;
 }
 
 /* Caption of Modal Image */
@@ -1016,4 +1018,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
   .modal-content {
     width: 100%;
   }
+}
+
+.checked {
+    color: orange;
 }

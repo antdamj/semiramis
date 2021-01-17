@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
     <link rel="stylesheet" type="text/css" href="./styles/main.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <!-- Font Awesome Icon Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script>
        function formatiraj(arg) {
@@ -70,11 +72,22 @@
         document.write(ukCijena.toFixed(2).concat(" kn"));
     };
 
+    function delReservation() {
+            if (confirm('Jeste li sigurni da želite obrisati ovu rezervaciju?') == true) {
+                //obrisi racun
+                document.getElementById("del-reservation-link").click();
+                //odjava
+            } else {
+                //odustani
+            }
+            return 
+        }
+
     </script>
 
 </head>
 
-<body>
+<body style="text-align: center;">
 
     <%- include(`partials/header`); %>
 
@@ -86,23 +99,23 @@
         <% if(aktivnePostoji == true) { %>
         <div class="myBlock">
             <table class="myReservationTable">
-                <tr>
-                    <th class="th" style="width: 10%;">Slika</th>
-                    <th class="th" style="width: 10%;">Rezervirano vozilo</th>
-                    <th class="th" style="width: 5%;">Registracija</th>
-                    <th class="th" style="width: 10%;">Adresa preuzimanja</th>
-                    <th class="th" style="width: 10%;">Adresa ostavljanja</th>
-                    <th class="th" style="width: 10%;">Vrijeme preuzimanja</th>
-                    <th class="th" style="width: 10%;">Vrijeme ostavljanja</th>
-                    <th class="th" style="width: 5%;">Tip plaćanja</th>
-                    <th class="th" style="width: 5%;">Cijena</th>
-                    <th class="th" style="width: 10%;">Status</th>
-                    <th class="th" style="width: 20%;"></th>
+                <tr style="text-align: center;">
+                    <th style="text-align: center;"class="th" style="width: 15%;">Slika</th>
+                    <th style="text-align: center;" class="th" style="width: 10%;">Rezervirano vozilo</th>
+                    <th style="text-align: center;" class="th" style="width: 5%;">Registracija</th>
+                    <th style="text-align: center;" class="th" style="width: 10%;">Adresa preuzimanja</th>
+                    <th style="text-align: center;" class="th" style="width: 10%;">Adresa ostavljanja</th>
+                    <th style="text-align: center;" class="th" style="width: 10%;">Vrijeme preuzimanja</th>
+                    <th style="text-align: center;" class="th" style="width: 10%;">Vrijeme ostavljanja</th>
+                    <th style="text-align: center;" class="th" style="width: 8%;">Tip plaćanja</th>
+                    <th style="text-align: center;" class="th" style="width: 5%;">Cijena</th>
+                    <th style="text-align: center;" class="th" style="width: 7%;">Status</th>
+                    <th style="text-align: center;" class="th" style="width: 10%;"></th>
                 </tr>
             <% for (let rez of aktivne) { %>
                 <div>
                     <tr class="tr">
-                        <td class="td" style="width: 10%;">
+                        <td class="td" style="width: 15%;">
                             <img id="myImg" alt="<%=rez.marka%> <%=rez.model%>" class="photo-box-image" src= "<%= rez.slikaurl %>">
                             <!-- The Modal -->
                             <div id="myModal" class="modal">
@@ -121,20 +134,33 @@
                         <td class="td" style="width: 10%;">
                             <script>formatiraj('<%= rez.vrijemezavrsetka %>');</script>
                         </td>
-                        <td class="td" style="width: 5%;">
+                        <td class="td" style="width: 8%;">
                             <% if(rez.tipplacanja == 'cash' || rez.tipplacanja == 'gotovina') { %>Gotovina
                             <% } else { %> Kartica <% }%>
                         </td>
                         <td class="td" style="width: 5%;">
                             <script>izracunajUkCijenu('<%= rez.vrijemepreuzimanja %>', '<%= rez.vrijemezavrsetka %>', '<%= rez.cijenadan %>');</script>
                         </td>
-                        <td class="td" style="width: 10%;">
+                        <td class="td" style="width: 7%;">
                             <% if(rez.status == 'aktivna') { %> Aktivna rezervacija
                                 <% } else { %> Neaktivna rezervacija <% }%>
                         </td>
-                        <td class="td" id="smallIcons" style="width: 15%;">
-                            <img class="smallsvg" id="left-element" src="../images/delete.svg" alt="remove">
-                            <img class="smallsvg" id="middle-element"src="../images/pencil.svg" alt="edit">
+                        <td class="td" style="align-items: center;" id="smallIcons" style="width: 10%;">
+                            <div class="tooltip">
+                                <img class="smallsvg" id="reservation-del" src="../images/delete.svg" value="true" onclick="delReservation()">
+                                <span class="tooltiptext">Obriši rezervaciju</span>
+                            </div>
+                            <div class="tooltip">
+                                <img class="smallsvg" id="reservation-edit" onclick="editReservation()" src="../images/pencil.svg">
+                                <span class="tooltiptext">Uredi rezervaciju</span>
+                            </div>
+                            <!--Sakriveni botun-->
+                            <form action="/user" method="POST" style="display: none;">
+                                <div class="formItem inputField col-12">
+                                    <input type="hidden" id="deleteIn" name="delReservation" value="<%= rez.idrezervacija%>">
+                                </div>
+                                <button type="submit" id="del-reservation-link" value="Submit" style="display: none;"></button>
+                            </form>
                         </td>
                     </tr>
                 </div>
@@ -150,31 +176,31 @@
     
     <br><br><br>
 
-     <!-- Zavrsene rezervacije -->
+    <!-- Zavrsene rezervacije -->
 
-     <div id="aktivneBlock">
-        <h1 style="text-align:center" id="myReservationHeader">Završene rezervacije</h1>
+    <div id="aktivneBlock">
+        <h1 style="text-align:center" id="myReservationHeader">Trenutne rezervacije</h1>
         <hr>
         <% if(zavrsenePostoji == true) { %>
         <div class="myBlock">
             <table class="myReservationTable">
-                <tr>
-                    <th class="th" style="width: 10%;">Slika</th>
-                    <th class="th" style="width: 10%;">Rezervirano vozilo</th>
-                    <th class="th" style="width: 5%;">Registracija</th>
-                    <th class="th" style="width: 10%;">Adresa preuzimanja</th>
-                    <th class="th" style="width: 10%;">Adresa ostavljanja</th>
-                    <th class="th" style="width: 10%;">Vrijeme preuzimanja</th>
-                    <th class="th" style="width: 10%;">Vrijeme ostavljanja</th>
-                    <th class="th" style="width: 5%;">Tip plaćanja</th>
-                    <th class="th" style="width: 5%;">Cijena</th>
-                    <th class="th" style="width: 10%;">Status</th>
-                    <th class="th" style="width: 20%;"></th>
+                <tr style="text-align: center;">
+                    <th style="text-align: center;"class="th" style="width: 15%;">Slika</th>
+                    <th style="text-align: center;" class="th" style="width: 10%;">Rezervirano vozilo</th>
+                    <th style="text-align: center;" class="th" style="width: 5%;">Registracija</th>
+                    <th style="text-align: center;" class="th" style="width: 10%;">Adresa preuzimanja</th>
+                    <th style="text-align: center;" class="th" style="width: 10%;">Adresa ostavljanja</th>
+                    <th style="text-align: center;" class="th" style="width: 10%;">Vrijeme preuzimanja</th>
+                    <th style="text-align: center;" class="th" style="width: 10%;">Vrijeme ostavljanja</th>
+                    <th style="text-align: center;" class="th" style="width: 8%;">Tip plaćanja</th>
+                    <th style="text-align: center;" class="th" style="width: 5%;">Cijena</th>
+                    <th style="text-align: center;" class="th" style="width: 7%;">Status</th>
+                    <th style="text-align: center;" class="th" style="width: 10%;"></th>
                 </tr>
             <% for (let rez of zavrsene) { %>
                 <div>
                     <tr class="tr">
-                        <td class="td" style="width: 10%;">
+                        <td class="td" style="width: 15%;">
                             <img id="myImg" alt="<%=rez.marka%> <%=rez.model%>" class="photo-box-image" src= "<%= rez.slikaurl %>">
                             <!-- The Modal -->
                             <div id="myModal" class="modal">
@@ -193,18 +219,25 @@
                         <td class="td" style="width: 10%;">
                             <script>formatiraj('<%= rez.vrijemezavrsetka %>');</script>
                         </td>
-                        <td class="td" style="width: 5%;">
+                        <td class="td" style="width: 8%;">
                             <% if(rez.tipplacanja == 'cash' || rez.tipplacanja == 'gotovina') { %>Gotovina
                             <% } else { %> Kartica <% }%>
                         </td>
                         <td class="td" style="width: 5%;">
                             <script>izracunajUkCijenu('<%= rez.vrijemepreuzimanja %>', '<%= rez.vrijemezavrsetka %>', '<%= rez.cijenadan %>');</script>
                         </td>
-                        <td class="td" style="width: 10%;">
+                        <td class="td" style="width: 7%;">
                             Završena rezervacija
                         </td>
-                        <td class="td" id="smallIcons" style="width: 15%;">
-                            <img class="smallsvg" src="../images/pencil.svg" alt="edit">
+                        <td class="td" style="align-items: center;" id="smallIcons" style="width: 10%;">
+                            <div class="tooltip">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="tooltiptext">Ocijeni uslugu</span>
+                            </div>
                         </td>
                     </tr>
                 </div>
@@ -217,6 +250,7 @@
             </div>
         <% } %>
     </div>
+    
 
     <script>
         // Get the modal

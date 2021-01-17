@@ -92,6 +92,18 @@ module.exports = class User {
             }
     }
 
+    //brisanje rezervacije preko id-a i korisnickog imena
+    static async deleteReservation(username, idrezervacija) {
+        const sql = `DELETE FROM rezervacija WHERE korisnickoime = '` + username + `' AND idrezervacija = '` + idrezervacija + `'`;
+            try {
+                await db.query(sql, []);
+            } catch (err) {
+                console.log(err);
+                throw err
+            }
+    }
+
+
     //pohrana korisnika u bazu podataka
     async persist() {
         try {
@@ -105,7 +117,7 @@ module.exports = class User {
 
     //dohvat aktivnih rezervacija korisnika
     static async getActiveReservations(user_name) {
-        const sql = `SELECT REZERVACIJA.korisnickoime, VOZILO.slikaURL, VOZILO.registracija, VOZILO.marka, VOZILO.model, VOZILO.cijenaDan, REZERVACIJA.vrijemepreuzimanja, REZERVACIJA.vrijemezavrsetka, REZERVACIJA.lokacijapreuzimanja, REZERVACIJA.lokacijaostavljanja, REZERVACIJA.status, REZERVACIJA.tipplacanja, RECENZIJA.ocjena, RECENZIJA.opis, p1.lokacija AS lokacijaostavljanja, p2.lokacija AS lokacijapreuzimanja
+        const sql = `SELECT REZERVACIJA.idrezervacija, REZERVACIJA.korisnickoime, VOZILO.slikaURL, VOZILO.registracija, VOZILO.marka, VOZILO.model, VOZILO.cijenaDan, REZERVACIJA.vrijemepreuzimanja, REZERVACIJA.vrijemezavrsetka, REZERVACIJA.lokacijapreuzimanja, REZERVACIJA.lokacijaostavljanja, REZERVACIJA.status, REZERVACIJA.tipplacanja, RECENZIJA.ocjena, RECENZIJA.opis, p1.lokacija AS lokacijaostavljanja, p2.lokacija AS lokacijapreuzimanja
                         FROM rezervacija LEFT JOIN recenzija USING (idrezervacija)
                             JOIN vozilo USING (registracija)
                             JOIN POSLOVNICA AS p1 ON (rezervacija.lokacijaostavljanja = p1.idposlovnica)
@@ -123,7 +135,7 @@ module.exports = class User {
 
     //dohvat završenih rezervacija korisnika
     static async getPastReservations(user_name) {
-        const sql = `SELECT REZERVACIJA.korisnickoime, VOZILO.slikaURL, VOZILO.registracija, VOZILO.marka, VOZILO.model, VOZILO.cijenaDan, REZERVACIJA.vrijemepreuzimanja, REZERVACIJA.vrijemezavrsetka, REZERVACIJA.lokacijapreuzimanja, REZERVACIJA.lokacijaostavljanja, REZERVACIJA.status, REZERVACIJA.tipplacanja, RECENZIJA.ocjena, RECENZIJA.opis, p1.lokacija AS lokacijaostavljanja, p2.lokacija AS lokacijapreuzimanja
+        const sql = `SELECT REZERVACIJA.idrezervacija, REZERVACIJA.korisnickoime, VOZILO.slikaURL, VOZILO.registracija, VOZILO.marka, VOZILO.model, VOZILO.cijenaDan, REZERVACIJA.vrijemepreuzimanja, REZERVACIJA.vrijemezavrsetka, REZERVACIJA.lokacijapreuzimanja, REZERVACIJA.lokacijaostavljanja, REZERVACIJA.status, REZERVACIJA.tipplacanja, RECENZIJA.ocjena, RECENZIJA.opis, p1.lokacija AS lokacijaostavljanja, p2.lokacija AS lokacijapreuzimanja
                         FROM rezervacija LEFT JOIN recenzija USING (idrezervacija)
                             JOIN vozilo USING (registracija)
                             JOIN POSLOVNICA AS p1 ON (rezervacija.lokacijaostavljanja = p1.idposlovnica)

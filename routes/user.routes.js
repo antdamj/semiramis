@@ -54,7 +54,8 @@ router.post('/', async (req, res, next) => {
 
     //brisanje korisničkog računa
     if ('delete' in req.body) {
-        console.log("Brisanje korisničkog računa")
+        console.log("Brisanje korisničkog računa");
+        console.log(req.body);
         await User.deleteUser(req.session.user.korisnickoime)
         
         req.session.user = undefined;
@@ -63,6 +64,21 @@ router.post('/', async (req, res, next) => {
         res.render('home', {
             title: 'Korisnički profil',
             linkActive: 'user',
+            user: undefined,
+            err: undefined,
+            msg: undefined
+        });
+        return
+    }
+     //brisanje rezervacije
+     if('delReservation' in req.body) {
+        console.log("Brisanje rezervacije");
+        console.log(req.body);
+        await User.deleteReservation(req.session.user.korisnickoime, req.body.delReservation);
+
+        res.render('cart', {
+            title: 'Moje rezervacije',
+            linkActive: 'cart',
             user: undefined,
             err: undefined,
             msg: undefined
