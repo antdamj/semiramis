@@ -55,8 +55,8 @@ router.post('/', async (req, res) => {
 
     if ('locationEdit' in req.body) {
         console.log("Uredivanje poslovnice.")
-        if (req.body.locationEdit[1] != '') await Administrator.editLocationLocation(req.body.locationEdit[0], req.body.locationEdit[1])
-        if (req.body.phoneEdit != '') await Administrator.editLocationNumber(req.body.locationEdit[0], req.body.phoneEdit)
+        if (req.body.locationEdit[1] != undefined && req.body.locationEdit[1] != '') await Administrator.editLocationLocation(req.body.locationEdit[0], req.body.locationEdit[1])
+        if (req.body.phoneEdit!= undefined && req.body.phoneEdit != '') await Administrator.editLocationNumber(req.body.locationEdit[0], req.body.phoneEdit)
         postMsg = "Lokacija uspješno uređena!"
     }
 
