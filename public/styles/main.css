@@ -737,3 +737,158 @@ label {
 .accountLogo>b>a:hover {
     color: white;
 }
+
+/* Dodano - Magda */
+
+
+.myBlock {
+    background-color: white;
+}
+
+#reservation-msg {
+    font-size: x-large;
+    color: blue;
+    text-align: center;
+}
+
+#myReservationHeader {
+    background-color: lightblue;
+    height: 60px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 12px;
+}
+
+.myReservationTable {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.star {
+    max-width: 55px;
+    width: 55px;
+    background-position-y: top;
+    padding-bottom: 4px;
+    padding-left: -2px;
+}
+
+#smallIcons {
+    align-items: center;
+}
+
+#left-element {
+    padding-left: 60px;
+}
+
+#right-element:hover {
+    display:none;
+    content: url('../images/star-empty.png')
+}
+
+.h1User {
+    color:#003d52;
+    text-shadow: #003d52;
+}
+
+.hUser {
+    color:#003d52;
+}
+
+.myData {
+    background-color: #c5eaf75e;
+    padding-top: 1;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+.up {
+    padding-left: 5%;
+    padding-top: 2%;
+    width: 60%;
+}
+
+.down {
+    width: 40%;
+    padding-top: 6%;
+    padding-left: 5%;
+    padding-bottom: 5%;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #003d52;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 105%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 15px;
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 0.9;
+  }
+
+#forma {
+    background-color: #c5eaf75e;
+    border-radius: 15px;
+}
+
+#form {
+    background-color: #c5eaf75e;
+    border-radius: 15px;
+}
+
+.promijeniButton {
+    min-height: 48px;
+    width: 20%;
+    margin: auto;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #003d52;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.promijeniButton:hover {
+    background-color: rgb(0, 61, 82, 0.85);
+    color: white;
+    cursor: pointer;
+}
+
+.promijeniButton:focus {
+    outline: none;
+    background-color: #003d52;
+}
+
+#field {
+    border: 0;
+}
