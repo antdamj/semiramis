@@ -106,7 +106,53 @@
     }
 
     function formatirajVrijeme(arg) {
-        document.write(arg.substring(4, 15))
+        let n = arg.substring(4, 15)
+        let m = n.substring(0, 3)
+        switch (m) {
+            case "Jan":
+                m = "siječnja"
+                break;
+            case "Feb":
+                m = "veljače"
+                break;
+            case "Mar":
+                m = "ožujka"
+                break;
+            case "Apr":
+                m = "travnja"
+                break;
+            case "May":
+                m = "svibnja"
+                break;
+            case "Jun":
+                m = "lipnja"
+                break;
+            case "Jul":
+                m = "srpnja"
+                break;
+            case "Aug":
+                m = "kolovoza"
+                break;
+            case "Sep":
+                m = "rujna"
+                break;
+            case "Oct":
+                m = "listopada"
+                break;
+            case "Nov":
+                m = "studenoga"
+                break;
+            case "Dec":
+                m = "prosinca"
+                break;
+            default:
+                break;
+        }
+        let dd = n.substring(4, 6)
+        if(dd[0] == "0") dd = dd[1]
+        let yy = n.substring(7, 11)        
+        let rez = dd.concat(". ").concat(m).concat(" ").concat(yy).concat(".")
+        document.write(rez)
     }
 
     function imeVozila(arg) {
