@@ -114,6 +114,26 @@
         }
     }
 
+    function sleep(milliseconds) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+            currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
+    }
+
+    async function obojiZvjezdice(idrez, ocjena) {
+        if(ocjena != undefined) {
+            console.log("idrez:", idrez, "ocjena:", ocjena)
+            for(let i = 1; i <= ocjena; i++) {
+                let x = "ocjena".concat(i).concat(idrez)
+                console.log(document.getElementById(x))
+                console.log(x)
+                document.getElementById(x).style.color = "orange"
+            }
+        }
+    }
+
     </script>
 
 
@@ -296,15 +316,24 @@
                             <div class="tooltip-recenzija">
                                 <div class = "container1">
                                     <div class = "star-widget" style="display: inline-block;">
-                                        <input type="checkbox" name="rate" id="ocjena1-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');"><label for = "ocjena1-<%=index%>" id="ocjena1" class="ocjena1-<%=index%>">&#9733;</label>
-                                        <input type="checkbox" name="rate" id="ocjena2-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');"><label for = "ocjena2-<%=index%>" id="ocjena2" class="ocjena2-<%=index%>">&#9733;</label>
-                                        <input type="checkbox" name="rate" id="ocjena3-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');"><label for = "ocjena3-<%=index%>" id="ocjena3" class="ocjena3-<%=index%>">&#9733;</label>
-                                        <input type="checkbox" name="rate" id="ocjena4-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');"><label for = "ocjena4-<%=index%>" id="ocjena4" class="ocjena4-<%=index%>">&#9733;</label>
-                                        <input type="checkbox" name="rate" id="ocjena5-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');"><label for = "ocjena5-<%=index%>" id="ocjena5" class="ocjena5-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena1-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');">
+                                        <label for = "ocjena1-<%=index%>" id="ocjena1<%=rez.idrezervacija%>" class="ocjenaBroj ocjena1-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena2-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');">
+                                        <label for = "ocjena2-<%=index%>" id="ocjena2<%=rez.idrezervacija%>" class="ocjenaBroj ocjena2-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena3-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');">
+                                        <label for = "ocjena3-<%=index%>" id="ocjena3<%=rez.idrezervacija%>" class="ocjenaBroj ocjena3-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena4-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');">
+                                        <label for = "ocjena4-<%=index%>" id="ocjena4<%=rez.idrezervacija%>" class="ocjenaBroj ocjena4-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena5-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');">
+                                        <label for = "ocjena5-<%=index%>" id="ocjena5<%=rez.idrezervacija%>" class="ocjenaBroj ocjena5-<%=index%>">&#9733;</label>
                                     </div>
                                 </div>
                                 <span class="tooltiptext-recenzija">Ocijeni uslugu</span>
                             </div>
+
+                            <script>
+                                obojiZvjezdice('<%=rez.idrezervacija%>', '<%= rez.ocjena%>');
+                            </script>
                         </td>
                     </tr>
                 </div>
