@@ -781,9 +781,14 @@ label {
 }
 
 #reservation-msg {
-    font-size: x-large;
-    color: blue;
+    font-stretch: expanded;
+    color: black;
+    opacity: 0.9;
     text-align: center;
+}
+
+.empty-cart {
+    height: 150px;
 }
 
 #myReservationHeader {
@@ -1021,6 +1026,107 @@ body {font-family: Arial, Helvetica, sans-serif;}
   }
 }
 
-.checked {
-    color: orange;
+/*Dio za recenzije */
+
+.container1, .star-widget {
+	width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
+
+.container1 .star-widget input {
+	display:none;
+}
+.star-widget label {
+	font-size: 25px;
+    color: black;
+    transition: all 0.9 ease;
+}
+
+.star-widget input:not(:checked) ~ label:hover {
+	color: orange;
+}
+
+/*Tooltip za lokacije i status - malo siri*/
+
+.tooltip-lokacija {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip-lokacija .tooltiptext-lokacija {
+    visibility: hidden;
+    width: 200px;
+    background-color: #003d52;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 105%;
+    left: 20%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 15px;
+  }
+  
+  .tooltip-lokacija .tooltiptext-lokacija::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #003d52 transparent transparent transparent;
+  }
+  
+  .tooltip-lokacija:hover .tooltiptext-lokacija {
+    visibility: visible;
+    opacity: 0.88;
+  }
+
+  /*Tooltip za recentije*/
+
+  .tooltip-recenzija {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip-recenzija .tooltiptext-recenzija {
+    visibility: hidden;
+    width: 120px;
+    background-color: #003d52;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 105%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 15px;
+  }
+  
+  .tooltip-recenzija .tooltiptext-recenzija::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #003d52 transparent transparent transparent;
+  }
+  
+  .tooltip-recenzija:hover .tooltiptext-recenzija {
+    visibility: visible;
+    opacity: 0.9;
+  }
