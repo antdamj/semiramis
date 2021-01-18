@@ -97,8 +97,8 @@
             case 4: document.getElementById("ocjena4").style.color = "orange";
         	case 3: document.getElementById("ocjena3").style.color = "orange";
         	case 2: document.getElementById("ocjena2").style.color = "orange";
-        	case 1: document.getElementById("ocjena1").style.color = "orange";
-			default: break;
+            case 1: document.getElementById("ocjena1").style.color = "orange";
+            default: break;
         }
     }
 
@@ -228,14 +228,14 @@
                     <th style="text-align: center;"class="th" style="width: 10%;">Slika</th>
                     <th style="text-align: center;" class="th" style="width: 10%;">Rezervirano vozilo</th>
                     <th style="text-align: center;" class="th" style="width: 10%;">Registracija</th>
-                    <th style="text-align: center;" class="th" style="width: 10%;">Adresa preuzimanja</th>
-                    <th style="text-align: center;" class="th" style="width: 10%;">Adresa ostavljanja</th>
-                    <th style="text-align: center;" class="th" style="width: 5%;">Vrijeme preuzimanja</th>
-                    <th style="text-align: center;" class="th" style="width: 5%;">Vrijeme ostavljanja</th>
-                    <th style="text-align: center;" class="th" style="width: 10%;">Tip plaćanja</th>
-                    <th style="text-align: center;" class="th" style="width: 5%;">Cijena</th>
-                    <th style="text-align: center;" class="th" style="width: 5%;">Status</th>
-                    <th style="text-align: center;" class="th" style="width: 20%;">Ocjena</th>
+                    <th style="text-align: center;" class="th" style="width: 8%;">Adresa preuzimanja</th>
+                    <th style="text-align: center;" class="th" style="width: 8%;">Adresa ostavljanja</th>
+                    <th style="text-align: center;" class="th" style="width: 7%;">Vrijeme preuzimanja</th>
+                    <th style="text-align: center;" class="th" style="width: 7%;">Vrijeme ostavljanja</th>
+                    <th style="text-align: center;" class="th" style="width: 8%;">Tip plaćanja</th>
+                    <th style="text-align: center;" class="th" style="width: 7%;">Cijena</th>
+                    <th style="text-align: center;" class="th" style="width: 10%;">Status</th>
+                    <th style="text-align: center;" class="th" style="width: 15%;">Ocjena</th>
                 </tr>
             <% for (let rez of zavrsene) { %>
                 <% broj = broj + 1%>
@@ -252,38 +252,38 @@
                         </td>
                         <td class="td" style="width: 10%;"><%= rez.marka %> <%= rez.model %> </td>
                         <td class="td" style="width: 10%;"><%= rez.registracija %></td>
-                        <td class="td" style="width: 10%;">
+                        <td class="td" style="width: 8%;">
                             <div class="tooltip-lokacija">
                                 <%= rez.lokacijapreuzimanja %>
                                 <a class="tooltiptext-lokacija" href="https://www.google.com/maps/place/<%= rez.lokacijapreuzimanja %>/Zagreb" target="_blank" rel="noopener noreferrer">Otvori lokaciju u Google mapama</a>
                             </div> 
                         </td>
-                        <td class="td" style="width: 10%;">
+                        <td class="td" style="width: 8%;">
                             <div class="tooltip-lokacija">
                                 <%= rez.lokacijaostavljanja %>
                                 <a class="tooltiptext-lokacija" href="https://www.google.com/maps/place/<%= rez.lokacijaostavljanja %>/Zagreb" target="_blank" rel="noopener noreferrer">Otvori lokaciju u Google mapama</a>
                             </div> 
                         </td>
-                        <td class="td" style="width: 5%;">
+                        <td class="td" style="width: 7%;">
                             <script>formatiraj('<%= rez.vrijemepreuzimanja %>');</script>
                         </td>
-                        <td class="td" style="width: 5%;">
+                        <td class="td" style="width: 7%;">
                             <script>formatiraj('<%= rez.vrijemezavrsetka %>');</script>
                         </td>
-                        <td class="td" style="width: 10%;">
+                        <td class="td" style="width: 8%;">
                             <% if(rez.tipplacanja == 'cash' || rez.tipplacanja == 'gotovina') { %>Gotovina
                             <% } else { %> Kartica <% }%>
                         </td>
-                        <td class="td" style="width: 5%;">
+                        <td class="td" style="width: 7%;">
                             <div class="tooltip">
                                 <script>izracunajUkCijenu('<%= rez.vrijemepreuzimanja %>', '<%= rez.vrijemezavrsetka %>', '<%= rez.cijenadan %>');</script>
                                 <span class="tooltiptext">Cijena za jedan dan iznosi: <%=rez.cijenadan%> kn</span>
                             </div> 
                         </td>
-                        <td class="td" style="width: 5%;">
+                        <td class="td" style="width: 10%;">
                             Završena rezervacija
                         </td>
-                        <td class="td" style="width: 20%;">
+                        <td class="td" style="width: 15%;">
                             <div class="tooltip-recenzija">
                                 <div class = "container1">
                                     <div class = "star-widget" style="display: inline-block;">
@@ -292,7 +292,7 @@
                                         <input type="checkbox" name="rate" id="rate-3" onclick = "ocijeni(3)"><label for = "rate-3" id="ocjena3">&#9733;</label>
                                         <input type="checkbox" name="rate" id="rate-4" onclick = "ocijeni(4)"><label for = "rate-4" id="ocjena4">&#9733;</label>
                                         <input type="checkbox" name="rate" id="rate-5" onclick = "ocijeni(5)"><label for = "rate-5" id="ocjena5">&#9733;</label>
-                                </div>
+                                    </div>
                                 </div>
                                 <span class="tooltiptext-recenzija">Ocijeni uslugu</span>
                             </div>
