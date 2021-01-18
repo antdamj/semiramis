@@ -29,10 +29,16 @@ router.get('/', async function (req, res, next) {
 });
 
 router.post('/', async function (req, res) {
+    console.log(req.body);
 
     if('delReservation' in req.body) {
         console.log("Brisanje rezervacije");
         await User.deleteReservation(req.session.user.korisnickoime, req.body.delReservation);
+    }
+
+    if('rezRating' in req.body) {
+        console.log("Dodavanje recenzije preko id-ja rezervacije");
+        await User.addRating(req.session.user.korisnickoime, req.body.rezRating, req.body.rezZvjezdice);
     }
 
     //potrebni podatci

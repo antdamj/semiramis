@@ -59,7 +59,7 @@
         let dd = n.substring(4, 6)
         if(dd[0] == "0") dd = dd[1]
         let yy = n.substring(7, 11)        
-        let rez = dd.concat(". ").concat(m).concat(".").concat(" ").concat(yy).concat(".")
+        let rez = dd.concat(". ").concat(m).concat(" ").concat(yy).concat(".")
         document.write(rez)
     }; 
 
@@ -86,13 +86,14 @@
     }
 
     //Recenzija - zvijezdice
-    function ocijeni(idZvjezdice) {
+    function ocijeni(idZvjezdice, idrez) {
         var red = idZvjezdice.substring(8);
         var rating = idZvjezdice.substring(6,7);
         console.log("Ovaj id se posalje " + idZvjezdice);
         console.log("Ova ocjena se posalje " + rating);
         console.log("Ovaj redak se posalje " + red);
         console.log("Ovakva je klasa: " + 'ocjena5-' + red);
+        console.log("Id rezervacije je " + idrez);
         document.getElementsByClassName('ocjena5-' + red)[0].style.color = "black";
         document.getElementsByClassName('ocjena4-' + red)[0].style.color = "black";
     	document.getElementsByClassName('ocjena3-' + red)[0].style.color = "black";
@@ -104,8 +105,12 @@
             case '4': document.getElementsByClassName('ocjena4-' + red)[0].style.color = "orange";
         	case '3': document.getElementsByClassName('ocjena3-' + red)[0].style.color = "orange";
         	case '2': document.getElementsByClassName('ocjena2-' + red)[0].style.color = "orange";
-        	case '1': document.getElementsByClassName('ocjena1-' + red)[0].style.color = "orange";
-            default: break;
+            case '1': document.getElementsByClassName('ocjena1-' + red)[0].style.color = "orange";
+            default: 
+                document.getElementById("rezRating").value = idrez;     //id rezervacije
+                document.getElementById("rezZvjezdice").value = rating; //ocjena 
+                document.getElementById("recenzijaBtn").click();
+                break;
         }
     }
 
@@ -194,10 +199,6 @@
                             <div class="tooltip">
                                 <img class="smallsvg" id="reservation-del" src="../images/delete.svg" value="true" onclick="delReservation('<%= rez.idrezervacija%>')">
                                 <span class="tooltiptext">Obriši rezervaciju</span>
-                            </div>
-                            <div class="tooltip">
-                                <img class="smallsvg" id="reservation-edit" onclick="editReservation()" src="../images/pencil.svg">
-                                <span class="tooltiptext">Uredi rezervaciju</span>
                             </div>
                             <!--Sakriveni botun-->
                             <form action="/cart" method="POST" style="display: none;">
@@ -295,11 +296,11 @@
                             <div class="tooltip-recenzija">
                                 <div class = "container1">
                                     <div class = "star-widget" style="display: inline-block;">
-                                        <input type="checkbox" name="rate" id="ocjena1-<%=index%>" onclick = "ocijeni(this.id);"><label for = "ocjena1-<%=index%>" id="ocjena1" class="ocjena1-<%=index%>">&#9733;</label>
-                                        <input type="checkbox" name="rate" id="ocjena2-<%=index%>" onclick = "ocijeni(this.id);"><label for = "ocjena2-<%=index%>" id="ocjena2" class="ocjena2-<%=index%>">&#9733;</label>
-                                        <input type="checkbox" name="rate" id="ocjena3-<%=index%>" onclick = "ocijeni(this.id);"><label for = "ocjena3-<%=index%>" id="ocjena3" class="ocjena3-<%=index%>">&#9733;</label>
-                                        <input type="checkbox" name="rate" id="ocjena4-<%=index%>" onclick = "ocijeni(this.id);"><label for = "ocjena4-<%=index%>" id="ocjena4" class="ocjena4-<%=index%>">&#9733;</label>
-                                        <input type="checkbox" name="rate" id="ocjena5-<%=index%>" onclick = "ocijeni(this.id);"><label for = "ocjena5-<%=index%>" id="ocjena5" class="ocjena5-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena1-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');"><label for = "ocjena1-<%=index%>" id="ocjena1" class="ocjena1-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena2-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');"><label for = "ocjena2-<%=index%>" id="ocjena2" class="ocjena2-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena3-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');"><label for = "ocjena3-<%=index%>" id="ocjena3" class="ocjena3-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena4-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');"><label for = "ocjena4-<%=index%>" id="ocjena4" class="ocjena4-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena5-<%=index%>" onclick = "ocijeni(this.id, '<%=rez.idrezervacija%>');"><label for = "ocjena5-<%=index%>" id="ocjena5" class="ocjena5-<%=index%>">&#9733;</label>
                                     </div>
                                 </div>
                                 <span class="tooltiptext-recenzija">Ocijeni uslugu</span>
@@ -318,6 +319,15 @@
             </div>
         <% } %>
     </div>
+
+    <!--Sakriveni botun za star rating-->
+    <form action="/cart" method="POST" style="display: none;">
+        <div class="formItem inputField col-12">
+            <input type="hidden" id="rezRating" name="rezRating">
+            <input type="hidden" id="rezZvjezdice" name="rezZvjezdice">
+        </div>
+        <button type="submit" id="recenzijaBtn" value="Submit" style="display: none;"></button>
+    </form>
     
 
     <script>

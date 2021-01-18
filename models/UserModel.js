@@ -103,6 +103,19 @@ module.exports = class User {
             }
     }
 
+    //Dodavanje recenzije preko id-a rezervacije i korisnickog imena
+    static async addRating(username, idrezervacija, ocjena) {
+        const sql0 = `DELETE FROM recenzija WHERE idrezervacija = '` + idrezervacija + `'`;
+        const sql = `INSERT INTO recenzija(idrezervacija, ocjena) VALUES ('` + idrezervacija + `', '` + ocjena + `')`;
+            try {
+                await db.query(sql0, []);
+                await db.query(sql, []);
+            } catch (err) {
+                console.log(err);
+                throw err
+            }
+    }
+
 
     //pohrana korisnika u bazu podataka
     async persist() {
