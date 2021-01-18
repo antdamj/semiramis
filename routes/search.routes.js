@@ -57,7 +57,16 @@ router.post('/', async function (req, res, next) {
 
         // console.log(podatciPotrebni)
 
-        let carsDb = await db.query(`select distinct vozilo.* from vozilo left outer join rezervacija on rezervacija.registracija = vozilo.registracija where  '${datum_primitka}'  > vrijemePreuzimanja or  '${datum_povratka}'  < vrijemeZavrsetka or idRezervacija is null`);
+        let x = new Date().getTime()
+        let prvi = "temp1".concat(x)
+        let drugi = "temp2".concat(x)
+
+        await db.query(`create view ${prvi} as select distinct vozilo.*, ('${datum_primitka}' < vrijemePreuzimanja or '${datum_povratka}' > vrijemeZavrsetka) as dostupnost from vozilo left outer join rezervacija on rezervacija.registracija = vozilo.registracija`)
+        await db.query(`create view ${drugi} as select registracija, count(*) from pr group by registracija`)
+        let carsDb = await db.query(`select * from ${drugi} natural join vozilo where count < 2`)
+        await db.query(`drop view ${drugi}`)
+        await db.query(`drop view ${prvi}`) 
+
 
         let today = Date.now();
         let nadoknada = false;
