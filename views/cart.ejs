@@ -113,7 +113,7 @@
     <%- include(`partials/header`); %>
 
     <!-- Trenutne rezervacije -->
-
+    <% broj = 0 %>
     <div id="aktivneBlock">
         <h1 style="text-align:center" id="myReservationHeader">Trenutne rezervacije</h1>
         <hr>
@@ -134,15 +134,16 @@
                     <th style="text-align: center;" class="th" style="width: 10%;"></th>
                 </tr>
             <% for (let rez of aktivne) { %>
+                <% broj = broj + 1 %>
                 <div>
                     <tr class="tr">
                         <td class="td" style="width: 15%;">
-                            <img id="myImg" alt="<%=rez.marka%> <%=rez.model%>" class="photo-box-image" src= "<%= rez.slikaurl %>">
+                            <img id="myImg" src= "<%= rez.slikaurl %>" onclick="slicica('<%=rez.slikaurl%>','<%=rez.marka%> <%=rez.model%>');" class="myImg-<%=broj%>" alt="<%=rez.marka%> <%=rez.model%>">
                             <!-- The Modal -->
-                            <div id="myModal" class="modal">
-                                <span class="close">&times;</span>
-                                <img class="modal-content" id="img01">
-                                <div id="caption"></div>
+                            <div id="myModal" class="modal-<%=broj%>">
+                                <span class="close" onclick="zatvori();">&times;</span>
+                                <img class="modal-content-<%=broj%>" id="img01">
+                                <div id="caption" class="caption-<%=broj%>"></div>
                             </div>
                         </td>
                         <td class="td" style="width: 10%;"><%= rez.marka %> <%= rez.model %> </td>
@@ -237,15 +238,16 @@
                     <th style="text-align: center;" class="th" style="width: 20%;">Ocjena</th>
                 </tr>
             <% for (let rez of zavrsene) { %>
+                <% broj = broj + 1%>
                 <div>
                     <tr class="tr">
                         <td class="td" style="width: 10%;">
-                            <img id="myImg" alt="<%=rez.marka%> <%=rez.model%>" class="photo-box-image" src= "<%= rez.slikaurl %>">
+                            <img id="myImg" onclick="slicica('<%=rez.slikaurl%>','<%=rez.marka%> <%=rez.model%>');" alt="<%=rez.marka%> <%=rez.model%>" class="myImg-<%=broj%>" src= "<%= rez.slikaurl %>">
                             <!-- The Modal -->
-                            <div id="myModal" class="modal">
-                                <span class="close">&times;</span>
-                                <img class="modal-content" id="img01">
-                                <div id="caption"></div>
+                            <div id="myModal" class="modal-<%=broj%>">
+                                <span class="close" onclick="zatvori()">&times;</span>
+                                <img class="modal-content-<%=broj%>" id="img01">
+                                <div id="caption" class="caption-<%=broj%>"></div>
                             </div>
                         </td>
                         <td class="td" style="width: 10%;"><%= rez.marka %> <%= rez.model %> </td>
@@ -311,26 +313,34 @@
     
 
     <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
         
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = document.getElementById("myImg");
-        var modalImg = document.getElementById("img01");
-        var captionText = document.getElementById("caption");
-        img.onclick = function(){
-          modal.style.display = "block";
-          modalImg.src = this.src;
-          captionText.innerHTML = this.alt;
+        function slicica(srcposlan, altposlan){
+            // Get the modal
+            var modal = document.getElementsByClassName("modal-<%=broj%>");
+            // Get the image and insert it inside the modal - use its "alt" text as a caption
+            var modalImg = document.getElementsByClassName("modal-content-<%=broj%>")[0];
+            var captionText = document.getElementsByClassName("caption-<%=broj%>")[0];
+            console.log(modalImg);
+
+            for(var i=0, len=modal.length; i<len; i++) {
+                modal[0].style["display"] = "block";
+            }
+            modalImg.src = srcposlan;
+            captionText.innerHTML = altposlan;
         }
         
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
         
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function() { 
-          modal.style.display = "none";
+        function zatvori() { 
+            var modal = document.getElementsByClassName("modal-<%=broj%>");
+            for(var i=0, len=modal.length; i<len; i++) {
+                modal[0].style["display"] = "none";
+            }
         }
+
+        
 
         </script>
 </body>
