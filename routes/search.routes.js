@@ -62,7 +62,7 @@ router.post('/', async function (req, res, next) {
         let drugi = "temp2".concat(x)
 
         await db.query(`create view ${prvi} as select distinct vozilo.*, ('${datum_primitka}' < vrijemePreuzimanja or '${datum_povratka}' > vrijemeZavrsetka) as dostupnost from vozilo left outer join rezervacija on rezervacija.registracija = vozilo.registracija`)
-        await db.query(`create view ${drugi} as select registracija, count(*) from pr group by registracija`)
+        await db.query(`create view ${drugi} as select registracija, count(*) from ${prvi} group by registracija`)
         let carsDb = await db.query(`select * from ${drugi} natural join vozilo where count < 2`)
         await db.query(`drop view ${drugi}`)
         await db.query(`drop view ${prvi}`) 
