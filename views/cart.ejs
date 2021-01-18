@@ -86,18 +86,25 @@
     }
 
     //Recenzija - zvijezdice
-    function ocijeni(broj) {
-    	document.getElementById("ocjena5").style.color = "black";
-        document.getElementById("ocjena4").style.color = "black";
-        document.getElementById("ocjena3").style.color = "black";
-        document.getElementById("ocjena2").style.color = "black";
-        document.getElementById("ocjena1").style.color = "black";
-    	switch(broj) {
-        	case 5: document.getElementById("ocjena5").style.color = "orange";
-            case 4: document.getElementById("ocjena4").style.color = "orange";
-        	case 3: document.getElementById("ocjena3").style.color = "orange";
-        	case 2: document.getElementById("ocjena2").style.color = "orange";
-            case 1: document.getElementById("ocjena1").style.color = "orange";
+    function ocijeni(idZvjezdice) {
+        var red = idZvjezdice.substring(8);
+        var rating = idZvjezdice.substring(6,7);
+        console.log("Ovaj id se posalje " + idZvjezdice);
+        console.log("Ova ocjena se posalje " + rating);
+        console.log("Ovaj redak se posalje " + red);
+        console.log("Ovakva je klasa: " + 'ocjena5-' + red);
+        document.getElementsByClassName('ocjena5-' + red)[0].style.color = "black";
+        document.getElementsByClassName('ocjena4-' + red)[0].style.color = "black";
+    	document.getElementsByClassName('ocjena3-' + red)[0].style.color = "black";
+    	document.getElementsByClassName('ocjena2-' + red)[0].style.color = "black";
+    	document.getElementsByClassName('ocjena1-' + red)[0].style.color = "black";
+
+    	switch(rating) {
+            case '5': document.getElementsByClassName('ocjena5-' + red)[0].style.color = "orange";
+            case '4': document.getElementsByClassName('ocjena4-' + red)[0].style.color = "orange";
+        	case '3': document.getElementsByClassName('ocjena3-' + red)[0].style.color = "orange";
+        	case '2': document.getElementsByClassName('ocjena2-' + red)[0].style.color = "orange";
+        	case '1': document.getElementsByClassName('ocjena1-' + red)[0].style.color = "orange";
             default: break;
         }
     }
@@ -217,11 +224,11 @@
     <br>
 
     <!-- Zavrsene rezervacije -->
-
     <div id="aktivneBlock">
         <h1 style="text-align:center" id="myReservationHeader">Završene rezervacije</h1>
         <hr>
         <% if(zavrsenePostoji == true) { %>
+            <%  index = 0 %>
         <div class="myBlock">
             <table class="myReservationTable">
                 <tr style="text-align: center;">
@@ -239,6 +246,7 @@
                 </tr>
             <% for (let rez of zavrsene) { %>
                 <% broj = broj + 1%>
+                <% index = index + 1%>
                 <div>
                     <tr class="tr">
                         <td class="td" style="width: 10%;">
@@ -287,11 +295,11 @@
                             <div class="tooltip-recenzija">
                                 <div class = "container1">
                                     <div class = "star-widget" style="display: inline-block;">
-                                        <input type="checkbox" name="rate" id="rate-1" onclick = "ocijeni(1)"><label for = "rate-1" id="ocjena1">&#9733;</label>
-                                        <input type="checkbox" name="rate" id="rate-2" onclick = "ocijeni(2)"><label for = "rate-2" id="ocjena2">&#9733;</label>
-                                        <input type="checkbox" name="rate" id="rate-3" onclick = "ocijeni(3)"><label for = "rate-3" id="ocjena3">&#9733;</label>
-                                        <input type="checkbox" name="rate" id="rate-4" onclick = "ocijeni(4)"><label for = "rate-4" id="ocjena4">&#9733;</label>
-                                        <input type="checkbox" name="rate" id="rate-5" onclick = "ocijeni(5)"><label for = "rate-5" id="ocjena5">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena1-<%=index%>" onclick = "ocijeni(this.id);"><label for = "ocjena1-<%=index%>" id="ocjena1" class="ocjena1-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena2-<%=index%>" onclick = "ocijeni(this.id);"><label for = "ocjena2-<%=index%>" id="ocjena2" class="ocjena2-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena3-<%=index%>" onclick = "ocijeni(this.id);"><label for = "ocjena3-<%=index%>" id="ocjena3" class="ocjena3-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena4-<%=index%>" onclick = "ocijeni(this.id);"><label for = "ocjena4-<%=index%>" id="ocjena4" class="ocjena4-<%=index%>">&#9733;</label>
+                                        <input type="checkbox" name="rate" id="ocjena5-<%=index%>" onclick = "ocijeni(this.id);"><label for = "ocjena5-<%=index%>" id="ocjena5" class="ocjena5-<%=index%>">&#9733;</label>
                                     </div>
                                 </div>
                                 <span class="tooltiptext-recenzija">Ocijeni uslugu</span>
