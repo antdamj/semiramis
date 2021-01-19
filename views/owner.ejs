@@ -155,10 +155,12 @@
         document.write(rez)
     }
 
+    function formatirajSate(arg) {
+        document.write(arg.substring(15, 21))
+    }
+
     function imeVozila(arg) {
-        console.log(arg)
         let av = <%- JSON.stringify(allVehicles) %>
-        console.log(av)
         let izlaz = ""
         for(let i = 0; i < av.length; i++) {
             if(av[i].registracija == arg){
@@ -170,12 +172,35 @@
         document.write(izlaz)
     }
 
+    function adresa (arg) {
+        let x
+        let l = <%- JSON.stringify(locations) %>
+        for (let i = 0; i < l.length; i++) {
+            if(l[i].idposlovnica == arg) {
+                x = l[i].lokacija
+                break;
+            }
+        }
+        let y = x.split(" ")[0]
+        document.write(y)
+    }
+
     function zatvaranjeRezervacije (arg) {
         if(confirm('Želite li zatvoriti tu rezervaciju?')) {
             document.getElementById("zr").value = arg
             document.getElementById("zrBtn").click()
         } else {
             alert('Rezervacija nije zatvorena.')
+            return
+        }
+    }
+
+    function aktivnaRezervacija (arg) {
+        if(confirm('Rezervacija će postati aktivna!')) {
+            document.getElementById("ar").value = arg
+            document.getElementById("arBtn").click()
+        } else {
+            alert('Rezervacija nije promijenila status.')
             return
         }
     }
@@ -351,26 +376,64 @@
         </div>
 
         <div class="containerOA" id="rezervacijeContainer" style="display: none;">
+            <!-- NADOLAZEĆE REZERVACIJE -->
+            <div class="centered-container"><h4>Nadolazeće rezervacije</h4></div>
             <table class="rezervacijeTable">
                 <tr>
                     <th class="th" style="width: 15%;">Korisnik</th>
-                    <th class="th" style="width: 25%;">Početak</th>
-                    <th class="th" style="width: 25%;">Kraj</th>
-                    <th class="th" style="width: 25%;">Vozilo</th>
-                    <th class="th" style="width: 10%;"></th>
+                    <th class="th" style="width: 30%;">Početak rezervacije</th>
+                    <th class="th" style="width: 20%;">Lokacija</th>
+                    <th class="th" style="width: 30%;">Vozilo</th>
+                    <th class="th" style="width: 5%;"></th>
                 </tr>
 
-                <% if (allReservations != undefined) { %>
-                    <% for (let r of allReservations) { %>
+                <% if (inactiveReservations != undefined) { %>
+                    <% for (let r of inactiveReservations) { %>
                         <tr class="tr">
                             <td class="td" style="width: 15%;"><%=r.korisnickoime%></td>
-                            <td class="td" style="width: 25%;">
+                            <td class="td" style="width: 30%;">
                                 <script>formatirajVrijeme('<%= r.vrijemepreuzimanja %>')</script>
+                                <script>formatirajSate('<%= r.vrijemepreuzimanja %>')</script>
                             </td>
-                            <td class="td" style="width: 25%;">
+                            <td class="td" style="width: 20%;">
+                                <script>adresa('<%= r.lokacijapreuzimanja %>')</script>
+                            </td>
+                            <td class="td" style="width: 30%;">
+                                <script>imeVozila('<%= r.registracija %>')</script>
+                            </td>
+                            <td class="td tdButtonArea">
+                                <img class="smallsvg" src="../images/check.svg" alt="finish" onclick="aktivnaRezervacija('<%= r.idrezervacija %>')">
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } %>
+            </table>
+
+            <div class="formItem"></div>
+
+            <!-- AKTIVNE REZERVACIJE -->
+            <div class="centered-container"><h4>Aktivne rezervacije</h4></div>
+            <table class="rezervacijeTable">
+                <tr>
+                    <th class="th" style="width: 15%;">Korisnik</th>
+                    <th class="th" style="width: 30%;">Kraj rezervacije</th>
+                    <th class="th" style="width: 20%;">Lokacija</th>
+                    <th class="th" style="width: 30%;">Vozilo</th>
+                    <th class="th" style="width: 5%;"></th>
+                </tr>
+
+                <% if (activeReservations != undefined) { %>
+                    <% for (let r of activeReservations) { %>
+                        <tr class="tr">
+                            <td class="td" style="width: 15%;"><%=r.korisnickoime%></td>
+                            <td class="td" style="width: 30%;">
                                 <script>formatirajVrijeme('<%= r.vrijemezavrsetka %>')</script>
+                                <script>formatirajSate('<%= r.vrijemezavrsetka %>')</script>
                             </td>
-                            <td class="td" style="width: 25%;">
+                            <td class="td" style="width: 20%;">
+                                <script>adresa('<%= r.lokacijaostavljanja %>')</script>
+                            </td>
+                            <td class="td" style="width: 30%;">
                                 <script>imeVozila('<%= r.registracija %>')</script>
                             </td>
                             <td class="td tdButtonArea">
@@ -379,7 +442,37 @@
                         </tr>
                     <% } %>
                 <% } %>
+            </table>
 
+            <div class="formItem"></div>
+
+            <!-- GOTOVE REZERVACIJE -->
+            <div class="centered-container"><h4>Prošle narudžbe</h4></div>
+            <table class="rezervacijeTable">
+                <tr>
+                    <th class="th" style="width: 15%;">Korisnik</th>
+                    <th class="th" style="width: 25%;">Početak</th>
+                    <th class="th" style="width: 25%;">Kraj</th>
+                    <th class="th" style="width: 30%;">Vozilo</th>
+                    <th class="th" style="width: 5%;"></th>
+                </tr>
+
+                <% if (finishedReservations != undefined) { %>
+                    <% for (let r of finishedReservations) { %>
+                        <tr class="tr">
+                            <td style="line-height: 55px;" class="td" style="width: 15%;"><%=r.korisnickoime%></td>
+                            <td class="td" style="width: 25%;">
+                                <script>formatirajVrijeme('<%= r.vrijemepreuzimanja %>')</script>
+                            </td>
+                            <td class="td" style="width: 15%;">
+                                <script>formatirajVrijeme('<%= r.vrijemezavrsetka %>')</script>
+                            </td>
+                            <td class="td" style="width: 35%;">
+                                <script>imeVozila('<%= r.registracija %>')</script>
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } %>
             </table>
 
             <div class="formItem"></div><div class="formItem"></div>
@@ -393,6 +486,20 @@
                         </div>
                         <div class="formItem col-12">
                             <button type="submit" id="zrBtn" value="Submit" class="submitButton">Zatvori rezervaciju</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="centered-container formContainer" >
+                    <!--<button class="submitButton" onclick="pritisak('zatvaranjeRezervacije')">Zatvaranje rezervacije</button>-->
+                    <form action="/owner" method="post" id="aktivnaRezervacija" style="display: none;">
+                        <div class="formItem inputField col-12">
+                            <input type="text" id="ar" name="rezervacijaOpen" placeholder="ID rezervacije" minlength="4">
+                        </div>
+                        <div class="formItem col-12">
+                            <button type="submit" id="arBtn" value="Submit" class="submitButton">Otvori rezervaciju</button>
                         </div>
                     </form>
                 </div>

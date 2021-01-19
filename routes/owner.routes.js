@@ -7,25 +7,35 @@ router.get('/', async (req, res, next) => {
     if (req.session.user !== undefined && req.session.user.uloga == 'vlasnik') {
 
         let v = await Vlasnik.getAvailableVehicles();
-        let r = await Vlasnik.getActiveReservations();
+        let resActive = await Vlasnik.getActiveReservations();
+        let resInactive = await Vlasnik.getInactiveReservations();
+        let resFinished = await Vlasnik.getFinishedReservations();
         let av = await Vlasnik.getAllVehicles();
         let ar = await db.query(`select * from rezervacija order by vrijemepreuzimanja desc`)
         ar = ar.rows
+        // recenzije
         let rat = await db.query(`select * from rezervacija natural join recenzija order by vrijemepreuzimanja desc`)
         rat = rat.rows
+        // statistika
         let st = await db.query(`select to_char(vrijemeZavrsetka, 'YYYY-MM') as mjesec, sum((vrijemezavrsetka::date - vrijemepreuzimanja::date) * cijenadan) as zarada from rezervacija natural join vozilo group by mjesec order by mjesec`)
         st = st.rows
+        // poslovnice
+        let loc = await db.query(`select * from poslovnica`)
+        loc = loc.rows
 
         res.render('owner', {
             title: 'vlasnik page',
             user: req.session.user,
             linkActive: 'vlasnik',
             vehicles: v,
-            reservations: r,
             allReservations: ar,
+            activeReservations: resActive,
+            inactiveReservations: resInactive,
+            finishedReservations: resFinished,
             allVehicles: av,
             ratings: rat,
             stats: st,
+            locations: loc,
             poruka: ""
         });
     }
@@ -60,13 +70,19 @@ router.post('/', async (req, res) => {
         await Vlasnik.closeReservation(req.body.rezervacijaClose);
         postMsg = "Rezervacija uspješno zatvorena!"
     }
+    if('rezervacijaOpen' in req.body) {
+        await Vlasnik.openReservation(req.body.rezervacijaOpen);
+        postMsg = 'Rezervacija je sada aktivna!'
+    }
     if ('recenzijaDelete' in req.body) {
         await db.query(`delete from recenzija where idRezervacija = '${req.body.recenzijaDelete}'`)
         postMsg = "Recenzija uspješno uklonjena!"
     }
 
     let v = await Vlasnik.getAvailableVehicles();
-    let r = await Vlasnik.getActiveReservations();
+    let resActive = await Vlasnik.getActiveReservations();
+    let resInactive = await Vlasnik.getInactiveReservations();
+    let resFinished = await Vlasnik.getFinishedReservations();
     let av = await Vlasnik.getAllVehicles();
     let ar = db.query(`select * from rezervacija order by vrijemezavrsetka desc`)
     ar = ar.rows
@@ -74,17 +90,22 @@ router.post('/', async (req, res) => {
     rat = rat.rows
     let st = await db.query(`select to_char(vrijemeZavrsetka, 'YYYY-MM') as mjesec, sum((vrijemezavrsetka::date - vrijemepreuzimanja::date) * cijenadan) as zarada from rezervacija natural join vozilo group by mjesec order by mjesec`)
     st = st.rows
+    let loc = await db.query(`select * from poslovnica`)
+    loc = loc.rows
 
     res.render('owner', {
         title: 'vlasnik page',
         user: req.session.user,
         linkActive: 'vlasnik',
         vehicles: v,
-        reservations: r,
         allReservations: ar,
+        activeReservations: resActive,
+        inactiveReservations: resInactive,
+        finishedReservations: resFinished,
         allVehicles: av,
         ratings: rat,
         stats: st,
+        locations: loc,
         poruka: postMsg
     });
 });

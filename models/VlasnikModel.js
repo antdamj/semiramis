@@ -77,7 +77,27 @@ module.exports = class Vlasnik extends User {
         }
     }
     static getActiveReservations = async () => {
-        const sql = `select * from rezervacija where status = 'aktivna'`
+        const sql = `select * from rezervacija where status = 'aktivna' order by vrijemezavrsetka desc`
+        try {
+            const result = await db.query(sql, [])
+            return result.rows
+        } catch (e) {
+            console.log(e)
+            throw e
+        }
+    }
+    static getInactiveReservations = async () => {
+        const sql = `select * from rezervacija where status = 'neaktivna' order by vrijemepreuzimanja desc`
+        try {
+            const result = await db.query(sql, [])
+            return result.rows
+        } catch (e) {
+            console.log(e)
+            throw e
+        }
+    }
+    static getFinishedReservations = async () => {
+        const sql = `select * from rezervacija where status = 'zavrsena' order by vrijemezavrsetka desc`
         try {
             const result = await db.query(sql, [])
             return result.rows
@@ -98,6 +118,16 @@ module.exports = class Vlasnik extends User {
     }
     static closeReservation = async (idrezervacija) => {
         const sql = `update rezervacija set status = 'zavrsena'
+        where idrezervacija = '` + idrezervacija + `'`
+        try {
+            const result = await db.query(sql, [])
+        } catch (e) {
+            console.log(e)
+            throw e
+        }
+    }
+    static openReservation = async (idrezervacija) => {
+        const sql = `update rezervacija set status = 'aktivna'
         where idrezervacija = '` + idrezervacija + `'`
         try {
             const result = await db.query(sql, [])
